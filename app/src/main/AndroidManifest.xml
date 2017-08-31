@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".DataEntry">
         </activity>
-        <activity android:name=".QR_Scanner">
+        <activity android:name=".QR_Scanner"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

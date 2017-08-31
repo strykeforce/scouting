@@ -101,7 +101,7 @@ public class DataEntry extends AppCompatActivity {
     }
     void initalize_data_entry_form_ui()
     {
-        Spinner spinner = (Spinner) findViewById(R.id.data_entry_gear_placement_spinner);
+        Spinner spinner = (Spinner) findViewById(R.id.data_entry_auton_gear_placement_spinner);
         set_spinner_items_by_id (spinner, R.array.gear_positions);
         Button detdgdb = (Button) findViewById(R.id.data_entry_tele_decrement_gears_delievered_button);
         Button detigdb = (Button) findViewById(R.id.data_entry_tele_increment_gears_delievered_button);
@@ -161,62 +161,65 @@ public class DataEntry extends AppCompatActivity {
     }
     void data_entry_form_on_click_done_button(View v)
     {
-        boolean CrossBaseLine, AutoLow;
-        String PlaceGear;
+        boolean auton_cross_base_line_value, auton_low_goal_dumped_value;
+        String auton_gear_placement_value;
         String autohigh;
-        boolean gearoffground;
-        String highgoals;
-        boolean getsdefended, touchpad, defense;
-        String scoutid;
+        boolean tele_picks_gears_off_ground_value;
+        String tele_high_goals_scored_value;
+        boolean tele_defence_interferes_value, end_activated_touchpad_value, other_played_defense_value;
         String scoutName, notes;
-        int progressSeek;
-        EditText inputText1 = (EditText) findViewById(R.id.data_entry_auton_high_goals_scored_edit_text);
-        autohigh = inputText1.getText().toString();
-        EditText inputText2 = (EditText) findViewById(R.id.data_entry_other_scout_initials_edit_text);
-        scoutName = inputText2.getText().toString();
+        int end_rope_climb_time_value, tele_low_goal_value, tele_gears_delievered_value;
+        EditText deahgset = (EditText) findViewById(R.id.data_entry_auton_high_goals_scored_edit_text);
+        autohigh = deahgset.getText().toString();
+        EditText deosiet = (EditText) findViewById(R.id.data_entry_other_scout_initials_edit_text);
+        scoutName = deosiet.getText().toString();
         if(scoutName.isEmpty())
         {
             scoutName = ".";
         }
-        EditText inputText3 = (EditText) findViewById(R.id.data_entry_other_notes_edit_text);
-        notes = inputText3.getText().toString();
+        EditText deonet = (EditText) findViewById(R.id.data_entry_other_notes_edit_text);
+        notes = deonet.getText().toString();
         if(notes.isEmpty())
         {
             notes = ".";
         }
-        EditText inputText4 = (EditText) findViewById(R.id.data_entry_tele_high_goals_scored_edit_text);
-        highgoals = inputText4.getText().toString();
-        Switch baselineswitch = (Switch) findViewById(R.id.data_entry_auton_cross_base_line_switch);
-        CrossBaseLine = baselineswitch.isChecked();
-        Spinner placegearSwitch = (Spinner) findViewById(R.id.data_entry_auton_gear_placement_spinner);
-        PlaceGear = (String) placegearSwitch.getSelectedItem();
-        Switch lowgoalAutoSwitch = (Switch) findViewById(R.id.data_entry_auton_low_goal_dumped_switch);
-        AutoLow = lowgoalAutoSwitch.isChecked();
-        Switch touchpadSwitch = (Switch) findViewById(R.id.data_entry_end_activated_touchpad_switch);
-        touchpad = touchpadSwitch.isChecked();
-        Switch gearoffgroundSwitch = (Switch) findViewById(R.id.data_entry_tele_picks_gears_off_ground_switch);
-        gearoffground = gearoffgroundSwitch.isChecked();
-        Switch OnDefenseSwitch = (Switch) findViewById(R.id.data_entry_other_played_defense_switch);
-        defense = OnDefenseSwitch.isChecked();
-        Switch GetsDefendedSwitch = (Switch) findViewById(R.id.data_entry_tele_defence_interferes_switch);
-        getsdefended = GetsDefendedSwitch.isChecked();
-        SeekBar seekbar3 = (SeekBar) findViewById(R.id.data_entry_end_rope_climb_time_seek_bar);
-        progressSeek = seekbar3.getProgress();
+        EditText dethgset = (EditText) findViewById(R.id.data_entry_tele_high_goals_scored_edit_text);
+        tele_high_goals_scored_value = dethgset.getText().toString();
+        Switch deacbls = (Switch) findViewById(R.id.data_entry_auton_cross_base_line_switch);
+        auton_cross_base_line_value = deacbls.isChecked();
+        Spinner deagps = (Spinner) findViewById(R.id.data_entry_auton_gear_placement_spinner);
+        auton_gear_placement_value = (String) deagps.getSelectedItem();
+        Switch aealgds = (Switch) findViewById(R.id.data_entry_auton_low_goal_dumped_switch);
+        auton_low_goal_dumped_value = aealgds.isChecked();
+        Switch deeats = (Switch) findViewById(R.id.data_entry_end_activated_touchpad_switch);
+        end_activated_touchpad_value = deeats.isChecked();
+        Switch detpgogs = (Switch) findViewById(R.id.data_entry_tele_picks_gears_off_ground_switch);
+        tele_picks_gears_off_ground_value = detpgogs.isChecked();
+        Switch deopds = (Switch) findViewById(R.id.data_entry_other_played_defense_switch);
+        other_played_defense_value = deopds.isChecked();
+        Switch detdis = (Switch) findViewById(R.id.data_entry_tele_defence_interferes_switch);
+        tele_defence_interferes_value = detdis.isChecked();
+        SeekBar deerctsb = (SeekBar) findViewById(R.id.data_entry_end_rope_climb_time_seek_bar);
+        end_rope_climb_time_value = deerctsb.getProgress();
+        EditText detlget = (EditText) findViewById(R.id.data_entry_tele_low_goal_edit_text);
+        tele_low_goal_value = Integer.valueOf(detlget.getText().toString());
+        EditText detgdet = (EditText) findViewById(R.id.data_entry_tele_gears_delievered_edit_text);
+        tele_gears_delievered_value = Integer.valueOf(detgdet.getText().toString());
         String qr_code =  "Scout ID: " + (team_index + 1) + "\t"
                 +"Team: " + (team_matches[match_index][team_index]) + "\t"
                 +"Match: " + (match_index+1) + "\t"
                 +"Auto High: " + autohigh + "\t"
-                +"Tele High: " + highgoals + "\t"
-                +"Tele Low: " + lowgoalLoadsTele+ "\t"
-                +"Tele Gear: " + gearsDeliveredTele +"\t"
-                +"Climb rope time: " + ((touchpad) ? (progressSeek) : ("0")) + "\t"
-                +"Auto Low: " + AutoLow + "\t"
-                +"Auto Gear: " + PlaceGear + "\t"
-                +"Crosses base line: "+ CrossBaseLine+ "\t"
-                +"Can pick gears off ground: " + gearoffground + "\t"
-                +"On defence: " + defense + "\t"
-                +"Defended shooting high: " + getsdefended + "\t"
-                +"Touchpad: " + touchpad + "\t"
+                +"Tele High: " + tele_high_goals_scored_value + "\t"
+                +"Tele Low: " + tele_low_goal_value+ "\t"
+                +"Tele Gear: " + tele_gears_delievered_value +"\t"
+                +"Climb rope time: " + ((end_activated_touchpad_value) ? (end_rope_climb_time_value) : ("0")) + "\t"
+                +"Auto Low: " + auton_low_goal_dumped_value + "\t"
+                +"Auto Gear: " + auton_gear_placement_value + "\t"
+                +"Crosses base line: "+ auton_cross_base_line_value+ "\t"
+                +"Can pick gears off ground: " + tele_picks_gears_off_ground_value + "\t"
+                +"On defence: " + other_played_defense_value + "\t"
+                +"Defended shooting high: " + tele_defence_interferes_value + "\t"
+                +"Touchpad: " + end_activated_touchpad_value + "\t"
                 +"Scout Name: " + scoutName + "\t"
                 +"Notes: " + notes + "\t";
         System.out.println("qr_code == " + qr_code);
