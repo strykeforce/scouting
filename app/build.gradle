@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     buildToolsVersion "26.0.1"
     defaultConfig {
-        applicationId "com.a2017.strykeforce.remadescoutingapp2017"
+        applicationId "com.a2017.strykeforce.zandersscoutingapp"
         minSdkVersion 15
         targetSdkVersion 26
         versionCode 1
