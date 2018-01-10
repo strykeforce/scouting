@@ -1,3 +1,3 @@
-# Stryke Force Scouting App
-
-This is the source code repository for our scouting app.
+# Scouting App for 2017 to 2018
+The Scouting Code For Both Apps Team: 2767.
+Currently still in the works.
