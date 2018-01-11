@@ -905,29 +905,6 @@
         android:text="0" />
 
 
-
-    <ImageView
-
-        android:layout_width="310dp"
-
-        android:layout_height="310dp"
-
-        app:srcCompat="@android:drawable/alert_light_frame"
-
-        android:scaleX="1.50"
-
-        android:scaleY="1.50"
-
-        android:layout_x="300dp"
-
-        android:layout_y="40dp"
-
-        android:id="@+id/imageView"
-
-        android:visibility="invisible" />
-
-
-
     <Button
 
         android:text="CONTINUE"
@@ -1040,6 +1017,25 @@
 
         android:layout_y="4dp"/>
 
+    <ImageView
+
+        android:layout_width="310dp"
+
+        android:layout_height="310dp"
+
+        app:srcCompat="@android:drawable/alert_light_frame"
+
+        android:scaleX="1.50"
+
+        android:scaleY="1.50"
+
+        android:layout_x="364dp"
+
+        android:layout_y="53dp"
+
+        android:id="@+id/imageView"
+
+        android:visibility="invisible" />
 
 
     android:orientation="horizontal"
