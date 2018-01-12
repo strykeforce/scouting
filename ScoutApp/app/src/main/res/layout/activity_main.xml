@@ -734,7 +734,7 @@
 
     <TextView
 
-        android:text="Exchange Cubes"
+        android:text="Exchange"
 
         android:layout_width="wrap_content"
 
