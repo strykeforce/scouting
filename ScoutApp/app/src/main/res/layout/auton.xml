@@ -261,7 +261,7 @@
         android:layout_y="-5dp" />
 
     <Button
-        android:text="WOW"
+        android:text="Next"
 
         android:layout_width="wrap_content"
 
@@ -271,11 +271,13 @@
 
         android:scaleY="2.00"
 
-        android:layout_x="808dp"
+        android:layout_x="832dp"
 
-        android:layout_y="490dp"
+        android:layout_y="492dp"
 
-        android:id="@+id/nextAuton" />
+        android:id="@+id/nextAuton"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 </AbsoluteLayout>

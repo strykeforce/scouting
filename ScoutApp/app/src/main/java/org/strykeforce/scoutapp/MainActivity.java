@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     String highgoals = "0";
 
-    boolean getsdefended = false, touchpad = false, defense = false;
+    boolean getsdefended = false, touchpad = false, defense = false, switchCube = false;
 
     String scoutid;
 
@@ -196,42 +196,39 @@ public class MainActivity extends AppCompatActivity {
 
                 else {
 
-                    setContentView(R.layout.activity_main);
+                    setContentView(R.layout.auton);
 
                     scoutDisplay = (TextView) findViewById(R.id.scoutDisplay);
 
                     setScouter(SCOUT_ID);
 
-                    masterDisplay = (TextView) findViewById(R.id.masterDisplay);
+                    /*masterDisplay = (TextView) findViewById(R.id.masterDisplay);
 
                     lowgoaldisplay = (TextView) findViewById(R.id.lowgoalloaddata);
 
-                    geardisplay = (TextView) findViewById(R.id.gearNumDisplay);
+                    geardisplay = (TextView) findViewById(R.id.gearNumDisplay);*/
 
                     MATCH_NUMBER--;
 
 
                     ResetMatch();
 
-                    qrdisplay = (ImageView) findViewById(R.id.imageView);
+                    /*qrdisplay = (ImageView) findViewById(R.id.imageView);
 
                     continueQR = (Button) findViewById(R.id.continue_btn);
 
-                    backbtn = (Button) findViewById(R.id.back_btn);
+                    backbtn = (Button) findViewById(R.id.back_btn);*/
 
 
 
-                    if (SCOUT_ID < 3)
+                    /*if (SCOUT_ID < 3)
 
                         ((TextView) findViewById(R.id.masterDisplay)).setTextColor(Color.parseColor("#ffcc0000"));
 
                     else
 
-                        ((TextView) findViewById(R.id.masterDisplay)).setTextColor(Color.parseColor("#283593"));
+                        ((TextView) findViewById(R.id.masterDisplay)).setTextColor(Color.parseColor("#283593"));*/
 
-
-
-                    makeEverythingVisible();
 
 
 
@@ -247,7 +244,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 public void onClick(DialogInterface dialog, int which) {
 
-                                    makeEverythingVisible();
 
                                     ResetMatch(); //calls method to next match
 
@@ -281,25 +277,14 @@ public class MainActivity extends AppCompatActivity {
 
                     });
 
-                    backbtn.setOnClickListener(new View.OnClickListener() {
 
-                        @Override
+                    SeekBar seekbar = (SeekBar) findViewById(R.id.scaleTime);
 
-                        public void onClick(View v) {
-
-                            makeEverythingVisible();
-
-                        }
-
-                    });
-
-                    SeekBar seekbar1 = (SeekBar) findViewById(R.id.ropetimedata);
-
-                    seekbar1.setMax((max - min) / step);
+                    seekbar.setMax((max - min) / step);
 
 
 
-                    seekbar1.setOnSeekBarChangeListener(
+                    seekbar.setOnSeekBarChangeListener(
 
                             new SeekBar.OnSeekBarChangeListener() {
 
@@ -333,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
 
                     );
 
-                    findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
+                   /* findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
 
                         @Override
 
@@ -393,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
-                    });
+                    }); */
 
 
 
@@ -404,8 +389,6 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View v) {
 
                             GenerateQRString();
-
-                            makeEverythingInvisible();
 
                             if (SCOUT_ID < 3) {
 
@@ -455,37 +438,23 @@ public class MainActivity extends AppCompatActivity {
 
     {
 
-        EditText inputText1 = (EditText) findViewById(R.id.editText6);
-
-        autohigh = inputText1.getText().toString();
-
-
-        EditText inputText2 = (EditText) findViewById(R.id.editText3);
-
-        scoutName = inputText2.getText().toString();
-
 
         EditText inputText3 = (EditText) findViewById(R.id.editText2);
 
         notes = inputText3.getText().toString();
 
 
-        EditText inputText4 = (EditText) findViewById(R.id.highteledata);
+        Switch baseline = (Switch) findViewById(R.id.baseline);
 
-        highgoals = inputText4.getText().toString();
-
-
-        Switch baselineswitch = (Switch) findViewById(R.id.baseline);
-
-        CrossBaseLine = baselineswitch.isChecked();
+        CrossBaseLine = baseline.isChecked();
 
 
-        Switch placegearSwitch = (Switch) findViewById(R.id.placegearautodata);
+        Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
 
-        PlaceGear = placegearSwitch.isChecked();
+        switchCube = deliverSwitchAuton.isChecked();
 
 
-        Switch lowgoalAutoSwitch = (Switch) findViewById(R.id.lowgoaldataauto);
+        /*Switch lowgoalAutoSwitch = (Switch) findViewById(R.id.lowgoaldataauto);
 
         AutoLow = lowgoalAutoSwitch.isChecked();
 
@@ -507,7 +476,7 @@ public class MainActivity extends AppCompatActivity {
 
         Switch GetsDefendedSwitch = (Switch) findViewById(R.id.highgoaldefence);
 
-        getsdefended = GetsDefendedSwitch.isChecked();
+        getsdefended = GetsDefendedSwitch.isChecked();*/
 
 
 
@@ -571,7 +540,7 @@ public class MainActivity extends AppCompatActivity {
                     +"Tele Gear: " + gearsDeliveredTele +"\t"
                     +"Climb rope time: " + ((touchpad) ? (progressSeek+min) : ("0")) + "\t"
                     +"Auto Low: " + AutoLow + "\t"
-                    +"Auto Gear: " + PlaceGear + "\t"
+                    +"Auto Switch: " + switchCube + "\t"
                     +"Crosses base line: "+ CrossBaseLine+ "\t"
                     +"Can pick gears off ground: " + gearoffground + "\t"
                     +"On defence: " + defense + "\t"
@@ -590,7 +559,7 @@ public class MainActivity extends AppCompatActivity {
 
         {
 
-            SeekBar seekbar = (SeekBar) (findViewById(R.id.ropetimedata));
+            SeekBar seekbar = (SeekBar) (findViewById(R.id.scaleTime));
 
             seekbar.setMax((max - min) / step);
 
@@ -630,18 +599,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-            lowgoaldisplay = (TextView) findViewById(R.id.lowgoalloaddata);
-
-            lowgoaldisplay.setText(Integer.toString(lowgoalLoadsTele));
-
-
-
-            geardisplay = (TextView) findViewById(R.id.gearNumDisplay);
-
-            geardisplay.setText(Integer.toString(gearsDeliveredTele));
-
-
-
+/*
             findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -702,7 +660,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            });
+            }); */
 
 
 /*
@@ -777,7 +735,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                setContentView(R.layout.activity_main);
+                setContentView(R.layout.auton);
 
                 ResetMatch();
 
@@ -809,53 +767,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        SeekBar seekbar = (SeekBar) (findViewById(R.id.ropetimedata));
+        SeekBar seekbar = (SeekBar) (findViewById(R.id.scaleTime));
 
         seekbar.setProgress(0);
 
 
 
-        Switch baselineswitch  = (Switch) findViewById(R.id.baseline);
+        Switch baseline  = (Switch) findViewById(R.id.baseline);
 
-        baselineswitch.setChecked(false);
-
-
-
-        Switch placegearSwitch = (Switch) findViewById(R.id.placegearautodata);
-
-        placegearSwitch.setChecked(false);
+        baseline.setChecked(false);
 
 
 
-        Switch lowgoalAutoSwitch = (Switch) findViewById(R.id.lowgoaldataauto);
+        Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
 
-        lowgoalAutoSwitch.setChecked(false);
-
-
-
-        Switch touchpadSwitch = (Switch) findViewById(R.id.touchpad);
-
-        touchpadSwitch.setChecked(false);;
-
-
-
-        Switch gearoffgroundSwitch = (Switch) findViewById(R.id.gearoffground);
-
-        gearoffgroundSwitch.setChecked(false);
-
-
-
-        Switch OnDefenseSwitch = (Switch) findViewById(R.id.ondefence);
-
-        OnDefenseSwitch.setChecked(false);
-
-
-
-        Switch GetsDefendedSwitch = (Switch) findViewById(R.id.highgoaldefence);
-
-        GetsDefendedSwitch.setChecked(false);
-
-
+        deliverSwitchAuton.setChecked(false);
 
 
 
@@ -873,19 +799,11 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        EditText highgoalsauto = (EditText) findViewById(R.id.editText6);
+        /*EditText highgoalsauto = (EditText) findViewById(R.id.editText6);
 
-        highgoalsauto.setText("0");
+        highgoalsauto.setText("0");*/
 
         //highgoalsauto.setTextColor(Color.parseColor("@android:color/holo_green_dark"));
-
-
-
-        EditText highgoalsdel = (EditText) findViewById(R.id.highteledata);
-
-        highgoalsdel.setText("0");
-
-        //highgoalsdel.setTextColor(Color.parseColor("@android:color/holo_orange_dark"));
 
 
 
@@ -894,10 +812,6 @@ public class MainActivity extends AppCompatActivity {
         notes.setText(".");
 
 
-
-        EditText scoutname = (EditText) findViewById(R.id.editText3);
-
-        scoutname.setText(".");
 
     }
 
@@ -1058,199 +972,6 @@ public void println(String line)
 
 
 
-    public void makeEverythingInvisible()
-
-    {
-
-        ((Switch) findViewById(R.id.ondefence)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.baseline)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.placegearautodata)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.lowgoaldataauto)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.touchpad)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.gearoffground)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.ondefence)).setVisibility(View.INVISIBLE);
-
-        ((Switch) findViewById(R.id.highgoaldefence)).setVisibility(View.INVISIBLE);
-
-
-
-        ((TextView) findViewById(R.id.auto)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.tele)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.highgoalsauto)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.lowgoalstele)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.gearstele)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.gearoffground)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.highgoaltele)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.highgoaldefence)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.endgame)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.touchpad)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.ropetime)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.textView35)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.textView4)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.ondefence)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.textView36)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.textView38)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.gearNumDisplay)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.lowgoalloaddata)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.scoutDisplay)).setVisibility(View.INVISIBLE);
-
-        ((TextView) findViewById(R.id.match)).setVisibility(View.INVISIBLE);
-
-
-
-        ((EditText) findViewById(R.id.editText6)).setVisibility(View.INVISIBLE);
-
-        ((EditText) findViewById(R.id.editText3)).setVisibility(View.INVISIBLE);
-
-        ((EditText) findViewById(R.id.editText2)).setVisibility(View.INVISIBLE);
-
-        ((EditText) findViewById(R.id.highteledata)).setVisibility(View.INVISIBLE);
-
-
-
-        ((Button)findViewById(R.id.lowgoalsub)).setVisibility(View.INVISIBLE);
-
-        ((Button)findViewById(R.id.lowgoaladd)).setVisibility(View.INVISIBLE);
-
-        ((Button)findViewById(R.id.gearsadd)).setVisibility(View.INVISIBLE);
-
-        ((Button)findViewById(R.id.gearssub)).setVisibility(View.INVISIBLE);
-
-        ((Button)findViewById(R.id.sendbutton)).setVisibility(View.INVISIBLE);
-
-
-
-        qrdisplay.setVisibility(View.VISIBLE);
-
-        continueQR.setVisibility(View.VISIBLE);
-
-        backbtn.setVisibility(View.VISIBLE);
-
-        masterDisplay.setVisibility(View.VISIBLE);
-
-    }
-
-
-
-    public void makeEverythingVisible()
-
-    {
-
-        ((Switch) findViewById(R.id.ondefence)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.baseline)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.placegearautodata)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.lowgoaldataauto)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.touchpad)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.gearoffground)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.ondefence)).setVisibility(View.VISIBLE);
-
-        ((Switch) findViewById(R.id.highgoaldefence)).setVisibility(View.VISIBLE);
-
-
-
-        ((TextView) findViewById(R.id.auto)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.tele)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.highgoalsauto)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.lowgoalstele)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.gearstele)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.gearoffground)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.highgoaltele)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.highgoaldefence)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.endgame)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.touchpad)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.ropetime)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.textView35)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.textView4)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.ondefence)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.textView36)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.textView38)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.gearNumDisplay)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.lowgoalloaddata)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.scoutDisplay)).setVisibility(View.VISIBLE);
-
-        ((TextView) findViewById(R.id.match)).setVisibility(View.VISIBLE);
-
-
-
-        ((EditText) findViewById(R.id.editText6)).setVisibility(View.VISIBLE);
-
-        ((EditText) findViewById(R.id.editText3)).setVisibility(View.VISIBLE);
-
-        ((EditText) findViewById(R.id.editText2)).setVisibility(View.VISIBLE);
-
-        ((EditText) findViewById(R.id.highteledata)).setVisibility(View.VISIBLE);
-
-
-
-        ((Button)findViewById(R.id.lowgoalsub)).setVisibility(View.VISIBLE);
-
-        ((Button)findViewById(R.id.lowgoaladd)).setVisibility(View.VISIBLE);
-
-        ((Button)findViewById(R.id.gearsadd)).setVisibility(View.VISIBLE);
-
-        ((Button)findViewById(R.id.gearssub)).setVisibility(View.VISIBLE);
-
-        ((Button)findViewById(R.id.sendbutton)).setVisibility(View.VISIBLE);
-
-
-
-        qrdisplay.setVisibility(View.INVISIBLE);
-
-        continueQR.setVisibility(View.INVISIBLE);
-
-        backbtn.setVisibility(View.INVISIBLE);
-
-        masterDisplay.setVisibility(View.INVISIBLE);
-
-    }
 
 }
 
