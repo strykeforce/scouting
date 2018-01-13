@@ -23,6 +23,39 @@
     tools:context="org.strykeforce.scoutapp.MainActivity">
 
 
+    <TextView
+
+        android:id="@+id/horizline"
+
+        android:layout_width="1500dp"
+
+        android:layout_height="20dp"
+
+        android:layout_x="0dp"
+
+        android:layout_y="26dp"
+
+        android:text="________________________________________________________________________________________________________________________________________________________"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/black" />
+
+    <TextView
+
+        android:id="@+id/vertbar"
+
+        android:layout_width="5dp"
+
+        android:layout_height="500dp"
+
+        android:layout_x="380dp"
+
+        android:layout_y="30dp"
+
+        android:text="|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\"
+
+        android:textStyle="normal|bold" />
 
     <TextView
 
@@ -44,6 +77,76 @@
 
         android:layout_y="0dp" />
 
+
+    <TextView
+
+        android:id="@+id/match"
+
+        android:layout_width="50dp"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="39dp"
+
+        android:layout_x="255dp"
+
+        android:layout_y="4dp"
+
+        android:scaleX="1.75"
+
+        android:scaleY="1.75"
+
+        android:text="Match"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/matchdata"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="79dp"
+
+        android:layout_x="318dp"
+
+        android:layout_y="4dp"
+
+        android:scaleX="1.70"
+
+        android:scaleY="1.70"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/scoutDisplay"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="35dp"
+
+        android:layout_x="-46dp"
+
+        android:layout_y="-6dp"
+
+        android:text="Blue 1"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_blue_dark"
+
+        android:textSize="30dp"
+
+        android:textStyle="normal|bold" />
 
     <TextView
 
@@ -70,45 +173,42 @@
         android:layout_y="4dp"/>
 
 
-
+    <!--Num high goals in auto?-->
 
 
     <TextView
 
-        android:text="|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\"
+        android:id="@+id/teamdata"
 
-        android:layout_width="5dp"
+        android:layout_width="80dp"
 
-        android:layout_height="500dp"
+        android:layout_height="20dp"
 
-        android:id="@+id/textView31"
+        android:layout_marginEnd="249dp"
 
-        android:textStyle="normal|bold"
+        android:layout_x="565dp"
 
-        android:layout_x="400dp"
+        android:layout_y="4dp"
 
-        android:layout_y="30dp"/>
+        android:scaleX="1.80"
 
+        android:scaleY="1.80"
 
+        android:text="0"
 
+        android:textColor="@android:color/black"
 
-
-
-    <!--Num high goals in auto?-->
-
-
-
-
+        android:textStyle="normal|bold" />
 
     <Button
 
-        android:text="Done"
+        android:text="Back"
 
         android:layout_width="wrap_content"
 
         android:layout_height="60dp"
 
-        android:id="@+id/sendbutton"
+        android:id="@+id/backbutton"
 
         android:textAllCaps="false"
 
@@ -116,178 +216,41 @@
 
         android:textSize="20dp"
 
-        android:textStyle="bold"
+        android:scaleX="1.5"
 
-        android:layout_x="795dp"
-
-        android:layout_y="380dp"/>
-
-
-    <TextView
-
-        android:text=" Notes/Feedback:"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/textView36"
-
-        android:textColor="@color/zxing_custom_viewfinder_laser"
+        android:scaleY="1.5"
 
         android:textStyle="bold"
-
-        android:layout_x="@dimen/right_align2"
-
-        android:layout_y="410dp"/>
-
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="20dp"
-
-        android:id="@+id/matchdata"
-
-        android:scaleX="1.70"
-
-        android:scaleY="1.70"
-
-        android:layout_marginEnd="79dp"
-
-        android:textStyle="normal|bold"
-
-        android:textColor="@android:color/black"
-
-        android:layout_x="318dp"
-
-        android:layout_y="4dp"/>
-
-
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="80dp"
-
-        android:layout_height="20dp"
-
-        android:scaleX="1.80"
-
-        android:scaleY="1.80"
-
-        android:id="@+id/teamdata"
-
-        android:layout_marginEnd="249dp"
-
-        android:textStyle="normal|bold"
-
-        android:textColor="@android:color/black"
-
-        android:layout_x="565dp"
-
-        android:layout_y="4dp"/>
-
-
-    <TextView
-
-        android:text="________________________________________________________________________________________________________________________________________________________"
-
-        android:layout_width="1500dp"
-
-        android:layout_height="20dp"
-
-        android:id="@+id/textView32"
-
-        android:textColor="@android:color/black"
-
-        android:textAllCaps="false"
 
         android:layout_x="0dp"
 
-        android:layout_y="26dp" />
+        android:layout_y="480dp"/>
 
+    <Button
 
-    <EditText
+        android:id="@+id/sendbutton"
 
         android:layout_width="wrap_content"
 
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
 
-        android:inputType="textPersonName"
+        android:layout_x="800dp"
 
-        android:ems="9"
+        android:layout_y="480dp"
 
-        android:id="@+id/editText2"
+        android:scaleX="1.5"
 
-        android:textSize="14sp"
+        android:scaleY="1.5"
+
+        android:text="Done"
 
         android:textAllCaps="false"
 
-        android:textColor="@color/zxing_custom_viewfinder_laser"
+        android:textColor="@color/colorPrimaryDark"
 
-        android:textStyle="bold"
+        android:textSize="20dp"
 
-        android:layout_x="645dp"
-
-        android:layout_y="400dp"/>
-
-
-    <TextView
-
-        android:text="Blue 1"
-
-        android:layout_height="35dp"
-
-        android:textSize="30dp"
-
-        android:textAlignment="center"
-
-        android:layout_width="match_parent"
-
-        android:id="@+id/scoutDisplay"
-
-        android:textColor="@android:color/holo_blue_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="-46dp"
-
-        android:layout_y="-6dp" />
-
-
-    <TextView
-
-        android:text="Match"
-
-        android:layout_height="20dp"
-
-        android:id="@+id/match"
-
-        android:scaleX="1.75"
-
-        android:scaleY="1.75"
-
-        android:layout_width="50dp"
-
-        android:layout_marginEnd="39dp"
-
-        android:textStyle="normal|bold"
-
-        android:textColor="@android:color/black"
-
-        android:layout_x="255dp"
-
-        android:layout_y="4dp"/>
-
+        android:textStyle="bold" />
 
 
     <TextView
@@ -492,23 +455,23 @@
 
     <Button
 
-        android:text="-"
+        android:id="@+id/zonesub"
 
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
 
-        android:id="@+id/zonesub"
+        android:layout_x="160dp"
+
+        android:layout_y="170dp"
+
+        android:text="-"
 
         android:textColor="@android:color/holo_orange_dark"
 
-        android:textStyle="bold"
-
         android:textSize="20sp"
 
-        android:layout_x="160dp"
-
-        android:layout_y="170dp"/>
+        android:textStyle="bold" />
 
     <TextView
 
@@ -734,7 +697,7 @@
 
     <TextView
 
-        android:text="Exchange"
+        android:text="Exchange Cubes"
 
         android:layout_width="wrap_content"
 
@@ -819,6 +782,204 @@
         android:layout_x="740dp"
 
         android:layout_y="170dp"/>
+
+    <TextView
+        android:text="End game"
+        android:layout_width="133dp"
+        android:layout_height="20dp"
+        android:id="@+id/endgame"
+        android:scaleX="2.5"
+        android:scaleY="2.5"
+        android:layout_marginEnd="33dp"
+        android:textStyle="normal|bold"
+        android:textColor="@android:color/black"
+        android:layout_x="125dp"
+        android:layout_y="240dp"/>
+
+    <CheckBox
+        android:id="@+id/climbattempt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="65dp"
+        android:layout_y="270dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Attempted climb?" />
+
+    <CheckBox
+        android:id="@+id/climb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="79dp"
+        android:layout_y="320dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Successfully climbed?" />
+
+    <CheckBox
+        android:id="@+id/lift1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="37dp"
+        android:layout_y="370dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted 1?" />
+
+    <CheckBox
+        android:id="@+id/lift2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="37dp"
+        android:layout_y="420dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted 2?" />
+
+    <CheckBox
+        android:id="@+id/failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="450dp"
+        android:layout_y="320dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Robot failed?"
+        android:textColor="@color/zxing_custom_viewfinder_laser" />
+
+    <TextView
+
+        android:id="@+id/penaltylabel"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="460dp"
+
+        android:layout_y="390dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:text="Penalties"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/penaltysub"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="560dp"
+
+        android:layout_y="380dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/penalties"
+
+        android:textAlignment="center"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:layout_x="650dp"
+
+        android:layout_y="395dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/penaltyadd"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="680dp"
+
+        android:layout_y="380dp"/>
+
+    <TextView
+
+        android:id="@+id/notelabel"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="440dp"
+
+        android:layout_y="450dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:text=" Notes/Feedback:"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
+    <EditText
+
+        android:id="@+id/notes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="600dp"
+
+        android:layout_y="440dp"
+
+        android:ems="9"
+
+        android:inputType="textPersonName"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textSize="14sp"
+
+        android:textStyle="bold" />
 
     android:orientation="horizontal"
 
