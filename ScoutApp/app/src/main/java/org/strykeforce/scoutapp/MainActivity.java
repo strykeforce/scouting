@@ -60,13 +60,6 @@ public class MainActivity extends AppCompatActivity {
     private final static String TAG = "MainActivity";
     /*THINGS THAT NEED TO IMPROVE:
 
-    slide bar showing actual numbers
-
-    lock screen orientation -> change manifest file and qr code layout
-
-    no negatives in gear display
-
-
 
     Pack List: paper and ink
 
@@ -80,29 +73,25 @@ public class MainActivity extends AppCompatActivity {
 
         1 Small Black Extra Master Tablet
 
-     Need to Buy Still:
-
-        7-8 clickers
-
-        10-12 battery packs
-
-
-
-        ORDER OF ITEMS IS WRONG
 
     */
 
 
+    boolean CrossBaseLine = false, AutonSwitch = false, SecondCube = false;
 
-    boolean CrossBaseLine = false, PlaceGear = false, AutoLow = false;
-
-    String autohigh = "0";
+    int AutonScaleTime = 0;
 
     boolean gearoffground = false;
 
-    String highgoals = "0";
+    String PortalCubes, CenterCubes, ZoneCubes, SwitchCubes, ScaleCubes, ExchangeCubes = "0";
 
-    boolean getsdefended = false, touchpad = false, defense = false, switchCube = false;
+    boolean robotfailed = false;
+
+    boolean ClimbAttempted, CLimbSuccess, LiftedOne, LiftedTwo, Parked = false;
+
+    String Penalties = "0";
+
+    String notes = "none";
 
     String scoutid;
 
@@ -110,13 +99,10 @@ public class MainActivity extends AppCompatActivity {
 
     private String QRStr;
 
-    int lowgoalLoadsTele = 0, gearsDeliveredTele = 0;
-
-    TextView lowgoaldisplay, geardisplay;
-
-    String scoutName = "n/a", notes = "none";
+    String scoutName = "n/a";
 
     private static SeekBar seek_bar;
+
 
     private TextView scoutDisplay, masterDisplay;
 
@@ -126,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
 
     int step = 1, max = 30, min = 5, progressSeek;
 
-
+    int state = 1;
 
     //Nika's Variables
 
@@ -138,16 +124,13 @@ public class MainActivity extends AppCompatActivity {
 
     private String teamText = "";
 
-    private static int MATCH_NUMBER=0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
-
+    private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
 
 
     @Override
 
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         setContentView(R.layout.activity_main);
@@ -157,6 +140,28 @@ public class MainActivity extends AppCompatActivity {
         builderSend.setTitle("NEXT MATCH?");
 
 
+        //while(1 == 1) {
+        //for(int n = 0; n<4; n++){
+            switch (state) {
+                case 1:
+                    Log.d(TAG, "Hello World");
+                    setContentView(R.layout.start);
+                    state++;
+                    break;
+                case 2:
+                    Log.d(TAG, "See This?");
+                    break;
+                case 3:
+                    break;
+            }
+        //}
+    }
+}
+
+
+//Old code
+
+/*
 
         //SeditallTeamNums = getTeamNums();
 
@@ -168,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        setContentView(R.layout.start);
+        //setContentView(R.layout.start);
 
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 
@@ -213,37 +218,38 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
-                    /*masterDisplay = (TextView) findViewById(R.id.masterDisplay);
+
+                     masterDisplay = (TextView) findViewById(R.id.masterDisplay);
 
                     lowgoaldisplay = (TextView) findViewById(R.id.lowgoalloaddata);
 
-                    geardisplay = (TextView) findViewById(R.id.gearNumDisplay);*/
+                    geardisplay = (TextView) findViewById(R.id.gearNumDisplay);
 
                     //MATCH_NUMBER--;  Sedit
 
 
                     //ResetMatch(); Sedit
 
-                    /*qrdisplay = (ImageView) findViewById(R.id.imageView);
+                     qrdisplay = (ImageView) findViewById(R.id.imageView);
 
                     continueQR = (Button) findViewById(R.id.continue_btn);
 
-                    backbtn = (Button) findViewById(R.id.back_btn);*/
+                    backbtn = (Button) findViewById(R.id.back_btn);
 
 
 
-                    /*if (SCOUT_ID < 3)
+                     if (SCOUT_ID < 3)
 
                         ((TextView) findViewById(R.id.masterDisplay)).setTextColor(Color.parseColor("#ffcc0000"));
 
                     else
 
-                        ((TextView) findViewById(R.id.masterDisplay)).setTextColor(Color.parseColor("#283593"));*/
+                        ((TextView) findViewById(R.id.masterDisplay)).setTextColor(Color.parseColor("#283593"));
 
 
 
 
-                    /*Sedit builderSend.setMessage("Are you sure you want to continue? Did the MASTER scan your data?");
+                     Sedit builderSend.setMessage("Are you sure you want to continue? Did the MASTER scan your data?");
 
                     continueQR.setOnClickListener(new View.OnClickListener() {
 
@@ -327,9 +333,9 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                    );Sedit*/
+                    );Sedit
 
-                   /* findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
+                     findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
 
                         @Override
 
@@ -389,11 +395,11 @@ public class MainActivity extends AppCompatActivity {
 
                         }
 
-                    }); */
+                    });
 
 
 
-                    /*SeditfindViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
+                     SeditfindViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
 
                         @Override
 
@@ -441,7 +447,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-    }Sedit*/
+    }Sedit
 
 
 
@@ -462,10 +468,10 @@ public class MainActivity extends AppCompatActivity {
 
         Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
 
-        switchCube = deliverSwitchAuton.isChecked();
+        //switchCube = deliverSwitchAuton.isChecked();
 
 
-        /*Switch lowgoalAutoSwitch = (Switch) findViewById(R.id.lowgoaldataauto);
+         Switch lowgoalAutoSwitch = (Switch) findViewById(R.id.lowgoaldataauto);
 
         AutoLow = lowgoalAutoSwitch.isChecked();
 
@@ -487,11 +493,11 @@ public class MainActivity extends AppCompatActivity {
 
         Switch GetsDefendedSwitch = (Switch) findViewById(R.id.highgoaldefence);
 
-        getsdefended = GetsDefendedSwitch.isChecked();*/
+        getsdefended = GetsDefendedSwitch.isChecked();
 
 
 
-    /*
+
 
 0    SCOUT ID int
 
@@ -533,14 +539,8 @@ public class MainActivity extends AppCompatActivity {
 
   10  Notes STRING
 
-     */
-        if (Integer.parseInt(highgoals) < 0) {
-            highgoals = "0";
-        }
-        if (gearsDeliveredTele < 0) {
 
-            gearsDeliveredTele = 0;
-        }
+         Sedit
 
             QRStr = "Scout ID: " + (SCOUT_ID + 1) + "\t"
                     +"Team: " + TEAM_NUMBER + "\t"
@@ -610,7 +610,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-/*
+
             findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -671,10 +671,10 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-            }); */
+            });
 
 
-/*
+
             findViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -690,7 +690,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             });
-            */
+
 
         }}
 
@@ -798,21 +798,21 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        gearsDeliveredTele = 0;
+        //gearsDeliveredTele = 0;
 
-        lowgoalLoadsTele = 0;
+        //lowgoalLoadsTele = 0;
 
-        geardisplay.setText("0");
+        //geardisplay.setText("0");
 
-        lowgoaldisplay.setText("0");
-
-
+        //lowgoaldisplay.setText("0");
 
 
 
-        /*EditText highgoalsauto = (EditText) findViewById(R.id.editText6);
 
-        highgoalsauto.setText("0");*/
+
+         EditText highgoalsauto = (EditText) findViewById(R.id.editText6);
+
+        highgoalsauto.setText("0");
 
         //highgoalsauto.setTextColor(Color.parseColor("@android:color/holo_green_dark"));
 
@@ -833,10 +833,10 @@ public void println(String line)
 {
     System.out.println(line);
 }
-    /*
+
     This is a terrible function, and if I were to be using an actually GOOD language, like C, maybe
     This could have been implemented better. This sucks, but it's NOT MY FAULT!
-     */
+
     public int[][] getTeamNums()
 
     {
@@ -939,7 +939,7 @@ public void println(String line)
 
 
 
-    /*Seditprivate void resetScoutScreen()
+     Seditprivate void resetScoutScreen()
 
     {
 
@@ -979,15 +979,16 @@ public void println(String line)
 
         matchInput.setText("");
 
-    }*/
+    }
 
 
 
 
-}/*sEDIT->*/)
+} sEDIT->)
 
 
 
 
 
-;}});}}//sEDIT
+;}});}}}
+*/
