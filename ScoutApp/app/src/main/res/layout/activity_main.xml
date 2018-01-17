@@ -49,7 +49,7 @@
 
         android:layout_height="500dp"
 
-        android:layout_x="380dp"
+        android:layout_x="430dp"
 
         android:layout_y="30dp"
 
@@ -59,23 +59,23 @@
 
     <TextView
 
-        android:text="Tele-op"
+        android:id="@+id/teleop"
 
         android:layout_width="156dp"
 
         android:layout_height="40dp"
 
-        android:id="@+id/tele-op"
+        android:layout_x="90dp"
 
-        android:textSize="35sp"
+        android:layout_y="0dp"
+
+        android:text="Tele-op"
 
         android:textColor="@android:color/holo_orange_dark"
 
-        android:textStyle="normal|bold"
+        android:textSize="35sp"
 
-        android:layout_x="90dp"
-
-        android:layout_y="0dp" />
+        android:textStyle="normal|bold" />
 
 
     <TextView
@@ -202,32 +202,6 @@
 
     <Button
 
-        android:text="Back"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="60dp"
-
-        android:id="@+id/backbutton"
-
-        android:textAllCaps="false"
-
-        android:textColor="@color/colorPrimaryDark"
-
-        android:textSize="20dp"
-
-        android:scaleX="1.5"
-
-        android:scaleY="1.5"
-
-        android:textStyle="bold"
-
-        android:layout_x="0dp"
-
-        android:layout_y="480dp"/>
-
-    <Button
-
         android:id="@+id/sendbutton"
 
         android:layout_width="wrap_content"
@@ -236,7 +210,7 @@
 
         android:layout_x="800dp"
 
-        android:layout_y="480dp"
+        android:layout_y="360dp"
 
         android:scaleX="1.5"
 
@@ -252,6 +226,25 @@
 
         android:textStyle="bold" />
 
+    <TextView
+
+        android:id="@+id/retrievedtxt"
+
+        android:layout_width="308dp"
+
+        android:layout_height="40dp"
+
+        android:layout_x="60dp"
+
+        android:layout_y="40dp"
+
+        android:text="Retrieve location:"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="35sp"
+
+        android:textStyle="normal|bold" />
 
     <TextView
 
@@ -273,9 +266,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="30dp"
+        android:layout_x="60dp"
 
-        android:layout_y="60dp"/>
+        android:layout_y="90dp"/>
 
     <Button
 
@@ -293,9 +286,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="160dp"
+        android:layout_x="210dp"
 
-        android:layout_y="50dp"/>
+        android:layout_y="80dp"/>
 
     <TextView
 
@@ -317,9 +310,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="250dp"
+        android:layout_x="300dp"
 
-        android:layout_y="65dp"/>
+        android:layout_y="95dp"/>
 
     <Button
 
@@ -337,9 +330,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="280dp"
+        android:layout_x="330dp"
 
-        android:layout_y="50dp"/>
+        android:layout_y="80dp"/>
 
     <TextView
 
@@ -361,9 +354,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="30dp"
+        android:layout_x="60dp"
 
-        android:layout_y="120dp"/>
+        android:layout_y="140dp"/>
 
     <Button
 
@@ -381,9 +374,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="160dp"
+        android:layout_x="210dp"
 
-        android:layout_y="110dp"/>
+        android:layout_y="130dp"/>
 
     <TextView
 
@@ -405,9 +398,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="250dp"
+        android:layout_x="300dp"
 
-        android:layout_y="125dp"/>
+        android:layout_y="145dp"/>
 
     <Button
 
@@ -425,9 +418,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="280dp"
+        android:layout_x="330dp"
 
-        android:layout_y="110dp"/>
+        android:layout_y="130dp"/>
 
     <TextView
 
@@ -449,9 +442,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="30dp"
+        android:layout_x="60dp"
 
-        android:layout_y="180dp"/>
+        android:layout_y="190dp"/>
 
     <Button
 
@@ -461,9 +454,9 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_x="160dp"
+        android:layout_x="210dp"
 
-        android:layout_y="170dp"
+        android:layout_y="180dp"
 
         android:text="-"
 
@@ -493,9 +486,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="250dp"
+        android:layout_x="300dp"
 
-        android:layout_y="185dp"/>
+        android:layout_y="195dp"/>
 
     <Button
 
@@ -513,9 +506,29 @@
 
         android:textSize="20sp"
 
-        android:layout_x="280dp"
+        android:layout_x="330dp"
 
-        android:layout_y="170dp"/>
+        android:layout_y="180dp"/>
+
+    <TextView
+
+        android:id="@+id/deliveredtxt"
+
+        android:layout_width="308dp"
+
+        android:layout_height="40dp"
+
+        android:layout_x="60dp"
+
+        android:layout_y="240dp"
+
+        android:text="Deliver location:"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="35sp"
+
+        android:textStyle="normal|bold" />
 
     <TextView
 
@@ -537,9 +550,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="480dp"
+        android:layout_x="60dp"
 
-        android:layout_y="60dp"/>
+        android:layout_y="290dp"/>
 
     <Button
 
@@ -557,9 +570,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="620dp"
+        android:layout_x="210dp"
 
-        android:layout_y="50dp"/>
+        android:layout_y="280dp"/>
 
     <TextView
 
@@ -581,10 +594,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="710dp"
+        android:layout_x="300dp"
 
-        android:layout_y="65dp"/>
-
+        android:layout_y="295dp"/>
     <Button
 
         android:text="+"
@@ -601,9 +613,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="740dp"
+        android:layout_x="330dp"
 
-        android:layout_y="50dp"/>
+        android:layout_y="280dp"/>
 
     <TextView
 
@@ -625,9 +637,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="480dp"
+        android:layout_x="60dp"
 
-        android:layout_y="120dp"/>
+        android:layout_y="330dp"/>
 
     <Button
 
@@ -645,9 +657,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="620dp"
+        android:layout_x="210dp"
 
-        android:layout_y="110dp"/>
+        android:layout_y="320dp"/>
 
     <TextView
 
@@ -669,9 +681,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="710dp"
+        android:layout_x="300dp"
 
-        android:layout_y="125dp"/>
+        android:layout_y="335dp"/>
 
     <Button
 
@@ -689,9 +701,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="740dp"
+        android:layout_x="330dp"
 
-        android:layout_y="110dp"/>
+        android:layout_y="320dp"/>
 
 
 
@@ -715,9 +727,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="460dp"
+        android:layout_x="50dp"
 
-        android:layout_y="180dp"/>
+        android:layout_y="375dp"/>
 
     <Button
 
@@ -735,9 +747,9 @@
 
         android:textSize="20sp"
 
-        android:layout_x="620dp"
+        android:layout_x="210dp"
 
-        android:layout_y="170dp"/>
+        android:layout_y="360dp"/>
 
     <TextView
 
@@ -759,9 +771,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="710dp"
+        android:layout_x="300dp"
 
-        android:layout_y="185dp"/>
+        android:layout_y="380dp"/>
 
     <Button
 
@@ -779,72 +791,19 @@
 
         android:textSize="20sp"
 
-        android:layout_x="740dp"
+        android:layout_x="330dp"
 
-        android:layout_y="170dp"/>
-
-    <TextView
-        android:text="End game"
-        android:layout_width="133dp"
-        android:layout_height="20dp"
-        android:id="@+id/endgame"
-        android:scaleX="2.5"
-        android:scaleY="2.5"
-        android:layout_marginEnd="33dp"
-        android:textStyle="normal|bold"
-        android:textColor="@android:color/black"
-        android:layout_x="125dp"
-        android:layout_y="240dp"/>
-
-    <CheckBox
-        android:id="@+id/climbattempt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="65dp"
-        android:layout_y="270dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Attempted climb?" />
-
-    <CheckBox
-        android:id="@+id/climb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="79dp"
-        android:layout_y="320dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Successfully climbed?" />
-
-    <CheckBox
-        android:id="@+id/lift1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="37dp"
-        android:layout_y="370dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Lifted 1?" />
-
-    <CheckBox
-        android:id="@+id/lift2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="37dp"
-        android:layout_y="420dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Lifted 2?" />
+        android:layout_y="360dp"/>
 
     <CheckBox
         android:id="@+id/failed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="450dp"
-        android:layout_y="320dp"
+        android:layout_x="480dp"
+        android:layout_y="220dp"
         android:scaleX="2.0"
         android:scaleY="2.0"
-        android:text="Robot failed?"
+        android:text="Robot failed"
         android:textColor="@color/zxing_custom_viewfinder_laser" />
 
     <TextView
@@ -855,9 +814,9 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_x="460dp"
+        android:layout_x="470dp"
 
-        android:layout_y="390dp"
+        android:layout_y="290dp"
 
         android:scaleX="2.00"
 
@@ -889,7 +848,7 @@
 
         android:layout_x="560dp"
 
-        android:layout_y="380dp"/>
+        android:layout_y="280dp"/>
 
     <TextView
 
@@ -913,7 +872,7 @@
 
         android:layout_x="650dp"
 
-        android:layout_y="395dp"/>
+        android:layout_y="295dp"/>
 
     <Button
 
@@ -933,27 +892,94 @@
 
         android:layout_x="680dp"
 
-        android:layout_y="380dp"/>
+        android:layout_y="280dp"/>
 
     <TextView
+        android:id="@+id/climbtxt"
+        android:layout_width="133dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="33dp"
+        android:layout_x="700dp"
+        android:layout_y="50dp"
+        android:scaleX="2.5"
+        android:scaleY="2.5"
+        android:text="Climb"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold" />
 
-        android:id="@+id/notelabel"
+    <CheckBox
+        android:id="@+id/climbattempt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="500dp"
+        android:layout_y="80dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Attempted" />
+
+    <CheckBox
+        android:id="@+id/climb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="500dp"
+        android:layout_y="125dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Successful" />
+
+    <CheckBox
+        android:id="@+id/lift1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="710dp"
+        android:layout_y="80dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted 1" />
+
+    <CheckBox
+        android:id="@+id/lift2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="710dp"
+        android:layout_y="125dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted 2" />
+
+    <CheckBox
+        android:id="@+id/platform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="600dp"
+        android:layout_y="170dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="On Platform" />
+
+    <Button
+
+        android:id="@+id/backbutton"
 
         android:layout_width="wrap_content"
 
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
 
-        android:layout_x="440dp"
+        android:layout_x="460dp"
 
-        android:layout_y="450dp"
+        android:layout_y="360dp"
 
-        android:scaleX="2.00"
+        android:scaleX="1.5"
 
-        android:scaleY="2.00"
+        android:scaleY="1.5"
 
-        android:text=" Notes/Feedback:"
+        android:text="Back"
 
-        android:textColor="@color/zxing_custom_viewfinder_laser"
+        android:textAllCaps="false"
+
+        android:textColor="@color/colorPrimaryDark"
+
+        android:textSize="20dp"
 
         android:textStyle="bold" />
 
@@ -965,9 +991,9 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_x="600dp"
+        android:layout_x="750dp"
 
-        android:layout_y="440dp"
+        android:layout_y="220dp"
 
         android:ems="9"
 
@@ -980,6 +1006,29 @@
         android:textSize="14sp"
 
         android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/notelabel"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="670dp"
+
+        android:layout_y="230dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:text=" Notes:"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
 
     android:orientation="horizontal"
 

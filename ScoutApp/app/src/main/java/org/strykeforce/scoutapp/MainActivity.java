@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import android.util.Log;
 import android.widget.Button;
 
 import android.view.View;
@@ -55,6 +56,8 @@ import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TAG is used for inserting tags later on for troubleshooting purposes
+    private final static String TAG = "MainActivity";
     /*THINGS THAT NEED TO IMPROVE:
 
     slide bar showing actual numbers
@@ -143,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
 
 
@@ -156,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        allTeamNums = getTeamNums();
+        //SeditallTeamNums = getTeamNums();
 
         matchDone = new boolean[numMatches];
 
@@ -188,19 +190,28 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                if (notValidMatch(MATCH_NUMBER) || notValidScout(SCOUT_ID)) {
+                //if (notValidMatch(MATCH_NUMBER) || notValidScout(SCOUT_ID)) {
 
-                    resetScoutScreen();
+                //Sedit    resetScoutScreen();
 
-                }
+                //}
 
-                else {
+                //else {
 
                     setContentView(R.layout.auton);
 
                     scoutDisplay = (TextView) findViewById(R.id.scoutDisplay);
 
-                    setScouter(SCOUT_ID);
+                    //SeditsetScouter(SCOUT_ID);
+                Log.d(TAG, "I'm in your activity, logging all the things 2");
+                    findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener() {
+
+                        @Override
+
+                        public void onClick(View v) {
+                        setContentView(R.layout.activity_main);
+
+                        }
 
                     /*masterDisplay = (TextView) findViewById(R.id.masterDisplay);
 
@@ -208,10 +219,10 @@ public class MainActivity extends AppCompatActivity {
 
                     geardisplay = (TextView) findViewById(R.id.gearNumDisplay);*/
 
-                    MATCH_NUMBER--;
+                    //MATCH_NUMBER--;  Sedit
 
 
-                    ResetMatch();
+                    //ResetMatch(); Sedit
 
                     /*qrdisplay = (ImageView) findViewById(R.id.imageView);
 
@@ -232,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    builderSend.setMessage("Are you sure you want to continue? Did the MASTER scan your data?");
+                    /*Sedit builderSend.setMessage("Are you sure you want to continue? Did the MASTER scan your data?");
 
                     continueQR.setOnClickListener(new View.OnClickListener() {
 
@@ -316,7 +327,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                    );
+                    );Sedit*/
 
                    /* findViewById(R.id.lowgoalsub).setOnClickListener(new View.OnClickListener() {
 
@@ -382,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                    findViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
+                    /*SeditfindViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
 
                         @Override
 
@@ -430,7 +441,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-    }
+    }Sedit*/
 
 
 
@@ -439,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
     {
 
 
-        EditText inputText3 = (EditText) findViewById(R.id.editText2);
+        EditText inputText3 = (EditText) findViewById(R.id.notes);
 
         notes = inputText3.getText().toString();
 
@@ -807,7 +818,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        EditText notes = (EditText) findViewById(R.id.editText2);
+        EditText notes = (EditText) findViewById(R.id.notes);
 
         notes.setText(".");
 
@@ -928,7 +939,7 @@ public void println(String line)
 
 
 
-    private void resetScoutScreen()
+    /*Seditprivate void resetScoutScreen()
 
     {
 
@@ -968,14 +979,15 @@ public void println(String line)
 
         matchInput.setText("");
 
-    }
+    }*/
 
 
 
 
-}
+}/*sEDIT->*/)
 
 
 
 
 
+;}});}}//sEDIT

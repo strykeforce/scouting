@@ -46,6 +46,27 @@
 
         android:layout_height="25dp" />
 
+    <Switch
+        android:text="Picked up second cube: "
+
+        android:scaleX="3.00"
+
+        android:scaleY="3.00"
+
+        android:layout_width="wrap_content"
+
+        android:id="@+id/cubex2"
+
+        android:textColor="@android:color/holo_green_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="211dp"
+
+        android:layout_y="383dp"
+
+        android:layout_height="25dp" />
+
     <TextView
 
         android:text="Time to Deliver to Scale:"
@@ -271,9 +292,9 @@
 
         android:scaleY="2.00"
 
-        android:layout_x="832dp"
+        android:layout_x="700dp"
 
-        android:layout_y="492dp"
+        android:layout_y="380dp"
 
         android:id="@+id/nextAuton"
 
