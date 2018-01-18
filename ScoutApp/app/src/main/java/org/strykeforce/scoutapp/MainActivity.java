@@ -3,12 +3,6 @@ package org.strykeforce.scoutapp;
 
 
 
-import android.content.DialogInterface;
-
-import android.graphics.Color;
-
-import android.support.v7.app.AlertDialog;
-
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -18,46 +12,16 @@ import android.widget.Button;
 
 import android.view.View;
 
-import android.widget.EditText;
-
 import android.widget.SeekBar;
 
 import android.widget.TextView;
 
-import android.widget.Switch;
-
 import android.widget.ImageView;
-
-import android.graphics.Bitmap;
-
-
-
-import com.google.zxing.BarcodeFormat;
-
-import com.google.zxing.MultiFormatWriter;
-
-import com.google.zxing.WriterException;
-
-import com.google.zxing.common.BitMatrix;
-
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
-
-
-import java.io.File;
-import java.io.IOException;
-
-import java.io.InputStream;
-
-import java.util.Scanner;
-
-
-import java.util.*;
 
 public class MainActivity extends AppCompatActivity {
 
     //TAG is used for inserting tags later on for troubleshooting purposes
-    private final static String TAG = "MainActivity";
+    private final static String TAG = "Greg";
     /*THINGS THAT NEED TO IMPROVE:
 
 
@@ -128,24 +92,66 @@ public class MainActivity extends AppCompatActivity {
 
 
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setContentView(R.layout.start);
+        Log.d(TAG, "start screen displayed");
 
+        //this reads the button on the start screen
+        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "ok button pushed");
+                goAuton();
+            }
+        });
+    }
+
+    public void goAuton(){
+        setContentView(R.layout.auton);
+
+        //this reads the button on the auton screen
+        setContentView(R.layout.auton);
+        findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener()
+        {
+
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "auton next button pushed");
+                goTeleOp();
+                }
+        });
+
+
+    }
+
+    public void goTeleOp(){
         setContentView(R.layout.activity_main);
 
-        final AlertDialog.Builder builderSend = new AlertDialog.Builder(this);
+        //this reads the button on the teleop screen
+        findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener()
+        {
 
-        builderSend.setTitle("NEXT MATCH?");
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "teleop back button pushed");
+                goAuton();
+            }
+        });
 
 
-        //while(1 == 1) {
-        //for(int n = 0; n<4; n++){
-            switch (state) {
+    }
+
+}
+
+
+
+    /*          switch (state) {
                 case 1:
                     Log.d(TAG, "Hello World");
-                    setContentView(R.layout.start);
+
                     state++;
                     break;
                 case 2:
@@ -154,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
                 case 3:
                     break;
             }
-        //}
     }
 }
 
@@ -162,6 +167,13 @@ public class MainActivity extends AppCompatActivity {
 //Old code
 
 /*
+
+        setContentView(R.layout.activity_main);
+
+        final AlertDialog.Builder builderSend = new AlertDialog.Builder(this);
+
+        builderSend.setTitle("NEXT MATCH?");
+
 
         //SeditallTeamNums = getTeamNums();
 
