@@ -146,7 +146,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goTeleOp(){
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.teleop);
 
         final TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
         portalcubes.setText(PortalCubes);
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.teleop);
 
         final AlertDialog.Builder builderSend = new AlertDialog.Builder(this);
 
@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
 
                         public void onClick(View v) {
-                        setContentView(R.layout.activity_main);
+                        setContentView(R.layout.teleop);
 
                         }
 
@@ -774,7 +774,7 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(View v) {
 
-                setContentView(R.layout.activity_main);
+                setContentView(R.layout.teleop);
 
                 popupscouttScreen();
 

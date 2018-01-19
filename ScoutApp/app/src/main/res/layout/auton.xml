@@ -7,9 +7,9 @@
     <Switch
         android:text=" Cross Base Line: "
 
-        android:scaleX="3.00"
+        android:scaleX="2.50"
 
-        android:scaleY="3.00"
+        android:scaleY="2.50"
 
         android:layout_width="wrap_content"
 
@@ -28,9 +28,9 @@
     <Switch
         android:text="Auto scale place: "
 
-        android:scaleX="3.00"
+        android:scaleX="2.50"
 
-        android:scaleY="3.00"
+        android:scaleY="2.50"
 
         android:layout_width="wrap_content"
 
@@ -45,83 +45,6 @@
         android:layout_y="83dp"
 
         android:layout_height="25dp" />
-
-    <Switch
-        android:text="Picked up second cube: "
-
-        android:scaleX="3.00"
-
-        android:scaleY="3.00"
-
-        android:layout_width="wrap_content"
-
-        android:id="@+id/cubex2"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="211dp"
-
-        android:layout_y="383dp"
-
-        android:layout_height="25dp" />
-
-    <TextView
-
-        android:text="Time to Deliver to Scale:"
-
-        android:layout_width="671dp"
-
-        android:layout_height="68dp"
-
-        android:id="@+id/scaleTimeText"
-
-        android:textSize="40sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="22dp"
-
-        android:layout_y="222dp" />
-
-    <SeekBar
-
-        android:layout_width="182dp"
-
-        android:layout_height="30dp"
-
-        android:id="@+id/scaleTime"
-
-        android:layout_x="664dp"
-
-        android:layout_y="231dp"
-
-        android:scaleX="3.00"
-
-        android:scaleY="3.00"/>
-
-    <TextView
-
-        android:text="0           5           10           15"
-
-        android:layout_width="671dp"
-
-        android:layout_height="68dp"
-
-        android:id="@+id/scaleTextNum"
-
-        android:textSize="40sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="523dp"
-
-        android:layout_y="271dp" />
 
     <TextView
 
@@ -281,25 +204,6 @@
 
         android:layout_y="-5dp" />
 
-    <Button
-        android:text="Next"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:layout_x="700dp"
-
-        android:layout_y="380dp"
-
-        android:id="@+id/nextAuton"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
     <Switch
         android:id="@+id/deliverSwitchAuton"
 
@@ -311,15 +215,111 @@
 
         android:layout_y="156dp"
 
-        android:scaleX="3.00"
+        android:scaleX="2.50"
 
-        android:scaleY="3.00"
+        android:scaleY="2.50"
 
         android:text="Deliver Cube to Switch: "
 
         android:textColor="@android:color/holo_green_dark"
 
         android:textStyle="bold" />
+
+    <Switch
+        android:text="Picked up second cube: "
+
+        android:scaleX="2.50"
+
+        android:scaleY="2.50"
+
+        android:layout_width="wrap_content"
+
+        android:id="@+id/cubex2"
+
+        android:textColor="@android:color/holo_green_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="256dp"
+
+        android:layout_y="224dp"
+
+        android:layout_height="25dp" />
+
+    <TextView
+
+        android:text="Time to Deliver to Scale:"
+
+        android:layout_width="671dp"
+
+        android:layout_height="68dp"
+
+        android:id="@+id/scaleTimeText"
+
+        android:textSize="36sp"
+
+        android:textColor="@android:color/holo_green_dark"
+
+        android:textStyle="normal|bold"
+
+        android:layout_x="20dp"
+
+        android:layout_y="271dp" />
+
+    <SeekBar
+
+        android:layout_width="182dp"
+
+        android:layout_height="30dp"
+
+        android:id="@+id/scaleTime"
+
+        android:layout_x="665dp"
+
+        android:layout_y="283dp"
+
+        android:scaleX="3.00"
+
+        android:scaleY="3.00"/>
+
+    <TextView
+
+        android:text="0           5           10           15"
+
+        android:layout_width="671dp"
+
+        android:layout_height="68dp"
+
+        android:id="@+id/scaleTextNum"
+
+        android:textSize="40sp"
+
+        android:textColor="@android:color/holo_green_dark"
+
+        android:textStyle="normal|bold"
+
+        android:layout_x="527dp"
+
+        android:layout_y="329dp" />
+
+    <Button
+        android:text="Next"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:layout_x="825dp"
+
+        android:layout_y="390dp"
+
+        android:id="@+id/nextAuton"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
 
 </AbsoluteLayout>
