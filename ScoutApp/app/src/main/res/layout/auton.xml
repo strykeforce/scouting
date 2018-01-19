@@ -26,7 +26,7 @@
         android:layout_height="25dp" />
 
     <Switch
-        android:text="Deliver Cube to Switch: "
+        android:text="Auto scale place: "
 
         android:scaleX="3.00"
 
@@ -34,15 +34,15 @@
 
         android:layout_width="wrap_content"
 
-        android:id="@+id/deliverSwitchAuton"
+        android:id="@+id/autoScale"
 
         android:textColor="@android:color/holo_green_dark"
 
         android:textStyle="bold"
 
-        android:layout_x="211dp"
+        android:layout_x="630dp"
 
-        android:layout_y="156dp"
+        android:layout_y="83dp"
 
         android:layout_height="25dp" />
 
@@ -299,6 +299,27 @@
         android:id="@+id/nextAuton"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <Switch
+        android:id="@+id/deliverSwitchAuton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="25dp"
+
+        android:layout_x="208dp"
+
+        android:layout_y="156dp"
+
+        android:scaleX="3.00"
+
+        android:scaleY="3.00"
+
+        android:text="Deliver Cube to Switch: "
+
+        android:textColor="@android:color/holo_green_dark"
+
+        android:textStyle="bold" />
 
 
 </AbsoluteLayout>

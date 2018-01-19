@@ -14,6 +14,7 @@ import android.view.View;
 
 import android.widget.SeekBar;
 
+import android.widget.Switch;
 import android.widget.TextView;
 
 import android.widget.ImageView;
@@ -41,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
     */
 
 
-    boolean CrossBaseLine = false, AutonSwitch = false, SecondCube = false;
+    boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
 
-    int AutonScaleTime = 0;
+    int ScaleTimeInt = 0;
 
     boolean gearoffground = false;
 
     String PortalCubes, CenterCubes, ZoneCubes, SwitchCubes, ScaleCubes, ExchangeCubes = "0";
+    int PortalCubesInt, CenterCubesInt, ZoneCubesInt, SwitchCubesInt, ScaleCubesInt, ExchangeCubesInt = 0;
 
     boolean robotfailed = false;
 
@@ -96,11 +98,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.start);
-        Log.d(TAG, "start screen displayed");
+        Log.d(TAG, "start screen displayed ");
 
         //this reads the button on the start screen
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "ok button pushed");
@@ -112,23 +113,53 @@ public class MainActivity extends AppCompatActivity {
     public void goAuton(){
         setContentView(R.layout.auton);
 
-        //this reads the button on the auton screen
-        setContentView(R.layout.auton);
+        final Switch baseline = (Switch) findViewById(R.id.baseline);
+        final Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
+        final Switch cubex2 = (Switch) findViewById(R.id.cubex2);
+        final Switch autoScale = (Switch) findViewById(R.id.autoScale);
+        final SeekBar scaleTime = (SeekBar) findViewById(R.id.scaleTime);
+
+        baseline.setChecked(BaseLineBool);
+        deliverSwitchAuton.setChecked(DeliverSwitchBool);
+        cubex2.setChecked(SecondCubeBool);
+        autoScale.setChecked(AutoScaleBool);
+        scaleTime.setProgress(ScaleTimeInt);
+
+
+//this reads the button on the auton screen
         findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener()
         {
 
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "auton next button pushed");
+
+                BaseLineBool = baseline.isChecked();
+                DeliverSwitchBool = deliverSwitchAuton.isChecked();
+                SecondCubeBool = cubex2.isChecked();
+                AutoScaleBool = autoScale.isChecked();
+                ScaleTimeInt = scaleTime.getProgress();
+
+                Log.d(TAG, "auton next button pushed" + BaseLineBool);
                 goTeleOp();
                 }
         });
-
-
     }
 
     public void goTeleOp(){
         setContentView(R.layout.activity_main);
+
+        final TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
+        portalcubes.setText(PortalCubes);
+
+        findViewById(R.id.portaladd).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                PortalCubesInt++;
+                PortalCubes = Integer.toString(PortalCubesInt);
+                portalcubes.setText(PortalCubes);
+            }
+        });
 
         //this reads the button on the teleop screen
         findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener()
@@ -136,6 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                PortalCubes = portalcubes.getText().toString();
                 Log.d(TAG, "teleop back button pushed");
                 goAuton();
             }

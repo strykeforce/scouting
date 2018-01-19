@@ -951,11 +951,21 @@
         android:id="@+id/platform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="600dp"
+        android:layout_x="500dp"
         android:layout_y="170dp"
         android:scaleX="2.0"
         android:scaleY="2.0"
         android:text="On Platform" />
+
+    <CheckBox
+        android:id="@+id/lifted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="710dp"
+        android:layout_y="170dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted" />
 
     <Button
 
