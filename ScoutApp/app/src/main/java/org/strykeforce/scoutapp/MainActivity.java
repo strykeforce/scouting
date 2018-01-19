@@ -48,8 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     boolean gearoffground = false;
 
-    String PortalCubes, CenterCubes, ZoneCubes, SwitchCubes, ScaleCubes, ExchangeCubes = "0";
-    int PortalCubesInt, CenterCubesInt, ZoneCubesInt, SwitchCubesInt, ScaleCubesInt, ExchangeCubesInt = 0;
+    int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
 
     boolean robotfailed = false;
 
@@ -149,15 +148,119 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.teleop);
 
         final TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
-        portalcubes.setText(PortalCubes);
+        final TextView centercubes = (TextView) findViewById(R.id.centercubes);
+        final TextView zonecubes = (TextView) findViewById(R.id.zonecubes);
+        final TextView switchcubes = (TextView) findViewById(R.id.switchcubes);
+        final TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
+        final TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
 
+
+        portalcubes.setText(Integer.toString(PortalCubes));
+        centercubes.setText(Integer.toString(CenterCubes));
+        zonecubes.setText(Integer.toString(ZoneCubes));
+        switchcubes.setText(Integer.toString(SwitchCubes));
+        scalecubes.setText(Integer.toString(ScaleCubes));
+        exchangecubes.setText(Integer.toString(ExchangeCubes));
+
+        findViewById(R.id.portalsub).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                PortalCubes--;
+                portalcubes.setText(Integer.toString(PortalCubes));
+            }
+        });
         findViewById(R.id.portaladd).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v) {
-                PortalCubesInt++;
-                PortalCubes = Integer.toString(PortalCubesInt);
-                portalcubes.setText(PortalCubes);
+                PortalCubes++;
+                portalcubes.setText(Integer.toString(PortalCubes));
+            }
+        });
+
+        findViewById(R.id.centersub).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                CenterCubes--;
+                centercubes.setText(Integer.toString(CenterCubes));
+            }
+        });
+        findViewById(R.id.centeradd).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                CenterCubes++;
+                centercubes.setText(Integer.toString(CenterCubes));
+            }
+        });
+
+        findViewById(R.id.zonesub).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ZoneCubes--;
+                zonecubes.setText(Integer.toString(ZoneCubes));
+            }
+        });
+        findViewById(R.id.zoneadd).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ZoneCubes++;
+                zonecubes.setText(Integer.toString(ZoneCubes));
+            }
+        });
+
+        findViewById(R.id.switchsub).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                SwitchCubes--;
+                switchcubes.setText(Integer.toString(SwitchCubes));
+            }
+        });
+        findViewById(R.id.switchadd).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                SwitchCubes++;
+                switchcubes.setText(Integer.toString(SwitchCubes));
+            }
+        });
+
+        findViewById(R.id.scalesub).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ScaleCubes--;
+                scalecubes.setText(Integer.toString(ScaleCubes));
+            }
+        });
+        findViewById(R.id.scaleadd).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ScaleCubes++;
+                scalecubes.setText(Integer.toString(ScaleCubes));
+            }
+        });
+
+        findViewById(R.id.exchangesub).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ExchangeCubes--;
+                exchangecubes.setText(Integer.toString(ExchangeCubes));
+            }
+        });
+        findViewById(R.id.exchangeadd).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                ExchangeCubes++;
+                exchangecubes.setText(Integer.toString(ExchangeCubes));
             }
         });
 
@@ -167,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                PortalCubes = portalcubes.getText().toString();
+                PortalCubes = Integer.parseInt(portalcubes.getText().toString());
                 Log.d(TAG, "teleop back button pushed");
                 goAuton();
             }
