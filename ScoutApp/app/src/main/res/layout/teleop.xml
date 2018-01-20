@@ -512,26 +512,6 @@
 
     <TextView
 
-        android:id="@+id/deliveredtxt"
-
-        android:layout_width="308dp"
-
-        android:layout_height="40dp"
-
-        android:layout_x="60dp"
-
-        android:layout_y="240dp"
-
-        android:text="Deliver location:"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textSize="35sp"
-
-        android:textStyle="normal|bold" />
-
-    <TextView
-
         android:text="Switch Cubes"
 
         android:layout_width="wrap_content"
@@ -552,7 +532,7 @@
 
         android:layout_x="60dp"
 
-        android:layout_y="290dp"/>
+        android:layout_y="275dp"/>
 
     <Button
 
@@ -572,7 +552,7 @@
 
         android:layout_x="210dp"
 
-        android:layout_y="280dp"/>
+        android:layout_y="260dp"/>
 
     <TextView
 
@@ -596,7 +576,7 @@
 
         android:layout_x="300dp"
 
-        android:layout_y="295dp"/>
+        android:layout_y="275dp"/>
     <Button
 
         android:text="+"
@@ -615,7 +595,7 @@
 
         android:layout_x="330dp"
 
-        android:layout_y="280dp"/>
+        android:layout_y="260dp"/>
 
     <TextView
 
@@ -639,7 +619,7 @@
 
         android:layout_x="60dp"
 
-        android:layout_y="330dp"/>
+        android:layout_y="325dp"/>
 
     <Button
 
@@ -659,7 +639,7 @@
 
         android:layout_x="210dp"
 
-        android:layout_y="320dp"/>
+        android:layout_y="310dp"/>
 
     <TextView
 
@@ -683,7 +663,7 @@
 
         android:layout_x="300dp"
 
-        android:layout_y="335dp"/>
+        android:layout_y="325dp"/>
 
     <Button
 
@@ -703,7 +683,7 @@
 
         android:layout_x="330dp"
 
-        android:layout_y="320dp"/>
+        android:layout_y="310dp"/>
 
 
 
@@ -796,15 +776,25 @@
         android:layout_y="360dp"/>
 
     <CheckBox
-        android:id="@+id/failed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="480dp"
-        android:layout_y="220dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
         android:text="Robot failed"
-        android:textColor="@color/zxing_custom_viewfinder_laser" />
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/failed"
+
+        android:layout_x="504dp"
+
+        android:layout_y="220dp"
+
+        android:scaleX="2.0"
+
+        android:scaleY="2.0"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
 
     <TextView
 
@@ -814,7 +804,7 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_x="470dp"
+        android:layout_x="495dp"
 
         android:layout_y="290dp"
 
@@ -829,70 +819,6 @@
         android:textColor="@color/zxing_custom_viewfinder_laser"
 
         android:textStyle="bold" />
-
-    <Button
-
-        android:text="-"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/penaltysub"
-
-        android:textColor="@color/zxing_custom_viewfinder_laser"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="560dp"
-
-        android:layout_y="280dp"/>
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/penalties"
-
-        android:textAlignment="center"
-
-        android:textColor="@color/zxing_custom_viewfinder_laser"
-
-        android:textStyle="bold"
-
-        android:layout_x="650dp"
-
-        android:layout_y="295dp"/>
-
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/penaltyadd"
-
-        android:textColor="@color/zxing_custom_viewfinder_laser"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="680dp"
-
-        android:layout_y="280dp"/>
 
     <TextView
         android:id="@+id/climbtxt"
@@ -931,7 +857,7 @@
         android:id="@+id/lift1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="710dp"
+        android:layout_x="715dp"
         android:layout_y="80dp"
         android:scaleX="2.0"
         android:scaleY="2.0"
@@ -941,7 +867,7 @@
         android:id="@+id/lift2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="710dp"
+        android:layout_x="715dp"
         android:layout_y="125dp"
         android:scaleX="2.0"
         android:scaleY="2.0"
@@ -951,7 +877,7 @@
         android:id="@+id/platform"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="500dp"
+        android:layout_x="504dp"
         android:layout_y="170dp"
         android:scaleX="2.0"
         android:scaleY="2.0"
@@ -993,6 +919,48 @@
 
         android:textStyle="bold" />
 
+    <TextView
+
+        android:id="@+id/notelabel"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="705dp"
+
+        android:layout_y="226dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:text=" Notes:"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/deliveredtxt"
+
+        android:layout_width="308dp"
+
+        android:layout_height="40dp"
+
+        android:layout_x="60dp"
+
+        android:layout_y="220dp"
+
+        android:text="Deliver location:"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="35sp"
+
+        android:textStyle="normal|bold" />
+
     <EditText
 
         android:id="@+id/notes"
@@ -1001,9 +969,9 @@
 
         android:layout_height="wrap_content"
 
-        android:layout_x="750dp"
+        android:layout_x="780dp"
 
-        android:layout_y="220dp"
+        android:layout_y="215dp"
 
         android:ems="9"
 
@@ -1017,27 +985,69 @@
 
         android:textStyle="bold" />
 
-    <TextView
+    <Button
 
-        android:id="@+id/notelabel"
+        android:text="-"
 
         android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
 
-        android:layout_x="670dp"
+        android:id="@+id/penaltysub"
 
-        android:layout_y="230dp"
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="590dp"
+
+        android:layout_y="280dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
 
         android:scaleX="2.00"
 
         android:scaleY="2.00"
 
-        android:text=" Notes:"
+        android:id="@+id/penalties"
+
+        android:textAlignment="center"
 
         android:textColor="@color/zxing_custom_viewfinder_laser"
 
-        android:textStyle="bold" />
+        android:textStyle="bold"
+
+        android:layout_x="674dp"
+
+        android:layout_y="295dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/penaltyadd"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="708dp"
+
+        android:layout_y="280dp"/>
 
 
     android:orientation="horizontal"
