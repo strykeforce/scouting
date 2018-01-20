@@ -108,6 +108,14 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "ok button pushed");
                     goAuton();
                 }
+                else{
+                    if(ValidScout(ScoutId) == 0){
+                        scoutid.setText("invalid");
+                    }
+                    if(ValidMatch(StartMatch) == 0){
+                        startmatch.setText("invalid");
+                    }
+                }
             }
         });
     }
