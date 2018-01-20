@@ -12,6 +12,8 @@ import android.widget.Button;
 
 import android.view.View;
 
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.SeekBar;
 
 import android.widget.Switch;
@@ -43,28 +45,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
-
     int ScaleTimeInt = 0;
 
-    boolean gearoffground = false;
-
     int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
+    boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
 
-    boolean robotfailed = false;
+    boolean Failed = false;
+    int Penalties = 0;
+    String Notes = "none";
 
-    boolean ClimbAttempted, CLimbSuccess, LiftedOne, LiftedTwo, Parked = false;
-
-    String Penalties = "0";
-
-    String notes = "none";
-
-    String scoutid;
+    int ScoutId;
+    int StartMatch;
 
     private ImageView QRImageView;
 
     private String QRStr;
 
-    String scoutName = "n/a";
 
     private static SeekBar seek_bar;
 
@@ -85,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean[] matchDone;
 
-    private int numMatches;
+    private int MatchLimit = 1000;
 
     private String teamText = "";
 
@@ -99,12 +95,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.start);
         Log.d(TAG, "start screen displayed ");
 
+        final TextView scoutid = (TextView) findViewById(R.id.editText);
+        final TextView startmatch = (TextView) findViewById(R.id.editText7);
+
         //this reads the button on the start screen
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "ok button pushed");
-                goAuton();
+                ScoutId = Integer.parseInt(scoutid.getText().toString());
+                StartMatch = Integer.parseInt(startmatch.getText().toString());
+                if(ValidScout(ScoutId) == 1 && ValidMatch(StartMatch) == 1) {
+                    Log.d(TAG, "ok button pushed");
+                    goAuton();
+                }
             }
         });
     }
@@ -131,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
                 BaseLineBool = baseline.isChecked();
                 DeliverSwitchBool = deliverSwitchAuton.isChecked();
                 SecondCubeBool = cubex2.isChecked();
@@ -154,6 +156,17 @@ public class MainActivity extends AppCompatActivity {
         final TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
         final TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
 
+        final CheckBox climbattempt = (CheckBox) findViewById(R.id.climbattempt);
+        final CheckBox climb = (CheckBox) findViewById(R.id.climb);
+        final CheckBox lift1 = (CheckBox) findViewById(R.id.lift1);
+        final CheckBox lift2 = (CheckBox) findViewById(R.id.lift2);
+        final CheckBox lifted = (CheckBox) findViewById(R.id.lifted);
+        final CheckBox platform = (CheckBox) findViewById(R.id.platform);
+
+
+        final TextView penalties = (TextView) findViewById(R.id.penalties);
+        final CheckBox failed = (CheckBox) findViewById(R.id.failed);
+        final EditText notes = (EditText) findViewById(R.id.notes);
 
         portalcubes.setText(Integer.toString(PortalCubes));
         centercubes.setText(Integer.toString(CenterCubes));
@@ -162,105 +175,120 @@ public class MainActivity extends AppCompatActivity {
         scalecubes.setText(Integer.toString(ScaleCubes));
         exchangecubes.setText(Integer.toString(ExchangeCubes));
 
-        findViewById(R.id.portalsub).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                PortalCubes--;
-                portalcubes.setText(Integer.toString(PortalCubes));
-            }
-        });
-        findViewById(R.id.portaladd).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                PortalCubes++;
-                portalcubes.setText(Integer.toString(PortalCubes));
-            }
-        });
+        climbattempt.setChecked(ClimbAttempt);
+        climb.setChecked(Climb);
+        lift1.setChecked(Lift1);
+        lift2.setChecked(Lift2);
+        lifted.setChecked(Lifted);
+        platform.setChecked(Platform);
 
-        findViewById(R.id.centersub).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                CenterCubes--;
-                centercubes.setText(Integer.toString(CenterCubes));
-            }
-        });
-        findViewById(R.id.centeradd).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                CenterCubes++;
-                centercubes.setText(Integer.toString(CenterCubes));
-            }
-        });
+        penalties.setText(Integer.toString(Penalties));
+        failed.setChecked(Failed);
+        notes.setText(Notes);
 
-        findViewById(R.id.zonesub).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                ZoneCubes--;
-                zonecubes.setText(Integer.toString(ZoneCubes));
-            }
-        });
-        findViewById(R.id.zoneadd).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                ZoneCubes++;
-                zonecubes.setText(Integer.toString(ZoneCubes));
-            }
-        });
+        //Plus/Minus buttons
+            findViewById(R.id.portalsub).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PortalCubes--;
+                    portalcubes.setText(Integer.toString(PortalCubes));
+                }
+            });
+            findViewById(R.id.portaladd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    PortalCubes++;
+                    portalcubes.setText(Integer.toString(PortalCubes));
+                }
+            });
 
-        findViewById(R.id.switchsub).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                SwitchCubes--;
-                switchcubes.setText(Integer.toString(SwitchCubes));
-            }
-        });
-        findViewById(R.id.switchadd).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                SwitchCubes++;
-                switchcubes.setText(Integer.toString(SwitchCubes));
-            }
-        });
+            findViewById(R.id.centersub).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CenterCubes--;
+                    centercubes.setText(Integer.toString(CenterCubes));
+                }
+            });
+            findViewById(R.id.centeradd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    CenterCubes++;
+                    centercubes.setText(Integer.toString(CenterCubes));
+                }
+            });
 
-        findViewById(R.id.scalesub).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                ScaleCubes--;
-                scalecubes.setText(Integer.toString(ScaleCubes));
-            }
-        });
-        findViewById(R.id.scaleadd).setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v) {
-                ScaleCubes++;
-                scalecubes.setText(Integer.toString(ScaleCubes));
-            }
-        });
+            findViewById(R.id.zonesub).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ZoneCubes--;
+                    zonecubes.setText(Integer.toString(ZoneCubes));
+                }
+            });
+            findViewById(R.id.zoneadd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ZoneCubes++;
+                    zonecubes.setText(Integer.toString(ZoneCubes));
+                }
+            });
 
-        findViewById(R.id.exchangesub).setOnClickListener(new View.OnClickListener()
-        {
+            findViewById(R.id.switchsub).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SwitchCubes--;
+                    switchcubes.setText(Integer.toString(SwitchCubes));
+                }
+            });
+            findViewById(R.id.switchadd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SwitchCubes++;
+                    switchcubes.setText(Integer.toString(SwitchCubes));
+                }
+            });
+
+            findViewById(R.id.scalesub).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ScaleCubes--;
+                    scalecubes.setText(Integer.toString(ScaleCubes));
+                }
+            });
+            findViewById(R.id.scaleadd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ScaleCubes++;
+                    scalecubes.setText(Integer.toString(ScaleCubes));
+                }
+            });
+
+            findViewById(R.id.exchangesub).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ExchangeCubes--;
+                    exchangecubes.setText(Integer.toString(ExchangeCubes));
+                }
+            });
+            findViewById(R.id.exchangeadd).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ExchangeCubes++;
+                    exchangecubes.setText(Integer.toString(ExchangeCubes));
+                }
+            });
+
+        findViewById(R.id.penaltysub).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExchangeCubes--;
-                exchangecubes.setText(Integer.toString(ExchangeCubes));
+                Penalties--;
+                penalties.setText(Integer.toString(Penalties));
             }
         });
-        findViewById(R.id.exchangeadd).setOnClickListener(new View.OnClickListener()
-        {
+        findViewById(R.id.penaltyadd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExchangeCubes++;
-                exchangecubes.setText(Integer.toString(ExchangeCubes));
+                Penalties++;
+                penalties.setText(Integer.toString(Penalties));
             }
         });
 
@@ -271,14 +299,78 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PortalCubes = Integer.parseInt(portalcubes.getText().toString());
+                CenterCubes = Integer.parseInt(centercubes.getText().toString());
+                ZoneCubes = Integer.parseInt(zonecubes.getText().toString());
+                SwitchCubes = Integer.parseInt(switchcubes.getText().toString());
+                ScaleCubes = Integer.parseInt(scalecubes.getText().toString());
+                ExchangeCubes = Integer.parseInt(exchangecubes.getText().toString());
+
+                ClimbAttempt = climbattempt.isChecked();
+                Climb = climb.isChecked();
+                Lift1 = lift1.isChecked();
+                Lift2 = lift2.isChecked();
+                Lifted = lifted.isChecked();
+                Platform = platform.isChecked();
+
+                Failed = failed.isChecked();
+                Penalties = Integer.parseInt(penalties.getText().toString());
+                Notes = notes.getText().toString();
+
                 Log.d(TAG, "teleop back button pushed");
                 goAuton();
             }
         });
 
+        findViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener()
+        {
 
+            @Override
+            public void onClick(View v) {
+                PortalCubes = Integer.parseInt(portalcubes.getText().toString());
+                CenterCubes = Integer.parseInt(centercubes.getText().toString());
+                ZoneCubes = Integer.parseInt(zonecubes.getText().toString());
+                SwitchCubes = Integer.parseInt(switchcubes.getText().toString());
+                ScaleCubes = Integer.parseInt(scalecubes.getText().toString());
+                ExchangeCubes = Integer.parseInt(exchangecubes.getText().toString());
+
+                ClimbAttempt = climbattempt.isChecked();
+                Climb = climb.isChecked();
+                Lift1 = lift1.isChecked();
+                Lift2 = lift2.isChecked();
+                Lifted = lifted.isChecked();
+                Platform = platform.isChecked();
+
+                Failed = failed.isChecked();
+                Penalties = Integer.parseInt(penalties.getText().toString());
+                Notes = notes.getText().toString();
+
+                Log.d(TAG, "teleop next button pushed");
+                goQR();
+            }
+        });
     }
 
+    public void goQR (){
+        setContentView(R.layout.popup);
+    }
+
+    private int ValidMatch(int matchnum) {
+        if(matchnum<MatchLimit && matchnum > 0) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    private int ValidScout(int id) {
+        if(id>=1 && id<=6) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }
 
 
