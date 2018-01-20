@@ -87,28 +87,41 @@ public class MainActivity extends AppCompatActivity {
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
 
-
+    //onCreate defines what happens when the app is started up
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //display the start screen
         setContentView(R.layout.start);
+        //this is just for troubleshooting purposes
         Log.d(TAG, "start screen displayed ");
 
+        //this defines variables we can use to access the screen objects
         final TextView scoutid = (TextView) findViewById(R.id.editText);
         final TextView startmatch = (TextView) findViewById(R.id.editText7);
 
-        //this reads the button on the start screen
+        //this tells the app what to do when the user pushes the "ok" button on the start screen
+        //key point:  the software reads the lines of code below, but does not pause here to wait
+        //for the the button to be pushed.  instead, the code just "takes note" of what to do if
+        //the button is pushed, but then continues to read the rest of the code below the
+        //"findviewbyiD..." section of code.
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //this records the values entered on the start screen
                 ScoutId = Integer.parseInt(scoutid.getText().toString());
                 StartMatch = Integer.parseInt(startmatch.getText().toString());
+
+                //this checks that the values entered are valid
                 if(ValidScout(ScoutId) == 1 && ValidMatch(StartMatch) == 1) {
                     Log.d(TAG, "ok button pushed");
+                    //go to the auton screen
                     goAuton();
                 }
                 else{
+                    //display/handle the error if we have invalid entries on the start screen
                     if(ValidScout(ScoutId) == 0){
                         scoutid.setText("invalid");
                     }
@@ -121,48 +134,56 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goAuton(){
+        //display auton screen
         setContentView(R.layout.auton);
 
+        //provide us with a variable that can be used to read/write to the screen objects
         final Switch baseline = (Switch) findViewById(R.id.baseline);
         final Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
         final Switch cubex2 = (Switch) findViewById(R.id.cubex2);
         final Switch autoScale = (Switch) findViewById(R.id.autoScale);
         final SeekBar scaleTime = (SeekBar) findViewById(R.id.scaleTime);
 
+        //when a screen is displayed, the objects default back to false, zero, so we have to...
+        //initialize the screen objects to whatever they were set to before...
+        //so that they will be correct if we arrived at this screen using a "back" button
         baseline.setChecked(BaseLineBool);
         deliverSwitchAuton.setChecked(DeliverSwitchBool);
         cubex2.setChecked(SecondCubeBool);
         autoScale.setChecked(AutoScaleBool);
         scaleTime.setProgress(ScaleTimeInt);
 
-
-//this reads the button on the auton screen
+        //this handles the "next" button on the auton screen
         findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener()
         {
-
             @Override
             public void onClick(View v) {
+                //store the current state of the objects on the auton screen
                 BaseLineBool = baseline.isChecked();
                 DeliverSwitchBool = deliverSwitchAuton.isChecked();
                 SecondCubeBool = cubex2.isChecked();
                 AutoScaleBool = autoScale.isChecked();
                 ScaleTimeInt = scaleTime.getProgress();
-
+                //this tag was just for troubleshooting
                 Log.d(TAG, "auton next button pushed" + BaseLineBool);
+                //go to the tele-op screen
                 goTeleOp();
                 }
         });
     }
 
     public void goTeleOp(){
+        //display the teleop screen
         setContentView(R.layout.teleop);
 
+        //provide us with variables that can be used to read/write to the screen objects
         final TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
         final TextView centercubes = (TextView) findViewById(R.id.centercubes);
         final TextView zonecubes = (TextView) findViewById(R.id.zonecubes);
         final TextView switchcubes = (TextView) findViewById(R.id.switchcubes);
         final TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
         final TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
+
 
         final CheckBox climbattempt = (CheckBox) findViewById(R.id.climbattempt);
         final CheckBox climb = (CheckBox) findViewById(R.id.climb);
@@ -176,6 +197,7 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox failed = (CheckBox) findViewById(R.id.failed);
         final EditText notes = (EditText) findViewById(R.id.notes);
 
+        //restore the current state of the objects on the teleop screen
         portalcubes.setText(Integer.toString(PortalCubes));
         centercubes.setText(Integer.toString(CenterCubes));
         zonecubes.setText(Integer.toString(ZoneCubes));
@@ -194,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
         failed.setChecked(Failed);
         notes.setText(Notes);
 
-        //Plus/Minus buttons
+        //handle what happens when the user pushes the Plus/Minus buttons
             findViewById(R.id.portalsub).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -300,12 +322,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //this reads the button on the teleop screen
+        //this tells the app what to do when the back button on the teleop screen is pushed
         findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener()
         {
 
             @Override
             public void onClick(View v) {
+                //store the current state of the objects
                 PortalCubes = Integer.parseInt(portalcubes.getText().toString());
                 CenterCubes = Integer.parseInt(centercubes.getText().toString());
                 ZoneCubes = Integer.parseInt(zonecubes.getText().toString());
@@ -324,16 +347,18 @@ public class MainActivity extends AppCompatActivity {
                 Penalties = Integer.parseInt(penalties.getText().toString());
                 Notes = notes.getText().toString();
 
-                Log.d(TAG, "teleop back button pushed");
+                //go back to the auton screen
                 goAuton();
             }
         });
 
+        //this tells the app what to do if the sendbutton is pushed
         findViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener()
         {
-
             @Override
             public void onClick(View v) {
+
+                //provide variables that allow us to access the screen objects
                 PortalCubes = Integer.parseInt(portalcubes.getText().toString());
                 CenterCubes = Integer.parseInt(centercubes.getText().toString());
                 ZoneCubes = Integer.parseInt(zonecubes.getText().toString());
@@ -341,6 +366,7 @@ public class MainActivity extends AppCompatActivity {
                 ScaleCubes = Integer.parseInt(scalecubes.getText().toString());
                 ExchangeCubes = Integer.parseInt(exchangecubes.getText().toString());
 
+                //record the state of the objects
                 ClimbAttempt = climbattempt.isChecked();
                 Climb = climb.isChecked();
                 Lift1 = lift1.isChecked();
@@ -352,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
                 Penalties = Integer.parseInt(penalties.getText().toString());
                 Notes = notes.getText().toString();
 
-                Log.d(TAG, "teleop next button pushed");
+                //go to the QRcode screen
                 goQR();
             }
         });
