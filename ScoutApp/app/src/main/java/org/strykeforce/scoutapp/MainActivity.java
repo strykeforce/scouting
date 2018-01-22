@@ -21,10 +21,13 @@ import android.widget.TextView;
 
 import android.widget.ImageView;
 
+import java.util.Scanner;
+import java.io.*;
+
 public class MainActivity extends AppCompatActivity {
 
     //TAG is used for inserting tags later on for troubleshooting purposes
-    private final static String TAG = "Greg";
+    private final static String TAG = "Sam";
     /*THINGS THAT NEED TO IMPROVE:
 
 
@@ -54,8 +57,11 @@ public class MainActivity extends AppCompatActivity {
     int Penalties = 0;
     String Notes = "none";
 
+
+
     int ScoutId;
     int StartMatch;
+
 
     private ImageView QRImageView;
 
@@ -78,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     //Nika's Variables
 
     private int[][] allTeamNums;
-
+    //allTeamNums = getTeamNums();
     private boolean[] matchDone;
 
     private int MatchLimit = 1000;
@@ -86,6 +92,33 @@ public class MainActivity extends AppCompatActivity {
     private String teamText = "";
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
+
+
+    /*final public Switch baseline = (Switch) findViewById(R.id.baseline);
+    final public Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
+    final public Switch cubex2 = (Switch) findViewById(R.id.cubex2);
+    final public Switch autoScale = (Switch) findViewById(R.id.autoScale);
+    final public SeekBar scaleTime = (SeekBar) findViewById(R.id.scaleTime);
+
+    final public TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
+    final public TextView centercubes = (TextView) findViewById(R.id.centercubes);
+    final public TextView zonecubes = (TextView) findViewById(R.id.zonecubes);
+    final public TextView switchcubes = (TextView) findViewById(R.id.switchcubes);
+    final public TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
+    final public TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
+
+
+    final public CheckBox climbattempt = (CheckBox) findViewById(R.id.climbattempt);
+    final public CheckBox climb = (CheckBox) findViewById(R.id.climb);
+    final public CheckBox lift1 = (CheckBox) findViewById(R.id.lift1);
+    final public CheckBox lift2 = (CheckBox) findViewById(R.id.lift2);
+    final public CheckBox lifted = (CheckBox) findViewById(R.id.lifted);
+    final public CheckBox platform = (CheckBox) findViewById(R.id.platform);
+
+
+    final public TextView penalties = (TextView) findViewById(R.id.penalties);
+    final public CheckBox failed = (CheckBox) findViewById(R.id.failed);
+    final public EditText notes = (EditText) findViewById(R.id.notes);*/
 
     //onCreate defines what happens when the app is started up
     @Override
@@ -96,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.start);
         //this is just for troubleshooting purposes
         Log.d(TAG, "start screen displayed ");
+
 
         //this defines variables we can use to access the screen objects
         final TextView scoutid = (TextView) findViewById(R.id.editText);
@@ -117,6 +151,13 @@ public class MainActivity extends AppCompatActivity {
                 //this checks that the values entered are valid
                 if(ValidScout(ScoutId) == 1 && ValidMatch(StartMatch) == 1) {
                     Log.d(TAG, "ok button pushed");
+
+                    MATCH_NUMBER = Integer.parseInt(startmatch.getText().toString())-1;;
+                    SCOUT_ID = Integer.parseInt(scoutid.getText().toString())-1;
+
+                    TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
+                    Log.d(TAG, Integer.toString(TEAM_NUMBER));
+
                     //go to the auton screen
                     goAuton();
                 }
@@ -138,6 +179,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.auton);
 
         //provide us with a variable that can be used to read/write to the screen objects
+        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
+        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+
         final Switch baseline = (Switch) findViewById(R.id.baseline);
         final Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
         final Switch cubex2 = (Switch) findViewById(R.id.cubex2);
@@ -147,6 +191,9 @@ public class MainActivity extends AppCompatActivity {
         //when a screen is displayed, the objects default back to false, zero, so we have to...
         //initialize the screen objects to whatever they were set to before...
         //so that they will be correct if we arrived at this screen using a "back" button
+        teamdata.setText(Integer.toString(TEAM_NUMBER));
+        matchdata.setText(Integer.toString(MATCH_NUMBER+1));
+
         baseline.setChecked(BaseLineBool);
         deliverSwitchAuton.setChecked(DeliverSwitchBool);
         cubex2.setChecked(SecondCubeBool);
@@ -177,13 +224,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.teleop);
 
         //provide us with variables that can be used to read/write to the screen objects
+        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
+        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+
         final TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
         final TextView centercubes = (TextView) findViewById(R.id.centercubes);
         final TextView zonecubes = (TextView) findViewById(R.id.zonecubes);
         final TextView switchcubes = (TextView) findViewById(R.id.switchcubes);
         final TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
         final TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
-
 
         final CheckBox climbattempt = (CheckBox) findViewById(R.id.climbattempt);
         final CheckBox climb = (CheckBox) findViewById(R.id.climb);
@@ -192,12 +241,14 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox lifted = (CheckBox) findViewById(R.id.lifted);
         final CheckBox platform = (CheckBox) findViewById(R.id.platform);
 
-
         final TextView penalties = (TextView) findViewById(R.id.penalties);
         final CheckBox failed = (CheckBox) findViewById(R.id.failed);
         final EditText notes = (EditText) findViewById(R.id.notes);
 
         //restore the current state of the objects on the teleop screen
+        teamdata.setText(Integer.toString(TEAM_NUMBER));
+        matchdata.setText(Integer.toString(MATCH_NUMBER+1));
+
         portalcubes.setText(Integer.toString(PortalCubes));
         centercubes.setText(Integer.toString(CenterCubes));
         zonecubes.setText(Integer.toString(ZoneCubes));
@@ -405,9 +456,69 @@ public class MainActivity extends AppCompatActivity {
             return 0;
         }
     }
+
+    /*public void NewMatch (){
+        baseline.setChecked(false);
+        deliverSwitchAuton.setChecked(false);
+        cubex2.setChecked(false);
+        autoScale.setChecked(false);
+        scaleTime.setProgress(0);
+
+        portalcubes.setText("0");
+        centercubes.setText("0");
+        zonecubes.setText("0");
+        switchcubes.setText("0");
+        scalecubes.setText("0");
+        exchangecubes.setText("0");
+
+        climbattempt.setChecked(false);
+        climb.setChecked(false);
+        lift1.setChecked(false);
+        lift2.setChecked(false);
+        lifted.setChecked(false);
+        platform.setChecked(false);
+
+        penalties.setText("");
+        failed.setChecked(false);
+        notes.setText("Notes");
+
+    }*/
+
+    public int[][] getTeamNums() {
+        MatchLimit=0;
+        try {
+            Scanner s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
+
+            while (s.hasNextLine()) {
+                s.nextLine();
+                MatchLimit++;
+
+            }
+            s.close();
+            s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
+
+            int[][] returned = new int[MatchLimit][6];
+            for(int i = 0;i<MatchLimit;i++)
+            {
+                returned[i] = new int[6];
+                String[] args = s.nextLine().split(",");
+                for (int ii = 0; ii < 6; ii++)
+                {
+                    returned[i][ii] = Integer.valueOf(args[ii]);
+                }
+            }
+            System.out.println("</getTeamNums>\n");
+            s.close();
+            return returned;
+        }
+        catch(Exception e)
+        {
+            System.out.println("oh nose!");
+            return null;
+        }
+
+    }
 }
-
-
 
     /*          switch (state) {
                 case 1:
