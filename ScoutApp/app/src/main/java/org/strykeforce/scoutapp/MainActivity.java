@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
     */
 
 
-    boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
+    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
     int ScaleTimeInt = 0;
 
-    int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
-    boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
+    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
+    public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
 
     boolean Failed = false;
     int Penalties = 0;
@@ -94,37 +94,14 @@ public class MainActivity extends AppCompatActivity {
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
 
 
-    /*final public Switch baseline = (Switch) findViewById(R.id.baseline);
-    final public Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
-    final public Switch cubex2 = (Switch) findViewById(R.id.cubex2);
-    final public Switch autoScale = (Switch) findViewById(R.id.autoScale);
-    final public SeekBar scaleTime = (SeekBar) findViewById(R.id.scaleTime);
-
-    final public TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
-    final public TextView centercubes = (TextView) findViewById(R.id.centercubes);
-    final public TextView zonecubes = (TextView) findViewById(R.id.zonecubes);
-    final public TextView switchcubes = (TextView) findViewById(R.id.switchcubes);
-    final public TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
-    final public TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
-
-
-    final public CheckBox climbattempt = (CheckBox) findViewById(R.id.climbattempt);
-    final public CheckBox climb = (CheckBox) findViewById(R.id.climb);
-    final public CheckBox lift1 = (CheckBox) findViewById(R.id.lift1);
-    final public CheckBox lift2 = (CheckBox) findViewById(R.id.lift2);
-    final public CheckBox lifted = (CheckBox) findViewById(R.id.lifted);
-    final public CheckBox platform = (CheckBox) findViewById(R.id.platform);
-
-
-    final public TextView penalties = (TextView) findViewById(R.id.penalties);
-    final public CheckBox failed = (CheckBox) findViewById(R.id.failed);
-    final public EditText notes = (EditText) findViewById(R.id.notes);*/
-
     //onCreate defines what happens when the app is started up
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        startScreen();
+    }
 
+    public void startScreen(){
         //display the start screen
         setContentView(R.layout.start);
         //this is just for troubleshooting purposes
@@ -156,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
                     SCOUT_ID = Integer.parseInt(scoutid.getText().toString())-1;
 
                     TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
-                    Log.d(TAG, Integer.toString(TEAM_NUMBER));
 
                     //go to the auton screen
                     goAuton();
@@ -380,7 +356,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //store the current state of the objects
-                PortalCubes = Integer.parseInt(portalcubes.getText().toString());
+                /*PortalCubes = Integer.parseInt(portalcubes.getText().toString());
                 CenterCubes = Integer.parseInt(centercubes.getText().toString());
                 ZoneCubes = Integer.parseInt(zonecubes.getText().toString());
                 SwitchCubes = Integer.parseInt(switchcubes.getText().toString());
@@ -396,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
 
                 Failed = failed.isChecked();
                 Penalties = Integer.parseInt(penalties.getText().toString());
-                Notes = notes.getText().toString();
+                Notes = notes.getText().toString();*/
 
                 //go back to the auton screen
                 goAuton();
@@ -436,7 +412,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goQR (){
-        setContentView(R.layout.popup);
+        setContentView(R.layout.qrscreen);
     }
 
     private int ValidMatch(int matchnum) {
@@ -457,32 +433,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    /*public void NewMatch (){
-        baseline.setChecked(false);
-        deliverSwitchAuton.setChecked(false);
-        cubex2.setChecked(false);
-        autoScale.setChecked(false);
-        scaleTime.setProgress(0);
+    public void NewMatch (){
+        BaseLineBool = false;
+        DeliverSwitchBool = false;
+        SecondCubeBool = false;
+        AutoScaleBool = false;
+        ScaleTimeInt = 0;
 
-        portalcubes.setText("0");
-        centercubes.setText("0");
-        zonecubes.setText("0");
-        switchcubes.setText("0");
-        scalecubes.setText("0");
-        exchangecubes.setText("0");
+        PortalCubes = 0;
+        CenterCubes = 0;
+        ZoneCubes = 0;
+        SwitchCubes = 0;
+        ScaleCubes = 0;
+        ExchangeCubes = 0;
+        ClimbAttempt = false;
+        Climb = false;
+        Lift1 = false;
+        Lift2 = false;
+        Lifted = false;
+        Platform = false;
 
-        climbattempt.setChecked(false);
-        climb.setChecked(false);
-        lift1.setChecked(false);
-        lift2.setChecked(false);
-        lifted.setChecked(false);
-        platform.setChecked(false);
+        Failed = false;
+        Penalties = 0;
+        Notes = "none";
 
-        penalties.setText("");
-        failed.setChecked(false);
-        notes.setText("Notes");
-
-    }*/
+        MATCH_NUMBER++;
+        goAuton();
+        Log.d(TAG, "New Match");
+    }
 
     public int[][] getTeamNums() {
         MatchLimit=0;
@@ -1067,7 +1045,7 @@ public class MainActivity extends AppCompatActivity {
 
                     GenerateQRString();
 
-                    setContentView(R.layout.popup);
+                    setContentView(R.layout.qrscreen);
 
                     popupqrscreen();
 
@@ -1080,7 +1058,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    //Segregated popup from scout screen
+    //Segregated qrscreen from scout screen
 
     public void popupqrscreen()
 
