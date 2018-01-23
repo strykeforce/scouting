@@ -37,27 +37,27 @@
 
         android:layout_centerHorizontal="true"
 
-        android:layout_x="272dp"
+        android:layout_x="25dp"
 
-        android:layout_y="30dp" />
+        android:layout_y="-2dp" />
 
     <Button
 
-        android:id="@+id/nextbutton"
+        android:id="@+id/backbutton"
 
         android:layout_width="wrap_content"
 
         android:layout_height="60dp"
 
-        android:layout_x="832dp"
+        android:layout_x="205dp"
 
-        android:layout_y="262dp"
+        android:layout_y="92dp"
 
         android:scaleX="2.0"
 
         android:scaleY="2.0"
 
-        android:text="Done"
+        android:text="Back"
 
         android:textAllCaps="false"
 
@@ -69,21 +69,21 @@
 
     <Button
 
-        android:id="@+id/backbutton"
+        android:id="@+id/nextbutton"
 
         android:layout_width="wrap_content"
 
         android:layout_height="60dp"
 
-        android:layout_x="91dp"
+        android:layout_x="206dp"
 
-        android:layout_y="264dp"
+        android:layout_y="301dp"
 
         android:scaleX="2.0"
 
         android:scaleY="2.0"
 
-        android:text="Back"
+        android:text="Done"
 
         android:textAllCaps="false"
 
@@ -111,8 +111,8 @@
 
         android:layout_marginTop="23dp"
 
-        android:layout_x="253dp"
+        android:layout_x="553dp"
 
-        android:layout_y="63dp" />
+        android:layout_y="-13dp" />
 
 </AbsoluteLayout>

@@ -3,6 +3,7 @@ package org.strykeforce.scoutapp;
 
 
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -21,8 +22,19 @@ import android.widget.TextView;
 
 import android.widget.ImageView;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.io.*;
+
+import android.graphics.Bitmap;
+
+import com.google.zxing.*;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.google.zxing.MultiFormatWriter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -80,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
     int step = 1, max = 30, min = 5, progressSeek;
 
     int state = 1;
+
+    //MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
     //Nika's Variables
 
@@ -406,14 +420,45 @@ public class MainActivity extends AppCompatActivity {
                 Notes = notes.getText().toString();
 
                 //go to the QRcode screen
-                //goQR();
-                NewMatch();
+                goQR();
+                //NewMatch();
             }
         });
     }
 
     public void goQR (){
+        //Display the QR code screen
         setContentView(R.layout.qrscreen);
+
+        //Display the QR code
+        ImageView qrImageView = (ImageView) findViewById(R.id.imageView2);
+        qrImageView.setImageBitmap(generateQRImage(GenerateQRString()));
+
+            /*BitMatrix bitMatrix = multiFormatWriter.encode(QRStr, BarcodeFormat.QR_CODE, 400, 400);
+
+            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+
+            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+
+            qrdisplay.setImageBitmap(bitmap);*/
+
+
+
+        //Tells what to do when backbutton is pressed
+        findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goTeleOp();
+            }
+        });
+
+        //Tells what to do when nextbutton is pressed
+        findViewById(R.id.nextbutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NewMatch();
+            }
+        });
     }
 
     private int ValidMatch(int matchnum) {
@@ -499,7 +544,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public String GenerateQR (){
+    public String GenerateQRString (){
         QRStr = "Scout ID: " + (SCOUT_ID + 1) + "\t"
                 +"Team: " + TEAM_NUMBER + "\t"
                 +"Match: " + (MATCH_NUMBER+1) + "\t"
@@ -525,6 +570,38 @@ public class MainActivity extends AppCompatActivity {
                 +"Notes: " + Notes + "\t";
         return QRStr;
     }
+
+    private Bitmap generateQRImage(final String content) {
+
+        Map<EncodeHintType, ErrorCorrectionLevel> hints = new HashMap<>();
+
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H);
+
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+
+        try {
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 512, 512, hints);
+
+            int width = bitMatrix.getWidth();
+            int height = bitMatrix.getHeight();
+
+            Bitmap bmp = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+
+            for (int x = 0; x < width; x++) {
+                for (int y = 0; y < height; y++) {
+
+                    bmp.setPixel(x , y, bitMatrix.get(x,y) ? Color.BLACK : Color.WHITE);
+                }
+            }
+
+            return bmp;
+        } catch (WriterException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
 
     //I think this is the code for going from the string to the QRcode
     /*
