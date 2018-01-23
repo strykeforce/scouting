@@ -406,7 +406,8 @@ public class MainActivity extends AppCompatActivity {
                 Notes = notes.getText().toString();
 
                 //go to the QRcode screen
-                goQR();
+                //goQR();
+                NewMatch();
             }
         });
     }
@@ -458,6 +459,7 @@ public class MainActivity extends AppCompatActivity {
         Notes = "none";
 
         MATCH_NUMBER++;
+        TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
         goAuton();
         Log.d(TAG, "New Match");
     }
@@ -496,7 +498,47 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+    public String GenerateQR (){
+        QRStr = "Scout ID: " + (SCOUT_ID + 1) + "\t"
+                +"Team: " + TEAM_NUMBER + "\t"
+                +"Match: " + (MATCH_NUMBER+1) + "\t"
+                +"Auto base line: " + BaseLineBool + "\t"
+                +"Auto switch: " + DeliverSwitchBool + "\t"
+                +"Auto scale: " + AutoScaleBool+ "\t"
+                +"Auto second cube: " + SecondCubeBool +"\t"
+                +"Auto scale time: " + ScaleTimeInt + "\t"
+                +"Portal cubes: " + PortalCubes + "\t"
+                +"Center cubes: " + CenterCubes + "\t"
+                +"Power zone cubes: "+ ZoneCubes+ "\t"
+                +"Switch cubes: " + SwitchCubes + "\t"
+                +"Scale cubes: " + ScaleCubes + "\t"
+                +"Exchange cubes: " + ExchangeCubes + "\t"
+                +"Attempted climb: " + ClimbAttempt + "\t"
+                +"Successful climb" + Climb + "\t"
+                +"Lifted 1" + Lift1 + "\t"
+                +"Lifted 2" + Lift2 + "\t"
+                +"Was lifted" + Lifted + "\t"
+                +"On platform" + Platform + "\t"
+                +"Robot failed" + Failed + "\t"
+                +"penalties" + Penalties + "\t"
+                +"Notes: " + Notes + "\t";
+        return QRStr;
+    }
+
+    //I think this is the code for going from the string to the QRcode
+    /*
+    BitMatrix bitMatrix = multiFormatWriter.encode(QRStr, BarcodeFormat.QR_CODE, 400, 400);
+
+                                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+
+                                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+
+                                qrdisplay.setImageBitmap(bitmap);
+    */
+
 }
+
 
     /*          switch (state) {
                 case 1:
