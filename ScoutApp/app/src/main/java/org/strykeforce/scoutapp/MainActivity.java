@@ -3,6 +3,7 @@ package org.strykeforce.scoutapp;
 
 
 
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 
@@ -33,8 +34,8 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.journeyapps.barcodescanner.BarcodeEncoder;
-import com.google.zxing.MultiFormatWriter;
+
+import android.widget.PopupWindow;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -434,16 +435,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView qrImageView = (ImageView) findViewById(R.id.imageView2);
         qrImageView.setImageBitmap(generateQRImage(GenerateQRString()));
 
-            /*BitMatrix bitMatrix = multiFormatWriter.encode(QRStr, BarcodeFormat.QR_CODE, 400, 400);
-
-            BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-
-            Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
-
-            qrdisplay.setImageBitmap(bitmap);*/
-
-
-
         //Tells what to do when backbutton is pressed
         findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -456,7 +447,9 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.nextbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NewMatch();
+               // PopupWindow
+
+               NewMatch();
             }
         });
     }
@@ -560,13 +553,13 @@ public class MainActivity extends AppCompatActivity {
                 +"Scale cubes: " + ScaleCubes + "\t"
                 +"Exchange cubes: " + ExchangeCubes + "\t"
                 +"Attempted climb: " + ClimbAttempt + "\t"
-                +"Successful climb" + Climb + "\t"
-                +"Lifted 1" + Lift1 + "\t"
-                +"Lifted 2" + Lift2 + "\t"
-                +"Was lifted" + Lifted + "\t"
-                +"On platform" + Platform + "\t"
-                +"Robot failed" + Failed + "\t"
-                +"penalties" + Penalties + "\t"
+                +"Successful climb: " + Climb + "\t"
+                +"Lifted 1: " + Lift1 + "\t"
+                +"Lifted 2: " + Lift2 + "\t"
+                +"Was lifted: " + Lifted + "\t"
+                +"On platform: " + Platform + "\t"
+                +"Robot failed: " + Failed + "\t"
+                +"Penalties: " + Penalties + "\t"
                 +"Notes: " + Notes + "\t";
         return QRStr;
     }
@@ -580,7 +573,7 @@ public class MainActivity extends AppCompatActivity {
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
 
         try {
-            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 512, 512, hints);
+            BitMatrix bitMatrix = qrCodeWriter.encode(content, BarcodeFormat.QR_CODE, 512, 512, hints); //OG 512
 
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
@@ -593,6 +586,8 @@ public class MainActivity extends AppCompatActivity {
                     bmp.setPixel(x , y, bitMatrix.get(x,y) ? Color.BLACK : Color.WHITE);
                 }
             }
+
+
 
             return bmp;
         } catch (WriterException e) {
