@@ -95,9 +95,9 @@
 
     <ImageView
 
-        android:layout_width="500dp"
+        android:layout_width="444dp"
 
-        android:layout_height="500dp"
+        android:layout_height="441dp"
 
         app:srcCompat="@android:drawable/alert_dark_frame"
 
@@ -111,8 +111,8 @@
 
         android:layout_marginTop="23dp"
 
-        android:layout_x="487dp"
+        android:layout_x="516dp"
 
-        android:layout_y="-9dp" />
+        android:layout_y="4dp" />
 
 </AbsoluteLayout>

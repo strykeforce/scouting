@@ -37,6 +37,8 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import android.widget.PopupWindow;
 
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     //TAG is used for inserting tags later on for troubleshooting purposes
@@ -537,32 +539,73 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private static int booltoInt (Boolean bool){
+        return bool ? 1 : 0;
+    }
+
     public String GenerateQRString (){
-        QRStr = "Scout ID: " + (SCOUT_ID + 1) + "\t"
-                +"Team: " + TEAM_NUMBER + "\t"
-                +"Match: " + (MATCH_NUMBER+1) + "\t"
-                +"Auto base line: " + BaseLineBool + "\t"
-                +"Auto switch: " + DeliverSwitchBool + "\t"
-                +"Auto scale: " + AutoScaleBool+ "\t"
-                +"Auto second cube: " + SecondCubeBool +"\t"
-                +"Auto scale time: " + ScaleTimeInt + "\t"
-                +"Portal cubes: " + PortalCubes + "\t"
-                +"Center cubes: " + CenterCubes + "\t"
-                +"Power zone cubes: "+ ZoneCubes+ "\t"
-                +"Switch cubes: " + SwitchCubes + "\t"
-                +"Scale cubes: " + ScaleCubes + "\t"
-                +"Exchange cubes: " + ExchangeCubes + "\t"
-                +"Attempted climb: " + ClimbAttempt + "\t"
-                +"Successful climb: " + Climb + "\t"
-                +"Lifted 1: " + Lift1 + "\t"
-                +"Lifted 2: " + Lift2 + "\t"
-                +"Was lifted: " + Lifted + "\t"
-                +"On platform: " + Platform + "\t"
-                +"Robot failed: " + Failed + "\t"
-                +"Penalties: " + Penalties + "\t"
-                +"Notes: " + Notes + "\t";
+        QRStr = "ID " + (SCOUT_ID + 1) + "\t" //Scout ID
+                +"Team " + TEAM_NUMBER + "\t" //Team
+                +"Match " + (MATCH_NUMBER+1) + "\t" //Match
+                +"ABL " +   booltoInt(BaseLineBool) + "\t" //Auto Base Line
+                +"Aswitch " + booltoInt(DeliverSwitchBool) + "\t" //Auto Switch
+                +"Ascale " + booltoInt(AutoScaleBool) + "\t" //Auto Scale
+                +"A2cube " + booltoInt(SecondCubeBool) +"\t" //Auto Second Cubes
+                +"Atime " + ScaleTimeInt + "\t" //Auto Scale Time
+                +"Pcube " + PortalCubes + "\t" //Portal Cubes
+                +"Ccube " + CenterCubes + "\t" //Center Cubes
+                +"Pzcube "+ ZoneCubes+ "\t" //Power Zone Cubes
+                +"Scube " + SwitchCubes + "\t" //Switch Cubes
+                +"Slcube " + ScaleCubes + "\t" //Scale Cubes
+                +"Xcube " + ExchangeCubes + "\t" //Exchange Cubes
+                +"Aclimb " + booltoInt(ClimbAttempt) + "\t" //Attempted Climbs
+                +"Sclimb " + booltoInt(Climb) + "\t" //Successful Climbs
+                +"Lift1 " + booltoInt(Lift1) + "\t" //Lifted 1
+                +"Lift2 " + booltoInt(Lift2) + "\t" //Lifted 2
+                +"Lift " + booltoInt(Lifted) + "\t" //Was Lifted
+                +"Op " + booltoInt(Platform) + "\t" //On Platform
+                +"Rf " + booltoInt(Failed) + "\t" //Robot Failed
+                +"Pen " + Penalties + "\t" //Penalties
+                +"Notes " + Notes + "\t"; //Notes
         return QRStr;
     }
+
+    public void storeLocal() {
+            PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/SampleJSON.json"), true));
+            try {
+                JSONObject o = new JSONObject();
+                o.put("Scout ID", (SCOUT_ID + 1));
+                o.put("Team", TEAM_NUMBER);
+                o.put("Match",(MATCH_NUMBER+1));
+                o.put("Auto Base Line", booltoInt(BaseLineBool));
+                o.put("Auto Switch", booltoInt(DeliverSwitchBool));
+                o.put("Auto Scale", booltoInt(AutoScaleBool));
+                o.put("Auto Second Cubes", booltoInt(SecondCubeBool));
+                o.put("Auto Scale Time", ScaleTimeInt);
+                o.put("Portal Cubes", PortalCubes);
+                o.put("Center Cubes", CenterCubes);
+                o.put("Power Zone Cubes", ZoneCubes);
+                o.put("Picks gear off ground", SwitchCubes);
+                o.put("Switch Cubes", ScaleCubes);
+                o.put("Defended shooting high", ExchangeCubes);
+                o.put("Touchpad", booltoInt(ClimbAttempt));
+                o.put("Scout name", booltoInt(Climb));
+                o.put("Notes", booltoInt(Lift1));
+                o.put("Notes", booltoInt(Lift2));
+                o.put("Notes", booltoInt(Lifted));
+                o.put("Notes", booltoInt(Platform));
+                o.put("Notes", booltoInt(Failed));
+                o.put("Notes", Penalties);
+                o.put("Notes", Notes);
+                String outputString = o.toString();
+                System.out.println("outputString == \"" + outputString + "\"");
+                fw.println(outputString);
+            } catch (Exception e) {
+                System.out.println("oh noes!");
+                e.printStackTrace();
+            }
+        }
+
 
     private Bitmap generateQRImage(final String content) {
 
