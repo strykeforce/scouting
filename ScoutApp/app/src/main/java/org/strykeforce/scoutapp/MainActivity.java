@@ -452,6 +452,7 @@ public class MainActivity extends AppCompatActivity {
                // PopupWindow
 
                NewMatch();
+               //storeLocal();
             }
         });
     }
@@ -570,42 +571,58 @@ public class MainActivity extends AppCompatActivity {
         return QRStr;
     }
 
-    public void storeLocal() {
-            PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/SampleJSON.json"), true));
-            try {
-                JSONObject o = new JSONObject();
-                o.put("Scout ID", (SCOUT_ID + 1));
-                o.put("Team", TEAM_NUMBER);
-                o.put("Match",(MATCH_NUMBER+1));
-                o.put("Auto Base Line", booltoInt(BaseLineBool));
-                o.put("Auto Switch", booltoInt(DeliverSwitchBool));
-                o.put("Auto Scale", booltoInt(AutoScaleBool));
-                o.put("Auto Second Cubes", booltoInt(SecondCubeBool));
-                o.put("Auto Scale Time", ScaleTimeInt);
-                o.put("Portal Cubes", PortalCubes);
-                o.put("Center Cubes", CenterCubes);
-                o.put("Power Zone Cubes", ZoneCubes);
-                o.put("Picks gear off ground", SwitchCubes);
-                o.put("Switch Cubes", ScaleCubes);
-                o.put("Defended shooting high", ExchangeCubes);
-                o.put("Touchpad", booltoInt(ClimbAttempt));
-                o.put("Scout name", booltoInt(Climb));
-                o.put("Notes", booltoInt(Lift1));
-                o.put("Notes", booltoInt(Lift2));
-                o.put("Notes", booltoInt(Lifted));
-                o.put("Notes", booltoInt(Platform));
-                o.put("Notes", booltoInt(Failed));
-                o.put("Notes", Penalties);
-                o.put("Notes", Notes);
-                String outputString = o.toString();
-                System.out.println("outputString == \"" + outputString + "\"");
-                fw.println(outputString);
-            } catch (Exception e) {
-                System.out.println("oh noes!");
-                e.printStackTrace();
+    /*public void storeLocal()
+    {
+        try
+        {
+            PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/BackupData.json"), true));
+            for(int j=0; j>1; j++)  {
+                try {
+                    JSONObject o = new JSONObject();
+                    o.put("ID", (SCOUT_ID + 1));
+                    o.put("Team", TEAM_NUMBER);
+                    o.put("Match",(MATCH_NUMBER+1));
+                    o.put("ABL", booltoInt(BaseLineBool));
+                    o.put("Aswitch", booltoInt(DeliverSwitchBool));
+                    o.put("Ascale", booltoInt(AutoScaleBool));
+                    o.put("A2cube", booltoInt(SecondCubeBool));
+                    o.put("Atime", ScaleTimeInt);
+                    o.put("Pcube", PortalCubes);
+                    o.put("Ccube", CenterCubes);
+                    o.put("Pzcube", ZoneCubes);
+                    o.put("Scube", SwitchCubes);
+                    o.put("Slcube", ScaleCubes);
+                    o.put("Xcube", ExchangeCubes);
+                    o.put("Aclimb", booltoInt(ClimbAttempt));
+                    o.put("Sclimb", booltoInt(Climb));
+                    o.put("Lift1", booltoInt(Lift1));
+                    o.put("Lift2", booltoInt(Lift2));
+                    o.put("Lift", booltoInt(Lifted));
+                    o.put("Op", booltoInt(Platform));
+                    o.put("Rf", booltoInt(Failed));
+                    o.put("Pen", Penalties);
+                    o.put("Notes", Notes);
+                    String outputString = o.toString();
+                    System.out.println("outputString == \"" + outputString + "\"");
+                    fw.println(outputString);
+                }
+                catch(Exception e) {
+                    System.out.println("oh noes!");
+                    e.printStackTrace();
+                }
             }
-        }
 
+
+
+
+            fw.close();
+
+        }
+        catch(Exception e) {
+            System.out.println("oh noes!");
+            e.printStackTrace();
+
+        }};*/
 
     private Bitmap generateQRImage(final String content) {
 
@@ -1511,3 +1528,32 @@ public void println(String line)
 
 ;}});}}}
 */
+
+/* Saving this becuase it's important, will delete later
+                o.put("ID", (SCOUT_ID + 1));
+                o.put("Team", TEAM_NUMBER);
+                o.put("Match",(MATCH_NUMBER+1));
+                o.put("ABL", booltoInt(BaseLineBool));
+                o.put("Aswitch", booltoInt(DeliverSwitchBool));
+                o.put("Ascale", booltoInt(AutoScaleBool));
+                o.put("A2cube", booltoInt(SecondCubeBool));
+                o.put("Atime", ScaleTimeInt);
+                o.put("Pcube", PortalCubes);
+                o.put("Ccube", CenterCubes);
+                o.put("Pzcube", ZoneCubes);
+                o.put("Scube", SwitchCubes);
+                o.put("Slcube", ScaleCubes);
+                o.put("Xcube", ExchangeCubes);
+                o.put("Aclimb", booltoInt(ClimbAttempt));
+                o.put("Sclimb", booltoInt(Climb));
+                o.put("Lift1", booltoInt(Lift1));
+                o.put("Lift2", booltoInt(Lift2));
+                o.put("Lift", booltoInt(Lifted));
+                o.put("Op", booltoInt(Platform));
+                o.put("Rf", booltoInt(Failed));
+                o.put("Pen", Penalties);
+                o.put("Notes", Notes);
+                String outputString = o.toString();
+                System.out.println("outputString == \"" + outputString + "\"");
+                fw.println(outputString);
+ */

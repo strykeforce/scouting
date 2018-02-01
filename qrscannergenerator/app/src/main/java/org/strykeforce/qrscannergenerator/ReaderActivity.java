@@ -289,7 +289,7 @@ Notes STRING
     {
         try
         {
-        PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/SampleJSON.json"), true));
+        PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/MasterDataJSON.json"), true));
         for(int j=0; j<6; j++)  {
             try {
                 JSONObject o = new JSONObject();
