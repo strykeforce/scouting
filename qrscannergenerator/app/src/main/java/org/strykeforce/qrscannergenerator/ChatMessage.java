@@ -4,44 +4,68 @@ public class ChatMessage {
 
     private String scoutID,teamNumber,matchNumber,autoHigh,autoLow,autoGear,teleHigh,teleLow,teleGear;
     private String baseLineCross,canPickGearOffGround,playsDefense,highShotDefended,touchPad,climbRopeTime,scoutName,notes;
-    private int scoutIDint,teamNumberint,matchNumberint,autoHighint,autoLowint,autoGearint,teleHighint,teleLowint,teleGearint;
+    private int scoutIDint, teamNumberInt, matchNumberint;
     private int baseLineCrossint,canPickGearOffGroundint,playsDefenseint,highShotDefendedint,touchPadint,climbRopeTimeint,scoutNameint,notesint;
-    private static final String[] labels = {"Scout ID","Team","Match","Auto High","Tele High","Tele Low","Tele Gears","Climb rope time","Auto Low","Auto Gears","Crosses base line","Picks gear off ground","On defense","Defended shooting high","Touchpad","Scout name","Notes"};
+    private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Notes"};
     private int numInt = 15, numStg = 2, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
+
+    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false, ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform, Failed;
+    int ScaleTimeInt;
+    int baseLineInt =  booltoInt(BaseLineBool), deliverSwitchInt = booltoInt(DeliverSwitchBool), secondCubeInt = booltoInt(SecondCubeBool), autoScaleInt = booltoInt(AutoScaleBool);
+    int climbInt = booltoInt(Climb), climbAttemptInt = booltoInt(ClimbAttempt), lift1Int = booltoInt(Lift1), lift2Int = booltoInt(Lift2), liftedInt = booltoInt(Lifted), platformInt = booltoInt(Platform);
+    int failedInt = booltoInt(Failed);
+
+    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
+
+    int Penalties;
+
+    private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0;
 
     public ChatMessage() {
 
     }
 
+    private static int booltoInt (Boolean bool){
+        return bool ? 1 : 0;
+    }
+
+
+
     public ChatMessage(int[] data, String[] names)
     {
         this.scoutIDint = data[0];
-        this.teamNumberint = data[1];
+        this.teamNumberInt = data[1];
         this.matchNumberint = data[2];
 
-        this.autoHighint = data[3];
-        this.autoLowint = data[8];
-        this.autoGearint = data[9];
+        this.baseLineInt = data[3];
+        this.deliverSwitchInt = data[4];
+        this.autoScaleInt = data[5];
 
-        this.teleHighint = data[4];
-        this.teleLowint = data[5];
+        this.secondCubeInt = data[6];
+        this.ScaleTimeInt = data[7];
 
-        this.teleGearint = data[6];
+        this.PortalCubes = data[8];
 
-        this.baseLineCrossint = data[10];
-        this.canPickGearOffGroundint = data[11];
-        this.playsDefenseint = data[12];
-        this.highShotDefendedint = data[13];
-        this.touchPadint = data[14];
-        this.climbRopeTimeint = data[7];
+        this.CenterCubes = data[9];
+        this.ZoneCubes = data[10];
+        this.SwitchCubes = data[11];
+        this.ScaleCubes = data[12];
+        this.ExchangeCubes = data[13];
+        this.climbAttemptInt = data[14];
 
-        this.scoutName = names[0];
-        this.notes = names[1];
+        this.climbInt = data[15];
+        this.lift1Int = data[16];
+        this.lift2Int = data[17];
+        this.liftedInt = data[18];
 
+        this.platformInt = data[19];
+        this.failedInt = data[20];
+        this.Penalties = data[21];
+
+        this.notes = names[0];
         this.nums = data;
-        this.strings = names;
     }
 
 
@@ -98,15 +122,15 @@ public class ChatMessage {
         return tempTotal;
     }
 
-    public int getTeamNumberInt() {
-        return teamNumberint;
+   /* public int getTeamNumberInt() {
+        return teamNumberInt;
     }
     public int getScoutID() {
         return scoutIDint;
     }
-    public int getBaseLineCross() {
+    public int getBaseLine() {
 
-        return baseLineCrossint;
+        return baseLineInt;
 
     }
     public int getAutoGear() {
@@ -143,5 +167,5 @@ public class ChatMessage {
     public int getTeleGear() {return teleGearint;}
     public int getClimbRopeTime() {return climbRopeTimeint;}
     public String getScoutName() {return scoutName;}
-    public String getNotes() {return notes;}
+    public String getNotes() {return notes;}*/
 }

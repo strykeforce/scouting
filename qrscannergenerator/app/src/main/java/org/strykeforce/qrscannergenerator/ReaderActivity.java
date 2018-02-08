@@ -42,6 +42,17 @@ public class ReaderActivity extends AppCompatActivity {
     private int curScoutID;
     private GoogleApiClient client;
 
+    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
+    int ScaleTimeInt = 0;
+
+    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
+    public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
+
+    boolean Failed = false;
+    int Penalties = 0;
+    String Notes = "none";
+
+    private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0;
 
     //FILE IO VARIABLES
     String root = Environment.getExternalStorageDirectory().toString();
@@ -285,6 +296,10 @@ Touchpad BOOL
 Scout Name StrING
 Notes STRING
 */
+    private static int booltoInt (Boolean bool){
+        return bool ? 1 : 0;
+    }
+
     public void storeLocal()
     {
         try
@@ -293,23 +308,29 @@ Notes STRING
         for(int j=0; j<6; j++)  {
             try {
                 JSONObject o = new JSONObject();
-                o.put("Scout ID", scoutingData[j].getScoutID());
-                o.put("Team",scoutingData[j].getTeamNumberInt());
-                o.put("Match", scoutingData[j].getMatchNumberInt());
-                o.put("Auto High", scoutingData[j].getAutoHigh());
-                o.put("Tele High", scoutingData[j].getTeleHigh());
-                o.put("Tele Low", scoutingData[j].getTeleLow());
-                o.put("Tele Gears",scoutingData[j].getTeleGear());
-                o.put("Climb rope time", scoutingData[j].getClimbRopeTime());
-                o.put("Auto Low", scoutingData[j].getAutoLow());
-                o.put("Auto Gears",  scoutingData[j].getAutoGear());
-                o.put("Crosses base line",  scoutingData[j].getBaseLineCross());
-                o.put("Picks gear off ground", scoutingData[j].getCanPickGearOffGround());
-                o.put("On defense", scoutingData[j].getPlaysDefense());
-                o.put("Defended shooting high", scoutingData[j].getHighShotDefended());
-                o.put("Touchpad", scoutingData[j].getTouchPad());
-                o.put("Scout name", scoutingData[j].getScoutName());
-                o.put("Notes", scoutingData[j].getNotes());
+                o.put("ID", (SCOUT_ID + 1));
+                o.put("Team", TEAM_NUMBER);
+                o.put("Match",(MATCH_NUMBER+1));
+                o.put("ABL", booltoInt(BaseLineBool));
+                o.put("Aswitch", booltoInt(DeliverSwitchBool));
+                o.put("Ascale", booltoInt(AutoScaleBool));
+                o.put("A2cube", booltoInt(SecondCubeBool));
+                o.put("Atime", ScaleTimeInt);
+                o.put("Pcube", PortalCubes);
+                o.put("Ccube", CenterCubes);
+                o.put("Pzcube", ZoneCubes);
+                o.put("Scube", SwitchCubes);
+                o.put("Slcube", ScaleCubes);
+                o.put("Xcube", ExchangeCubes);
+                o.put("Aclimb", booltoInt(ClimbAttempt));
+                o.put("Sclimb", booltoInt(Climb));
+                o.put("Lift1", booltoInt(Lift1));
+                o.put("Lift2", booltoInt(Lift2));
+                o.put("Lift", booltoInt(Lifted));
+                o.put("Op", booltoInt(Platform));
+                o.put("Rf", booltoInt(Failed));
+                o.put("Pen", Penalties);
+                o.put("Notes", Notes);
                 String outputString = o.toString();
                 System.out.println("outputString == \"" + outputString + "\"");
                 fw.println(outputString);
@@ -355,7 +376,7 @@ Notes STRING
         String tempLine, tempString;
         int indexEl;
         int[] nums = new int[NUM_INT];
-        String[] name = new String[NUM_STG];
+        String[] names = new String[NUM_STG];
         String elements[] = new String[NUM_ELEMENTS_SENDING];
         int j=0; //COUNT OF NUM ELEMENTS
 
@@ -387,7 +408,7 @@ Notes STRING
                     }
                 }
                 else{
-                    name[j-NUM_INT] = elements[j];
+                    names[j-NUM_INT] = elements[j];
                 }
                 if (j==0) //sets check button on/off of which scouter it received from
                 {
@@ -398,11 +419,11 @@ Notes STRING
             }
         }
         //ChatMessage sendingChat = new ChatMessage(elements);
-        ChatMessage otherChat = new ChatMessage(nums, name);
-      //  System.out.println("\n\n\nMEEEEEEEEEEE\n\n\n" + otherChat.jsonObjStg());
+        ChatMessage otherChat = new ChatMessage(nums, names);
+        //System.out.println("\n\n\nMEEEEEEEEEEE\n\n\n" + otherChat.jsonObjStg());
         return otherChat;
     }
-    public void savedata() {
+    /*public void savedata() {
         try {
 
 
@@ -422,7 +443,7 @@ Notes STRING
             e.printStackTrace();
         }
     }
-;
+;*/
 
 
     //clears the current match stores and resets the checkboxes
