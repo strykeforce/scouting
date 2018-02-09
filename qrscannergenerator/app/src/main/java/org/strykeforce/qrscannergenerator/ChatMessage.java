@@ -13,9 +13,9 @@ public class ChatMessage {
 
     public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false, ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform, Failed;
     int ScaleTimeInt;
-    int baseLineInt =  booltoInt(BaseLineBool), deliverSwitchInt = booltoInt(DeliverSwitchBool), secondCubeInt = booltoInt(SecondCubeBool), autoScaleInt = booltoInt(AutoScaleBool);
-    int climbInt = booltoInt(Climb), climbAttemptInt = booltoInt(ClimbAttempt), lift1Int = booltoInt(Lift1), lift2Int = booltoInt(Lift2), liftedInt = booltoInt(Lifted), platformInt = booltoInt(Platform);
-    int failedInt = booltoInt(Failed);
+    int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
+    int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
+    int failedInt;
 
     public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
 
@@ -53,15 +53,15 @@ public class ChatMessage {
         this.SwitchCubes = data[11];
         this.ScaleCubes = data[12];
         this.ExchangeCubes = data[13];
-        this.climbAttemptInt = data[14];
 
+        this.climbAttemptInt = data[14];
         this.climbInt = data[15];
         this.lift1Int = data[16];
         this.lift2Int = data[17];
         this.liftedInt = data[18];
-
         this.platformInt = data[19];
         this.failedInt = data[20];
+
         this.Penalties = data[21];
 
         this.notes = names[0];

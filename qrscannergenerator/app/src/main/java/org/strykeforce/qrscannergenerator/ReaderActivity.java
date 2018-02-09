@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -37,7 +38,7 @@ public class ReaderActivity extends AppCompatActivity {
     private String scanResult;
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
     private Firebase firebaseRef;
-    private static final int NUM_ELEMENTS_SENDING = 17, NUM_INT=15, NUM_STG=2;
+    private static final int NUM_ELEMENTS_SENDING = 23, NUM_INT=22, NUM_STG=1;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID;
     private GoogleApiClient client;
@@ -242,11 +243,13 @@ public class ReaderActivity extends AppCompatActivity {
     //method that scans QR code from camera and stores in a string
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("Lilian" , "Arrived in onActivityResult! uwu");
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
             } else {
+                Log.d("Lilian" , "Arrived in onActivityResult (again)! uwu");
                 scanResult = result.getContents(); //gets data from QR code and stores in private string
                 //Toast.makeText(this, scanResult, Toast.LENGTH_LONG).show(); //displays data from QR code on screen
                 storeScout();
@@ -263,6 +266,7 @@ public class ReaderActivity extends AppCompatActivity {
 
         if(!message.equals(""))
         {
+            Log.d("Lilian" , "Arrived in store scout! uwu");
             ChatMessage sendingObj = findElements(message);
             scoutingData[curScoutID-1] = sendingObj;
             if(curScoutID==1)
@@ -375,7 +379,7 @@ Notes STRING
         Scanner scan = new Scanner(tempScanResult); //makes scanner out of string for ease of extraction
         String tempLine, tempString;
         int indexEl;
-        int[] nums = new int[NUM_INT];
+        int[] data = new int[NUM_INT];
         String[] names = new String[NUM_STG];
         String elements[] = new String[NUM_ELEMENTS_SENDING];
         int j=0; //COUNT OF NUM ELEMENTS
@@ -392,18 +396,18 @@ Notes STRING
                 elements[j] = tempLine.substring(indexEl + 2);
                 if(j<NUM_INT)
                 {
-                    if(j>=8 && j<=14)
+                    if(j>=3 && j<=6 || j>=14 && j<=20)
                     {
                         if(elements[j].equals("false"))
                         {
-                            nums[j] = 0;
+                            data[j] = 0;
                         }
                         else
-                            nums[j] = 1;
+                            data[j] = 1;
                     }
                     else{
                         System.out.println("BREAK: " + elements[j] + " " + j);
-                        nums[j] = Integer.parseInt(elements[j]);
+                        data[j] = Integer.parseInt(elements[j]);
 
                     }
                 }
@@ -419,7 +423,7 @@ Notes STRING
             }
         }
         //ChatMessage sendingChat = new ChatMessage(elements);
-        ChatMessage otherChat = new ChatMessage(nums, names);
+        ChatMessage otherChat = new ChatMessage(data, names);
         //System.out.println("\n\n\nMEEEEEEEEEEE\n\n\n" + otherChat.jsonObjStg());
         return otherChat;
     }

@@ -545,29 +545,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String GenerateQRString (){
-        QRStr = "ID " + (SCOUT_ID + 1) + "\t" //Scout ID
-                +"Team " + TEAM_NUMBER + "\t" //Team
-                +"Match " + (MATCH_NUMBER+1) + "\t" //Match
-                +"ABL " +   booltoInt(BaseLineBool) + "\t" //Auto Base Line
-                +"Aswitch " + booltoInt(DeliverSwitchBool) + "\t" //Auto Switch
-                +"Ascale " + booltoInt(AutoScaleBool) + "\t" //Auto Scale
-                +"A2cube " + booltoInt(SecondCubeBool) +"\t" //Auto Second Cubes
-                +"Atime " + ScaleTimeInt + "\t" //Auto Scale Time
-                +"Pcube " + PortalCubes + "\t" //Portal Cubes
-                +"Ccube " + CenterCubes + "\t" //Center Cubes
-                +"Pzcube "+ ZoneCubes+ "\t" //Power Zone Cubes
-                +"Scube " + SwitchCubes + "\t" //Switch Cubes
-                +"Slcube " + ScaleCubes + "\t" //Scale Cubes
-                +"Xcube " + ExchangeCubes + "\t" //Exchange Cubes
-                +"Aclimb " + booltoInt(ClimbAttempt) + "\t" //Attempted Climbs
-                +"Sclimb " + booltoInt(Climb) + "\t" //Successful Climbs
-                +"Lift1 " + booltoInt(Lift1) + "\t" //Lifted 1
-                +"Lift2 " + booltoInt(Lift2) + "\t" //Lifted 2
-                +"Lift " + booltoInt(Lifted) + "\t" //Was Lifted
-                +"Op " + booltoInt(Platform) + "\t" //On Platform
-                +"Rf " + booltoInt(Failed) + "\t" //Robot Failed
-                +"Pen " + Penalties + "\t" //Penalties
-                +"Notes " + Notes + "\t"; //Notes
+        QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
+                +"Team: " + TEAM_NUMBER + "\t" //Team
+                +"Match: " + (MATCH_NUMBER+1) + "\t" //Match
+                +"ABL: " +   booltoInt(BaseLineBool) + "\t" //Auto Base Line
+                +"Aswitch: " + booltoInt(DeliverSwitchBool) + "\t" //Auto Switch
+                +"Ascale: " + booltoInt(AutoScaleBool) + "\t" //Auto Scale
+                +"A2cube: " + booltoInt(SecondCubeBool) +"\t" //Auto Second Cubes
+                +"Atime: " + ScaleTimeInt + "\t" //Auto Scale Time
+                +"Pcube: " + PortalCubes + "\t" //Portal Cubes
+                +"Ccube: " + CenterCubes + "\t" //Center Cubes
+                +"Pzcube: "+ ZoneCubes+ "\t" //Power Zone Cubes
+                +"Scube: " + SwitchCubes + "\t" //Switch Cubes
+                +"Slcube: " + ScaleCubes + "\t" //Scale Cubes
+                +"Xcube: " + ExchangeCubes + "\t" //Exchange Cubes
+                +"Aclimb: " + booltoInt(ClimbAttempt) + "\t" //Attempted Climbs
+                +"Sclimb: " + booltoInt(Climb) + "\t" //Successful Climbs
+                +"Lift1: " + booltoInt(Lift1) + "\t" //Lifted 1
+                +"Lift2: " + booltoInt(Lift2) + "\t" //Lifted 2
+                +"Lift: " + booltoInt(Lifted) + "\t" //Was Lifted
+                +"Op: " + booltoInt(Platform) + "\t" //On Platform
+                +"Rf: " + booltoInt(Failed) + "\t" //Robot Failed
+                +"Pen: " + Penalties + "\t" //Penalties
+                +"Notes: " + Notes + "\t"; //Notes
         return QRStr;
     }
 
