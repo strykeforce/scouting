@@ -7,7 +7,7 @@ public class ChatMessage {
     private int scoutIDint, teamNumberInt, matchNumberint;
     private int baseLineCrossint,canPickGearOffGroundint,playsDefenseint,highShotDefendedint,touchPadint,climbRopeTimeint,scoutNameint,notesint;
     private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Notes"};
-    private int numInt = 15, numStg = 2, numSending = numInt+numStg;
+    private int numInt = 22, numStg = 1, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 

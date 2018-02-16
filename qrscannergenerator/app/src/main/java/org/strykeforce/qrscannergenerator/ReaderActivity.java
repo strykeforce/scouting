@@ -43,10 +43,10 @@ public class ReaderActivity extends AppCompatActivity {
     private int curScoutID;
     private GoogleApiClient client;
 
-    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
-    int ScaleTimeInt = 0;
+    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool;
+    int ScaleTimeInt;
 
-    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
+    public int PortalCubes, CenterCubes, ZoneCubes, SwitchCubes, ScaleCubes, ExchangeCubes;
     public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
 
     boolean Failed = false;
@@ -312,29 +312,29 @@ Notes STRING
         for(int j=0; j<6; j++)  {
             try {
                 JSONObject o = new JSONObject();
-                o.put("ID", (SCOUT_ID + 1));
-                o.put("Team", TEAM_NUMBER);
-                o.put("Match",(MATCH_NUMBER+1));
-                o.put("ABL", booltoInt(BaseLineBool));
-                o.put("Aswitch", booltoInt(DeliverSwitchBool));
-                o.put("Ascale", booltoInt(AutoScaleBool));
-                o.put("A2cube", booltoInt(SecondCubeBool));
-                o.put("Atime", ScaleTimeInt);
-                o.put("Pcube", PortalCubes);
-                o.put("Ccube", CenterCubes);
-                o.put("Pzcube", ZoneCubes);
-                o.put("Scube", SwitchCubes);
-                o.put("Slcube", ScaleCubes);
-                o.put("Xcube", ExchangeCubes);
-                o.put("Aclimb", booltoInt(ClimbAttempt));
-                o.put("Sclimb", booltoInt(Climb));
-                o.put("Lift1", booltoInt(Lift1));
-                o.put("Lift2", booltoInt(Lift2));
-                o.put("Lift", booltoInt(Lifted));
-                o.put("Op", booltoInt(Platform));
-                o.put("Rf", booltoInt(Failed));
-                o.put("Pen", Penalties);
-                o.put("Notes", Notes);
+                o.put("Scout ID ", (SCOUT_ID + 1));
+                o.put("Team ", TEAM_NUMBER);
+                o.put("Match ",(MATCH_NUMBER+1));
+                o.put("Auto Base Line ", booltoInt(BaseLineBool));
+                o.put("Auto Switch ", booltoInt(DeliverSwitchBool));
+                o.put("Auto Scale ", booltoInt(AutoScaleBool));
+                o.put("Auto Second Cube ", booltoInt(SecondCubeBool));
+                o.put("Auto Scale Time ", ScaleTimeInt);
+                o.put("Portal Cubes ", PortalCubes);
+                o.put("Center Cubes ", CenterCubes);
+                o.put("Power Zone Cubes ", ZoneCubes);
+                o.put("Switch Cubes ", SwitchCubes);
+                o.put("Scale Cubes ", ScaleCubes);
+                o.put("Exchange Cubes ", ExchangeCubes);
+                o.put("Attempt Climb ", booltoInt(ClimbAttempt));
+                o.put("Successful Climb ", booltoInt(Climb));
+                o.put("Lifted 1 ", booltoInt(Lift1));
+                o.put("Lifted 2 ", booltoInt(Lift2));
+                o.put("Was Lifted ", booltoInt(Lifted));
+                o.put("On Platform ", booltoInt(Platform));
+                o.put("Robot Failed ", booltoInt(Failed));
+                o.put("Penalties ", Penalties);
+                o.put("Notes ", Notes);
                 String outputString = o.toString();
                 System.out.println("outputString == \"" + outputString + "\"");
                 fw.println(outputString);
@@ -396,7 +396,7 @@ Notes STRING
                 elements[j] = tempLine.substring(indexEl + 2);
                 if(j<NUM_INT)
                 {
-                    if(j>=3 && j<=6 || j>=14 && j<=20)
+                    /*if(j>=3 && j<=6 || j>=14 && j<=20)
                     {
                         if(elements[j].equals("false"))
                         {
@@ -405,11 +405,11 @@ Notes STRING
                         else
                             data[j] = 1;
                     }
-                    else{
+                    else{*/
                         System.out.println("BREAK: " + elements[j] + " " + j);
                         data[j] = Integer.parseInt(elements[j]);
 
-                    }
+                    //}
                 }
                 else{
                     names[j-NUM_INT] = elements[j];
