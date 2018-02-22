@@ -1,17 +1,12 @@
 package org.strykeforce.qrscannergenerator;
 
 public class ChatMessage {
-
-    private String scoutID,teamNumber,matchNumber,autoHigh,autoLow,autoGear,teleHigh,teleLow,teleGear;
-    private String baseLineCross,canPickGearOffGround,playsDefense,highShotDefended,touchPad,climbRopeTime,scoutName;
     public int scoutIDint, teamNumberInt, matchNumberint;
-    private int baseLineCrossint,canPickGearOffGroundint,playsDefenseint,highShotDefendedint,touchPadint,climbRopeTimeint,scoutNameint,notesint;
     private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Notes"};
     private int numInt = 22, numStg = 1, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 
-    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false, ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform, Failed;
     public int ScaleTimeInt;
     public int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
     public int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
@@ -20,18 +15,6 @@ public class ChatMessage {
     public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
     public String Notes;
     int Penalties;
-
-    private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0;
-
-    public ChatMessage() {
-
-    }
-
-    private static int booltoInt (Boolean bool){
-        return bool ? 1 : 0;
-    }
-
-
 
     public ChatMessage(int[] data, String[] names)
     {
@@ -67,105 +50,4 @@ public class ChatMessage {
         this.Notes = names[0];
         this.nums = data;
     }
-
-
-
-    /*
-  SCOUT ID int
-  TEAM NUM int
-  MATCH NUM int
-
-  Auto High int
-
-  Tele High int
-  Tele Low int
-  Tele Gears int
-  Climb Rope Time int
-
-  Auto Low BOOL
-  Auto Gears BOOL
-  Crosses base line BOOL
-  Picks gear off ground BOOL
-  On defence BOOL
-  Defended shooting high  BOOL
-  Touchpad BOOL
-
-  Scout Name StrING
-  Notes STRING
-   */
-    private String toJsonStg(String label, int data)
-    {
-        return "\""+label+"\":" + data;
-    }
-    private String toJsonStg(String label, String data)
-    {
-        return "\""+label+"\":\"" + data + "\"";
-    }
-
-    public String jsonObjStg()
-    {
-        String tempTotal = "{";
-        for(int j=0; j<numInt; j++) //num int elements = 15
-        {
-            tempTotal+=toJsonStg(labels[j],nums[j])+",";
-        }
-        for(int j=0; j<numStg; j++)
-        {
-            tempTotal+=toJsonStg(labels[j],strings[j]);
-            if(j+numInt+1!=numSending)
-            {
-                tempTotal+=",";
-            }
-        }
-        tempTotal+="}\n";
-        System.out.println("String!" + tempTotal);
-        return tempTotal;
-    }
-
-   /* public int getTeamNumberInt() {
-        return teamNumberInt;
-    }
-    public int getScoutID() {
-        return scoutIDint;
-    }
-    public int getBaseLine() {
-
-        return baseLineInt;
-
-    }
-    public int getAutoGear() {
-
-        return autoGearint;
-
-    }
-    public int getPlaysDefense() {
-
-        return playsDefenseint;
-
-    }
-    public int getCanPickGearOffGround() {
-
-        return canPickGearOffGroundint;
-
-    }
-    public int getHighShotDefended() {
-
-        return highShotDefendedint;
-
-    }
-    public int getTouchPad() {
-
-        return touchPadint;
-
-    }
-
-    public int getMatchNumberInt() {return matchNumberint;}
-    public int getAutoHigh() {return autoHighint;}
-    public int getAutoLow() {return autoLowint;}
-    public int getTeleHigh() {return teleHighint;}
-    public int getTeleLow() {return teleLowint;}
-    public int getTeleGear() {return teleGearint;}
-    public int getClimbRopeTime() {return climbRopeTimeint;}
-    public String getScoutName() {return scoutName;}
-    public String getNotes() {return notes;}*/
 }

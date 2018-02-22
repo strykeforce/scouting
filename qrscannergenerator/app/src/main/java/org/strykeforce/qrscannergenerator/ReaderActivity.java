@@ -43,47 +43,6 @@ public class ReaderActivity extends AppCompatActivity {
     private int curScoutID;
     private GoogleApiClient client;
 
-    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool;
-    int ScaleTimeInt;
-
-    public int PortalCubes, CenterCubes, ZoneCubes, SwitchCubes, ScaleCubes, ExchangeCubes;
-    public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
-
-    boolean Failed = false;
-    int Penalties = 0;
-    String Notes = "none";
-
-    private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0;
-
-    //FILE IO VARIABLES
-    String root = Environment.getExternalStorageDirectory().toString();
-    String usbDirectory = "/storage/usbotg";
-    String internalDirectory = "/storage/emulated/0";
-    String totalMatchString = "";
-    /*
-    SCOUT ID int
-    TEAM NUM int
-    MATCH NUM int
-
-    Auto High int
-
-    Tele High int
-    Tele Low int
-    Tele Gears int
-    Climb Rope Time int
-
-    Auto Low BOOL
-    Auto Gears BOOL
-    Crosses base line BOOL
-    Picks gear off ground BOOL
-    On defence BOOL
-    Defended shooting high  BOOL
-    Touchpad BOOL
-
-    Scout Name StrING
-    Notes STRING
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
         super.onCreate(savedInstanceState);
@@ -100,6 +59,7 @@ public class ReaderActivity extends AppCompatActivity {
         checkboxes[3] = (CheckBox) findViewById(R.id.checkBlue1);
         checkboxes[4] = (CheckBox) findViewById(R.id.checkBlue2);
         checkboxes[5] = (CheckBox) findViewById(R.id.checkBlue3);
+
         //sets visibility of check boxes
         for (int j = 0; j < checkboxes.length; j++) {
             checkboxes[j].setChecked(false);
@@ -144,79 +104,7 @@ public class ReaderActivity extends AppCompatActivity {
 
         });
 
-/*
-        final AlertDialog.Builder byuilderusb = new AlertDialog.Builder(this);
-        byuilderusb.setTitle("Save All Data To USB?");
-        byuilderusb.setMessage("Are You Sure You Want To Transfer All Data To USB?");
-        findViewById(R.id.usb).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-                byuilderusb.setPositiveButton("YES", new DialogInterface.OnClickListener() { //sets what the yes option will do
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        savedata(); //calls method to restart match
-                        dialog.dismiss(); //closes dialog box
-                    }
-
-                });
-                byuilderusb.setNegativeButton("NO", new DialogInterface.OnClickListener() { //sets what the no option will do
-
-                    @Override
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss(); //closes dialog box
-                    }
-
-                });
-                final AlertDialog alert = byuilderusb.create();
-                System.out.println(DialogInterface.BUTTON_NEGATIVE);
-                alert.show();
-                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
-                msgTxt.setTextSize((float)35.0);
-                */
-
-
-    /*    final AlertDialog.Builder storebuilder = new AlertDialog.Builder(this);
-        storebuilder.setTitle("Save All Data?");
-        storebuilder.setMessage("Make Sure You Have Scanned ALL Scouts.");
-        findViewById(R.id.storeButton).setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View v) {
-                storebuilder.setPositiveButton("YES", new DialogInterface.OnClickListener() { //sets what the yes option will do
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        storeLocal();
-                        dialog.dismiss(); //closes dialog box
-                    }
-
-                });
-                storebuilder.setNegativeButton("NO", new DialogInterface.OnClickListener() { //sets what the no option will do
-
-                    @Override
-
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss(); //closes dialog box
-                    }
-
-                });
-                final AlertDialog alert = storebuilder.create();
-                System.out.println(DialogInterface.BUTTON_NEGATIVE);
-                alert.show();
-                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
-                msgTxt.setTextSize((float)35.0);
-
-            }
-
-        });
-       // storeLocal();
-
-
         //initializes scan button and sets scan button to open camera and scan when pressed
-        */
         scan_btn = (Button) findViewById(R.id.scan_btn);
         final Activity activity = this;
         scan_btn.setOnClickListener(new View.OnClickListener() {
@@ -277,33 +165,6 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
-    /*
-SCOUT ID int
-TEAM NUM int
-MATCH NUM int
-
-Auto High int
-
-Tele High int
-Tele Low int
-Tele Gears int
-Climb Rope Time int
-
-Auto Low BOOL
-Auto Gears BOOL
-Crosses base line BOOL
-Picks gear off ground BOOL
-On defence BOOL
-Defended shooting high  BOOL
-Touchpad BOOL
-
-Scout Name StrING
-Notes STRING
-*/
-    private static int booltoInt (Boolean bool){
-        return bool ? 1 : 0;
-    }
-
     public void storeLocal()
     {
         try
@@ -357,23 +218,6 @@ Notes STRING
 
     }};
 
-
-
-
-
-
-    //sends data as a single object to firebase
-
- /*   public void sendMessage() {
-        //makes new object and calls findElements method as to push a single chatElement object to firebase
-        firebaseRef.push().setValue(scoutingData);
-        scoutingData = new ChatMessage[6];
-        for(int j=0; j<checkboxes.length; j++)
-        {
-            checkboxes[j].setChecked(false);
-        }
-    }*/
-
     //extracts data from QR string and returns it in a single element
     public ChatMessage findElements(String tempScanResult) {
         Scanner scan = new Scanner(tempScanResult); //makes scanner out of string for ease of extraction
@@ -396,20 +240,8 @@ Notes STRING
                 elements[j] = tempLine.substring(indexEl + 2);
                 if(j<NUM_INT)
                 {
-                    /*if(j>=3 && j<=6 || j>=14 && j<=20)
-                    {
-                        if(elements[j].equals("false"))
-                        {
-                            data[j] = 0;
-                        }
-                        else
-                            data[j] = 1;
-                    }
-                    else{*/
                         System.out.println("BREAK: " + elements[j] + " " + j);
                         data[j] = Integer.parseInt(elements[j]);
-
-                    //}
                 }
                 else{
                     names[j-NUM_INT] = elements[j];
@@ -422,33 +254,9 @@ Notes STRING
                 j++;
             }
         }
-        //ChatMessage sendingChat = new ChatMessage(elements);
         ChatMessage otherChat = new ChatMessage(data, names);
-        //System.out.println("\n\n\nMEEEEEEEEEEE\n\n\n" + otherChat.jsonObjStg());
         return otherChat;
     }
-    /*public void savedata() {
-        try {
-
-
-           Process p = Runtime.getRuntime().exec("cp /storage/emulated/0/HelloWorld /storage/usbotg");
-
-            System.out.println("launched");
-           p.waitFor();
-          System.out.println("waited: " + p.exitValue());
-            System.out.println("End");
-            while (p.getErrorStream().available() > 0) {
-                System.out.print
-                        ((char) (p.getErrorStream().read()));
-            }
-            System.out.println();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-;*/
-
 
     //clears the current match stores and resets the checkboxes
     public void resetMatch()
@@ -460,19 +268,13 @@ Notes STRING
         }
     }
 
-    private static int countLines(String str){
-        String[] lines = str.split("\r\n|\r|\n");
-        return  lines.length;
-    }
-
-    /**
+    /*
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.*/
 
     public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
-                .setName("Reader Page") // TODO: Define a title for the content shown.
-                // TODO: Make sure this auto-generated URL is correct.
+                .setName("Reader Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
                 .build();
         return new Action.Builder(Action.TYPE_VIEW)
