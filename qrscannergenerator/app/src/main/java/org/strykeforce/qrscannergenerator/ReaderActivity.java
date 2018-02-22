@@ -269,7 +269,7 @@ public class ReaderActivity extends AppCompatActivity {
             Log.d("Lilian" , "Arrived in store scout! uwu");
             ChatMessage sendingObj = findElements(message);
             scoutingData[curScoutID-1] = sendingObj;
-            if(curScoutID==1)
+             if(curScoutID==1)
             {
 
             }
@@ -308,35 +308,35 @@ Notes STRING
     {
         try
         {
-        PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/MasterDataJSON.json"), true));
+        PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/MasterDataJSON.txt"), true));
         for(int j=0; j<6; j++)  {
             try {
                 JSONObject o = new JSONObject();
-                o.put("Scout ID ", (SCOUT_ID + 1));
-                o.put("Team ", TEAM_NUMBER);
-                o.put("Match ",(MATCH_NUMBER+1));
-                o.put("Auto Base Line ", booltoInt(BaseLineBool));
-                o.put("Auto Switch ", booltoInt(DeliverSwitchBool));
-                o.put("Auto Scale ", booltoInt(AutoScaleBool));
-                o.put("Auto Second Cube ", booltoInt(SecondCubeBool));
-                o.put("Auto Scale Time ", ScaleTimeInt);
-                o.put("Portal Cubes ", PortalCubes);
-                o.put("Center Cubes ", CenterCubes);
-                o.put("Power Zone Cubes ", ZoneCubes);
-                o.put("Switch Cubes ", SwitchCubes);
-                o.put("Scale Cubes ", ScaleCubes);
-                o.put("Exchange Cubes ", ExchangeCubes);
-                o.put("Attempt Climb ", booltoInt(ClimbAttempt));
-                o.put("Successful Climb ", booltoInt(Climb));
-                o.put("Lifted 1 ", booltoInt(Lift1));
-                o.put("Lifted 2 ", booltoInt(Lift2));
-                o.put("Was Lifted ", booltoInt(Lifted));
-                o.put("On Platform ", booltoInt(Platform));
-                o.put("Robot Failed ", booltoInt(Failed));
-                o.put("Penalties ", Penalties);
-                o.put("Notes ", Notes);
+                o.put("Scout ID ", scoutingData[j].scoutIDint);
+                o.put("Team ", scoutingData[j].teamNumberInt);
+                o.put("Match ",scoutingData[j].matchNumberint);
+                o.put("Auto Base Line ", scoutingData[j].baseLineInt);
+                o.put("Auto Switch ", scoutingData[j].deliverSwitchInt);
+                o.put("Auto Scale ", scoutingData[j].autoScaleInt);
+                o.put("Auto Second Cube ", scoutingData[j].secondCubeInt);
+                o.put("Auto Scale Time ", scoutingData[j].ScaleTimeInt);
+                o.put("Portal Cubes ", scoutingData[j].PortalCubes);
+                o.put("Center Cubes ", scoutingData[j].CenterCubes);
+                o.put("Power Zone Cubes ", scoutingData[j].ZoneCubes);
+                o.put("Switch Cubes ", scoutingData[j].SwitchCubes);
+                o.put("Scale Cubes ", scoutingData[j].ScaleCubes);
+                o.put("Exchange Cubes ", scoutingData[j].ExchangeCubes);
+                o.put("Attempt Climb ", scoutingData[j].climbAttemptInt);
+                o.put("Successful Climb ", scoutingData[j].climbInt);
+                o.put("Lifted one ", scoutingData[j].lift1Int);
+                o.put("Lifted two ", scoutingData[j].lift2Int);
+                o.put("Was Lifted ", scoutingData[j].liftedInt);
+                o.put("On Platform ", scoutingData[j].platformInt);
+                o.put("Robot Failed ", scoutingData[j].failedInt);
+                o.put("Penalties ", scoutingData[j].Penalties);
+                o.put("Notes ", scoutingData[j].Notes);
                 String outputString = o.toString();
-                System.out.println("outputString == \"" + outputString + "\"");
+                Log.d("lilian", "outputString == " + outputString);
                 fw.println(outputString);
             }
             catch(Exception e) {

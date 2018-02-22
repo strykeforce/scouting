@@ -3,8 +3,8 @@ package org.strykeforce.qrscannergenerator;
 public class ChatMessage {
 
     private String scoutID,teamNumber,matchNumber,autoHigh,autoLow,autoGear,teleHigh,teleLow,teleGear;
-    private String baseLineCross,canPickGearOffGround,playsDefense,highShotDefended,touchPad,climbRopeTime,scoutName,notes;
-    private int scoutIDint, teamNumberInt, matchNumberint;
+    private String baseLineCross,canPickGearOffGround,playsDefense,highShotDefended,touchPad,climbRopeTime,scoutName;
+    public int scoutIDint, teamNumberInt, matchNumberint;
     private int baseLineCrossint,canPickGearOffGroundint,playsDefenseint,highShotDefendedint,touchPadint,climbRopeTimeint,scoutNameint,notesint;
     private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Notes"};
     private int numInt = 22, numStg = 1, numSending = numInt+numStg;
@@ -12,13 +12,13 @@ public class ChatMessage {
     private String[] strings;
 
     public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false, ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform, Failed;
-    int ScaleTimeInt;
-    int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
-    int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
-    int failedInt;
+    public int ScaleTimeInt;
+    public int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
+    public int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
+    public int failedInt;
 
     public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
-
+    public String Notes;
     int Penalties;
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0;
@@ -64,7 +64,7 @@ public class ChatMessage {
 
         this.Penalties = data[21];
 
-        this.notes = names[0];
+        this.Notes = names[0];
         this.nums = data;
     }
 
