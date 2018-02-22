@@ -193,7 +193,19 @@ public class MainActivity extends AppCompatActivity {
         autoScale.setChecked(AutoScaleBool);
         scaleTime.setProgress(ScaleTimeInt);
 
-        //this handles the "next" button on the auton screen
+
+        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
+        if (SCOUT_ID < 3) {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
+        }
+        else {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
+        }
+
+
+                //this handles the "next" button on the auton screen
         findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -259,6 +271,16 @@ public class MainActivity extends AppCompatActivity {
         penalties.setText(Integer.toString(Penalties));
         failed.setChecked(Failed);
         notes.setText(Notes);
+
+        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
+        if (SCOUT_ID < 3) {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
+        }
+        else {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
+        }
 
         //handle what happens when the user pushes the Plus/Minus buttons
             findViewById(R.id.portalsub).setOnClickListener(new View.OnClickListener() {
@@ -552,7 +574,7 @@ public class MainActivity extends AppCompatActivity {
                 +"Aswitch: " + booltoInt(DeliverSwitchBool) + "\t" //Auto Switch
                 +"Ascale: " + booltoInt(AutoScaleBool) + "\t" //Auto Scale
                 +"A2cube: " + booltoInt(SecondCubeBool) +"\t" //Auto Second Cubes
-                +"Atime: " + ScaleTimeInt + "\t" //Auto Scale Time
+                +"Atime: " + (int)(ScaleTimeInt*.15) + "\t" //Auto Scale Time
                 +"Pcube: " + PortalCubes + "\t" //Portal Cubes
                 +"Ccube: " + CenterCubes + "\t" //Center Cubes
                 +"Pzcube: "+ ZoneCubes+ "\t" //Power Zone Cubes
@@ -570,6 +592,9 @@ public class MainActivity extends AppCompatActivity {
                 +"Notes: " + Notes + "\t"; //Notes
         return QRStr;
     }
+
+
+
 
     /*public void storeLocal()
     {
