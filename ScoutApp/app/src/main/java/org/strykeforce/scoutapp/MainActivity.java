@@ -5,6 +5,7 @@ package org.strykeforce.scoutapp;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -34,6 +35,8 @@ import com.google.zxing.*;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
+import static org.strykeforce.scoutapp.R.id.nextbutton;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -380,7 +383,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.qrscreen);
 
         //Display the QR code
-        ImageView qrImageView = (ImageView) findViewById(R.id.imageView2);
+        final ImageView qrImageView = (ImageView) findViewById(R.id.imageView2);
         qrImageView.setImageBitmap(generateQRImage(GenerateQRString()));
 
         //Tells what to do when backbutton is pressed
@@ -392,12 +395,33 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //Tells what to do when nextbutton is pressed
-        findViewById(R.id.nextbutton).setOnClickListener(new View.OnClickListener() {
+        final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
+        builderReset.setTitle("RESET MATCH?");
+        builderReset.setMessage("Are you sure? Did the scouting overlord say to go to the next match?");
+        findViewById(nextbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // PopupWindow
+                builderReset.setPositiveButton("YES", new DialogInterface.OnClickListener() { //sets what the yes option will do
 
-                NewMatch();
+                    public void onClick(DialogInterface dialog, int which) {
+                        NewMatch(); //calls method to restart match
+                        dialog.dismiss(); //closes dialog box
+                    }
+
+                });
+                builderReset.setNegativeButton("NO", new DialogInterface.OnClickListener() { //sets what the no option will do
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); //closes dialog box
+                    }
+                });
+                final AlertDialog alert = builderReset.create();
+                System.out.println(DialogInterface.BUTTON_NEGATIVE);
+                alert.show();
+                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
+                msgTxt.setTextSize((float)35.0);
                 //storeLocal();
             }
         });
