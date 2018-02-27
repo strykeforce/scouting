@@ -336,7 +336,7 @@
 
     <TextView
 
-        android:text="Center Cubes"
+        android:text="Rows Cubes"
 
         android:layout_width="wrap_content"
 
@@ -354,7 +354,7 @@
 
         android:textStyle="bold"
 
-        android:layout_x="60dp"
+        android:layout_x="63dp"
 
         android:layout_y="140dp"/>
 
@@ -424,7 +424,7 @@
 
     <TextView
 
-        android:text="Zone Cubes"
+        android:text="Pile Cubes"
 
         android:layout_width="wrap_content"
 
@@ -442,7 +442,7 @@
 
         android:textStyle="bold"
 
-        android:layout_x="60dp"
+        android:layout_x="70dp"
 
         android:layout_y="190dp"/>
 
@@ -887,11 +887,12 @@
         android:id="@+id/lifted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="710dp"
+        android:layout_x="724dp"
         android:layout_y="170dp"
         android:scaleX="2.0"
         android:scaleY="2.0"
-        android:text="Lifted" />
+        android:text="Aided by another"
+        android:textSize="9dp"/>
 
     <Button
 
