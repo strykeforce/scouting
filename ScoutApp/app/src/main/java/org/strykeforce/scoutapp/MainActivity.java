@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
     int ScaleTimeInt = 0;
 
-    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
+    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0, Drivablility = 0;
     public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
 
     boolean Failed = false;
