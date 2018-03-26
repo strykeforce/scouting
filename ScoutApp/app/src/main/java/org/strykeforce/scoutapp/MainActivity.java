@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
         //Tells what to do when nextbutton is pressed
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("RESET MATCH?");
-        builderReset.setMessage("Are you sure? Did the scouting princess say to go to the next match?");
+        builderReset.setMessage("Are you sure? Did the scouting overlord say to go to the next match?");
         findViewById(nextbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
