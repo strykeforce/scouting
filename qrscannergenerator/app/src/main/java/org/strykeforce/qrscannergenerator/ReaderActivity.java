@@ -197,6 +197,7 @@ public class ReaderActivity extends AppCompatActivity {
                 o.put("Penalties", scoutingData[j].Penalties);
                 o.put("Notes", scoutingData[j].Notes);
                 String outputString = o.toString();
+                outputString = outputString + ","; //added comma to be compatible with qualification match report
                 Log.d("lilian", "outputString == " + outputString);
                 fw.println(outputString);
             }
