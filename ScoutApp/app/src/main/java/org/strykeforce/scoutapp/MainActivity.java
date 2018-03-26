@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
     int ScaleTimeInt = 0;
+    public int DrivablilityInt = 0;
 
-    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0, Drivablility = 0;
+    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
     public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
 
     boolean Failed = false;
@@ -199,6 +200,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView penalties = (TextView) findViewById(R.id.penalties);
         final CheckBox failed = (CheckBox) findViewById(R.id.failed);
         final EditText notes = (EditText) findViewById(R.id.notes);
+        final SeekBar driveability = (SeekBar) findViewById(R.id.drivabilitySeek);
 
         //restore the current state of the objects on the teleop screen
         teamdata.setText(Integer.toString(TEAM_NUMBER));
@@ -217,6 +219,7 @@ public class MainActivity extends AppCompatActivity {
         lift2.setChecked(Lift2);
         lifted.setChecked(Lifted);
         platform.setChecked(Platform);
+        driveability.setProgress(DrivablilityInt);
 
         penalties.setText(Integer.toString(Penalties));
         failed.setChecked(Failed);
@@ -342,6 +345,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+                //save the current settings
+                ClimbAttempt = climbattempt.isChecked();
+                Climb = climb.isChecked();
+                Lift1 = lift1.isChecked();
+                Lift2 = lift2.isChecked();
+                Lifted = lifted.isChecked();
+                Platform = platform.isChecked();
+                Notes = notes.getText().toString();
+                Failed = failed.isChecked();
+                DrivablilityInt = driveability.getProgress();
                 //go back to the auton screen
                 goAuton();
             }
@@ -371,6 +384,7 @@ public class MainActivity extends AppCompatActivity {
                 Failed = failed.isChecked();
                 Penalties = Integer.parseInt(penalties.getText().toString());
                 Notes = notes.getText().toString();
+                DrivablilityInt = driveability.getProgress();
 
                 //go to the QRcode screen
                 goQR();
@@ -397,7 +411,7 @@ public class MainActivity extends AppCompatActivity {
         //Tells what to do when nextbutton is pressed
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("RESET MATCH?");
-        builderReset.setMessage("Are you sure? Did the scouting overlord say to go to the next match?");
+        builderReset.setMessage("Are you sure? Did the scouting Princess Peach say to go to the next match?");
         findViewById(nextbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -466,6 +480,7 @@ public class MainActivity extends AppCompatActivity {
         Failed = false;
         Penalties = 0;
         Notes = "none";
+        DrivablilityInt = 0;
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -531,6 +546,7 @@ public class MainActivity extends AppCompatActivity {
                 + "Op: " + booltoInt(Platform) + "\t" //On Platform
                 + "Rf: " + booltoInt(Failed) + "\t" //Robot Failed
                 + "Pen: " + Penalties + "\t" //Penalties
+                + "Drv: " + (int) (DrivablilityInt) + "\t"  //driveability
                 + "Notes: " + Notes + "\t"; //Notes
         return QRStr;
     }
