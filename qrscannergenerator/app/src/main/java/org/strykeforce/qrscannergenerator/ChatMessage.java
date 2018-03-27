@@ -2,7 +2,7 @@ package org.strykeforce.qrscannergenerator;
 
 public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
-    private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Notes"};
+    private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Drv", "Notes"};
     private int numInt = 22, numStg = 1, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
@@ -11,6 +11,7 @@ public class ChatMessage {
     public int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
     public int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
     public int failedInt;
+    public int Driveability;
 
     public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
     public String Notes;
@@ -46,6 +47,7 @@ public class ChatMessage {
         this.failedInt = data[20];
 
         this.Penalties = data[21];
+        this.Driveability = data[22];
 
         this.Notes = names[0];
         this.nums = data;
