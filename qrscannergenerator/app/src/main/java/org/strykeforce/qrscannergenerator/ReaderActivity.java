@@ -40,7 +40,7 @@ public class ReaderActivity extends AppCompatActivity {
     private Firebase firebaseRef;
     private static final int NUM_ELEMENTS_SENDING = 24, NUM_INT=23, NUM_STG=1;
     private ChatMessage[] scoutingData = new ChatMessage[6];
-    private int curScoutID;
+    private int curScoutID, numOfTeams;
     private GoogleApiClient client;
 
     @Override
@@ -147,6 +147,43 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
+    public String getTeamNames(int teamNumber) {
+        numOfTeams = 0;
+        String returned = "no name";
+        try {
+            Scanner s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
+
+            while (s.hasNextLine()) {
+                s.nextLine();
+                numOfTeams++;
+
+            }
+            s.close();
+            s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
+
+            String[][] teamNameArray = new String[numOfTeams][3];
+            for (int i = 0; i < numOfTeams; i++) {
+                teamNameArray[i] = new String[3];
+                String[] args = s.nextLine().split(",");
+                for (int ii = 0; ii < 2; ii++) {
+                    teamNameArray[i][ii] = args[ii];
+                }
+            }
+            for (int i = 0; i < numOfTeams; i++) {
+                if (Integer.valueOf(teamNameArray[i][0]) == teamNumber) {
+                    return teamNameArray[i][1] = returned;
+                }
+            }
+            System.out.println("</getTeamNames>\n");
+            s.close();
+        } catch (Exception e) {
+            System.out.println("oh nose!");
+            return null;
+        }
+
+        return returned;
+    }
+
     //stores scout data from QR string to chatmessage array and sets match number to red 1's match num
     public void storeScout(){
         //gets QR results from private string
@@ -175,6 +212,7 @@ public class ReaderActivity extends AppCompatActivity {
                 JSONObject o = new JSONObject();
                 o.put("Scout_ID", scoutingData[j].scoutIDint);
                 o.put("Team", scoutingData[j].teamNumberInt);
+                o.put("Name", getTeamNames(scoutingData[j].teamNumberInt));
                 o.put("Match",scoutingData[j].matchNumberint);
                 o.put("Auto_Baseline", scoutingData[j].baseLineInt);
                 o.put("Auto_Switch", scoutingData[j].deliverSwitchInt);
