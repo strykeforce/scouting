@@ -42,6 +42,8 @@ public class ReaderActivity extends AppCompatActivity {
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
+    String [] teamNames = new String[9000] ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
@@ -64,7 +66,7 @@ public class ReaderActivity extends AppCompatActivity {
         for (int j = 0; j < checkboxes.length; j++) {
             checkboxes[j].setChecked(false);
         }
-
+        getTeamNames();
 
 
         //first, opens a dialog box to check if they are sure with clearing the match, then clears current stored data and resets checkboxes
@@ -147,23 +149,28 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
-    public String getTeamNames(int teamNumber) {
+    public void getTeamNames() {
         numOfTeams = 0;
+         String temp;
+        String[] readLine;
         String returned = "no name";
+
         try {
             Scanner s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
 
             while (s.hasNextLine()) {
-                s.nextLine();
+                temp = s.nextLine();
+                readLine = temp.split(",");
+                teamNames[Integer.parseInt(readLine[0])]=readLine[1];
                 numOfTeams++;
 
             }
             s.close();
-            s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
+ /*           s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
 
-            String[][] teamNameArray = new String[numOfTeams][3];
+ //           String[][] teamNameArray = new String[numOfTeams][3];
             for (int i = 0; i < numOfTeams; i++) {
-                teamNameArray[i] = new String[3];
+ //               teamNameArray[i] = new String[3];
                 String[] args = s.nextLine().split(",");
                 for (int ii = 0; ii < 2; ii++) {
                     teamNameArray[i][ii] = args[ii];
@@ -176,12 +183,12 @@ public class ReaderActivity extends AppCompatActivity {
             }
             System.out.println("</getTeamNames>\n");
             s.close();
-        } catch (Exception e) {
+ */       } catch (Exception e) {
             System.out.println("oh nose!");
-            return null;
+ //           return null;
         }
 
-        return returned;
+ //       return returned;
     }
 
     //stores scout data from QR string to chatmessage array and sets match number to red 1's match num
@@ -212,7 +219,7 @@ public class ReaderActivity extends AppCompatActivity {
                 JSONObject o = new JSONObject();
                 o.put("Scout_ID", scoutingData[j].scoutIDint);
                 o.put("Team", scoutingData[j].teamNumberInt);
-                o.put("Name", getTeamNames(scoutingData[j].teamNumberInt));
+                o.put("Name", teamNames[scoutingData[j].teamNumberInt]);
                 o.put("Match",scoutingData[j].matchNumberint);
                 o.put("Auto_Baseline", scoutingData[j].baseLineInt);
                 o.put("Auto_Switch", scoutingData[j].deliverSwitchInt);
