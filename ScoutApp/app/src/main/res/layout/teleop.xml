@@ -1,0 +1,1057 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/activity_scout_main"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    tools:context="org.strykeforce.scoutapp.MainActivity">
+
+
+    <TextView
+
+        android:id="@+id/horizline"
+
+        android:layout_width="1500dp"
+
+        android:layout_height="20dp"
+
+        android:layout_x="0dp"
+
+        android:layout_y="26dp"
+
+        android:text="________________________________________________________________________________________________________________________________________________________"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/black" />
+
+    <TextView
+
+        android:id="@+id/vertbar"
+
+        android:layout_width="5dp"
+
+        android:layout_height="500dp"
+
+        android:layout_x="430dp"
+
+        android:layout_y="30dp"
+
+        android:text="|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/teleop"
+
+        android:layout_width="156dp"
+
+        android:layout_height="40dp"
+
+        android:layout_x="90dp"
+
+        android:layout_y="0dp"
+
+        android:text="Tele-op"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="35sp"
+
+        android:textStyle="normal|bold" />
+
+
+    <TextView
+
+        android:id="@+id/match"
+
+        android:layout_width="50dp"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="39dp"
+
+        android:layout_x="255dp"
+
+        android:layout_y="4dp"
+
+        android:scaleX="1.75"
+
+        android:scaleY="1.75"
+
+        android:text="Match"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/matchdata"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="79dp"
+
+        android:layout_x="318dp"
+
+        android:layout_y="4dp"
+
+        android:scaleX="1.70"
+
+        android:scaleY="1.70"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/scoutDisplay"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="35dp"
+
+        android:layout_x="-46dp"
+
+        android:layout_y="-6dp"
+
+        android:text="Blue 1"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_blue_dark"
+
+        android:textSize="30dp"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:text="Team"
+
+        android:layout_width="50dp"
+
+        android:layout_height="20dp"
+
+        android:id="@+id/team"
+
+        android:scaleX="1.75"
+
+        android:scaleY="1.75"
+
+        android:layout_marginEnd="33dp"
+
+        android:textStyle="normal|bold"
+
+        android:textColor="@android:color/black"
+
+        android:layout_x="480dp"
+
+        android:layout_y="4dp"/>
+
+
+    <!--Num high goals in auto?-->
+
+
+    <TextView
+
+        android:id="@+id/teamdata"
+
+        android:layout_width="80dp"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="249dp"
+
+        android:layout_x="565dp"
+
+        android:layout_y="4dp"
+
+        android:scaleX="1.80"
+
+        android:scaleY="1.80"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <Button
+
+        android:id="@+id/sendbutton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="60dp"
+
+        android:layout_x="800dp"
+
+        android:layout_y="360dp"
+
+        android:scaleX="1.5"
+
+        android:scaleY="1.5"
+
+        android:text="Done"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/colorPrimaryDark"
+
+        android:textSize="20dp"
+
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/retrievedtxt"
+
+        android:layout_width="308dp"
+
+        android:layout_height="40dp"
+
+        android:layout_x="60dp"
+
+        android:layout_y="40dp"
+
+        android:text="Retrieve location:"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="35sp"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:text="Portal Cubes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/portallabel"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="60dp"
+
+        android:layout_y="90dp"/>
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/portalsub"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="210dp"
+
+        android:layout_y="80dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/portalcubes"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="300dp"
+
+        android:layout_y="95dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/portaladd"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="330dp"
+
+        android:layout_y="80dp"/>
+
+    <TextView
+
+        android:text="Rows Cubes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/centerlabel"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="63dp"
+
+        android:layout_y="140dp"/>
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/centersub"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="210dp"
+
+        android:layout_y="130dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/centercubes"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="300dp"
+
+        android:layout_y="145dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/centeradd"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="330dp"
+
+        android:layout_y="130dp"/>
+
+    <TextView
+
+        android:text="Pile Cubes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/zonelabel"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="70dp"
+
+        android:layout_y="190dp"/>
+
+    <Button
+
+        android:id="@+id/zonesub"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="210dp"
+
+        android:layout_y="180dp"
+
+        android:text="-"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="20sp"
+
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/zonecubes"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="300dp"
+
+        android:layout_y="195dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/zoneadd"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="330dp"
+
+        android:layout_y="180dp"/>
+
+    <TextView
+
+        android:text="Switch Cubes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/switchlabel"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="60dp"
+
+        android:layout_y="275dp"/>
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/switchsub"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="210dp"
+
+        android:layout_y="260dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/switchcubes"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="300dp"
+
+        android:layout_y="275dp"/>
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/switchadd"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="330dp"
+
+        android:layout_y="260dp"/>
+
+    <TextView
+
+        android:text="Scale Cubes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/scalelabel"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="60dp"
+
+        android:layout_y="325dp"/>
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/scalesub"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="210dp"
+
+        android:layout_y="310dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/scalecubes"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="300dp"
+
+        android:layout_y="325dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/scaleadd"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="330dp"
+
+        android:layout_y="310dp"/>
+
+
+
+    <TextView
+
+        android:text="Exchange Cubes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/exchangelabel"
+
+        android:textAllCaps="false"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="50dp"
+
+        android:layout_y="375dp"/>
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/exchangesub"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="210dp"
+
+        android:layout_y="360dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/exchangecubes"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:layout_x="300dp"
+
+        android:layout_y="380dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/exchangeadd"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="330dp"
+
+        android:layout_y="360dp"/>
+
+    <CheckBox
+        android:text="Robot failed"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/failed"
+
+        android:layout_x="504dp"
+
+        android:layout_y="220dp"
+
+        android:scaleX="2.0"
+
+        android:scaleY="2.0"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/penaltylabel"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="495dp"
+
+        android:layout_y="290dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:text="Penalties"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/climbtxt"
+        android:layout_width="133dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="33dp"
+        android:layout_x="700dp"
+        android:layout_y="50dp"
+        android:scaleX="2.5"
+        android:scaleY="2.5"
+        android:text="Climb"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold" />
+
+    <CheckBox
+        android:id="@+id/climbattempt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="500dp"
+        android:layout_y="80dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Attempted" />
+
+    <CheckBox
+        android:id="@+id/climb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="500dp"
+        android:layout_y="125dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Successful" />
+
+    <CheckBox
+        android:id="@+id/lift1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="715dp"
+        android:layout_y="80dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted 1" />
+
+    <CheckBox
+        android:id="@+id/lift2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="715dp"
+        android:layout_y="125dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Lifted 2" />
+
+    <CheckBox
+        android:id="@+id/platform"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="504dp"
+        android:layout_y="170dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="On Platform" />
+
+    <CheckBox
+        android:id="@+id/lifted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="745dp"
+        android:layout_y="170dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Good Mount of other robot"
+        android:textSize="9dp"/>
+
+    <Button
+
+        android:id="@+id/backbutton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="60dp"
+
+        android:layout_x="460dp"
+
+        android:layout_y="360dp"
+
+        android:scaleX="1.5"
+
+        android:scaleY="1.5"
+
+        android:text="Back"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/colorPrimaryDark"
+
+        android:textSize="20dp"
+
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/notelabel"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="705dp"
+
+        android:layout_y="226dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:text=" Notes:"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold" />
+
+    <TextView
+
+        android:id="@+id/deliveredtxt"
+
+        android:layout_width="308dp"
+
+        android:layout_height="40dp"
+
+        android:layout_x="60dp"
+
+        android:layout_y="220dp"
+
+        android:text="Deliver location:"
+
+        android:textColor="@android:color/holo_orange_dark"
+
+        android:textSize="35sp"
+
+        android:textStyle="normal|bold" />
+
+    <EditText
+
+        android:id="@+id/notes"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_x="780dp"
+
+        android:layout_y="215dp"
+
+        android:ems="9"
+
+        android:inputType="textPersonName"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textSize="14sp"
+
+        android:textStyle="bold" />
+
+    <Button
+
+        android:text="-"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/penaltysub"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="590dp"
+
+        android:layout_y="280dp"/>
+
+    <TextView
+
+        android:text="0"
+
+        android:layout_width="30dp"
+
+        android:layout_height="15dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:id="@+id/penalties"
+
+        android:textAlignment="center"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:layout_x="674dp"
+
+        android:layout_y="295dp"/>
+
+    <Button
+
+        android:text="+"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:id="@+id/penaltyadd"
+
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+
+        android:textStyle="bold"
+
+        android:textSize="20sp"
+
+        android:layout_x="708dp"
+
+        android:layout_y="280dp"/>
+
+
+    android:orientation="horizontal"
+
+
+</AbsoluteLayout>

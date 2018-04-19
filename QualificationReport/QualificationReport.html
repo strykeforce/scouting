@@ -1,0 +1,394 @@
+<!doctype html>
+<html>
+<head>
+    <title>Talon Item Commands</title>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="json2html.js"></script>
+    <script type="text/javascript" src="jquery.json2html.js"></script>
+    <script type="text/javascript" src="mustache.js" ></script>
+
+</head>
+<body>
+
+  <br />
+  <input id="Button0" type="button" value="Unused" onclick="runButton0()"/>
+  <div id="Button0TextArea">  </div>
+  <br />
+  <input id="Button1" type="button" value="Unused" onclick="runButton1()"/>
+  <div id="Button1TextArea">  </div>
+  <br />
+  <input id="Button2" type="button" value="Unused" onclick="runButton2()"/>
+  <div id="Button2TextArea">  </div>
+  <br />
+  <input id="Button3" type="button" value="Unused" onclick="runButton3()"/>
+  <div id="Button3TextArea">  </div>
+  <br />
+  <input id="Button4" type="button" value="Unused" onclick="runButton4()"/>
+  <div id="Button4TextArea">  </div>
+  <br />
+  <input id="Button5" type="button" value="Unused" onclick="runButton5()"/>
+  <div id="Button5TextArea">  </div>
+  <br />
+  <input id="Button6" type="button" value="Unused" onclick="runButton6()"/>
+  <div id="Button6TextArea">  </div>
+  <br />
+  <input id="Button7" type="button" value="Unused" onclick="runButton7()"/>
+  <div id="Button7TextArea">  </div>
+  <br />
+  <input id="Button8" type="button" value="Unused" onclick="runButton8()"/>
+  <div id="Button8TextArea">  </div>
+  <br />
+  <input id="Button9" type="button" value="Unused" onclick="runButton9()"/>
+  <div id="Button9TextArea">  </div>
+  <br />
+  <input id="Button10" type="button" value="Unused" onclick="runButton10()"/>
+  <div id="Button10TextArea">  </div>
+  <br />
+  <input id="Button11" type="button" value="Unused" onclick="runButton11()"/>
+  <div id="Button11TextArea">  </div>
+
+<script>
+//this provides a handle to the division called firstsection
+var Button0textArea = document.getElementById("Button0TextArea");
+var Button1textArea = document.getElementById("Button1TextArea");
+var Button2textArea = document.getElementById("Button2TextArea");
+var Button3textArea = document.getElementById("Button3TextArea");
+var Button4textArea = document.getElementById("Button4TextArea");
+var Button5textArea = document.getElementById("Button5TextArea");
+var Button6textArea = document.getElementById("Button6TextArea");
+var Button7textArea = document.getElementById("Button7TextArea");
+var Button8textArea = document.getElementById("Button8TextArea");
+var Button9textArea = document.getElementById("Button9TextArea");
+var Button10textArea = document.getElementById("Button10TextArea");
+var Button11textArea = document.getElementById("Button11TextArea");
+
+//this creates a 2 dimensional array...which is impossible in javascript, but you are allowed to have an array of arrays
+//teamArray is a 2d list of all robots in all matches.  [match #1-100][team position# 1-6]
+var teamArray = new Array(100);
+for (var index1 = 0; index1 < 100; index1++) {
+  teamArray[index1] = new Array(6);
+}
+
+//ourmatches is an array that lists the matches we are in
+var ourMatches = new Array(12);
+var ourMatchPosition = new Array(12);
+
+//some variables i used for troubleshooting
+var mystring = "nope";
+var output = "nada";
+var testnum = 5;
+var index =0;
+var temp = 0;
+var matchData;
+var matchText;
+var partner1 = new Array(12);
+var partner2 = new Array(12);
+var masterData2;
+var partner1MatchDataRows = new Array(12);
+var partner2MatchDataRows = new Array(12);
+var partner1Matches = new Array(12);
+var partner2Matches = new Array(12);
+
+//this is my attempt to read the schedule data in
+$.get('MyTeamMatches.csv', function(masterData) {
+    matchData = masterData;  //store file string in a string that i can parse/delete as I go
+
+    //temp = matchData.search("2767");
+    for (var i = 0; i < 100; i++) {
+      for (var j = 0; j < 6; j++) {
+        var n = matchData.search(",");
+        teamArray[i] [j] = matchData.substring(0,n);
+        matchData = matchData.substring(n+1,1000000);
+        if (teamArray[i][j]=="2767") {
+          ourMatches[index]=i;  //record which matches we compete in
+          ourMatchPosition[index]=j;  //record whether we are red1, blue3, other
+          //display match buttons for each match we compete in
+          document.getElementById("Button"+(index)).value="Match:"+(i+1);
+          index++;
+        }
+      }
+      matchData = matchData.substring(2,1000000); //remove carriage return at end of each row?
+    }
+    //find our alliance partners
+    for (var i=0;i<12;i++) {
+
+      if (ourMatchPosition[i]==0){
+          partner1[i] = teamArray[ourMatches[i]] [1];
+          partner2[i] = teamArray[ourMatches[i]] [2];
+      }
+      if (ourMatchPosition[i]==1){
+          partner1[i] = teamArray[ourMatches[i]] [0];
+          partner2[i] = teamArray[ourMatches[i]] [2]; //change this back to a 2
+      }
+      if (ourMatchPosition[i]==2){
+          partner1[i] = teamArray[ourMatches[i]] [0];
+          partner2[i] = teamArray[ourMatches[i]] [1];
+      }
+      if (ourMatchPosition[i]==3){
+          partner1[i] = teamArray[ourMatches[i]] [4];
+          partner2[i] = teamArray[ourMatches[i]] [5];
+      }
+      if (ourMatchPosition[i]==4){
+          partner1[i] = teamArray[ourMatches[i]] [3];
+          partner2[i] = teamArray[ourMatches[i]] [5];
+      }
+      if (ourMatchPosition[i]==5){
+          partner1[i] = teamArray[ourMatches[i]] [3];
+          partner2[i] = teamArray[ourMatches[i]] [4];
+      }
+    }
+});
+
+
+
+
+
+//i was playing with the ability to read another file....so i used a simple inventory2.json file
+//this reads the JSON file and puts the data in a string called "inventory"
+$.getJSON( "MasterDataJSON.txt", function( inventory ) {
+    masterData2 = inventory  //store .json info for use when buttons are pressed
+    //this inserts the data from the .json file into the text
+//    output = Mustache.render("my first tag value is: {{#.}} {{Scout ID}} {{/.}}. ", inventory2);
+//  output = output + Mustache.render("And this is my secondtag {{#.}} {{7.Match}} {{/.}}. ", inventory2);
+
+    //this overwrites the text in the division called sectionOne
+//    sectionOne.innerHTML=output;
+
+  //alert ("my alert is:" + ourMatches[1]);  //alerts create a dialog box...for troubleshooting or whatever
+});
+
+//this subroutine finds the matches our alliance partners were in, and collects their data from the JSON file.
+//      inputs:  which button was pressed
+function FindMatchResults(selectedmatchbutton){
+  var index1 = 0;
+  var index2 = 0;
+  var rowNumber;
+
+  matchText = "";
+  Button0textArea.innerHTML= matchText; //clear other button text
+  Button1textArea.innerHTML= matchText; //clear other button text
+  Button2textArea.innerHTML= matchText; //clear other button text
+  Button3textArea.innerHTML= matchText; //clear other button text
+  Button4textArea.innerHTML= matchText; //clear other button text
+  Button5textArea.innerHTML= matchText; //clear other button text
+  Button6textArea.innerHTML= matchText; //clear other button text
+  Button7textArea.innerHTML= matchText; //clear other button text
+  Button8textArea.innerHTML= matchText; //clear other button text
+  Button9textArea.innerHTML= matchText; //clear other button text
+  Button10textArea.innerHTML= matchText; //clear other button text
+  Button11textArea.innerHTML= matchText; //clear other button text
+  //find match result rows that the first alliance partner plays in
+  for (var i = 0; i < 100; i++) {
+    for (var j = 0; j < 6; j++) {
+        if (teamArray[i][j]==partner1[selectedmatchbutton]) {
+          partner1MatchDataRows[index1]=((i*6)+j);  //record which match result row partner#1's results should be in
+          partner1Matches [index1] = i;
+          index1++;
+        }
+        if (teamArray[i][j]==partner2[selectedmatchbutton]) {
+          partner2MatchDataRows[index2]=((i*6)+j);  //record which match result row partner#2's results should be in
+          partner2Matches [index2] = i;
+          index2++;
+        }
+      }
+    }
+    //start creating the html string to present when a button is pressed
+  matchText = matchText + "Our Alliance Partner #1 is: ";
+  matchText = matchText + partner1[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  //run through alliance partner #1's matches and gather their data into a string
+  for (i = 0; i<12;i++){
+    //determine which row of the JSON file to access
+    rowNumber = partner1MatchDataRows[i];
+    //get match #
+    matchText = matchText+ "<span style=margin-left:3em>Match " + (partner1Matches [i]+1);
+    matchText = matchText+ "<span style=margin-left:4em>Auton switch cubes " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Auto_Switch}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:5em>Crossed Line? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Auto_Baseline}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Drive ability: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Driveability}} {{/.}}", masterData2));
+    //calculate the total number of cubes delivered per match
+    var cubes = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Switch_Cubes}} {{/.}}", masterData2));
+    cubes = cubes + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Scale_Cubes}} {{/.}}", masterData2));
+    cubes = cubes + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Exchange_Cubes}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>cubes: " + cubes+ "<br />";
+  }
+//repeat the data collection for alliance partner #2
+  matchText = matchText + "<br />Our Alliance Partner #2 is: ";
+  matchText = matchText + partner2[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  for (i = 0; i<12;i++){
+    rowNumber = partner2MatchDataRows[i];
+    matchText = matchText+ "<span style=margin-left:4em>Match " + (partner2Matches [i]+1);
+    matchText = matchText+ "<span style=margin-left:5em>Auton switch cubes " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Auto_Switch}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:5em>Crossed Line? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Auto_Baseline}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Drive ability: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Driveability}} {{/.}}", masterData2));
+    var cubes = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Switch_Cubes}} {{/.}}", masterData2));
+    cubes = cubes + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Scale_Cubes}} {{/.}}", masterData2));
+    cubes = cubes + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".Exchange_Cubes}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>cubes: " + cubes+ "<br />";
+  }
+}
+
+//this function runs when the button for the first match is pressed
+function runButton0()
+{
+  var button = 0;  //identify which button was pressed
+  FindMatchResults(button);
+  Button0textArea.innerHTML= matchText;  //write out new button text
+}
+
+function runButton1()
+{
+  var button =1;
+  FindMatchResults(button);
+  Button1textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton2()
+{
+  var button =2;
+  FindMatchResults(button);
+  Button2textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton3()
+{
+  var button =3;
+  FindMatchResults(button);
+  Button3textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton4()
+{
+  var button =4;
+  FindMatchResults(button);
+  Button4textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton5()
+{
+  var button =5;
+  FindMatchResults(button);
+  Button5textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton6()
+{
+  var button =6;
+  FindMatchResults(button);
+  Button6textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton7()
+{
+  var button =7;
+  FindMatchResults(button);
+  Button7textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton8()
+{
+  var button =8;
+  FindMatchResults(button);
+  Button8textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton9()
+{
+  var button =9;
+  FindMatchResults(button);
+  Button9textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton10()
+{
+  var button =10;
+  FindMatchResults(button);
+  Button10textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton11()
+{
+  var button =11;
+  FindMatchResults(button);
+  Button11textArea.innerHTML= matchText;//write out new button text
+
+}
+
+</script>
+
+
+
+
+
+
+
+<script>
+/*
+var output = "blank";
+var driveWheel1 = 0;
+var sectionTwo = document.getElementById("secondSection");
+//now I want to read a more complicated file inventory.json, to see if I can read an array
+//this reads the JSON file and puts the data in a string called "inventory"
+$.getJSON( "inventory.json", function( inventory ) {
+    //this inserts the data from the inventory into the text
+    output = Mustache.render("the encoder values are: {{#.}} {{encoder.position}} {{/.}}. ", inventory);
+    //this next line gets the one encoder value we want, but repeats it over and over times the number of talons "174, 174, 174,..."
+    //but parseInt picks out the first one, so it works
+    driveWheel1 = parseInt(Mustache.render("{{#.}} {{2.encoder.position}} {{/.}}", inventory));
+    output = output + "encoder for talon 2 = " + driveWheel1;
+    //alert ("encoder: " + driveWheel1);
+    //this overwrites the text in the division called box
+    secondSection.innerHTML=output;
+});
+ */
+/*
+var sectionFour = document.getElementById("fourthSection");
+var msg;
+//this is a fourth section for playing with reading the inventory URL
+
+
+$.getJSON( {
+            type: 'GET',
+            dataType: 'jsonp',
+//            data: {},
+            crossDomain: 'true',
+            url: "http://10.27.67.2:5800/v1/inventory",
+            jsonp: false,
+            error: function(jqXHR, textStatus, errorThrown) {
+              output = Mustache.render("the encoder values are: {{#.}} {{encoder.position}} {{/.}}. ", jqXHR);
+
+                alert("jqXHR is "+jqXHR+" and error is "+errorThrown+" and textstatus is "+textStatus);
+            },
+            success: function(robotinventory) {
+                alert("i'm here");
+            }
+        });
+
+        sectionFour.innerHTML=output;
+  /*
+$.getJSON( 'http://10.27.67.2:5800/v1/inventory', function( inventory ) {
+//      output = Mustache.render("the encoder values are: {{#.}} {{encoder.position}} {{/.}}. ", inventory);
+alert("i'm here");
+    output = "it changed";
+    sectionFour.innerHTML=output;
+});
+*/
+
+</script>
+
+
+</body>
+
+
+<footer>
+<br />
+</footer>
+</html>

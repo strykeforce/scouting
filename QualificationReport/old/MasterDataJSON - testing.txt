@@ -1,0 +1,6 @@
+[
+{"Scout_ID":1,"Team":6568,"Match":1,"Auto_Baseline":0,"Auto_Switch":0,"Auto_Scale":1,"Auto_Second_Cube":1,"Auto_Scale_Time":3,"Portal_Cubes":2,"Center_Cubes":1,"Power_Zone_Cubes":1,"Switch_Cubes":0,"Scale_Cubes":1,"Exchange_Cubes":1,"Attempt_Climb":0,"Successful_Climb":1,"Lifted_one":1,"Lifted_two":0,"Was_Lifted":1,"On_Platform":0,"Robot_Failed":0,"Penalties":0,"Notes":"none"},
+{"Scout_ID":2,"Team":4237,"Match":1,"Auto_Baseline":1,"Auto_Switch":0,"Auto_Scale":0,"Auto_Second_Cube":0,"Auto_Scale_Time":1,"Portal_Cubes":1,"Center_Cubes":1,"Power_Zone_Cubes":1,"Switch_Cubes":1,"Scale_Cubes":1,"Exchange_Cubes":1,"Attempt_Climb":1,"Successful_Climb":1,"Lifted_one":0,"Lifted_two":0,"Was_Lifted":0,"On_Platform":1,"Robot_Failed":1,"Penalties":0,"Notes":"none"},
+{"Scout_ID":3,"Team":2611,"Match":1,"Auto_Baseline":0,"Auto_Switch":0,"Auto_Scale":0,"Auto_Second_Cube":0,"Auto_Scale_Time":9,"Portal_Cubes":3,"Center_Cubes":2,"Power_Zone_Cubes":1,"Switch_Cubes":3,"Scale_Cubes":2,"Exchange_Cubes":1,"Attempt_Climb":0,"Successful_Climb":0,"Lifted_one":1,"Lifted_two":1,"Was_Lifted":1,"On_Platform":0,"Robot_Failed":0,"Penalties":3,"Notes":"none"}
+
+]
