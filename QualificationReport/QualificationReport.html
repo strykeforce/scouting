@@ -64,8 +64,8 @@ var Button11textArea = document.getElementById("Button11TextArea");
 
 //this creates a 2 dimensional array...which is impossible in javascript, but you are allowed to have an array of arrays
 //teamArray is a 2d list of all robots in all matches.  [match #1-100][team position# 1-6]
-var teamArray = new Array(100);
-for (var index1 = 0; index1 < 100; index1++) {
+var teamArray = new Array(150);
+for (var index1 = 0; index1 < 150; index1++) {
   teamArray[index1] = new Array(6);
 }
 
@@ -94,7 +94,7 @@ $.get('MyTeamMatches.csv', function(masterData) {
     matchData = masterData;  //store file string in a string that i can parse/delete as I go
 
     //temp = matchData.search("2767");
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 150; i++) {
       for (var j = 0; j < 6; j++) {
         var n = matchData.search(",");
         teamArray[i] [j] = matchData.substring(0,n);
@@ -178,7 +178,7 @@ function FindMatchResults(selectedmatchbutton){
   Button10textArea.innerHTML= matchText; //clear other button text
   Button11textArea.innerHTML= matchText; //clear other button text
   //find match result rows that the first alliance partner plays in
-  for (var i = 0; i < 100; i++) {
+  for (var i = 0; i < 150; i++) {
     for (var j = 0; j < 6; j++) {
         if (teamArray[i][j]==partner1[selectedmatchbutton]) {
           partner1MatchDataRows[index1]=((i*6)+j);  //record which match result row partner#1's results should be in
