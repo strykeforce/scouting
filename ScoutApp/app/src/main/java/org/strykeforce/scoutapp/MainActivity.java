@@ -408,7 +408,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //Tells what to do when nextbutton is pressed
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("RESET MATCH?");
         builderReset.setMessage("Are you sure? Did the scouting Princess Peach say to go to the next match?");
