@@ -139,19 +139,40 @@ public class mainScreen extends AppCompatActivity {
     public void saveInfo() {
         final EditText teamInputBox = (EditText) findViewById(R.id.teamInput);
         final EditText driveInputBox = (EditText) findViewById(R.id.driveInput);
-        final EditText autonInputBox = (EditText) findViewById(R.id.autonInput);
+        final EditText wheelTypeBox = (EditText) findViewById(R.id.wheelTypeInput);
+        final EditText shiftingGearBoxBox = (EditText) findViewById(R.id.gearBoxInput);
+        final EditText sevenFiveFivesBox = (EditText) findViewById(R.id.sevenFiveFivesInput);
+        final EditText limitCurrentBox = (EditText) findViewById(R.id.limitCurrentInput);
+        final EditText intakeTypeBox = (EditText) findViewById(R.id.intakeTypeInput);
+        final EditText cubeReleaseBox = (EditText) findViewById(R.id.cubeReleaseInput);
+        final EditText weightBox = (EditText) findViewById(R.id.weightInput);
+        final EditText narrowWideSquareBox = (EditText) findViewById(R.id.narrowWideSquareInput);
 
         String teamNumber = teamInputBox.getText().toString();
         String driveType = driveInputBox.getText().toString();
-        String autonFunction = autonInputBox.getText().toString();
+        String wheelType = wheelTypeBox.getText().toString();
+        String shiftingGearBox = shiftingGearBoxBox.getText().toString();
+        String sevenFiveFives = sevenFiveFivesBox.getText().toString();
+        String limitCurrent = limitCurrentBox.getText().toString();
+        String intakeType = intakeTypeBox.getText().toString();
+        String cubeRelease = cubeReleaseBox.getText().toString();
+        String weight = weightBox.getText().toString();
+        String narrowWideSquare = narrowWideSquareBox.getText().toString();
 
         try {
             PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/PitScoutingJSON.txt"), true));
             try {
                 JSONObject pitData = new JSONObject();
-                pitData.put("Team Number ", teamNumber);
-                pitData.put("Drive Type ", driveType);
-                pitData.put("Auton ", autonFunction);
+                pitData.put( "number", teamNumber);
+                pitData.put("drive", driveType);
+                pitData.put("wheels", wheelType);
+                pitData.put("gearBox", shiftingGearBox);
+                pitData.put("sevenFiveFives", sevenFiveFives);
+                pitData.put("limitCurrent", limitCurrent);
+                pitData.put("intake", intakeType);
+                pitData.put("cubeRelease", cubeRelease);
+                pitData.put("weight", weight);
+                pitData.put("narrowWideSquare", narrowWideSquare);
                 String outputString = pitData.toString();
                 outputString = outputString + ",";
                 fw.println(outputString);
