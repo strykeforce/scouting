@@ -1,4 +1,25 @@
 var data = 
 [  
-Copy and paste the info from the file PitScoutingJSON.txt here!
+{"number":"2767","drive":"swerve","wheels":"swerve","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"n\/a","intake":"wheels","cubeRelease":"wheels","weight":"120","narrowWideSquare":"narrow"},
+{"number":"2676","drive":"","wheels":"","gearBox":"","sevenFiveFives":"","limitCurrent":"","intake":"","cubeRelease":"","weight":"","narrowWideSquare":""},
+{"number":"2676","drive":"","wheels":"","gearBox":"","sevenFiveFives":"","limitCurrent":"","intake":"","cubeRelease":"","weight":"","narrowWideSquare":""},
+{"number":"3357","drive":"shopping cart","wheels":"back~ grippy front~graphite","gearBox":"no","sevenFiveFives":"yes","limitCurrent":"not sure","intake":"wheel","cubeRelease":"cube flips or jump then rotate","weight":"117","narrowWideSquare":"narrow"},
+{"number":"3546","drive":"mechana","wheels":"mechana","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"wheels","cubeRelease":"spin to project","weight":"max","narrowWideSquare":"narrow"},
+{"number":"3572","drive":"standard 6 wheel","wheels":"standard","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"wheelz","cubeRelease":"dump\\shoot","weight":"120","narrowWideSquare":"narrow"},
+{"number":"3452","drive":"6wheel tank drive 8775 west coast","wheels":"6 in traction","gearBox":"no","sevenFiveFives":"yes","limitCurrent":"yes","intake":"roller wheel","cubeRelease":"sow spin","weight":"110","narrowWideSquare":"narrow"},
+{"number":"3620","drive":"tank","wheels":"colsens and omni","gearBox":"yes","sevenFiveFives":"yes","limitCurrent":"yes","intake":"active","cubeRelease":"outake ","weight":"120","narrowWideSquare":"narrow"},
+{"number":"3875","drive":"tank 6 wheel","wheels":"white ones","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"wheels","cubeRelease":"turn to shoot","weight":"110-120","narrowWideSquare":"narrow"},
+{"number":"4003","drive":"tank 8 wheel","wheels":"omni and tread","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"wheels and clamp","cubeRelease":"open clamp and piston","weight":"119.8","narrowWideSquare":"narrow"},
+{"number":"74","drive":"tank","wheels":"3 tracfion 2 omni","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"wheels clamp","cubeRelease":"spit","weight":"110","narrowWideSquare":"narrow"},
+{"number":"4237","drive":"mechana","wheels":"mechana","gearBox":"no","sevenFiveFives":"yes","limitCurrent":"yes","intake":"wheels","cubeRelease":"rotate","weight":"119","narrowWideSquare":"square"},
+{"number":"5710","drive":"tank","wheels":"","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"wheels","cubeRelease":"spin and spit","weight":"90","narrowWideSquare":"narrow"},
+{"number":"6090","drive":"tank","wheels":"omni and westbcoast","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"wheels","cubeRelease":"open clamp","weight":"119","narrowWideSquare":"narrow"},
+{"number":"4967","drive":"tank","wheels":"omni and hydro","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"wheels","cubeRelease":"spin out and neumatics","weight":"115","narrowWideSquare":"narrow"},
+{"number":"2405","drive":"6 wheel 2 omni","wheels":"traction and omni","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"wheels","cubeRelease":"reverse rotation","weight":"120","narrowWideSquare":"narrow"},
+{"number":"904","drive":"tank","wheels":"traction and omni","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"wheel","cubeRelease":"neumatic grippers","weight":"140","narrowWideSquare":"wide"},
+{"number":"85","drive":"tank","wheels":"omni  and plactions","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"active wheel","cubeRelease":"neumatic gripper","weight":"119.5","narrowWideSquare":"narrow"},
+{"number":"4004","drive":"swerve","wheels":"fulsons","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"qctive wheel","cubeRelease":"open or spin","weight":"119.5","narrowWideSquare":"square"},
+{"number":"5927","drive":"tank","wheels":"standard","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"wheel","cubeRelease":"spin and open","weight":"118","narrowWideSquare":"narrow"},
+{"number":"2013","drive":"ball shifters","wheels":"traction and omni","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"static","cubeRelease":"neumatics","weight":"120","narrowWideSquare":"wide"},
+
 ]

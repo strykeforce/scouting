@@ -360,6 +360,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.visualbutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goVisual();
+            }
+        });
+
         //this tells the app what to do if the sendbutton is pushed
         findViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -438,6 +445,11 @@ public class MainActivity extends AppCompatActivity {
                 //storeLocal();
             }
         });
+    }
+    public  void goVisual()
+    {
+        setContentView(R.layout.visual);
+
     }
 
     private int ValidMatch(int matchnum) {

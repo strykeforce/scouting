@@ -1,0 +1,31 @@
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="path/to/jquery.easy-autocomplete.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="PitScoutingJSON.json"></script>
+</head>
+<body onload = "listSearch();">
+<center>
+List of Avaliable Teams
+<div class ="output"></div>
+</center>
+</body>
+
+<script>
+
+var local_data = data;
+
+function listSearch() {
+var output = "";
+for (var j = 0; j < local_data.length; j++) {
+output = output + local_data[j].number + "<br>";
+}
+document.querySelector('.output').innerHTML = output;
+}
+</script>
+</html>

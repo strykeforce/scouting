@@ -920,6 +920,33 @@
 
         android:textStyle="bold" />
 
+    <Button
+
+        android:id="@+id/visualbutton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="60dp"
+
+        android:layout_x="630dp"
+
+        android:layout_y="370dp"
+
+        android:scaleX="1"
+
+        android:scaleY="1"
+
+        android:text="Visual"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/colorPrimaryDark"
+
+        android:textSize="20dp"
+
+        android:textStyle="bold" />
+
+
     <TextView
 
         android:id="@+id/notelabel"

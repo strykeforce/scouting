@@ -6,15 +6,17 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="path/to/jquery.easy-autocomplete.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <script type="text/javascript" src="PitScoutingJSON.json"></script>
 </head>
 <body>
 <center> This is a website to search for teams' pictures.
 <br>
 <br>
-<form id="form" onsubmit="return false;">
-<input type="text" name="Name" size=40 maxlength=50 id="userInput">
-<input type="submit" value = "Search" onclick="savePictures()">
+<form autocomplete = "off">
+<input type="text" id = "userInput" placeholder="Team Number">
+<input type="button" value="Search" onClick="savePictures()" />
 </form>
 <div class="searchData"></div>
 <br>
@@ -25,9 +27,13 @@
 <div class="results2"></div>
 <br>
 <div class="results3"></div>
+<br>
+
 </center>
 </body>
 <script>
+var local_data = data;
+
 function savePictures()
 {
 var input = document.getElementById("userInput").value;
@@ -37,7 +43,6 @@ picture3 = "<img src=teamPictures/" + input + "_3.jpg height=400px />";
 document.querySelector('.results1').innerHTML = picture1;
 document.querySelector('.results2').innerHTML = picture2;
 document.querySelector('.results3').innerHTML = picture3;
-    var local_data = data;
     var searchData = '';
     for (var i = 0; i < local_data.length; i++) {
       if(local_data[i].number == input) {
@@ -53,7 +58,10 @@ document.querySelector('.results3').innerHTML = picture3;
 	'<br>Do they drive narrow, wide, or square: ' + local_data[i].narrowWideSquare;
       }
     }
+
+
 document.querySelector('.searchData').innerHTML = searchData;
 }
+
   </script>
 </html>
