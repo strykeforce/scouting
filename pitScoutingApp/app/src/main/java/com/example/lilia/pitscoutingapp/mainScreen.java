@@ -147,6 +147,8 @@ public class mainScreen extends AppCompatActivity {
         final EditText cubeReleaseBox = (EditText) findViewById(R.id.cubeReleaseInput);
         final EditText weightBox = (EditText) findViewById(R.id.weightInput);
         final EditText narrowWideSquareBox = (EditText) findViewById(R.id.narrowWideSquareInput);
+        final EditText notesBox = (EditText) findViewById(R.id.notes);
+        final EditText nameBox = (EditText) findViewById(R.id.teamName);
 
         String teamNumber = teamInputBox.getText().toString();
         String driveType = driveInputBox.getText().toString();
@@ -158,6 +160,8 @@ public class mainScreen extends AppCompatActivity {
         String cubeRelease = cubeReleaseBox.getText().toString();
         String weight = weightBox.getText().toString();
         String narrowWideSquare = narrowWideSquareBox.getText().toString();
+        String notes = notesBox.getText().toString();
+        String name = nameBox.getText().toString();
 
         try {
             PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/PitScoutingJSON.txt"), true));
