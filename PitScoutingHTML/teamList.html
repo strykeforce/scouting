@@ -19,13 +19,14 @@ List of Avaliable Teams
 <script>
 
 var local_data = data;
+var output = '';
 
 function listSearch() {
-var output = "";
 for (var j = 0; j < local_data.length; j++) {
-output = output + local_data[j].number + "<br>";
+output = output + "<button>" + local_data[j].number + "</button><br>";
 }
 document.querySelector('.output').innerHTML = output;
 }
+
 </script>
 </html>
