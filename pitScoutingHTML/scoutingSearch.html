@@ -1,0 +1,71 @@
+<html>
+<title> Scouting Search </title>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="path/to/jquery.easy-autocomplete.min.js"></script> 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+<script type="text/javascript" src="PitScoutingJSON.json"></script>
+</head>
+<body>
+<center> This is a website to search for teams' pictures.
+<br>
+<br>
+<form autocomplete = "off">
+<input type="text" id = "userInput" placeholder="Team Number">
+<input type="button" value="Search" onClick="changeNum()" />
+</form>
+<div class="searchData"></div>
+<br>
+<div class="results"></div>
+<br>
+<div class="results1"></div>
+<br>
+<div class="results2"></div>
+<br>
+<div class="results3"></div>
+<br>
+
+</center>
+</body>
+<script>
+var local_data = data;
+
+function changeNum() {
+sessionStorage.searchfunc = document.getElementById("userInput").value;
+}
+
+function savePictures()
+{
+var input = sessionStorage.searchfunc;
+picture1 = "<img src=teamPictures/" + input + "_1.jpg height=400px />";
+picture2 = "<img src=teamPictures/" + input + "_2.jpg height=400px />";
+picture3 = "<img src=teamPictures/" + input + "_3.jpg height=400px />";
+document.querySelector('.results1').innerHTML = picture1;
+document.querySelector('.results2').innerHTML = picture2;
+document.querySelector('.results3').innerHTML = picture3;
+    var searchData = '';
+    for (var i = 0; i < local_data.length; i++) {
+      if(local_data[i].number == input) {
+	var searchData = 'Team Number:' + local_data[i].number +
+        '<br>Drive Train: ' + local_data[i].drive + 
+        '<br>Wheel Type: ' + local_data[i].wheels +
+	'<br>Shifting Gear Box: ' + local_data[i].gearBox +
+	'<br>755s on drive train: ' + local_data[i].sevenFiveFives +
+	'<br>How do they limit current: ' +local_data[i].limitCurrent +
+	'<br>Intake Type: ' + local_data[i].intake +
+	'<br>Release of Cubes: ' + local_data[i].cubeRelease +
+	'<br>Weight: ' + local_data[i].weight +
+	'<br>Do they drive narrow, wide, or square: ' + local_data[i].narrowWideSquare;
+      }
+    }
+
+
+document.querySelector('.searchData').innerHTML = searchData;
+}
+
+  </script>
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:text="Team Number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="71dp"
+        android:layout_y="108dp"
+        android:id="@+id/pictureTeamText"
+        android:textSize="24sp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:layout_x="345dp"
+        android:layout_y="100dp"
+        android:id="@+id/pictureTeamInput" />
+
+    <Button
+        android:text="Picture 1"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/picture1"
+        android:layout_x="177dp"
+        android:layout_y="222dp"
+        style="@style/Widget.AppCompat.Button" />
+
+    <Button
+        android:text="Picture 2"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/picture2"
+        android:layout_x="178dp"
+        android:layout_y="335dp"
+        style="@style/Widget.AppCompat.Button" />
+
+    <Button
+        android:text="Picture 3"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/picture3"
+        android:layout_x="179dp"
+        android:layout_y="454dp" />
+
+    <Button
+        android:text="Information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="236dp"
+        android:layout_y="670dp"
+        android:id="@+id/infoButton" />
+</AbsoluteLayout>

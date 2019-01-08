@@ -213,9 +213,9 @@ public class ReaderActivity extends AppCompatActivity {
     {
         try
         {
-        PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/MasterDataJSON.txt"), true));
-        for(int j=0; j<6; j++)  {
-            try {
+        PrintWriter fw =  new PrintWriter(new FileWriter(new File("/storage/emulated/0/MasterDataJSON.txt"), true));
+                for(int j=0; j<6; j++)  {
+                    try {
                 JSONObject o = new JSONObject();
                 o.put("Scout_ID", scoutingData[j].scoutIDint);
                 o.put("Team", scoutingData[j].teamNumberInt);
