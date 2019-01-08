@@ -695,12 +695,13 @@
         android:text="Played Defense"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="660dp"
-        android:layout_y="236dp"
+        android:layout_x="600dp"
+        android:layout_y="230dp"
         android:id="@+id/checkBox6"
         android:scaleX="2.00"
         android:scaleY="2.00"
-        android:textColor="@color/zxing_custom_viewfinder_laser" />
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+        android:textStyle="bold" />
 
     android:orientation="horizontal"
 
