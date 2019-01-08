@@ -16,7 +16,7 @@
 <br>
 <form autocomplete = "off">
 <input type="text" id = "userInput" placeholder="Team Number">
-<input type="button" value="Search" onClick="savePictures()" />
+<input type="button" value="Search" onClick="changeNum()" />
 </form>
 <div class="searchData"></div>
 <br>
@@ -34,9 +34,13 @@
 <script>
 var local_data = data;
 
+function changeNum() {
+sessionStorage.searchfunc = document.getElementById("userInput").value;
+}
+
 function savePictures()
 {
-var input = document.getElementById("userInput").value;
+var input = sessionStorage.searchfunc;
 picture1 = "<img src=teamPictures/" + input + "_1.jpg height=400px />";
 picture2 = "<img src=teamPictures/" + input + "_2.jpg height=400px />";
 picture3 = "<img src=teamPictures/" + input + "_3.jpg height=400px />";

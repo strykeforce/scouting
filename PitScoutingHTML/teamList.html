@@ -23,9 +23,12 @@ var output = '';
 
 function listSearch() {
 for (var j = 0; j < local_data.length; j++) {
-output = output + "<button>" + local_data[j].number + "</button><br>";
+output = output + "<button onclick='sendData(" + local_data[j].number + ")'>" + local_data[j].number + "</button><br>";
 }
 document.querySelector('.output').innerHTML = output;
+}
+function sendData(number) {
+sessionStorage.searchfunc= number;
 }
 
 </script>

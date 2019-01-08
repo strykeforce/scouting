@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public int DrivablilityInt = 0;
 
     public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
-    public boolean ClimbAttempt, Climb, Lift1, Lift2, Lifted, Platform;
+    public boolean Lift1, Lift2, Lifted;
 
     boolean Failed = false;
     int Penalties = 0;
@@ -182,44 +182,20 @@ public class MainActivity extends AppCompatActivity {
         //provide us with variables that can be used to read/write to the screen objects
         final TextView teamdata = (TextView) findViewById(R.id.teamdata);
         final TextView matchdata = (TextView) findViewById(R.id.matchdata);
-
-        final TextView portalcubes = (TextView) findViewById(R.id.portalcubes);
-        final TextView centercubes = (TextView) findViewById(R.id.centercubes);
-        final TextView zonecubes = (TextView) findViewById(R.id.zonecubes);
-        final TextView switchcubes = (TextView) findViewById(R.id.switchcubes);
-        final TextView scalecubes = (TextView) findViewById(R.id.scalecubes);
-        final TextView exchangecubes = (TextView) findViewById(R.id.exchangecubes);
-
-        final CheckBox climbattempt = (CheckBox) findViewById(R.id.climbattempt);
-        final CheckBox climb = (CheckBox) findViewById(R.id.climb);
         final CheckBox lift1 = (CheckBox) findViewById(R.id.lift1);
         final CheckBox lift2 = (CheckBox) findViewById(R.id.lift2);
         final CheckBox lifted = (CheckBox) findViewById(R.id.lifted);
-        final CheckBox platform = (CheckBox) findViewById(R.id.platform);
 
         final TextView penalties = (TextView) findViewById(R.id.penalties);
         final CheckBox failed = (CheckBox) findViewById(R.id.failed);
         final EditText notes = (EditText) findViewById(R.id.notes);
-        final SeekBar driveability = (SeekBar) findViewById(R.id.drivabilitySeek);
 
         //restore the current state of the objects on the teleop screen
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
-
-        portalcubes.setText(Integer.toString(PortalCubes));
-        centercubes.setText(Integer.toString(CenterCubes));
-        zonecubes.setText(Integer.toString(ZoneCubes));
-        switchcubes.setText(Integer.toString(SwitchCubes));
-        scalecubes.setText(Integer.toString(ScaleCubes));
-        exchangecubes.setText(Integer.toString(ExchangeCubes));
-
-        climbattempt.setChecked(ClimbAttempt);
-        climb.setChecked(Climb);
         lift1.setChecked(Lift1);
         lift2.setChecked(Lift2);
         lifted.setChecked(Lifted);
-        platform.setChecked(Platform);
-        driveability.setProgress(DrivablilityInt);
 
         penalties.setText(Integer.toString(Penalties));
         failed.setChecked(Failed);
@@ -235,95 +211,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //handle what happens when the user pushes the Plus/Minus buttons
-        findViewById(R.id.portalsub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PortalCubes--;
-                portalcubes.setText(Integer.toString(PortalCubes));
-            }
-        });
-        findViewById(R.id.portaladd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PortalCubes++;
-                portalcubes.setText(Integer.toString(PortalCubes));
-            }
-        });
-
-        findViewById(R.id.centersub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CenterCubes--;
-                centercubes.setText(Integer.toString(CenterCubes));
-            }
-        });
-        findViewById(R.id.centeradd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                CenterCubes++;
-                centercubes.setText(Integer.toString(CenterCubes));
-            }
-        });
-
-        findViewById(R.id.zonesub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ZoneCubes--;
-                zonecubes.setText(Integer.toString(ZoneCubes));
-            }
-        });
-        findViewById(R.id.zoneadd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ZoneCubes++;
-                zonecubes.setText(Integer.toString(ZoneCubes));
-            }
-        });
-
-        findViewById(R.id.switchsub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SwitchCubes--;
-                switchcubes.setText(Integer.toString(SwitchCubes));
-            }
-        });
-        findViewById(R.id.switchadd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SwitchCubes++;
-                switchcubes.setText(Integer.toString(SwitchCubes));
-            }
-        });
-
-        findViewById(R.id.scalesub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ScaleCubes--;
-                scalecubes.setText(Integer.toString(ScaleCubes));
-            }
-        });
-        findViewById(R.id.scaleadd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ScaleCubes++;
-                scalecubes.setText(Integer.toString(ScaleCubes));
-            }
-        });
-
-        findViewById(R.id.exchangesub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ExchangeCubes--;
-                exchangecubes.setText(Integer.toString(ExchangeCubes));
-            }
-        });
-        findViewById(R.id.exchangeadd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ExchangeCubes++;
-                exchangecubes.setText(Integer.toString(ExchangeCubes));
-            }
-        });
 
         findViewById(R.id.penaltysub).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,24 +233,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //save the current settings
-                ClimbAttempt = climbattempt.isChecked();
-                Climb = climb.isChecked();
                 Lift1 = lift1.isChecked();
                 Lift2 = lift2.isChecked();
                 Lifted = lifted.isChecked();
-                Platform = platform.isChecked();
                 Notes = notes.getText().toString();
                 Failed = failed.isChecked();
-                DrivablilityInt = driveability.getProgress();
                 //go back to the auton screen
                 goAuton();
-            }
-        });
-
-        findViewById(R.id.visualbutton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goVisual();
             }
         });
 
@@ -373,25 +249,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 //provide variables that allow us to access the screen objects
-                PortalCubes = Integer.parseInt(portalcubes.getText().toString());
-                CenterCubes = Integer.parseInt(centercubes.getText().toString());
-                ZoneCubes = Integer.parseInt(zonecubes.getText().toString());
-                SwitchCubes = Integer.parseInt(switchcubes.getText().toString());
-                ScaleCubes = Integer.parseInt(scalecubes.getText().toString());
-                ExchangeCubes = Integer.parseInt(exchangecubes.getText().toString());
 
                 //record the state of the objects
-                ClimbAttempt = climbattempt.isChecked();
-                Climb = climb.isChecked();
                 Lift1 = lift1.isChecked();
                 Lift2 = lift2.isChecked();
                 Lifted = lifted.isChecked();
-                Platform = platform.isChecked();
 
                 Failed = failed.isChecked();
                 Penalties = Integer.parseInt(penalties.getText().toString());
                 Notes = notes.getText().toString();
-                DrivablilityInt = driveability.getProgress();
 
                 //go to the QRcode screen
                 goQR();
@@ -446,11 +312,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public  void goVisual()
-    {
-        setContentView(R.layout.visual);
-
-    }
 
     private int ValidMatch(int matchnum) {
         if (matchnum < MatchLimit && matchnum > 0) {
@@ -474,19 +335,9 @@ public class MainActivity extends AppCompatActivity {
         SecondCubeBool = false;
         AutoScaleBool = false;
         ScaleTimeInt = 0;
-
-        PortalCubes = 0;
-        CenterCubes = 0;
-        ZoneCubes = 0;
-        SwitchCubes = 0;
-        ScaleCubes = 0;
-        ExchangeCubes = 0;
-        ClimbAttempt = false;
-        Climb = false;
         Lift1 = false;
         Lift2 = false;
         Lifted = false;
-        Platform = false;
 
         Failed = false;
         Penalties = 0;
@@ -549,15 +400,11 @@ public class MainActivity extends AppCompatActivity {
                 + "Scube: " + SwitchCubes + "\t" //Switch Cubes
                 + "Slcube: " + ScaleCubes + "\t" //Scale Cubes
                 + "Xcube: " + ExchangeCubes + "\t" //Exchange Cubes
-                + "Aclimb: " + booltoInt(ClimbAttempt) + "\t" //Attempted Climbs
-                + "Sclimb: " + booltoInt(Climb) + "\t" //Successful Climbs
                 + "Lift1: " + booltoInt(Lift1) + "\t" //Lifted 1
                 + "Lift2: " + booltoInt(Lift2) + "\t" //Lifted 2
                 + "Lift: " + booltoInt(Lifted) + "\t" //Was Lifted
-                + "Op: " + booltoInt(Platform) + "\t" //On Platform
                 + "Rf: " + booltoInt(Failed) + "\t" //Robot Failed
                 + "Pen: " + Penalties + "\t" //Penalties
-                + "Drv: " + (int) (DrivablilityInt) + "\t"  //driveability
                 + "Notes: " + Notes + "\t"; //Notes
         return QRStr;
     }
