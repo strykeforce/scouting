@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_x="550dp"
         android:layout_y="80dp"
-        android:id="@+id/checkBox4"
+        android:id="@+id/oneEnd"
         android:scaleX="2.00"
         android:scaleY="2.00" />
 
@@ -138,7 +138,7 @@
         android:layout_width="133dp"
         android:layout_height="20dp"
         android:layout_marginEnd="33dp"
-        android:layout_x="440dp"
+        android:layout_x="425dp"
         android:layout_y="50dp"
         android:scaleX="2.5"
         android:scaleY="2.5"
@@ -185,10 +185,9 @@
         android:layout_height="wrap_content"
         android:layout_x="725dp"
         android:layout_y="170dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Mount other robot"
-        android:textSize="9dp"/>
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Was Lifted" />
 
     <Button
 
@@ -418,7 +417,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/cargoTop"
+        android:id="@+id/cargoLow"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -448,7 +447,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/cargoLow"
+        android:id="@+id/cargoTop"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -561,7 +560,7 @@
         android:layout_height="wrap_content"
         android:layout_x="550dp"
         android:layout_y="125dp"
-        android:id="@+id/checkBox5"
+        android:id="@+id/twoEnd"
         android:scaleX="2.00"
         android:scaleY="2.00" />
 
@@ -571,7 +570,7 @@
         android:layout_height="wrap_content"
         android:layout_x="550dp"
         android:layout_y="170dp"
-        android:id="@+id/checkBox3"
+        android:id="@+id/threeEnd"
         android:scaleX="2.00"
         android:scaleY="2.00" />
 
@@ -581,7 +580,7 @@
         android:layout_height="37dp"
         android:layout_x="40dp"
         android:layout_y="205dp"
-        android:id="@+id/button7"
+        android:id="@+id/hatchTopMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -590,7 +589,7 @@
         android:layout_height="37dp"
         android:layout_x="40dp"
         android:layout_y="380dp"
-        android:id="@+id/button4"
+        android:id="@+id/hatchLowMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -599,7 +598,7 @@
         android:layout_height="37dp"
         android:layout_x="40dp"
         android:layout_y="295dp"
-        android:id="@+id/button3"
+        android:id="@+id/hatchMidMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -608,7 +607,7 @@
         android:layout_height="37dp"
         android:layout_x="260dp"
         android:layout_y="265dp"
-        android:id="@+id/button5"
+        android:id="@+id/cargoMidMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -617,7 +616,7 @@
         android:layout_height="37dp"
         android:layout_x="260dp"
         android:layout_y="345dp"
-        android:id="@+id/button6"
+        android:id="@+id/cargoLowMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -626,7 +625,7 @@
         android:layout_height="37dp"
         android:layout_x="260dp"
         android:layout_y="180dp"
-        android:id="@+id/button2"
+        android:id="@+id/cargoTopMin"
         android:textScaleX="2.00" />
 
     <ImageView
@@ -643,7 +642,7 @@
         android:layout_height="wrap_content"
         android:layout_x="380dp"
         android:layout_y="81dp"
-        android:id="@+id/checkBox"
+        android:id="@+id/oneSand"
         android:scaleX="2.00"
         android:scaleY="2.00" />
 
@@ -653,7 +652,7 @@
         android:layout_height="wrap_content"
         android:layout_x="380dp"
         android:layout_y="130dp"
-        android:id="@+id/checkBox2"
+        android:id="@+id/twoSand"
         android:scaleX="2.00"
         android:scaleY="2.00" />
 
