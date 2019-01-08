@@ -124,9 +124,9 @@
 
     <TextView
 
-        android:text="Auto"
+        android:text="Sandstorm"
 
-        android:layout_width="100dp"
+        android:layout_width="wrap_content"
 
         android:layout_height="wrap_content"
 
@@ -138,7 +138,7 @@
 
         android:textStyle="normal|bold"
 
-        android:layout_x="109dp"
+        android:layout_x="50dp"
 
         android:layout_y="0dp" />
 
@@ -160,196 +160,6 @@
         android:id="@+id/nextAuton"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
-
-    <TextView
-
-        android:text="Deliver Cube to Switch: "
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="68dp"
-
-        android:textSize="30sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="17dp"
-
-        android:layout_y="205dp" />
-
-    <TextView
-        android:text=" Cross Base Line: "
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="68dp"
-
-        android:textSize="30sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="9dp"
-
-        android:layout_y="109dp" />
-
-    <Switch
-        android:id="@+id/deliverSwitchAuton"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="25dp"
-
-        android:layout_x="369dp"
-
-        android:layout_y="205dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00" />
-
-    <Switch
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:layout_width="wrap_content"
-
-        android:id="@+id/baseline"
-
-        android:layout_x="365dp"
-
-        android:layout_y="115dp"
-
-        android:layout_height="wrap_content" />
-
-    <TextView
-
-        android:text="Auto scale place:"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:textSize="30sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="494dp"
-
-        android:layout_y="105dp" />
-
-    <Switch
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:layout_width="wrap_content"
-
-        android:id="@+id/autoScale"
-
-        android:layout_x="859dp"
-
-        android:layout_y="115dp"
-
-        android:layout_height="25dp" />
-
-    <TextView
-
-        android:text="Time to Deliver to Scale:"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="68dp"
-
-        android:id="@+id/switchText"
-
-        android:textSize="30sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="19dp"
-
-        android:layout_y="281dp" />
-
-    <TextView
-        android:text="Picked up second cube:"
-
-        android:layout_width="332dp"
-
-        android:layout_height="wrap_content"
-
-        android:textSize="30sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="496dp"
-
-        android:layout_y="204dp" />
-
-    <Switch
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:layout_width="wrap_content"
-
-        android:id="@+id/cubex2"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="862dp"
-
-        android:layout_y="204dp"
-
-        android:layout_height="25dp" />
-
-    <SeekBar
-
-        android:layout_width="182dp"
-
-        android:layout_height="30dp"
-
-        android:id="@+id/scaleTime"
-
-        android:layout_x="574dp"
-
-        android:layout_y="287dp"
-
-        android:scaleX="3.00"
-
-        android:scaleY="3.00"/>
-
-    <TextView
-
-        android:text="0                     5                    10                     15  "
-
-        android:layout_width="671dp"
-
-        android:layout_height="68dp"
-
-        android:id="@+id/scaleTextNum"
-
-        android:textSize="24sp"
-
-        android:textColor="@android:color/holo_green_dark"
-
-        android:textStyle="normal|bold"
-
-        android:layout_x="439dp"
-
-        android:layout_y="321dp" />
 
 
 </AbsoluteLayout>
