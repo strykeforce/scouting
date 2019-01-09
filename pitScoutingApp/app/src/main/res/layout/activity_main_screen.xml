@@ -11,25 +11,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.lilia.pitscoutingapp.mainScreen">
 
-    <EditText
-        android:id="@+id/notes"
-        android:layout_width="450dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/cubeReleaseInput"
-        android:layout_alignStart="@+id/cubeReleaseInput"
-        android:layout_alignLeft="@+id/cubeReleaseInput"
-        android:layout_alignBottom="@+id/saveInformation"
-        android:layout_marginStart="-209dp"
-        android:layout_marginLeft="-209dp"
-        android:layout_marginTop="132dp"
-        android:layout_marginBottom="51dp"
-        android:layout_x="420dp"
-        android:layout_y="193dp"
-        android:ems="10"
-        android:inputType="textLongMessage"
-        android:textColor="#1c1817"
-        tools:id="notes" />
-
     <Button
         android:id="@+id/pictureButton"
         android:layout_width="wrap_content"
@@ -209,7 +190,7 @@
         android:layout_x="420dp"
         android:layout_y="155dp"
         android:ems="10"
-        android:inputType="number"
+        android:inputType="text"
         android:textColor="#1c1817" />
 
     <TextView
@@ -360,6 +341,22 @@
         android:layout_marginTop="102dp"
         android:text="Notes"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="?android:attr/colorControlNormal" />
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="450dp"
+        android:layout_height="60dp"
+        android:layout_x="420dp"
+        android:layout_y="193dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        android:textColor="#1c1817"
+        tools:id="notes"
+        android:layout_toRightOf="@+id/narrowWideSquareText"
+        android:layout_toEndOf="@+id/narrowWideSquareText"
+        android:layout_below="@+id/narrowWideSquareInput"
+        android:layout_above="@+id/saveInformation" />
 
 </RelativeLayout>

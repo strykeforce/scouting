@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.EditText;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -16,7 +15,6 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 
 import android.content.Intent;
-import android.os.Environment;
 import android.net.Uri;
 import android.provider.MediaStore;
 
@@ -25,12 +23,15 @@ public class mainScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //go to info screen
         goInfo();
     }
 
+    //go to info screen
     public void goInfo() {
         setContentView(R.layout.activity_main_screen);
 
+        //go to picture screen
         findViewById(R.id.pictureButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -38,6 +39,7 @@ public class mainScreen extends AppCompatActivity {
             }
         });
 
+        //final warning pop up before entering information
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("ENTER INFORMATION");
         builderReset.setMessage("Do NOT continue unless you are sure the information you entered is correct.");
@@ -68,6 +70,7 @@ public class mainScreen extends AppCompatActivity {
         });
     }
 
+    //go to pictures screen
     public void goPictures() {
         setContentView(R.layout.picture_screen);
 
@@ -78,6 +81,7 @@ public class mainScreen extends AppCompatActivity {
             }
         });
 
+        //open camera and save pictures
         findViewById(R.id.picture1).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,7 +140,9 @@ public class mainScreen extends AppCompatActivity {
         });
     }
 
+    //save the information
     public void saveInfo() {
+        //locate all the text boxes
         final EditText teamInputBox = (EditText) findViewById(R.id.teamInput);
         final EditText driveInputBox = (EditText) findViewById(R.id.driveInput);
         final EditText wheelTypeBox = (EditText) findViewById(R.id.wheelTypeInput);
@@ -150,6 +156,7 @@ public class mainScreen extends AppCompatActivity {
         final EditText notesBox = (EditText) findViewById(R.id.notes);
         final EditText nameBox = (EditText) findViewById(R.id.teamName);
 
+        //save info in those text boxes
         String teamNumber = teamInputBox.getText().toString();
         String driveType = driveInputBox.getText().toString();
         String wheelType = wheelTypeBox.getText().toString();
@@ -163,11 +170,13 @@ public class mainScreen extends AppCompatActivity {
         String notes = notesBox.getText().toString();
         String name = nameBox.getText().toString();
 
+        //output text to txt file
         try {
             PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/PitScoutingJSON.txt"), true));
             try {
                 JSONObject pitData = new JSONObject();
                 pitData.put( "number", teamNumber);
+                pitData.put( "name", name);
                 pitData.put("drive", driveType);
                 pitData.put("wheels", wheelType);
                 pitData.put("gearBox", shiftingGearBox);
@@ -177,6 +186,7 @@ public class mainScreen extends AppCompatActivity {
                 pitData.put("cubeRelease", cubeRelease);
                 pitData.put("weight", weight);
                 pitData.put("narrowWideSquare", narrowWideSquare);
+                pitData.put("notes",notes);
                 String outputString = pitData.toString();
                 outputString = outputString + ",";
                 fw.println(outputString);

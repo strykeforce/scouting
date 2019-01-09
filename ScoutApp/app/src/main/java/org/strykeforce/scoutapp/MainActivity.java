@@ -287,6 +287,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //checks if the match is within the valid match numbers
     private int ValidMatch(int matchnum) {
         if (matchnum < MatchLimit && matchnum > 0) {
             return 1;
@@ -295,6 +296,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //makes sure the scout id is valid
     private int ValidScout(int id) {
         if (id >= 1 && id <= 6) {
             return 1;
@@ -303,6 +305,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //starts a new match
     public void NewMatch() {
         Lift1 = false;
         Lift2 = false;
@@ -318,6 +321,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "New Match");
     }
 
+    //inputs an array of all the team numbers for every match
     public int[][] getTeamNums() {
         MatchLimit = 0;
         try {
@@ -349,6 +353,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //changes a boolean to an integer value for better compatibility with tableau
     private static int booltoInt(Boolean bool) {
         return bool ? 1 : 0;
     }
@@ -366,6 +371,7 @@ public class MainActivity extends AppCompatActivity {
         return QRStr;
     }
 
+    //generate the qr code image
     private Bitmap generateQRImage(final String content) {
 
         Map<EncodeHintType, ErrorCorrectionLevel> hints = new HashMap<>();
