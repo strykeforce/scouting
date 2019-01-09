@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
@@ -23,130 +24,15 @@
     tools:context="org.strykeforce.scoutapp.MainActivity">
 
 
-    <TextView
-
-        android:id="@+id/horizline"
-
-        android:layout_width="1500dp"
-
-        android:layout_height="20dp"
-
-        android:layout_x="0dp"
-
-        android:layout_y="26dp"
-
-        android:text="________________________________________________________________________________________________________________________________________________________"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/black" />
-
-    <TextView
-
-        android:id="@+id/vertbar"
-
-        android:layout_width="5dp"
-
-        android:layout_height="500dp"
-
-        android:layout_x="430dp"
-
-        android:layout_y="30dp"
-
-        android:text="|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||\"
-
-        android:textStyle="normal|bold" />
-
-    <TextView
-
-        android:id="@+id/teleop"
-
-        android:layout_width="156dp"
-
-        android:layout_height="40dp"
-
-        android:layout_x="90dp"
-
-        android:layout_y="0dp"
-
-        android:text="Tele-op"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textSize="35sp"
-
-        android:textStyle="normal|bold" />
-
-
-    <TextView
-
-        android:id="@+id/match"
-
-        android:layout_width="50dp"
-
-        android:layout_height="20dp"
-
-        android:layout_marginEnd="39dp"
-
-        android:layout_x="255dp"
-
-        android:layout_y="4dp"
-
-        android:scaleX="1.75"
-
-        android:scaleY="1.75"
-
-        android:text="Match"
-
-        android:textColor="@android:color/black"
-
-        android:textStyle="normal|bold" />
-
-    <TextView
-
-        android:id="@+id/matchdata"
-
+    <CheckBox
+        android:text="Level 1"
         android:layout_width="wrap_content"
-
-        android:layout_height="20dp"
-
-        android:layout_marginEnd="79dp"
-
-        android:layout_x="318dp"
-
-        android:layout_y="4dp"
-
-        android:scaleX="1.70"
-
-        android:scaleY="1.70"
-
-        android:text="0"
-
-        android:textColor="@android:color/black"
-
-        android:textStyle="normal|bold" />
-
-    <TextView
-
-        android:id="@+id/scoutDisplay"
-
-        android:layout_width="match_parent"
-
-        android:layout_height="35dp"
-
-        android:layout_x="-46dp"
-
-        android:layout_y="-6dp"
-
-        android:text="Blue 1"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_blue_dark"
-
-        android:textSize="30dp"
-
-        android:textStyle="normal|bold" />
+        android:layout_height="wrap_content"
+        android:layout_x="550dp"
+        android:layout_y="80dp"
+        android:id="@+id/oneEnd"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
 
     <TextView
 
@@ -168,37 +54,13 @@
 
         android:textColor="@android:color/black"
 
-        android:layout_x="480dp"
+        android:layout_x="510dp"
 
-        android:layout_y="4dp"/>
+        android:layout_y="7dp"/>
 
 
     <!--Num high goals in auto?-->
 
-
-    <TextView
-
-        android:id="@+id/teamdata"
-
-        android:layout_width="80dp"
-
-        android:layout_height="20dp"
-
-        android:layout_marginEnd="249dp"
-
-        android:layout_x="565dp"
-
-        android:layout_y="4dp"
-
-        android:scaleX="1.80"
-
-        android:scaleY="1.80"
-
-        android:text="0"
-
-        android:textColor="@android:color/black"
-
-        android:textStyle="normal|bold" />
 
     <Button
 
@@ -210,11 +72,11 @@
 
         android:layout_x="800dp"
 
-        android:layout_y="360dp"
+        android:layout_y="370dp"
 
-        android:scaleX="1.5"
+        android:scaleX="1"
 
-        android:scaleY="1.5"
+        android:scaleY="1"
 
         android:text="Done"
 
@@ -225,555 +87,6 @@
         android:textSize="20dp"
 
         android:textStyle="bold" />
-
-    <TextView
-
-        android:id="@+id/retrievedtxt"
-
-        android:layout_width="308dp"
-
-        android:layout_height="40dp"
-
-        android:layout_x="60dp"
-
-        android:layout_y="40dp"
-
-        android:text="Retrieve location:"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textSize="35sp"
-
-        android:textStyle="normal|bold" />
-
-    <TextView
-
-        android:text="Portal Cubes"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/portallabel"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="60dp"
-
-        android:layout_y="90dp"/>
-
-    <Button
-
-        android:text="-"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/portalsub"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="210dp"
-
-        android:layout_y="80dp"/>
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/portalcubes"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="300dp"
-
-        android:layout_y="95dp"/>
-
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/portaladd"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="330dp"
-
-        android:layout_y="80dp"/>
-
-    <TextView
-
-        android:text="Rows Cubes"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/centerlabel"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="63dp"
-
-        android:layout_y="140dp"/>
-
-    <Button
-
-        android:text="-"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/centersub"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="210dp"
-
-        android:layout_y="130dp"/>
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/centercubes"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="300dp"
-
-        android:layout_y="145dp"/>
-
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/centeradd"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="330dp"
-
-        android:layout_y="130dp"/>
-
-    <TextView
-
-        android:text="Pile Cubes"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/zonelabel"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="70dp"
-
-        android:layout_y="190dp"/>
-
-    <Button
-
-        android:id="@+id/zonesub"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:layout_x="210dp"
-
-        android:layout_y="180dp"
-
-        android:text="-"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textSize="20sp"
-
-        android:textStyle="bold" />
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/zonecubes"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="300dp"
-
-        android:layout_y="195dp"/>
-
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/zoneadd"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="330dp"
-
-        android:layout_y="180dp"/>
-
-    <TextView
-
-        android:text="Switch Cubes"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/switchlabel"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="60dp"
-
-        android:layout_y="275dp"/>
-
-    <Button
-
-        android:text="-"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/switchsub"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="210dp"
-
-        android:layout_y="260dp"/>
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/switchcubes"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="300dp"
-
-        android:layout_y="275dp"/>
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/switchadd"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="330dp"
-
-        android:layout_y="260dp"/>
-
-    <TextView
-
-        android:text="Scale Cubes"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/scalelabel"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="60dp"
-
-        android:layout_y="325dp"/>
-
-    <Button
-
-        android:text="-"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/scalesub"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="210dp"
-
-        android:layout_y="310dp"/>
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/scalecubes"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="300dp"
-
-        android:layout_y="325dp"/>
-
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/scaleadd"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="330dp"
-
-        android:layout_y="310dp"/>
-
-
-
-    <TextView
-
-        android:text="Exchange Cubes"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/exchangelabel"
-
-        android:textAllCaps="false"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="50dp"
-
-        android:layout_y="375dp"/>
-
-    <Button
-
-        android:text="-"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/exchangesub"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="210dp"
-
-        android:layout_y="360dp"/>
-
-    <TextView
-
-        android:text="0"
-
-        android:layout_width="30dp"
-
-        android:layout_height="15dp"
-
-        android:scaleX="2.00"
-
-        android:scaleY="2.00"
-
-        android:id="@+id/exchangecubes"
-
-        android:textAlignment="center"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:layout_x="300dp"
-
-        android:layout_y="380dp"/>
-
-    <Button
-
-        android:text="+"
-
-        android:layout_width="wrap_content"
-
-        android:layout_height="wrap_content"
-
-        android:id="@+id/exchangeadd"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textStyle="bold"
-
-        android:textSize="20sp"
-
-        android:layout_x="330dp"
-
-        android:layout_y="360dp"/>
 
     <CheckBox
         android:text="Robot failed"
@@ -786,7 +99,7 @@
 
         android:layout_x="504dp"
 
-        android:layout_y="220dp"
+        android:layout_y="275dp"
 
         android:scaleX="2.0"
 
@@ -806,7 +119,7 @@
 
         android:layout_x="495dp"
 
-        android:layout_y="290dp"
+        android:layout_y="340dp"
 
         android:scaleX="2.00"
 
@@ -825,33 +138,26 @@
         android:layout_width="133dp"
         android:layout_height="20dp"
         android:layout_marginEnd="33dp"
-        android:layout_x="700dp"
+        android:layout_x="425dp"
+        android:layout_y="50dp"
+        android:scaleX="2.5"
+        android:scaleY="2.5"
+        android:text="Sandstorm"
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="133dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="33dp"
+        android:layout_x="630dp"
         android:layout_y="50dp"
         android:scaleX="2.5"
         android:scaleY="2.5"
         android:text="Climb"
         android:textColor="@android:color/black"
         android:textStyle="normal|bold" />
-
-    <CheckBox
-        android:id="@+id/climbattempt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="500dp"
-        android:layout_y="80dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Attempted" />
-
-    <CheckBox
-        android:id="@+id/climb"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="500dp"
-        android:layout_y="125dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Successful" />
 
     <CheckBox
         android:id="@+id/lift1"
@@ -874,25 +180,14 @@
         android:text="Lifted 2" />
 
     <CheckBox
-        android:id="@+id/platform"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="504dp"
-        android:layout_y="170dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="On Platform" />
-
-    <CheckBox
         android:id="@+id/lifted"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="745dp"
+        android:layout_x="725dp"
         android:layout_y="170dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Good Mount of other robot"
-        android:textSize="9dp"/>
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Was Lifted" />
 
     <Button
 
@@ -904,11 +199,11 @@
 
         android:layout_x="460dp"
 
-        android:layout_y="360dp"
+        android:layout_y="370dp"
 
-        android:scaleX="1.5"
+        android:scaleX="1"
 
-        android:scaleY="1.5"
+        android:scaleY="1"
 
         android:text="Back"
 
@@ -920,6 +215,7 @@
 
         android:textStyle="bold" />
 
+
     <TextView
 
         android:id="@+id/notelabel"
@@ -930,7 +226,7 @@
 
         android:layout_x="705dp"
 
-        android:layout_y="226dp"
+        android:layout_y="280dp"
 
         android:scaleX="2.00"
 
@@ -942,26 +238,6 @@
 
         android:textStyle="bold" />
 
-    <TextView
-
-        android:id="@+id/deliveredtxt"
-
-        android:layout_width="308dp"
-
-        android:layout_height="40dp"
-
-        android:layout_x="60dp"
-
-        android:layout_y="220dp"
-
-        android:text="Deliver location:"
-
-        android:textColor="@android:color/holo_orange_dark"
-
-        android:textSize="35sp"
-
-        android:textStyle="normal|bold" />
-
     <EditText
 
         android:id="@+id/notes"
@@ -972,7 +248,7 @@
 
         android:layout_x="780dp"
 
-        android:layout_y="215dp"
+        android:layout_y="270dp"
 
         android:ems="9"
 
@@ -1004,7 +280,7 @@
 
         android:layout_x="590dp"
 
-        android:layout_y="280dp"/>
+        android:layout_y="325dp"/>
 
     <TextView
 
@@ -1026,9 +302,9 @@
 
         android:textStyle="bold"
 
-        android:layout_x="674dp"
+        android:layout_x="677dp"
 
-        android:layout_y="295dp"/>
+        android:layout_y="340dp"/>
 
     <Button
 
@@ -1048,8 +324,384 @@
 
         android:layout_x="708dp"
 
-        android:layout_y="280dp"/>
+        android:layout_y="325dp"/>
 
+    <ImageView
+        android:layout_width="396dp"
+        android:layout_height="593dp"
+        app:srcCompat="@drawable/rocketship"
+        android:layout_x="-39dp"
+        android:layout_y="-150dp"
+        android:id="@+id/rocketship" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="167dp"
+        android:layout_y="135dp"
+        android:id="@+id/cargoMidButton"
+        android:background="@android:drawable/list_selector_background"
+        android:paddingEnd="-30dp"
+        android:paddingLeft="-30dp"
+        android:layout_width="93dp"
+        android:layout_height="93dp" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:padding="-30dp"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="80dp"
+        android:layout_y="290dp"
+        android:id="@+id/hatchLowButton"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="0"
+        android:layout_height="30dp"
+        android:id="@+id/hatchTop"
+        android:textColor="?android:attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="34dp"
+        android:layout_y="90dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:text="0"
+        android:layout_height="30dp"
+        android:id="@+id/hatchMid"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="34dp"
+        android:layout_y="210dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/hatchLow"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="34dp"
+        android:layout_y="320dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:background="@android:drawable/radiobutton_off_background"
+        android:layout_width="30dp" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="170dp"
+        android:layout_y="250dp"
+        android:id="@+id/cargoLowButton"
+        android:background="@android:drawable/list_selector_background"
+        android:paddingEnd="-30dp"
+        android:paddingLeft="-30dp"
+        android:layout_width="93dp"
+        android:layout_height="93dp" />
+
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoLow"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="270dp"
+        android:layout_y="280dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoMid"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="270dp"
+        android:layout_y="170dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoTop"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="270dp"
+        android:layout_y="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+
+        android:id="@+id/matchdata"
+
+        android:layout_width="39dp"
+
+        android:layout_height="34dp"
+
+        android:layout_marginEnd="79dp"
+
+        android:layout_x="380dp"
+
+        android:layout_y="13dp"
+
+        android:scaleX="1.70"
+
+        android:scaleY="1.70"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/match"
+
+        android:layout_width="50dp"
+
+        android:layout_height="56dp"
+
+        android:layout_marginEnd="39dp"
+
+        android:layout_x="310dp"
+
+        android:layout_y="20dp"
+
+        android:scaleX="1.75"
+
+        android:scaleY="1.75"
+
+        android:text="Match"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/scoutDisplay"
+
+        android:layout_width="98dp"
+
+        android:layout_height="35dp"
+
+        android:layout_x="390dp"
+
+        android:layout_y="-5dp"
+
+        android:text="Blue 1"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_blue_dark"
+
+        android:textSize="30dp"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/teamdata"
+
+        android:layout_width="80dp"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="249dp"
+
+        android:layout_x="590dp"
+
+        android:layout_y="9dp"
+
+        android:scaleX="1.80"
+
+        android:scaleY="1.80"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <CheckBox
+        android:text="Level 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="550dp"
+        android:layout_y="125dp"
+        android:id="@+id/twoEnd"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <CheckBox
+        android:text="Level 3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="550dp"
+        android:layout_y="170dp"
+        android:id="@+id/threeEnd"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="130dp"
+        android:id="@+id/hatchTopMin"
+        android:textScaleX="2.00"
+        android:elevation="0dp" />
+
+    <Button
+        android:text="-"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_x="8dp"
+        android:layout_y="360dp"
+        android:id="@+id/hatchLowMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="250dp"
+        android:id="@+id/hatchMidMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="210dp"
+        android:id="@+id/cargoMidMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="320dp"
+        android:id="@+id/cargoLowMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="100dp"
+        android:id="@+id/cargoTopMin"
+        android:textScaleX="2.00" />
+
+    <ImageView
+        android:layout_width="34dp"
+        android:layout_height="125dp"
+        app:srcCompat="@android:drawable/status_bar_item_background"
+        android:layout_x="487dp"
+        android:layout_y="77dp"
+        android:id="@+id/imageView3" />
+
+    <CheckBox
+        android:text="Level 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="380dp"
+        android:layout_y="81dp"
+        android:id="@+id/oneSand"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <CheckBox
+        android:text="Level 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="380dp"
+        android:layout_y="130dp"
+        android:id="@+id/twoSand"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:scaleType="fitCenter"
+        android:padding="-30dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="80dp"
+        android:layout_y="55dp"
+        android:id="@+id/hatchTopButton"
+        android:background="@android:drawable/list_selector_background" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:layout_height="93dp"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="165dp"
+        android:layout_y="20dp"
+        android:id="@+id/cargoTopButton"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_width="wrap_content"
+        android:paddingEnd="-30dp"
+        android:paddingLeft="-30dp" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:padding="-30dp"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="80dp"
+        android:layout_y="180dp"
+        android:id="@+id/hatchMidButton"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <CheckBox
+        android:text="Played Defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="600dp"
+        android:layout_y="230dp"
+        android:id="@+id/checkBox6"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:textColor="@color/zxing_custom_viewfinder_laser"
+        android:textStyle="bold" />
 
     android:orientation="horizontal"
 
