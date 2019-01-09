@@ -43,11 +43,6 @@ public class MainActivity extends AppCompatActivity {
     //TAG is used for inserting tags later on for troubleshooting purposes
     private final static String TAG = "Sam";
 
-    public boolean BaseLineBool, DeliverSwitchBool, SecondCubeBool, AutoScaleBool = false;
-    int ScaleTimeInt = 0;
-    public int DrivablilityInt = 0;
-
-    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
     public boolean Lift1, Lift2, Lifted;
 
     boolean Failed = false;
@@ -128,24 +123,11 @@ public class MainActivity extends AppCompatActivity {
         final TextView teamdata = (TextView) findViewById(R.id.teamdata);
         final TextView matchdata = (TextView) findViewById(R.id.matchdata);
 
-        final Switch baseline = (Switch) findViewById(R.id.baseline);
-        final Switch deliverSwitchAuton = (Switch) findViewById(R.id.deliverSwitchAuton);
-        final Switch cubex2 = (Switch) findViewById(R.id.cubex2);
-        final Switch autoScale = (Switch) findViewById(R.id.autoScale);
-        final SeekBar scaleTime = (SeekBar) findViewById(R.id.scaleTime);
-
         //when a screen is displayed, the objects default back to false, zero, so we have to...
         //initialize the screen objects to whatever they were set to before...
         //so that they will be correct if we arrived at this screen using a "back" button
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
-
-        baseline.setChecked(BaseLineBool);
-        deliverSwitchAuton.setChecked(DeliverSwitchBool);
-        cubex2.setChecked(SecondCubeBool);
-        autoScale.setChecked(AutoScaleBool);
-        scaleTime.setProgress(ScaleTimeInt);
-
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
         if (SCOUT_ID < 3) {
@@ -161,14 +143,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //store the current state of the objects on the auton screen
-                BaseLineBool = baseline.isChecked();
-                DeliverSwitchBool = deliverSwitchAuton.isChecked();
-                SecondCubeBool = cubex2.isChecked();
-                AutoScaleBool = autoScale.isChecked();
-                ScaleTimeInt = scaleTime.getProgress();
-                //this tag was just for troubleshooting
-                Log.d(TAG, "auton next button pushed" + BaseLineBool);
                 //go to the tele-op screen
                 goTeleOp();
             }
@@ -330,11 +304,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void NewMatch() {
-        BaseLineBool = false;
-        DeliverSwitchBool = false;
-        SecondCubeBool = false;
-        AutoScaleBool = false;
-        ScaleTimeInt = 0;
         Lift1 = false;
         Lift2 = false;
         Lifted = false;
@@ -342,7 +311,6 @@ public class MainActivity extends AppCompatActivity {
         Failed = false;
         Penalties = 0;
         Notes = "none";
-        DrivablilityInt = 0;
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -389,17 +357,6 @@ public class MainActivity extends AppCompatActivity {
         QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
                 + "Team: " + TEAM_NUMBER + "\t" //Team
                 + "Match: " + (MATCH_NUMBER + 1) + "\t" //Match
-                + "ABL: " + booltoInt(BaseLineBool) + "\t" //Auto Base Line
-                + "Aswitch: " + booltoInt(DeliverSwitchBool) + "\t" //Auto Switch
-                + "Ascale: " + booltoInt(AutoScaleBool) + "\t" //Auto Scale
-                + "A2cube: " + booltoInt(SecondCubeBool) + "\t" //Auto Second Cubes
-                + "Atime: " + (int) (ScaleTimeInt * .15) + "\t" //Auto Scale Time
-                + "Pcube: " + PortalCubes + "\t" //Portal Cubes
-                + "Ccube: " + CenterCubes + "\t" //Center Cubes
-                + "Pzcube: " + ZoneCubes + "\t" //Power Zone Cubes
-                + "Scube: " + SwitchCubes + "\t" //Switch Cubes
-                + "Slcube: " + ScaleCubes + "\t" //Scale Cubes
-                + "Xcube: " + ExchangeCubes + "\t" //Exchange Cubes
                 + "Lift1: " + booltoInt(Lift1) + "\t" //Lifted 1
                 + "Lift2: " + booltoInt(Lift2) + "\t" //Lifted 2
                 + "Lift: " + booltoInt(Lifted) + "\t" //Was Lifted

@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<AbsoluteLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/activity_scout_main"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    tools:context="org.strykeforce.scoutapp.MainActivity">
 
 
     <TextView
@@ -14,7 +33,7 @@
 
         android:textAlignment="center"
 
-        android:layout_width="169dp"
+        android:layout_width="133dp"
 
         android:id="@+id/scoutDisplay"
 
@@ -22,7 +41,7 @@
 
         android:textStyle="normal|bold"
 
-        android:layout_x="409dp"
+        android:layout_x="380dp"
 
         android:layout_y="5dp" />
 
@@ -46,7 +65,7 @@
 
         android:textColor="@android:color/black"
 
-        android:layout_x="399dp"
+        android:layout_x="360dp"
 
         android:layout_y="16dp"/>
 
@@ -70,7 +89,7 @@
 
         android:textColor="@android:color/black"
 
-        android:layout_x="329dp"
+        android:layout_x="300dp"
 
         android:layout_y="16dp"/>
 
@@ -94,7 +113,7 @@
 
         android:textColor="@android:color/black"
 
-        android:layout_x="591dp"
+        android:layout_x="530dp"
 
         android:layout_y="14dp"/>
 
@@ -118,9 +137,28 @@
 
         android:textColor="@android:color/black"
 
-        android:layout_x="652dp"
+        android:layout_x="600dp"
 
         android:layout_y="15dp"/>
+
+    <Button
+        android:text="Next"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:scaleX="2.00"
+
+        android:scaleY="2.00"
+
+        android:layout_x="750dp"
+
+        android:layout_y="350dp"
+
+        android:id="@+id/nextAuton"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
 
     <TextView
 
@@ -138,28 +176,255 @@
 
         android:textStyle="normal|bold"
 
-        android:layout_x="50dp"
+        android:layout_x="640dp"
 
         android:layout_y="0dp" />
 
-    <Button
-        android:text="Next"
 
+
+    <ImageView
+        android:layout_width="396dp"
+        android:layout_height="593dp"
+        app:srcCompat="@drawable/rocketship"
+        android:layout_x="-39dp"
+        android:layout_y="-150dp"
+        android:id="@+id/rocketship" />
+
+    <ImageButton
         android:layout_width="wrap_content"
-
+        android:scaleType="fitCenter"
+        android:padding="-30dp"
         android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="80dp"
+        android:layout_y="55dp"
+        android:id="@+id/hatchTopButton"
+        android:background="@android:drawable/list_selector_background" />
 
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:layout_height="93dp"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="165dp"
+        android:layout_y="20dp"
+        android:id="@+id/cargoTopButton"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_width="wrap_content"
+        android:paddingEnd="-30dp"
+        android:paddingLeft="-30dp" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:padding="-30dp"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="80dp"
+        android:layout_y="180dp"
+        android:id="@+id/hatchMidButton"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <Button
+        android:text="-"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="130dp"
+        android:id="@+id/hatchTopMin"
+        android:textScaleX="2.00"
+        android:elevation="0dp" />
+
+    <Button
+        android:text="-"
+        android:layout_width="78dp"
+        android:layout_height="wrap_content"
+        android:layout_x="8dp"
+        android:layout_y="360dp"
+        android:id="@+id/hatchLowMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="15dp"
+        android:layout_y="250dp"
+        android:id="@+id/hatchMidMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="210dp"
+        android:id="@+id/cargoMidMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="320dp"
+        android:id="@+id/cargoLowMin"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="100dp"
+        android:id="@+id/cargoTopMin"
+        android:textScaleX="2.00" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="167dp"
+        android:layout_y="135dp"
+        android:id="@+id/cargoMidButton"
+        android:background="@android:drawable/list_selector_background"
+        android:paddingEnd="-30dp"
+        android:paddingLeft="-30dp"
+        android:layout_width="93dp"
+        android:layout_height="93dp" />
+
+    <ImageButton
+        android:scaleType="fitCenter"
+        android:padding="-30dp"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="80dp"
+        android:layout_y="290dp"
+        android:id="@+id/hatchLowButton"
+        android:background="@android:drawable/list_selector_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:text="0"
+        android:layout_height="30dp"
+        android:id="@+id/hatchTop"
+        android:textColor="?android:attr/colorControlActivated"
+        android:textStyle="bold"
         android:scaleX="2.00"
-
         android:scaleY="2.00"
+        android:layout_x="34dp"
+        android:layout_y="90dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
 
-        android:layout_x="825dp"
+    <TextView
+        android:text="0"
+        android:layout_height="30dp"
+        android:id="@+id/hatchMid"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="34dp"
+        android:layout_y="210dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
 
-        android:layout_y="390dp"
+    <TextView
+        android:text="0"
+        android:id="@+id/hatchLow"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="34dp"
+        android:layout_y="320dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:background="@android:drawable/radiobutton_off_background"
+        android:layout_width="30dp" />
 
-        android:id="@+id/nextAuton"
+    <ImageButton
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="170dp"
+        android:layout_y="250dp"
+        android:id="@+id/cargoLowButton"
+        android:background="@android:drawable/list_selector_background"
+        android:paddingEnd="-30dp"
+        android:paddingLeft="-30dp"
+        android:layout_width="93dp"
+        android:layout_height="93dp" />
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoLow"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="270dp"
+        android:layout_y="280dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoMid"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="270dp"
+        android:layout_y="170dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoTop"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="270dp"
+        android:layout_y="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <CheckBox
+        android:text="Exit Platform from Level 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="550dp"
+        android:layout_y="190dp"
+        android:id="@+id/twoSand"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <CheckBox
+        android:text="Exit Platform from Level 1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="550dp"
+        android:layout_y="122dp"
+        android:id="@+id/oneSand"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
 
 
 </AbsoluteLayout>
