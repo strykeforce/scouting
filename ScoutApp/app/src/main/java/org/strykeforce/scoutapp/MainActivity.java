@@ -156,24 +156,10 @@ public class MainActivity extends AppCompatActivity {
         //provide us with variables that can be used to read/write to the screen objects
         final TextView teamdata = (TextView) findViewById(R.id.teamdata);
         final TextView matchdata = (TextView) findViewById(R.id.matchdata);
-        final CheckBox lift1 = (CheckBox) findViewById(R.id.lift1);
-        final CheckBox lift2 = (CheckBox) findViewById(R.id.lift2);
-        final CheckBox lifted = (CheckBox) findViewById(R.id.lifted);
-
-        final TextView penalties = (TextView) findViewById(R.id.penalties);
-        final CheckBox failed = (CheckBox) findViewById(R.id.failed);
-        final EditText notes = (EditText) findViewById(R.id.notes);
 
         //restore the current state of the objects on the teleop screen
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
-        lift1.setChecked(Lift1);
-        lift2.setChecked(Lift2);
-        lifted.setChecked(Lifted);
-
-        penalties.setText(Integer.toString(Penalties));
-        failed.setChecked(Failed);
-        notes.setText(Notes);
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
         if (SCOUT_ID < 3) {
@@ -184,34 +170,11 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
         }
 
-        //handle what happens when the user pushes the Plus/Minus buttons
-
-        findViewById(R.id.penaltysub).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Penalties--;
-                penalties.setText(Integer.toString(Penalties));
-            }
-        });
-        findViewById(R.id.penaltyadd).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Penalties++;
-                penalties.setText(Integer.toString(Penalties));
-            }
-        });
-
         //this tells the app what to do when the back button on the teleop screen is pushed
         findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                //save the current settings
-                Lift1 = lift1.isChecked();
-                Lift2 = lift2.isChecked();
-                Lifted = lifted.isChecked();
-                Notes = notes.getText().toString();
-                Failed = failed.isChecked();
                 //go back to the auton screen
                 goAuton();
             }
@@ -221,18 +184,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.sendbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //provide variables that allow us to access the screen objects
-
-                //record the state of the objects
-                Lift1 = lift1.isChecked();
-                Lift2 = lift2.isChecked();
-                Lifted = lifted.isChecked();
-
-                Failed = failed.isChecked();
-                Penalties = Integer.parseInt(penalties.getText().toString());
-                Notes = notes.getText().toString();
-
                 //go to the QRcode screen
                 goQR();
             }

@@ -5,7 +5,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="PitScoutingJSON.json"></script>
-<link rel="stylesheet" href="path/to/easy-autocomplete.min.css"> 
+<script src="jquery-3.3.1.min.js"></script>
+<script src="jquery-ui-1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
+<link rel="stylesheet" href="jquery-ui-1.12.1/style.css">
 </head>
 
 
@@ -35,23 +38,6 @@ function searchKeyPress(e)
     return true;
 }
 
-var options = {
-
-  url: "/PitScoutingJSON.json",
-
-  getValue: "number",
-
-  list: {	
-    match: {
-      enabled: true
-    }
-  },
-
-  theme: "square"
-};
-
-$("#userInput").easyAutocomplete(options);
-
 </script>
 
 
@@ -70,6 +56,14 @@ $("#userInput").easyAutocomplete(options);
 </body>
 <script>
 var local_data = data;
+
+var avaliableTags = ["hewwo","mistew","obama"];
+
+$ ( function() {
+$('#userInput').autocomplete({
+source: avaliableTags
+});
+});
 
 var input = document.getElementById("userInput")
 
