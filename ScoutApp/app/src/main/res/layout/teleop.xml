@@ -64,7 +64,7 @@
 
     <Button
 
-        android:id="@+id/sendbutton"
+        android:id="@+id/nextteleopbutton"
 
         android:layout_width="wrap_content"
 
@@ -78,7 +78,7 @@
 
         android:scaleY="1"
 
-        android:text="Done"
+        android:text="Next"
 
         android:textAllCaps="false"
 
@@ -103,7 +103,7 @@
 
     <Button
 
-        android:id="@+id/backbutton"
+        android:id="@+id/backteleopbutton"
 
         android:layout_width="wrap_content"
 
@@ -417,7 +417,7 @@
         android:text="-"
         android:layout_width="74dp"
         android:layout_height="wrap_content"
-        android:layout_x="575dp"
+        android:layout_x="570dp"
         android:layout_y="200dp"
         android:id="@+id/button3"
         android:textScaleX="2.00" />
@@ -569,11 +569,12 @@
         android:text="Climb Time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="650dp"
-        android:layout_y="294dp"
+        android:layout_x="630dp"
+        android:layout_y="270dp"
         android:id="@+id/textView14"
         android:scaleX="2.00"
-        android:scaleY="2.00" />
+        android:scaleY="2.00"
+        android:textColor="@android:color/black" />
 
     android:orientation="horizontal"
 

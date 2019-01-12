@@ -22,6 +22,51 @@
 
     tools:context="org.strykeforce.scoutapp.MainActivity">
 
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="570dp"
+        android:layout_y="200dp"
+        android:id="@+id/hatchCargoShipMinAuto"
+        android:textScaleX="2.00" />
+
+    <Button
+        android:text="-"
+        android:layout_width="74dp"
+        android:layout_height="wrap_content"
+        android:layout_x="425dp"
+        android:layout_y="200dp"
+        android:id="@+id/cargoCargoShipMinAuto"
+        android:textScaleX="2.00" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cargoship"
+        android:layout_x="400dp"
+        android:layout_y="63dp"
+        android:id="@+id/imageView4" />
+
+
+    <ImageButton
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/cargo"
+        android:layout_x="410dp"
+        android:layout_y="90dp"
+        android:id="@+id/cargoCargoShipButtAuto"
+        android:background="@android:drawable/list_selector_background" />
+
+
+    <TextView
+        android:text="Cargo Ship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="503dp"
+        android:layout_y="220dp"
+        android:id="@+id/textView16"
+        android:textColor="@android:color/black" />
 
     <TextView
 
@@ -198,7 +243,7 @@
         app:srcCompat="@drawable/hatchpanel"
         android:layout_x="80dp"
         android:layout_y="55dp"
-        android:id="@+id/hatchTopButton"
+        android:id="@+id/hatchTopButtonAuto"
         android:background="@android:drawable/list_selector_background" />
 
     <ImageButton
@@ -207,7 +252,7 @@
         app:srcCompat="@drawable/cargo"
         android:layout_x="165dp"
         android:layout_y="20dp"
-        android:id="@+id/cargoTopButton"
+        android:id="@+id/cargoTopButtonAuto"
         android:background="@android:drawable/list_selector_background"
         android:layout_width="wrap_content"
         android:paddingEnd="-30dp"
@@ -219,7 +264,7 @@
         app:srcCompat="@drawable/hatchpanel"
         android:layout_x="80dp"
         android:layout_y="180dp"
-        android:id="@+id/hatchMidButton"
+        android:id="@+id/hatchMidButtonAuto"
         android:background="@android:drawable/list_selector_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -231,7 +276,7 @@
         android:layout_height="wrap_content"
         android:layout_x="15dp"
         android:layout_y="130dp"
-        android:id="@+id/hatchTopMin"
+        android:id="@+id/hatchTopMinAuto"
         android:textScaleX="2.00"
         android:elevation="0dp" />
 
@@ -241,7 +286,7 @@
         android:layout_height="wrap_content"
         android:layout_x="8dp"
         android:layout_y="360dp"
-        android:id="@+id/hatchLowMin"
+        android:id="@+id/hatchLowMinAuto"
         android:textScaleX="2.00" />
 
     <Button
@@ -250,7 +295,7 @@
         android:layout_height="wrap_content"
         android:layout_x="15dp"
         android:layout_y="250dp"
-        android:id="@+id/hatchMidMin"
+        android:id="@+id/hatchMidMinAuto"
         android:textScaleX="2.00" />
 
     <Button
@@ -259,7 +304,7 @@
         android:layout_height="wrap_content"
         android:layout_x="250dp"
         android:layout_y="210dp"
-        android:id="@+id/cargoMidMin"
+        android:id="@+id/cargoMidMinAuto"
         android:textScaleX="2.00" />
 
     <Button
@@ -268,7 +313,7 @@
         android:layout_height="wrap_content"
         android:layout_x="250dp"
         android:layout_y="320dp"
-        android:id="@+id/cargoLowMin"
+        android:id="@+id/cargoLowMinAuto"
         android:textScaleX="2.00" />
 
     <Button
@@ -277,7 +322,7 @@
         android:layout_height="wrap_content"
         android:layout_x="250dp"
         android:layout_y="100dp"
-        android:id="@+id/cargoTopMin"
+        android:id="@+id/cargoTopMinAuto"
         android:textScaleX="2.00" />
 
     <ImageButton
@@ -285,7 +330,7 @@
         app:srcCompat="@drawable/cargo"
         android:layout_x="167dp"
         android:layout_y="135dp"
-        android:id="@+id/cargoMidButton"
+        android:id="@+id/cargoMidButtonAuto"
         android:background="@android:drawable/list_selector_background"
         android:paddingEnd="-30dp"
         android:paddingLeft="-30dp"
@@ -298,7 +343,7 @@
         app:srcCompat="@drawable/hatchpanel"
         android:layout_x="80dp"
         android:layout_y="290dp"
-        android:id="@+id/hatchLowButton"
+        android:id="@+id/hatchLowButtonAuto"
         android:background="@android:drawable/list_selector_background"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
@@ -306,7 +351,7 @@
     <TextView
         android:text="0"
         android:layout_height="30dp"
-        android:id="@+id/hatchTop"
+        android:id="@+id/hatchTopTextAuto"
         android:textColor="?android:attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -321,7 +366,7 @@
     <TextView
         android:text="0"
         android:layout_height="30dp"
-        android:id="@+id/hatchMid"
+        android:id="@+id/hatchMidTextAuto"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -335,7 +380,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/hatchLow"
+        android:id="@+id/hatchLowTextAuto"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -353,7 +398,7 @@
         app:srcCompat="@drawable/cargo"
         android:layout_x="170dp"
         android:layout_y="250dp"
-        android:id="@+id/cargoLowButton"
+        android:id="@+id/cargoLowButtonAuto"
         android:background="@android:drawable/list_selector_background"
         android:paddingEnd="-30dp"
         android:paddingLeft="-30dp"
@@ -363,7 +408,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/cargoLow"
+        android:id="@+id/cargoLowTextAuto"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -378,7 +423,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/cargoMid"
+        android:id="@+id/cargoMidTextAuto"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -393,7 +438,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/cargoTop"
+        android:id="@+id/cargoTopTextAuto"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -407,24 +452,81 @@
         android:background="@android:drawable/radiobutton_off_background" />
 
     <CheckBox
-        android:text="Exit Platform from Level 2"
+        android:text="Exit from Level 2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="550dp"
-        android:layout_y="190dp"
-        android:id="@+id/twoSand"
+        android:layout_x="488dp"
+        android:layout_y="357dp"
+        android:id="@+id/twoAuto"
         android:scaleX="2.00"
         android:scaleY="2.00" />
 
     <CheckBox
-        android:text="Exit Platform from Level 1"
+        android:text="Exit from Level 1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="550dp"
-        android:layout_y="122dp"
-        android:id="@+id/oneSand"
+        android:layout_x="489dp"
+        android:layout_y="312dp"
+        android:id="@+id/oneAuto"
         android:scaleX="2.00"
         android:scaleY="2.00" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/hatchCargoShipAuto"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="583dp"
+        android:layout_y="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/hatchpanel"
+        android:layout_x="557dp"
+        android:layout_y="100dp"
+        android:id="@+id/hatchCargoShipButtAuto"
+        android:background="@android:drawable/list_selector_background" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/cargoCargoShipAuto"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="450dp"
+        android:layout_y="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <Spinner
+        android:layout_width="186dp"
+        android:layout_height="36dp"
+        android:layout_x="721dp"
+        android:layout_y="139dp"
+        android:id="@+id/preload" />
+
+    <TextView
+        android:text="Preload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="775dp"
+        android:layout_y="110dp"
+        android:id="@+id/textView15"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:textColor="@android:color/black" />
 
 
 </AbsoluteLayout>

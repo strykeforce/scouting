@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <CheckBox
+        android:text="Robot Failed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="120dp"
+        android:id="@+id/robotfailure"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <Button
+
+        android:id="@+id/backpostbutton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="60dp"
+
+        android:layout_x="100dp"
+
+        android:layout_y="370dp"
+
+        android:scaleX="1"
+
+        android:scaleY="1"
+
+        android:text="Back"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/colorPrimaryDark"
+
+        android:textSize="20dp"
+
+        android:textStyle="bold" />
+
+    <Button
+
+        android:id="@+id/donebutton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="60dp"
+
+        android:layout_x="800dp"
+
+        android:layout_y="370dp"
+
+        android:scaleX="1"
+
+        android:scaleY="1"
+
+        android:text="Done"
+
+        android:textAllCaps="false"
+
+        android:textColor="@color/colorPrimaryDark"
+
+        android:textSize="20dp"
+
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:text="Played Defense"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="108dp"
+        android:layout_y="68dp"
+        android:id="@+id/defense"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <EditText
+        android:layout_width="404dp"
+        android:layout_height="256dp"
+        android:inputType="textPersonName"
+        android:text="Notes"
+        android:ems="10"
+        android:layout_x="570dp"
+        android:layout_y="32dp"
+        android:id="@+id/editText2"
+        android:textSize="30dp" />
+
+    <EditText
+        android:layout_width="408dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Scouter Initials"
+        android:ems="10"
+        android:layout_x="575dp"
+        android:layout_y="302dp"
+        android:id="@+id/editText3"
+        android:textSize="30dp" />
+
+    <TextView
+        android:text="Ranking (talk with your teammates to rank the best to worst)"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:layout_x="117dp"
+        android:layout_y="220dp"
+        android:id="@+id/textView6"
+        android:textColor="@android:color/black"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <Spinner
+        android:layout_width="159dp"
+        android:layout_height="50dp"
+        android:layout_x="326dp"
+        android:layout_y="219dp"
+        android:id="@+id/ranking" />
+
+</AbsoluteLayout>
