@@ -76,29 +76,17 @@
         android:scaleY="2.00" />
 
     <EditText
-        android:layout_width="404dp"
-        android:layout_height="256dp"
-        android:inputType="textPersonName"
-        android:text="Notes"
-        android:ems="10"
-        android:layout_x="570dp"
-        android:layout_y="32dp"
-        android:id="@+id/editText2"
-        android:textSize="30dp" />
-
-    <EditText
-        android:layout_width="408dp"
+        android:layout_width="298dp"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Scouter Initials"
         android:ems="10"
-        android:layout_x="575dp"
+        android:layout_x="683dp"
         android:layout_y="302dp"
-        android:id="@+id/editText3"
+        android:id="@+id/initials"
         android:textSize="30dp" />
 
     <TextView
-        android:text="Ranking (talk with your teammates to rank the best to worst)"
+        android:text="Ranking (talk with your teammates to rank the best (1) to worst(3))"
         android:layout_width="112dp"
         android:layout_height="wrap_content"
         android:layout_x="117dp"
@@ -114,5 +102,83 @@
         android:layout_x="326dp"
         android:layout_y="219dp"
         android:id="@+id/ranking" />
+
+    <TextView
+        android:text="0"
+        android:id="@+id/penalties"
+        android:textColor="?attr/colorControlActivated"
+        android:textStyle="bold"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:layout_x="730dp"
+        android:layout_y="73dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:background="@android:drawable/radiobutton_off_background" />
+
+    <EditText
+        android:layout_width="296dp"
+        android:layout_height="132dp"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:layout_x="684dp"
+        android:layout_y="161dp"
+        android:id="@+id/notes"
+        android:textSize="30dp" />
+
+    <TextView
+        android:text="Penalities"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="483dp"
+        android:layout_y="79dp"
+        android:id="@+id/textView19"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="584dp"
+        android:layout_y="224dp"
+        android:id="@+id/textviewblahblahblah"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:textColor="@android:color/black" />
+
+    <TextView
+        android:text="Scouter Initials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="525dp"
+        android:layout_y="322dp"
+        android:id="@+id/textView18"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:text="-"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_x="644dp"
+        android:layout_y="63dp"
+        android:id="@+id/minusPenalties"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
+
+    <Button
+        android:text="+"
+        android:layout_width="47dp"
+        android:layout_height="wrap_content"
+        android:layout_x="804dp"
+        android:layout_y="63dp"
+        android:id="@+id/plusPenalties"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
 
 </AbsoluteLayout>

@@ -249,7 +249,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/textView12"
+        android:id="@+id/cargoTop"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -419,7 +419,7 @@
         android:layout_height="wrap_content"
         android:layout_x="570dp"
         android:layout_y="200dp"
-        android:id="@+id/button3"
+        android:id="@+id/hatchCargoShipMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -428,7 +428,7 @@
         android:layout_height="wrap_content"
         android:layout_x="425dp"
         android:layout_y="200dp"
-        android:id="@+id/button2"
+        android:id="@+id/cargoCargoShipMin"
         android:textScaleX="2.00" />
 
     <Button
@@ -497,7 +497,7 @@
         app:srcCompat="@drawable/hatchpanel"
         android:layout_x="557dp"
         android:layout_y="100dp"
-        android:id="@+id/imageButton2"
+        android:id="@+id/hatchCargoShipButton"
         android:background="@android:drawable/list_selector_background" />
 
     <ImageButton
@@ -506,7 +506,7 @@
         app:srcCompat="@drawable/cargo"
         android:layout_x="410dp"
         android:layout_y="90dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/cargoCargoShipButton"
         android:background="@android:drawable/list_selector_background" />
 
     <TextView
@@ -520,7 +520,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/cargoTop"
+        android:id="@+id/cargoCargoShip"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -535,7 +535,7 @@
 
     <TextView
         android:text="0"
-        android:id="@+id/textView11"
+        android:id="@+id/hatchCargoShip"
         android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
@@ -552,7 +552,7 @@
         android:layout_height="60dp"
         android:layout_x="520dp"
         android:layout_y="301dp"
-        android:id="@+id/seekBar"
+        android:id="@+id/climbTime"
         android:scaleX="2.00"
         android:scaleY="2.00"
         android:layout_width="261dp" />

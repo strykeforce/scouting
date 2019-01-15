@@ -6,6 +6,7 @@ package org.strykeforce.scoutapp;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -42,6 +43,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import org.w3c.dom.Text;
 
+import static org.strykeforce.scoutapp.R.id.climbTime;
 import static org.strykeforce.scoutapp.R.id.nextbutton;
 import static org.strykeforce.scoutapp.R.id.oneAuto;
 
@@ -59,10 +61,24 @@ public class MainActivity extends AppCompatActivity {
     int ScoutId;
     int StartMatch;
 
+    int preSpinPos;
     int hatchCargoShipAuto = 0, hatchTopAuto = 0, hatchMidAuto = 0, hatchLowAuto = 0;
     int cargoCargoShipAuto = 0, cargoTopAuto = 0, cargoMidAuto = 0, cargoLowAuto = 0;
+    String preload;
+
+    int hatchCargoShipTele = 0, hatchTopTele = 0, hatchMidTele = 0, hatchLowTele = 0;
+    int cargoCargoShipTele = 0, cargoTopTele = 0, cargoMidTele = 0, cargoLowTele = 0;
+    int climbTimeTele = 0;
 
     boolean levelOneAuto = false, levelTwoAuto = false;
+
+    boolean levelOneTele = false, levelTwoTele = false, levelThreeTele = false;
+
+    int penalties = 0;
+
+    boolean robotFailed = false, playedDefense = false;
+
+    String scouterNotes = "", scouterInitials = "";
 
     private String QRStr;
 
@@ -148,6 +164,13 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox levelOneAutoBox = (CheckBox) findViewById(R.id.oneAuto);
         final  CheckBox levelTwoAutoBox = (CheckBox) findViewById(R.id.twoAuto);
 
+        final Spinner preloadSpinner = (Spinner) findViewById(R.id.preload);
+
+        //set spinner
+        String[] items = new String[]{"none" , "hatch" , "cargo"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        preloadSpinner.setAdapter(adapter);
+
         //when a screen is displayed, the objects default back to false, zero, so we have to...
         //initialize the screen objects to whatever they were set to before...
         //so that they will be correct if we arrived at this screen using a "back" button
@@ -166,6 +189,8 @@ public class MainActivity extends AppCompatActivity {
 
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
+
+        preloadSpinner.setSelection(preSpinPos);
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
         if (SCOUT_ID < 3) {
@@ -322,19 +347,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //preload spinner
-        final Spinner preloadspinner = (Spinner) findViewById(R.id.preload);
-        String[] items = new String[]{"hatch" , "cargo"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
-        preloadspinner.setAdapter(adapter);
-
         //this handles the "next" button on the auton screen
         findViewById(R.id.nextAuton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //save the state of the checkboxes
+                //save the state of the checkboxes and spinner
                 levelOneAuto = levelOneAutoBox.isChecked();
                 levelTwoAuto = levelTwoAutoBox.isChecked();
+                preload = preloadSpinner.getSelectedItem().toString();
+                preSpinPos = preloadSpinner.getSelectedItemPosition();
 
                 //go to the tele-op screen
                 goTeleOp();
@@ -350,7 +371,42 @@ public class MainActivity extends AppCompatActivity {
         final TextView teamdata = (TextView) findViewById(R.id.teamdata);
         final TextView matchdata = (TextView) findViewById(R.id.matchdata);
 
+        final TextView hatchTop = (TextView) findViewById(R.id.hatchTop);
+        final TextView hatchMid = (TextView) findViewById(R.id.hatchMid);
+        final TextView hatchLow = (TextView) findViewById(R.id.hatchLow);
+        final TextView cargoTop = (TextView) findViewById(R.id.cargoTop);
+        final TextView cargoMid = (TextView) findViewById(R.id.cargoMid);
+        final TextView cargoLow = (TextView) findViewById(R.id.cargoLow);
+
+        final TextView cargoCargoShip = (TextView) findViewById(R.id.cargoCargoShip);
+        final TextView hatchCargoShip = (TextView) findViewById(R.id.hatchCargoShip);
+
+        final CheckBox levelOne = (CheckBox) findViewById(R.id.oneEnd);
+        final CheckBox levelTwo = (CheckBox) findViewById(R.id.twoEnd);
+        final CheckBox levelThree = (CheckBox) findViewById(R.id.threeEnd);
+
+        final SeekBar climbTime = (SeekBar) findViewById(R.id.climbTime);
+
         //restore the current state of the objects on the teleop screen
+        teamdata.setText(Integer.toString(TEAM_NUMBER));
+        matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
+
+        hatchCargoShip.setText("" + hatchCargoShipTele);
+        hatchTop.setText("" + hatchTopTele);
+        hatchMid.setText("" + hatchMidTele);
+        hatchLow.setText("" + hatchLowTele);
+
+        cargoCargoShip.setText("" + cargoCargoShipTele);
+        cargoTop.setText("" + cargoTopTele);
+        cargoMid.setText("" + cargoMidTele);
+        cargoLow.setText("" + cargoLowTele);
+
+        levelOne.setChecked(levelOneTele);
+        levelTwo.setChecked(levelTwoTele);
+        levelThree.setChecked(levelThreeTele);
+
+        climbTime.setProgress(climbTimeTele);
+
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
 
@@ -363,11 +419,161 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
         }
 
+        //hatch buttons
+        findViewById(R.id.hatchCargoShipButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchCargoShipTele++;
+                hatchCargoShip.setText("" + hatchCargoShipTele);
+            }
+        });
+
+        findViewById(R.id.hatchCargoShipMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchCargoShipTele--;
+                hatchCargoShip.setText("" + hatchCargoShipTele);
+            }
+        });
+
+
+
+        findViewById(R.id.hatchTopButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchTopTele++;
+                hatchTop.setText("" + hatchTopTele);
+            }
+        });
+
+        findViewById(R.id.hatchTopMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchTopTele--;
+                hatchTop.setText("" + hatchTopTele);
+            }
+        });
+
+
+
+        findViewById(R.id.hatchMidButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchMidTele++;
+                hatchMid.setText("" + hatchMidTele);
+            }
+        });
+
+        findViewById(R.id.hatchMidMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchMidTele--;
+                hatchMid.setText("" + hatchMidTele);
+            }
+        });
+
+
+
+        findViewById(R.id.hatchLowButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchLowTele++;
+                hatchLow.setText("" + hatchLowTele);
+            }
+        });
+
+        findViewById(R.id.hatchLowMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hatchLowTele--;
+                hatchLow.setText("" + hatchLowTele);
+            }
+        });
+
+
+
+        //cargo buttons
+        findViewById(R.id.cargoCargoShipButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoCargoShipTele++;
+                cargoCargoShip.setText("" + cargoCargoShipTele);
+            }
+        });
+
+        findViewById(R.id.cargoCargoShipMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoCargoShipTele--;
+                cargoCargoShip.setText("" + cargoCargoShipTele);
+            }
+        });
+
+
+
+        findViewById(R.id.cargoTopButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoTopTele++;
+                cargoTop.setText("" + cargoTopTele);
+            }
+        });
+
+        findViewById(R.id.cargoTopMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoTopTele--;
+                cargoTop.setText("" + cargoTopTele);
+            }
+        });
+
+
+
+        findViewById(R.id.cargoMidButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoMidTele++;
+                cargoMid.setText("" + cargoMidTele);
+            }
+        });
+
+        findViewById(R.id.cargoMidMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoMidTele--;
+                cargoMid.setText("" + cargoMidTele);
+            }
+        });
+
+
+
+        findViewById(R.id.cargoLowButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoLowTele++;
+                cargoLow.setText("" + cargoLowTele);
+            }
+        });
+
+        findViewById(R.id.cargoLowMin).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cargoLowTele--;
+                cargoLow.setText("" + cargoLowTele);
+            }
+        });
+
         //this tells the app what to do when the back button on the teleop screen is pushed
         findViewById(R.id.backteleopbutton).setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                //save state of checkboxes and seek bar
+                levelOneTele = levelOne.isChecked();
+                levelTwoTele = levelTwo.isChecked();
+                levelThreeTele = levelThree.isChecked();
+                climbTimeTele = climbTime.getProgress();
+
                 //go back to the auton screen
                 goAuton();
             }
@@ -377,7 +583,84 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.nextteleopbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //go to the QRcode screen
+                //go to the post match screen
+                goPostMatch();
+            }
+        });
+    }
+
+    public void goPostMatch() {
+        //Display the post match screen
+        setContentView(R.layout.postmatch);
+
+        //Provide us with variables that let us communicate with the onscreen buttons
+        final TextView penaltyshow = (TextView) findViewById(R.id.penalties);
+
+        final CheckBox defense = (CheckBox) findViewById(R.id.defense);
+        final CheckBox failed = (CheckBox) findViewById(R.id.robotfailure);
+
+        final EditText notes = (EditText) findViewById(R.id.notes);
+        final EditText initials = (EditText) findViewById(R.id.initials);
+
+        final Spinner rankingSpinner = (Spinner) findViewById(R.id.ranking);
+
+        //Import data if coming from next screen
+        defense.setChecked(playedDefense);
+        failed.setChecked(robotFailed);
+
+        notes.setText(scouterNotes);
+        initials.setText(scouterInitials);
+
+        //Set spinner
+        String[] items = new String[]{"none" , "1" , "2" , "3"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        rankingSpinner.setAdapter(adapter);
+
+        //penalties buttons
+        findViewById(R.id.plusPenalties).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                penalties++;
+                penaltyshow.setText("" + penalties);
+            }
+        });
+
+        findViewById(R.id.minusPenalties).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                penalties--;
+                penaltyshow.setText("" + penalties);
+            }
+        });
+
+        //back button
+        findViewById(R.id.backpostbutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Saves the data in case we come back to this screen
+                playedDefense = defense.isChecked();
+                robotFailed = failed.isChecked();
+
+                scouterNotes = notes.getText().toString();
+                scouterInitials = initials.getText().toString();
+
+                //Goes to the teleop screen
+                goTeleOp();
+            }
+        });
+
+        //goes to the next screen when the button is pressed
+        findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Saves the data in case we come back to this screen
+                playedDefense = defense.isChecked();
+                robotFailed = failed.isChecked();
+
+                scouterNotes = notes.getText().toString();
+                scouterInitials = initials.getText().toString();
+
+                //Goes to the QR code screen
                 goQR();
             }
         });
@@ -395,13 +678,13 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.backbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goTeleOp();
+                goPostMatch();
             }
         });
 
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("RESET MATCH?");
-        builderReset.setMessage("Are you sure? Did the scouting Princess Peach say to go to the next match?");
+        builderReset.setMessage("Are you sure? Did Mission Control say to go to the next match?");
         findViewById(nextbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -505,13 +788,34 @@ public class MainActivity extends AppCompatActivity {
     public String GenerateQRString() {
         QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
                 + "Team: " + TEAM_NUMBER + "\t" //Team
-                + "Match: " + (MATCH_NUMBER + 1) + "\t" //Match
-                + "Lift1: " + booltoInt(Lift1) + "\t" //Lifted 1
-                + "Lift2: " + booltoInt(Lift2) + "\t" //Lifted 2
-                + "Lift: " + booltoInt(Lifted) + "\t" //Was Lifted
-                + "Rf: " + booltoInt(Failed) + "\t" //Robot Failed
-                + "Pen: " + Penalties + "\t" //Penalties
-                + "Notes: " + Notes + "\t"; //Notes
+                + "HCSA" + hatchCargoShipAuto  + "\t" //Hatch Cargo Ship Auto
+                + "HTA" + hatchTopAuto + "\t" //Hatch Top Auto
+                + "HMA" + hatchMidAuto + "\t" //Hatch Mid Auto
+                + "HLA" + hatchLowAuto + "\t" //Hatch Low Auto
+                + "CCSA" + cargoCargoShipAuto + "\t" //Cargo Cargo Ship Auto
+                + "CTA" + cargoTopAuto + "\t" //Cargo Top Auto
+                + "CMA" + cargoMidAuto + "\t" //Cargo Mid Auto
+                + "CLA" + cargoLowAuto + "\t" //Cargo Low Auto
+                + "PRE" + preload + "\t" //Preload (Cargo/Hatch)
+                + "HCST" + hatchCargoShipTele + "\t" //Hatch Cargo Ship Tele
+                + "hatchTopTele
+                hatchMidTele
+                hatchLowTele
+                cargoCargoShipTele
+                cargoTopTele
+                cargoMidTele
+                cargoLowTele
+                climbTimeTele
+                levelOneAuto
+                levelTwoAuto
+                levelOneTele
+                levelTwoTele
+                levelThreeTele
+                penalties
+                robotFailed
+                playedDefense
+                scouterNotes
+                scouterInitials
         return QRStr;
     }
 
