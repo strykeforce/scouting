@@ -2,7 +2,7 @@ package org.strykeforce.qrscannergenerator;
 
 public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
-    private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Drv", "Notes"};
+    private static final String[] labels = {"ID","TEAM","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Drv", "Notes"};
     private int numInt = 22, numStg = 1, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
