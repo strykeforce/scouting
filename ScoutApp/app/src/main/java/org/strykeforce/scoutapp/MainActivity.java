@@ -786,37 +786,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String GenerateQRString() {
-        QRStr = "ID " + (SCOUT_ID + 1) + "\t" //Scout ID
-                + "TEAM " + TEAM_NUMBER + "\t" //Team
-                +"MATCH " + MATCH_NUMBER + "\t"
-                + "HCSA " + hatchCargoShipAuto  + "\t" //Hatch Cargo Ship Auto
-                + "HTA " + hatchTopAuto + "\t" //Hatch Top Auto
-                + "HMA " + hatchMidAuto + "\t" //Hatch Mid Auto
-                + "HLA " + hatchLowAuto + "\t" //Hatch Low Auto
-                + "CCSA " + cargoCargoShipAuto + "\t" //Cargo Cargo Ship Auto
-                + "CTA " + cargoTopAuto + "\t" //Cargo Top Auto
-                + "CMA " + cargoMidAuto + "\t" //Cargo Mid Auto
-                + "CLA " + cargoLowAuto + "\t" //Cargo Low Auto
-                + "PRE " + preload + "\t" //Preload (Cargo/Hatch)
-                + "L1A " + booltoInt(levelOneAuto) + "\t" //Level One Autonomous
-                + "L2A " + booltoInt(levelTwoAuto) + "\t" //Level Two Autonomous
-                + "HCST " + hatchCargoShipTele + "\t" //Hatch Cargo Ship Tele
-                + "HTT " + hatchTopTele + "\t" //Hatch Rocket Top Tele
-                + "HMT " + hatchMidTele + "\t" //Hatch Rocket Mid Tele
-                + "HLT " + hatchLowTele + "\t" //Hatch Rocket Low Tele
-                + "CCST " + cargoCargoShipTele + "\t" //Cargo Cargo Ship Tele
-                + "CTT " + cargoTopTele + "\t" //Cargo Rocket Top Tele
-                + "CMT " + cargoMidTele + "\t" //Cargo Rocket Mid Tele
-                + "CLT " + cargoLowTele + "\t" //Cargo Rocket Low Tele
-                + "CTT" + climbTimeTele + "\t" //Climb Time Tele
-                + "L2T " + booltoInt(levelOneTele) + "\t" //Climb to Level 1 Tele
-                + "L2T " + booltoInt(levelTwoTele) + "\t" //Climb to Level 2 Tele
-                + "L3T " + booltoInt(levelThreeTele) + "\t" //Climb to Level 3 Tele
-                + "PEN " + penalties + "\t" //Penalties
-                + "FAIL " + booltoInt(robotFailed) + "\t" //Robot Failed
-                + "DEF " + booltoInt(playedDefense) + "\t" //Played Defense
-                + "NOTE " + scouterNotes + "\t" //Notes
-                + "INIT " + scouterInitials + "\t"; //Initials
+        QRStr = "ID:" + (SCOUT_ID + 1) + "\t" //Scout ID
+                + "TEAM:" + TEAM_NUMBER + "\t" //Team
+                + "MATCH:" + MATCH_NUMBER + "\t"
+                + "HCSA:" + hatchCargoShipAuto  + "\t" //Hatch Cargo Ship Auto
+                + "HTA:" + hatchTopAuto + "\t" //Hatch Top Auto
+                + "HMA:" + hatchMidAuto + "\t" //Hatch Mid Auto
+                + "HLA:" + hatchLowAuto + "\t" //Hatch Low Auto
+                + "CCSA:" + cargoCargoShipAuto + "\t" //Cargo Cargo Ship Auto
+                + "CTA:" + cargoTopAuto + "\t" //Cargo Top Auto
+                + "CMA:" + cargoMidAuto + "\t" //Cargo Mid Auto
+                + "CLA:" + cargoLowAuto + "\t" //Cargo Low Auto
+                + "PRE:" + preload + "\t" //Preload (Cargo/Hatch)
+                + "L1A:" + booltoInt(levelOneAuto) + "\t" //Level One Autonomous
+                + "L2A:" + booltoInt(levelTwoAuto) + "\t" //Level Two Autonomous
+                + "HCST:" + hatchCargoShipTele + "\t" //Hatch Cargo Ship Tele
+                + "HTT:" + hatchTopTele + "\t" //Hatch Rocket Top Tele
+                + "HMT:" + hatchMidTele + "\t" //Hatch Rocket Mid Tele
+                + "HLT:" + hatchLowTele + "\t" //Hatch Rocket Low Tele
+                + "CCST:" + cargoCargoShipTele + "\t" //Cargo Cargo Ship Tele
+                + "CTT:" + cargoTopTele + "\t" //Cargo Rocket Top Tele
+                + "CMT:" + cargoMidTele + "\t" //Cargo Rocket Mid Tele
+                + "CLT:" + cargoLowTele + "\t" //Cargo Rocket Low Tele
+                + "CT:"+ climbTimeTele + "\t" //Climb Time Tele
+                + "L1T:" + booltoInt(levelOneTele) + "\t" //Climb to Level 1 Tele
+                + "L2T:" + booltoInt(levelTwoTele) + "\t" //Climb to Level 2 Tele
+                + "L3T:" + booltoInt(levelThreeTele) + "\t" //Climb to Level 3 Tele
+                + "PEN:" + penalties + "\t" //Penalties
+                + "FAIL:" + booltoInt(robotFailed) + "\t" //Robot Failed
+                + "DEF:" + booltoInt(playedDefense) + "\t" //Played Defense
+                + "NOTE:" + scouterNotes + "\t" //Notes
+                + "INIT:" + scouterInitials + "\t"; //Initials
         return QRStr;
     }
 

@@ -2,20 +2,31 @@ package org.strykeforce.qrscannergenerator;
 
 public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
-    private static final String[] labels = {"ID","TEAM","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Drv", "Notes"};
+    private static final String[] labels = {"ID","TEAM","MATCH","HCSA","HTA","HMA","HLA","CCSA","CTA",
+            "CMA","CLA","PRE","L1A","L2A",
+            "HCST","HTT","HMT", "HLT", "CCST", "CTT", "CMT", "CLT", "CT", "L1T",
+            "L2T", "L3T", "PEN", "FAIL", "DEF", "NOTE", "INIT"};
     private int numInt = 22, numStg = 1, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 
-    public int ScaleTimeInt;
-    public int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
-    public int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
-    public int failedInt;
-    public int Driveability;
+    int hatchCargoShipAuto, hatchTopAuto, hatchMidAuto, hatchLowAuto;
+    int cargoCargoShipAuto, cargoTopAuto, cargoMidAuto, cargoLowAuto;
+    String preload;
 
-    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
-    public String Notes;
-    int Penalties;
+    int hatchCargoShipTele, hatchTopTele, hatchMidTele, hatchLowTele;
+    int cargoCargoShipTele, cargoTopTele, cargoMidTele, cargoLowTele;
+    int climbTimeTele;
+
+    int levelOneAuto , levelTwoAuto ;
+
+    int levelOneTele , levelTwoTele , levelThreeTele;
+
+    int penalties = 0;
+
+    int robotFailed, playedDefense;
+
+    String scouterNotes = "", scouterInitials = "";
 
     public ChatMessage(int[] data, String[] names)
     {
@@ -23,33 +34,45 @@ public class ChatMessage {
         this.teamNumberInt = data[1];
         this.matchNumberint = data[2];
 
-        this.baseLineInt = data[3];
-        this.deliverSwitchInt = data[4];
-        this.autoScaleInt = data[5];
+        this.hatchCargoShipAuto = data[3];
+        this.hatchTopAuto = data[4];
+        this.hatchMidAuto = data[5];
+        this.hatchLowAuto = data[6];
 
-        this.secondCubeInt = data[6];
-        this.ScaleTimeInt = data[7];
+        this.cargoCargoShipAuto = data[7];
+        this.cargoTopAuto = data[8];
+        this.cargoMidAuto = data[9];
+        this.cargoLowAuto = data[10];
 
-        this.PortalCubes = data[8];
+        this.levelOneAuto = data[11];
+        this.levelTwoAuto = data[12];
 
-        this.CenterCubes = data[9];
-        this.ZoneCubes = data[10];
-        this.SwitchCubes = data[11];
-        this.ScaleCubes = data[12];
-        this.ExchangeCubes = data[13];
+        this.preload = names[0];
 
-        this.climbAttemptInt = data[14];
-        this.climbInt = data[15];
-        this.lift1Int = data[16];
-        this.lift2Int = data[17];
-        this.liftedInt = data[18];
-        this.platformInt = data[19];
-        this.failedInt = data[20];
+        this.hatchCargoShipTele = data[13];
+        this.hatchTopTele = data[14];
+        this.hatchMidTele = data[15];
+        this.hatchLowTele = data[16];
 
-        this.Penalties = data[21];
-        this.Driveability = data[22];
+        this.cargoCargoShipTele = data[17];
+        this.cargoTopTele = data[18];
+        this.cargoMidTele = data[19];
+        this.cargoLowTele = data[20];
 
-        this.Notes = names[0];
+        this.climbTimeTele = data[21];
+
+        this.levelOneTele = data[22];
+        this.levelTwoTele = data[23];
+        this.levelThreeTele = data[24];
+
+        this.penalties = data[25];
+        this.robotFailed = data[26];
+        this.playedDefense = data[27];
+
+        this.scouterNotes = names[1];
+        this.scouterInitials = names[2];
+
         this.nums = data;
+        this.strings = names;
     }
 }

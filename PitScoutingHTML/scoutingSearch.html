@@ -57,29 +57,13 @@ function searchKeyPress(e)
 <script>
 var local_data = data;
 
-var avaliableTags = ["hewwo","mistew","obama"];
+var avaliableTags = local_data;
 
+$(function(){
 $("#userInput").autocomplete({
-    source: function (request, response) {
-        $.ajax({
-            url: "file:///C:/Users/2004g/Documents/GitHub/scouting/PitScoutingHTML/PitScoutingJSON.json",
-            data: { query: request.term },
-            success: response (data) {
-                var transformed = $.map(data, function (el) {
-                    return {
-                        label: el.drive,
-                        id: el.number
-                    };
-                });
-                response(transformed);
-            },
-            error: function () {
-                response([]);
-            }
-        });
-    });
+source: avaliableTags
 });
-
+});
 
 var input = document.getElementById("userInput")
 
