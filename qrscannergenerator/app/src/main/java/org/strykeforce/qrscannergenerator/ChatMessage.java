@@ -3,9 +3,9 @@ package org.strykeforce.qrscannergenerator;
 public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
     private static final String[] labels = {"ID","TEAM","MATCH","HCSA","HTA","HMA","HLA","CCSA","CTA",
-            "CMA","CLA","PRE","L1A","L2A",
+            "CMA","CLA","L1A","L2A",
             "HCST","HTT","HMT", "HLT", "CCST", "CTT", "CMT", "CLT", "CT", "L1T",
-            "L2T", "L3T", "PEN", "FAIL", "DEF", "NOTE", "INIT"};
+            "L2T", "L3T", "PEN", "FAIL", "DEF", "PRE", "NOTE", "INIT"};
     private int numInt = 22, numStg = 1, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
@@ -47,8 +47,6 @@ public class ChatMessage {
         this.levelOneAuto = data[11];
         this.levelTwoAuto = data[12];
 
-        this.preload = names[0];
-
         this.hatchCargoShipTele = data[13];
         this.hatchTopTele = data[14];
         this.hatchMidTele = data[15];
@@ -69,6 +67,7 @@ public class ChatMessage {
         this.robotFailed = data[26];
         this.playedDefense = data[27];
 
+        this.preload = names[0];
         this.scouterNotes = names[1];
         this.scouterInitials = names[2];
 

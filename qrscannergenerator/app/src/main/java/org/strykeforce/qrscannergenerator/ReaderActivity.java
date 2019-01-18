@@ -38,7 +38,7 @@ public class ReaderActivity extends AppCompatActivity {
     private String scanResult;
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
     private Firebase firebaseRef;
-    private static final int NUM_ELEMENTS_SENDING = 24, NUM_INT=23, NUM_STG=1;
+    private static final int NUM_INT=28, NUM_STG=3, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
