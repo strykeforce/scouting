@@ -21,7 +21,7 @@
 <br>
 
 
-<form autocomplete = "on">
+<form autocomplete = "off">
 <input type="text" id = "userInput" placeholder="Team Number" onkeydown = "return searchKeyPress(event);"/>
 <input type ="button" id ="btnSearch" value="Search" onClick="savePictures()" />
 </form>
@@ -53,19 +53,19 @@ function searchKeyPress(e)
 <br>
 
 </center>
-</body>
 <script>
 var local_data = data;
 
-var avaliableTags = local_data;
+teams = new Array(local_data.length);
 
-$(function(){
-$("#userInput").autocomplete({
-source: avaliableTags
-});
-});
+for(var count = 0; count < local_data.length; count++) {
+teams[count] = local_data[count].number;
+}
 
-var input = document.getElementById("userInput")
+$("#userInput" ).autocomplete({
+  source: teams,
+  minlength: 0
+});
 
 function savePictures()
 {
@@ -74,9 +74,9 @@ var input = document.getElementById("userInput").value;
     var searchData = '';
 
     for (var i = 0; i < local_data.length; i++) {
-      if(local_data[i].number == input || local_data[i].name == input) {
+      if(local_data[i].number == input || local_data[i].name.toUpperCase() == input.toUpperCase()) {
 
-	var searchData = 'Team Number:' + local_data[i].number +
+	var searchData = 'Team Number: ' + local_data[i].number +
 	'<br>Name: ' + local_data[i].name +
         '<br>Drive Train: ' + local_data[i].drive + 
         '<br>Wheel Type: ' + local_data[i].wheels +
@@ -101,4 +101,5 @@ document.querySelector('.results3').innerHTML = picture3;
 document.querySelector('.searchData').innerHTML = searchData;
 }
   </script>
+</body>
 </html>
