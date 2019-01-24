@@ -359,4 +359,39 @@
         android:layout_below="@+id/narrowWideSquareInput"
         android:layout_above="@+id/saveInformation" />
 
+    <Spinner
+        android:id="@+id/spinner4"
+        android:layout_width="179dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/teamInput"
+        android:layout_alignEnd="@+id/saveInformation"
+        android:layout_marginTop="102dp"
+        android:layout_marginEnd="4dp" />
+
+    <Spinner
+        android:id="@+id/spinner5"
+        android:layout_width="173dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/wheelTypeInput"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="7dp" />
+
+    <Spinner
+        android:id="@+id/spinner6"
+        android:layout_width="153dp"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/spinner5"
+        android:layout_alignTop="@+id/shiftingGearBoxText"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="0dp" />
+
+    <Spinner
+        android:id="@+id/spinner7"
+        android:layout_width="133dp"
+        android:layout_height="41dp"
+        android:layout_alignTop="@+id/sevenFiveFives"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-1dp" />
+
 </RelativeLayout>
