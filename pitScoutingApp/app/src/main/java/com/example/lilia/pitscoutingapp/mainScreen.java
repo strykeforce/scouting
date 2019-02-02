@@ -5,6 +5,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
 
@@ -29,7 +31,7 @@ public class mainScreen extends AppCompatActivity {
 
     //go to info screen
     public void goInfo() {
-        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.activity_main_screen_2);
 
         //go to picture screen
         findViewById(R.id.pictureButton).setOnClickListener(new View.OnClickListener() {
@@ -38,6 +40,11 @@ public class mainScreen extends AppCompatActivity {
                 goPictures();
             }
         });
+        String[] driveTrain = new String[]{"Tank" , "Swerve", "Slide", "Other"};
+        final Spinner driveTrainSpinner = (Spinner) findViewById(R.id.driveTrain);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, driveTrainSpinner);
+        driveTrainSpinner.setAdapter(adapter);
 
         //final warning pop up before entering information
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
@@ -144,11 +151,10 @@ public class mainScreen extends AppCompatActivity {
     public void saveInfo() {
         //locate all the text boxes
         final EditText teamInputBox = (EditText) findViewById(R.id.teamInput);
-        final EditText driveInputBox = (EditText) findViewById(R.id.driveInput);
-        final EditText wheelTypeBox = (EditText) findViewById(R.id.wheelTypeInput);
-        final EditText shiftingGearBoxBox = (EditText) findViewById(R.id.gearBoxInput);
-        final EditText sevenFiveFivesBox = (EditText) findViewById(R.id.sevenFiveFivesInput);
-        final EditText limitCurrentBox = (EditText) findViewById(R.id.limitCurrentInput);
+        final Spinner driveTrainDropdown = (Spinner) findViewById(R.id.driveTrain);
+        final Spinner wheelTypeDropdown = (Spinner) findViewById(R.id.wheelTypeSpinner);
+        final Spinner shiftingGearBoxDropdown = (Spinner) findViewById(R.id.shiftingGearBox);
+        final Spinner sevenSevenFiveDropdown = (Spinner) findViewById(R.id.sevenSevenFive);
         final EditText intakeTypeBox = (EditText) findViewById(R.id.intakeTypeInput);
         final EditText cubeReleaseBox = (EditText) findViewById(R.id.cubeReleaseInput);
         final EditText weightBox = (EditText) findViewById(R.id.weightInput);
@@ -158,11 +164,10 @@ public class mainScreen extends AppCompatActivity {
 
         //save info in those text boxes
         String teamNumber = teamInputBox.getText().toString();
-        String driveType = driveInputBox.getText().toString();
-        String wheelType = wheelTypeBox.getText().toString();
-        String shiftingGearBox = shiftingGearBoxBox.getText().toString();
-        String sevenFiveFives = sevenFiveFivesBox.getText().toString();
-        String limitCurrent = limitCurrentBox.getText().toString();
+        String driveType = driveTrainDropdown.getSelectedItem().toString();
+        String wheelType = wheelTypeDropdown.getSelectedItem().toString();
+        String shiftingGearBox = shiftingGearBoxDropdown.getSelectedItem().toString();
+        String sevenFiveFives = sevenSevenFiveDropdown.getSelectedItem().toString();
         String intakeType = intakeTypeBox.getText().toString();
         String cubeRelease = cubeReleaseBox.getText().toString();
         String weight = weightBox.getText().toString();
@@ -180,8 +185,7 @@ public class mainScreen extends AppCompatActivity {
                 pitData.put("drive", driveType);
                 pitData.put("wheels", wheelType);
                 pitData.put("gearBox", shiftingGearBox);
-                pitData.put("sevenFiveFives", sevenFiveFives);
-                pitData.put("limitCurrent", limitCurrent);
+                pitData.put("sevenSevenFives", sevenFiveFives);
                 pitData.put("intake", intakeType);
                 pitData.put("cubeRelease", cubeRelease);
                 pitData.put("weight", weight);

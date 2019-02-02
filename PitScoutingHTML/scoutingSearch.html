@@ -9,21 +9,49 @@
 <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
 <link rel="stylesheet" href="jquery-ui-1.12.1/style.css">
+
+<style>
+
+body{
+background-color: #F1B91A;
+
+}
+
+h1{
+font-size: 25px;
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+p{
+font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
+
+inputBox{
+text-align: center;
+}
+
+</style>
+
+
+
 </head>
+
 
 
 
 
 <body>
 
-<center> This is a website to search for teams' pictures.
-<br>
-<br>
 
+<center> <h1>This is a website to search for teams' pictures.</h1>
+<br>
 
 <form autocomplete = "off">
+<div class="inputBox">
 <input type="text" id = "userInput" placeholder="Team Number" onkeydown = "return searchKeyPress(event);"/>
-<input type ="button" id ="btnSearch" value="Search" onClick="savePictures()" />
+
+<input type ="button" id ="btnSearch" value="Search" onClick="savePictures()" 
+</div>
 </form>
 
 <script>
@@ -40,7 +68,7 @@ function searchKeyPress(e)
 
 </script>
 
-
+<p>
 <div class="searchData"></div>
 <br>
 <div class="results"></div>
@@ -51,7 +79,7 @@ function searchKeyPress(e)
 <br>
 <div class="results3"></div>
 <br>
-
+</p>
 </center>
 <script>
 var local_data = data;
