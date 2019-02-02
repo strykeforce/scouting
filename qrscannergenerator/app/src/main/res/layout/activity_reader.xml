@@ -393,5 +393,13 @@
         android:layout_alignStart="@+id/red2view"
         android:layout_marginBottom="18dp" />
 
+    <Button
+        android:text="Print"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/printbttn"
+        android:layout_alignBottom="@+id/resetButton"
+        android:layout_toRightOf="@+id/textView3" />
+
 
 </RelativeLayout>

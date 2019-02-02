@@ -127,6 +127,8 @@ public class ReaderActivity extends AppCompatActivity {
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+
+        Button print_btn = (Button) findViewById(R.id.scan_btn);
     }
 
 
