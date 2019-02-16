@@ -5,6 +5,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class mainScreen extends AppCompatActivity {
         goInfo();
     }
 
+
     //go to info screen
     public void goInfo() {
         setContentView(R.layout.activity_main_screen_2);
@@ -40,11 +42,68 @@ public class mainScreen extends AppCompatActivity {
                 goPictures();
             }
         });
+
+
+        //set spinner entries
+
+
+
         String[] driveTrain = new String[]{"Tank" , "Swerve", "Slide", "Other"};
         final Spinner driveTrainSpinner = (Spinner) findViewById(R.id.driveTrain);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, driveTrainSpinner);
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, driveTrain);
         driveTrainSpinner.setAdapter(adapter);
+
+
+        String[] wheelType = new String[]{"Colsons" , "Mechanum", "Omni", "Mixed", "Other", "Nitrile/Tread"};
+        final Spinner wheelTypeSpinner = (Spinner) findViewById(R.id.wheelTypeSpinner);
+
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, wheelType);
+        wheelTypeSpinner.setAdapter(adapter1);
+
+
+        String[] shiftingGearBoxStrings = new String[]{"Yes", "No"};
+        final Spinner shiftingGearBoxSpinner = (Spinner) findViewById(R.id.shiftingGearBox);
+
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, shiftingGearBoxStrings);
+        shiftingGearBoxSpinner.setAdapter(adapter2);
+
+
+        String[] sevenSevenFiveStrings = new String[]{"No" , "Yes"};
+        final Spinner sevenSevenFiveSpinner = (Spinner) findViewById(R.id.sevenSevenFive);
+
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sevenSevenFiveStrings);
+        sevenSevenFiveSpinner.setAdapter(adapter3);
+
+
+        //Make prompts link to their pages
+
+
+
+
+        ((Spinner)findViewById(R.id.driveTrain)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                if(adapter.getItem(i)== "Other") {
+
+
+                   setContentView(an
+                   )
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+/*
+jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
+ */
 
         //final warning pop up before entering information
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
