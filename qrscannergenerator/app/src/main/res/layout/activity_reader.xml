@@ -22,8 +22,6 @@
 
     tools:context="org.strykeforce.qrscannergenerator.ReaderActivity">
 
-
-
     <TextView
 
         android:layout_width="wrap_content"
@@ -34,9 +32,7 @@
 
         android:layout_centerHorizontal="true"
 
-        android:id="@+id/textView3"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+        android:id="@+id/textView3" />
 
 
 
@@ -49,8 +45,6 @@
         android:layout_height="wrap_content"
 
         android:id="@+id/red3view"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
 
         android:layout_centerVertical="true"
 
@@ -106,8 +100,6 @@
 
         android:id="@+id/red1view"
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-
         android:layout_alignBaseline="@+id/red3view"
 
         android:layout_alignBottom="@+id/red3view"
@@ -127,8 +119,6 @@
         android:layout_height="wrap_content"
 
         android:id="@+id/red2view"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
 
         android:layout_alignBaseline="@+id/red1view"
 
@@ -180,8 +170,6 @@
 
         android:id="@+id/blueView1"
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-
         android:layout_below="@+id/checkRed1"
 
         android:layout_alignParentLeft="true"
@@ -199,8 +187,6 @@
         android:layout_height="wrap_content"
 
         android:id="@+id/blueView2"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
 
         android:layout_alignBaseline="@+id/blueView1"
 
@@ -314,8 +300,6 @@
 
         android:id="@+id/blueView3"
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-
         android:layout_alignBaseline="@+id/blueView2"
 
         android:layout_alignBottom="@+id/blueView2"
@@ -369,8 +353,6 @@
 
         android:layout_marginTop="60dp"
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-
         android:layout_below="@+id/textView3"
 
         android:layout_alignLeft="@+id/red2view"
@@ -387,7 +369,6 @@
 
         android:id="@+id/resetButton"
 
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/red2view"
         android:layout_alignStart="@+id/red2view"

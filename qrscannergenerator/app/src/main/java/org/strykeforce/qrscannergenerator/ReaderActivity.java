@@ -15,10 +15,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
+//import com.google.android.gms.appindexing.Action;
+//import com.google.android.gms.appindexing.AppIndex;
+//import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -36,8 +35,6 @@ public class ReaderActivity extends AppCompatActivity {
     private Button scan_btn;
     private CheckBox[] checkboxes = new CheckBox[6]; //refers to off/on checkboxes images
     private String scanResult;
-    private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
-    private Firebase firebaseRef;
     private static final int NUM_INT=28, NUM_STG=3, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
@@ -49,10 +46,6 @@ public class ReaderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reader); //sets to layout of app
-
-        //initializes firebase to be able to send data to that URL
-        Firebase.setAndroidContext(this);
-        firebaseRef = new Firebase(FIREBASE_URL);
 
         //initializes all off/on check boxes
         checkboxes[0] = (CheckBox) findViewById(R.id.checkRed1);
@@ -126,7 +119,7 @@ public class ReaderActivity extends AppCompatActivity {
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         Button print_btn = (Button) findViewById(R.id.scan_btn);
     }
@@ -328,7 +321,7 @@ public class ReaderActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.*/
 
-    public Action getIndexApiAction() {
+    /*public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Reader Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
@@ -338,7 +331,7 @@ public class ReaderActivity extends AppCompatActivity {
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
 
                 .build();
-    }
+    }*/
 
 
     @Override
@@ -347,8 +340,8 @@ public class ReaderActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+        //client.connect();
+        //AppIndex.AppIndexApi.start(client, getIndexApiAction());
 
 
 
@@ -366,9 +359,9 @@ public class ReaderActivity extends AppCompatActivity {
 
         // See https://g.co/AppIndexing/AndroidStudio for more information.
 
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        //AppIndex.AppIndexApi.end(client, getIndexApiAction());
 
-        client.disconnect();
+        //client.disconnect();
 
     }
 }
