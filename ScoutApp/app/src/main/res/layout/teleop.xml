@@ -163,7 +163,7 @@
         android:text="0"
         android:layout_height="30dp"
         android:id="@+id/hatchTop"
-        android:textColor="?android:attr/colorControlActivated"
+        android:textColor="?attr/colorControlActivated"
         android:textStyle="bold"
         android:scaleX="2.00"
         android:scaleY="2.00"

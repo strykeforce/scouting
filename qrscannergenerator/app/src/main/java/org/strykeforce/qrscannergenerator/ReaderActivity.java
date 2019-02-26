@@ -15,7 +15,7 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.client.Firebase;
+//import com.firebase.client.Firebase;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -37,7 +37,7 @@ public class ReaderActivity extends AppCompatActivity {
     private CheckBox[] checkboxes = new CheckBox[6]; //refers to off/on checkboxes images
     private String scanResult;
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
-    private Firebase firebaseRef;
+//    private Firebase firebaseRef;
     private static final int NUM_INT=28, NUM_STG=3, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
@@ -51,8 +51,8 @@ public class ReaderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reader); //sets to layout of app
 
         //initializes firebase to be able to send data to that URL
-        Firebase.setAndroidContext(this);
-        firebaseRef = new Firebase(FIREBASE_URL);
+//        Firebase.setAndroidContext(this);
+//        firebaseRef = new Firebase(FIREBASE_URL);
 
         //initializes all off/on check boxes
         checkboxes[0] = (CheckBox) findViewById(R.id.checkRed1);
