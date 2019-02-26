@@ -126,7 +126,7 @@ public class ReaderActivity extends AppCompatActivity {
         });
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
         Button print_btn = (Button) findViewById(R.id.scan_btn);
     }
@@ -328,7 +328,7 @@ public class ReaderActivity extends AppCompatActivity {
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.*/
 
-    public Action getIndexApiAction() {
+    /*public Action getIndexApiAction() {
         Thing object = new Thing.Builder()
                 .setName("Reader Page")
                 .setUrl(Uri.parse("http://[ENTER-YOUR-URL-HERE]"))
@@ -338,7 +338,7 @@ public class ReaderActivity extends AppCompatActivity {
                 .setActionStatus(Action.STATUS_TYPE_COMPLETED)
 
                 .build();
-    }
+    }*/
 
 
     @Override
@@ -347,8 +347,8 @@ public class ReaderActivity extends AppCompatActivity {
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        AppIndex.AppIndexApi.start(client, getIndexApiAction());
+        //client.connect();
+        //AppIndex.AppIndexApi.start(client, getIndexApiAction());
 
 
 
@@ -366,9 +366,9 @@ public class ReaderActivity extends AppCompatActivity {
 
         // See https://g.co/AppIndexing/AndroidStudio for more information.
 
-        AppIndex.AppIndexApi.end(client, getIndexApiAction());
+        //AppIndex.AppIndexApi.end(client, getIndexApiAction());
 
-        client.disconnect();
+        //client.disconnect();
 
     }
 }

@@ -3,16 +3,13 @@ apply plugin: 'com.android.application'
 
 
 android {
-
     compileSdkVersion 28
-
-    buildToolsVersion "28.0.3"
-
+    buildToolsVersion '28.0.3'
     defaultConfig {
 
         applicationId "org.strykeforce.qrscannergenerator"
 
-        minSdkVersion 15
+        minSdkVersion 28
 
         targetSdkVersion 28
 
@@ -23,10 +20,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-
     buildTypes {
 
-        debug{
+        debug {
 
             debuggable true
 
@@ -41,9 +37,6 @@ android {
         }
 
     }
-
-
-
     packagingOptions {
 
         exclude 'META-INF/LICENSE'
@@ -53,15 +46,14 @@ android {
         exclude 'META-INF/NOTICE'
 
     }
-
+    productFlavors {
+    }
 }
 
 
 
 dependencies {
-
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
 
         exclude group: 'com.android.support', module: 'support-annotations'
@@ -77,9 +69,7 @@ dependencies {
 
 
     //DEPENDENCIES TO ZXING LIBRARY, necessary to import files
-
     implementation 'com.google.zxing:core:3.2.1'
-
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
 
     implementation 'com.android.support:support-annotations:25.1.0'
