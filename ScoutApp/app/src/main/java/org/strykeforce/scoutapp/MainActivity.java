@@ -52,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
     //TAG is used for inserting tags later on for troubleshooting purposes
     private final static String TAG = "Sam";
 
-    public boolean Lift1, Lift2, Lifted;
-
-    boolean Failed = false;
-    int Penalties = 0;
-    String Notes = "none";
-
     int ScoutId;
     int StartMatch;
 
@@ -77,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
     int penalties = 0;
 
     boolean robotFailed = false, playedDefense = false;
+
+    int rankSpinPos = 0;
+    String rank;
 
     String scouterNotes = "", scouterInitials = "";
 
@@ -615,6 +612,8 @@ public class MainActivity extends AppCompatActivity {
         notes.setText(scouterNotes);
         initials.setText(scouterInitials);
 
+        rankingSpinner.setSelection(rankSpinPos);
+
         //Set spinner
         String[] items = new String[]{"none" , "1" , "2" , "3"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
@@ -645,6 +644,9 @@ public class MainActivity extends AppCompatActivity {
                 playedDefense = defense.isChecked();
                 robotFailed = failed.isChecked();
 
+                rank = rankingSpinner.getSelectedItem().toString();
+                rankSpinPos = rankingSpinner.getSelectedItemPosition();
+
                 scouterNotes = notes.getText().toString();
                 scouterInitials = initials.getText().toString();
 
@@ -663,6 +665,9 @@ public class MainActivity extends AppCompatActivity {
 
                 scouterNotes = notes.getText().toString();
                 scouterInitials = initials.getText().toString();
+
+                rank = rankingSpinner.getSelectedItem().toString();
+                rankSpinPos = rankingSpinner.getSelectedItemPosition();
 
                 //Goes to the QR code screen
                 goQR();
@@ -771,6 +776,9 @@ public class MainActivity extends AppCompatActivity {
         robotFailed = false;
         playedDefense = false;
 
+        rank = "";
+        rankSpinPos = 0;
+
         scouterNotes = "";
         scouterInitials = "";
 
@@ -818,6 +826,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String GenerateQRString() {
+        climbTimeTele = (int) ( ( (double) climbTimeTele /100) * 60 );
         QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
                 + "TEAM: " + TEAM_NUMBER + "\t" //Team
                 + "MATCH: " + MATCH_NUMBER + "\t"
@@ -847,6 +856,7 @@ public class MainActivity extends AppCompatActivity {
                 + "FAIL: " + booltoInt(robotFailed) + "\t" //Robot Failed
                 + "DEF: " + booltoInt(playedDefense) + "\t" //Played Defense
                 + "PRE: " + preload + "\t" //Preload (Cargo/Hatch)
+                + "RANK: " + rank + "\t" //Rank
                 + "NOTE: " + scouterNotes + "\t" //Notes
                 + "INIT: " + scouterInitials + "\t"; //Initials
         return QRStr;

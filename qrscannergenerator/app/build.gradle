@@ -9,7 +9,7 @@ android {
 
         applicationId "org.strykeforce.qrscannergenerator"
 
-        minSdkVersion 28
+        minSdkVersion 20
 
         targetSdkVersion 28
 

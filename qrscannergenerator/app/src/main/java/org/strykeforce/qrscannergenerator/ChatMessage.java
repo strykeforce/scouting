@@ -5,8 +5,8 @@ public class ChatMessage {
     private static final String[] labels = {"ID","TEAM","MATCH","HCSA","HTA","HMA","HLA","CCSA","CTA",
             "CMA","CLA","L1A","L2A",
             "HCST","HTT","HMT", "HLT", "CCST", "CTT", "CMT", "CLT", "CT", "L1T",
-            "L2T", "L3T", "PEN", "FAIL", "DEF", "PRE", "NOTE", "INIT"};
-    private int numInt = 22, numStg = 1, numSending = numInt+numStg;
+            "L2T", "L3T", "PEN", "FAIL", "DEF", "PRE", "RANK", "NOTE", "INIT"};
+    private int numInt = 28, numStg = 4, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 
@@ -25,6 +25,8 @@ public class ChatMessage {
     int penalties = 0;
 
     int robotFailed, playedDefense;
+
+    String rank;
 
     String scouterNotes = "", scouterInitials = "";
 
@@ -68,8 +70,9 @@ public class ChatMessage {
         this.playedDefense = data[27];
 
         this.preload = names[0];
-        this.scouterNotes = names[1];
-        this.scouterInitials = names[2];
+        this.rank = names[1];
+        this.scouterNotes = names[2];
+        this.scouterInitials = names[3];
 
         this.nums = data;
         this.strings = names;

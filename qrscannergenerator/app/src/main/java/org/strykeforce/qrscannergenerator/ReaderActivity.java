@@ -38,7 +38,7 @@ public class ReaderActivity extends AppCompatActivity {
     private String scanResult;
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
 //    private Firebase firebaseRef;
-    private static final int NUM_INT=28, NUM_STG=3, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
+    private static final int NUM_INT=28, NUM_STG=4, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
@@ -249,6 +249,7 @@ public class ReaderActivity extends AppCompatActivity {
                         o.put("penalties",scoutingData[j].penalties);
                         o.put("robotFailed",scoutingData[j].robotFailed);
                         o.put("playedDefense",scoutingData[j].playedDefense);
+                        o.put("rank", scoutingData[j].rank);
                         o.put("scouterNotes",scoutingData[j].scouterNotes);
                         o.put("scouterInitials",scoutingData[j].scouterInitials);
                         String outputString = o.toString();
