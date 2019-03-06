@@ -20,17 +20,16 @@
 
 
         android:id="@+id/driveTrainOK"
-        android:layout_width="wrap_content"
-        android:layout_height="55dp"
+        android:layout_width="299dp"
+        android:layout_height="224dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="343dp"
-        android:layout_marginLeft="343dp"
+        android:layout_marginStart="239dp"
+        android:layout_marginLeft="239dp"
         android:layout_marginTop="257dp"
-        android:layout_marginBottom="696dp"
+        android:layout_marginBottom="406dp"
         android:text="OK" />
 
 

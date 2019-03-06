@@ -47,7 +47,7 @@
         android:layout_y="675dp"
         android:layout_x="25dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/cubeReleaseText"
         android:layout_alignParentLeft="true"/>
@@ -61,7 +61,7 @@
         android:layout_x="41dp"
         android:layout_marginLeft="0dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/textView"
         android:layout_alignParentLeft="true"/>
@@ -73,7 +73,7 @@
         android:layout_below="@+id/driveTrainText"
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:layout_x="41dp"
         android:layout_y="270dp"
         android:text="Wheel Type"
@@ -88,7 +88,7 @@
         android:layout_x="41dp"
         android:layout_marginLeft="0dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/wheelTypeText"
         android:layout_alignParentLeft="true" />
@@ -102,7 +102,7 @@
         android:layout_x="26dp"
         android:layout_marginLeft="0dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/shiftingGearBoxText"
         android:layout_alignParentLeft="true"/>
@@ -116,23 +116,24 @@
         android:layout_x="33dp"
         android:layout_marginRight="238dp"
         android:layout_marginEnd="238dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/sevenFiveFives"
         android:layout_alignParentLeft="true"/>
 
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:id="@+id/cubeReleaseText"
-        android:text="Filler"
-        android:layout_y="591dp"
-        android:layout_x="31dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="40dp"
-        android:textSize="24sp"
+        android:layout_width="429dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/intakeTypeText"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="323dp"
+        android:layout_x="31dp"
+        android:layout_y="591dp"
+        android:text="Can they pick a hatch up off the ground?"
+        android:textSize="24sp" />
 
     <TextView
         android:layout_height="wrap_content"
@@ -141,25 +142,25 @@
         android:text="Drive narrow, wide, or square?"
         android:layout_y="745dp"
         android:layout_x="23dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/weightText"
         android:layout_alignParentLeft="true"
         android:layout_alignEnd="@+id/saveInformation"/>
 
     <EditText
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:id="@+id/teamInput"
-        android:layout_y="155dp"
-        android:layout_x="420dp"
-        android:layout_marginLeft="73dp"
-        android:layout_marginStart="73dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/teamText"
         android:layout_alignParentRight="true"
-        android:textColor="#1c1817"
-        android:inputType="number"
+        android:layout_marginStart="73dp"
+        android:layout_marginLeft="73dp"
+        android:layout_x="420dp"
+        android:layout_y="155dp"
         android:ems="10"
-        android:layout_alignTop="@+id/teamText"/>
+        android:inputType="number"
+        android:textColor="#1c1817" />
 
     <EditText
         android:id="@+id/teamName"
@@ -264,7 +265,7 @@
         android:text="Notes"
         android:layout_marginLeft="23dp"
         android:layout_marginStart="23dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="35dp"
         android:textSize="24sp"
         android:layout_below="@+id/narrowWideSquareText"
         android:layout_alignParentLeft="true"
@@ -272,19 +273,19 @@
         android:textAppearance="@style/TextAppearance.AppCompat"/>
 
     <EditText
-        android:layout_height="60dp"
-        android:layout_width="450dp"
-        tools:id="notes"
         android:id="@+id/notes"
-        android:layout_y="193dp"
-        android:layout_x="420dp"
-        android:layout_marginBottom="-221dp"
-        android:layout_alignParentRight="true"
-        android:textColor="#1c1817"
-        android:inputType="textLongMessage"
-        android:ems="10"
+        android:layout_width="431dp"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/textView2"
-        android:layout_centerHorizontal="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-221dp"
+        android:layout_x="420dp"
+        android:layout_y="193dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        android:textColor="#1c1817"
+        tools:id="notes" />
 
     <Spinner
         android:id="@+id/driveTrain"
