@@ -62,6 +62,7 @@ public class mainScreen extends AppCompatActivity {
     String wheelTypeString = "";
     String shiftingGearBoxString = "";
     String driveTrainString = "";
+    String sevenSevenFiveCurrent = "";
 
 
     @Override
@@ -83,7 +84,7 @@ public void goCurrentPrompt() {
     findViewById(R.id.currentOK).setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            sevenSevenFive = currentBox.getText().toString();
+            sevenSevenFiveCurrent = currentBox.getText().toString();
             goInfo();
         }
     });
@@ -497,13 +498,14 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
                 pitData.put("narrowWideSquare", narrowWideSquare);
                 pitData.put("notes",notes);
                 pitData.put("sevenFiveFive",currentString);
+                pitData.put("sevenFiveFiveCurrent",sevenSevenFiveCurrent);
                 pitData.put("wheelType",wheelTypeString);
                 pitData.put("driveTrain",driveTrainString);
                 pitData.put("shiftingGearBox",shiftingGearBoxString);
                 pitData.put("sevenFiveFive",sevenSevenFive);
                 pitData.put("wheelTypeOther",wheelTypeOther);
                 pitData.put("wheelTypeMixed",wheelTypeMixed);
-                pitData.put("driveTrain",driveTrainOther);
+                pitData.put("driveTrainOther",driveTrainOther);
                 String outputString = pitData.toString();
                 outputString = outputString + ",";
                 fw.println(outputString);
