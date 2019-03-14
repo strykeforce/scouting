@@ -19,11 +19,11 @@ background-color: #FFFFE0;
 
 h1{
 font-size: 25px;
-font-family: "Helvetica, "Helvetica", cursive;
+font-family: "Helvetica, "Helvetica";
 }
 
 p{
-font-family: "Helvetica", "Helvetica", cursive;
+font-family: "Helvetica", "Helvetica";
 }
 
 inputBox{
@@ -41,20 +41,66 @@ text-align: center;
 
 
 <body>
+<table width="100%" border="0">
+<tr>
+  <td width="25%" align="left" valign="top">
+    (◡︿◡✿)
+    <div id="mechom"></div>
+  </td>
+  <td width="50%" align="center">
+    <h1>Scouting Search</h1>
+    <br>
 
+    <form autocomplete = "off">
+    <div class="inputBox">
+    <input type="text" id = "userInput" placeholder="Team Number" onkeydown = "return searchKeyPress(event);"/>
 
-<center> <h1>Scouting Search</h1>
-<br>
+    <input type ="button" id ="btnSearch" value="Search" onClick="savePictures()"
+    </div>
+    </form>
+    <p>
+    <div class="searchData"></div>
+    <br>
+    <div class="results"></div>
+    <br>
+    <div class="results1"></div>
+    <br>
+    <div class="results2"></div>
+    <br>
+    <div class="results3"></div>
+    </p>
+  </td>
+  <td align="right" valign="top">
+    <div id="teamlist"></div>
+  </td>
+</tr>
+</table>
 
-<form autocomplete = "off">
-<div class="inputBox">
-<input type="text" id = "userInput" placeholder="Team Number" onkeydown = "return searchKeyPress(event);"/>
-
-<input type ="button" id ="btnSearch" value="Search" onClick="savePictures()" 
-</div>
-</form>
 
 <script>
+var local_data = data;
+
+teams = new Array(local_data.length);
+var teamstg = "";
+
+mechanum();
+teamNames();
+
+for(var count = 0; count < local_data.length; count++) {
+teams[count] = local_data[count].number;
+teamstg += local_data[count].number + "<br>";
+}
+
+function teamNames()
+{
+  document.getElementById("teamlist").innerHTML = teamstg;
+}
+
+$("#userInput" ).autocomplete({
+  source: teams,
+  minlength: 0
+});
+
 function searchKeyPress(e)
 {
     e = e || window.event;
@@ -66,34 +112,23 @@ function searchKeyPress(e)
     return true;
 }
 
-</script>
 
-<p>
-<div class="searchData"></div>
-<br>
-<div class="results"></div>
-<br>
-<div class="results1"></div>
-<br>
-<div class="results2"></div>
-<br>
-<div class="results3"></div>
-<br>
-</p>
-</center>
-<script>
-var local_data = data;
-
-teams = new Array(local_data.length);
-
-for(var count = 0; count < local_data.length; count++) {
-teams[count] = local_data[count].number;
+function mechanum()
+{
+  var mechomList = "";
+  for(var j = 0; j < local_data.length; j++)
+  {
+    if(local_data[j].wheelType == "Mechanum" || local_data[j].wheelTypeMixed.toUpperCase().includes("MECHANUM") || local_data[j].wheelTypeOther.toUpperCase().includes("MECHANUM"))
+    {
+      mechomList += local_data[j].number + ": Mechanum<br>";
+    }
+    if(local_data[j].wheelType == "Omni" || local_data[j].wheelTypeMixed.toUpperCase().includes("OMNI") || local_data[j].wheelTypeOther.toUpperCase().includes("OMNI"))
+    {
+      mechomList += local_data[j].number + ": Omni<br>";
+    }
+  }
+  document.getElementById('mechom').innerHTML = mechomList;
 }
-
-$("#userInput" ).autocomplete({
-  source: teams,
-  minlength: 0
-});
 
 function savePictures()
 {
