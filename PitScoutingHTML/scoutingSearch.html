@@ -46,8 +46,11 @@ text-align: center;
   <td width="25%" align="left" valign="top">
     (◡︿◡✿)
     <div id="mechom"></div>
+    <br>
+    Team List
+    <div id="teamlist"></div>
   </td>
-  <td width="50%" align="center">
+  <td width="50%" align="center" valign="top">
     <h1>Scouting Search</h1>
     <br>
 
@@ -59,8 +62,6 @@ text-align: center;
     </div>
     </form>
     <p>
-    <div class="searchData"></div>
-    <br>
     <div class="results"></div>
     <br>
     <div class="results1"></div>
@@ -70,8 +71,8 @@ text-align: center;
     <div class="results3"></div>
     </p>
   </td>
-  <td align="right" valign="top">
-    <div id="teamlist"></div>
+  <td align="left" valign="top">
+    <div class="searchData"></div>
   </td>
 </tr>
 </table>
@@ -86,13 +87,12 @@ var teamstg = "";
 mechanum();
 teamNames();
 
-for(var count = 0; count < local_data.length; count++) {
-teams[count] = local_data[count].number;
-teamstg += local_data[count].number + "<br>";
-}
-
 function teamNames()
 {
+  for(var count = 0; count < local_data.length; count++) {
+  teams[count] = local_data[count].number;
+  teamstg += local_data[count].number + "<br>";
+  }
   document.getElementById("teamlist").innerHTML = teamstg;
 }
 
@@ -141,8 +141,8 @@ var input = document.getElementById("userInput").value;
 
 	var searchData = 'Team Number: ' + local_data[i].number +
 	'<br>Name: ' + local_data[i].name +
-        '<br>Drive Train: ' + local_data[i].driveTrain + ',' + local_data[i].driveTrainOther +
-        '<br>Wheel Type: ' + local_data[i].wheelType + ',' + local_data[i].wheelTypeOther + ',' + local_data[i].wheelTypeMixed +
+  '<br>Drive Train: ' + local_data[i].driveTrain + ',' + local_data[i].driveTrainOther +
+  '<br>Wheel Type: ' + local_data[i].wheelType + ',' + local_data[i].wheelTypeOther + ',' + local_data[i].wheelTypeMixed +
 	'<br>Shifting Gear Box: ' + local_data[i].shiftingGearBox +
 	'<br>775s on drive train: ' + local_data[i].sevenFiveFive+
 	'<br>How do they limit current: ' +local_data[i].sevenFiveFiveCurrent +
@@ -150,6 +150,7 @@ var input = document.getElementById("userInput").value;
 	'<br>Hatches of the ground?: ' + local_data[i].hatchOffGround +
 	'<br>Weight: ' + local_data[i].weight +
 	'<br>Do they drive narrow, wide, or square: ' + local_data[i].narrowWideSquare +
+  '<br>What do they preload: ' + local_data[i].preload +
 	'<br>Notes: ' + local_data[i].notes;
 
 picture1 = "<img src=teamPictures/" + local_data[i].number + "_1.jpg height=400px />";
