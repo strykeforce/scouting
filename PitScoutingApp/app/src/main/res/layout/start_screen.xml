@@ -44,12 +44,11 @@
         android:id="@+id/teamList"
         android:layout_width="100dp"
         android:layout_height="250dp"
-        android:layout_alignBottom="@+id/numberOK"
-        android:layout_alignRight="@+id/numberOK"
-        android:layout_alignParentBottom="true"
-        android:align_below="@+id/numberOK"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="203dp" />
+        android:layout_alignTop="@+id/numberOK"
+
+
+        android:layout_alignEnd="@+id/numberOK"
+        android:layout_marginTop="109dp" />
 
 
 </RelativeLayout>
