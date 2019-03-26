@@ -4,18 +4,24 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.EditText;
+
+import java.util.ArrayList;
+
 
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.util.List;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -23,128 +29,185 @@ import android.provider.MediaStore;
 
 public class mainScreen extends AppCompatActivity {
 
-    EditText teamInputBox ;
-     Spinner driveTrainDropdown ;
-    Spinner wheelTypeDropdown ;
-    Spinner shiftingGearBoxDropdown ;
-    Spinner sevenSevenFiveDropdown ;
-    EditText intakeTypeBox ;
-     EditText weightBox ;
-    EditText narrowWideSquareBox ;
-     EditText notesBox ;
-     EditText nameBox ;
-     EditText currentBox;
-     EditText wheelMixedBox;
+    EditText teamInputBox;
+    Spinner driveTrainDropdown;
+    Spinner wheelTypeDropdown;
+    Spinner shiftingGearBoxDropdown;
+    Spinner sevenSevenFiveDropdown;
+    EditText intakeTypeBox;
+    EditText weightBox;
+    EditText narrowWideSquareBox;
+    EditText notesBox;
+    EditText nameBox;
+    EditText currentBox;
+    EditText wheelMixedBox;
     EditText wheelOtherBox;
     EditText driveOtherBox;
     EditText numberSearchBox;
     TextView teamNumberCheck;
+    ListView teamNumberList;
 
-    String teamNumber = "" ;
-    String driveType ="";
-    String wheelType ="";
-    String shiftingGearBox ="";
-    String sevenFiveFives ="";
-    String intakeType ="";
-    String hatchOffGround ="";
-    String weight ="";
-    String narrowWideSquare ="" ;
-    String notes ="";
-    String name ="";
+    String teamNumber = "";
+    String driveType = "";
+    String wheelType = "";
+    String shiftingGearBox = "";
+    String sevenFiveFives = "";
+    String intakeType = "";
+    String hatchOffGround = "";
+    String weight = "";
+    String narrowWideSquare = "";
+    String notes = "";
+    String name = "";
     String preloadString = "";
     String sevenSevenFive = "";
     String wheelTypeMixed = "";
     String wheelTypeOther = "";
     String driveTrainOther = "";
-    static int driveTrainId =0;
-    static int wheelTypeId=0;
-    static int shiftingGearBoxId=0;
-    static int sevenSevenFiveId=0;
-    static int hatchOffGroundId=0;
-    static int preloadSpinnerId=0;
+    static int driveTrainId = 0;
+    static int wheelTypeId = 0;
+    static int shiftingGearBoxId = 0;
+    static int sevenSevenFiveId = 0;
+    static int hatchOffGroundId = 0;
+    static int preloadSpinnerId = 0;
     String currentStringSpinner = "";
     String wheelTypeString = "";
     String shiftingGearBoxString = "";
     String driveTrainString = "";
     String sevenSevenFiveCurrent = "";
     String preloadStrings = "";
-
-
-
+    private static final String TAG = "MainScreen";
+    List<String> teams = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        teams.add("27");
+        teams.add("67");
+        teams.add("216");
+        teams.add("244");
+        teams.add("288");
+        teams.add("858");
+        teams.add("1918");
+        teams.add("2054");
+        teams.add("2405");
+        teams.add("2772");
+        teams.add("3458");
+        teams.add("3546");
+        teams.add("3875");
+        teams.add("4327");
+        teams.add("4362");
+        teams.add("4482");
+        teams.add("4855");
+        teams.add("4956");
+        teams.add("4967");
+        teams.add("5056");
+        teams.add("5161");
+        teams.add("5316");
+        teams.add("5460");
+        teams.add("5470");
+        teams.add("5675");
+        teams.add("5963");
+        teams.add("6090");
+        teams.add("6428");
+        teams.add("6600");
+        teams.add("6627");
+        teams.add("7073");
+        teams.add("7187");
+        teams.add("7225");
+        teams.add("7248");
+        teams.add("7256");
+        teams.add("7689");
+        teams.add("7811");
+        teams.add("7812");
+        teams.add("7814");
+        teams.add("7911");
+
+
+
         //go to info screen
+
+        // teams.add("");
+
+
+
         goStart();
     }
 
-public void goStart(){
+    public void goStart() {
+        Log.i(TAG, "entering goStart()");
         setContentView(R.layout.start_screen);
         numberSearchBox = (EditText) findViewById(R.id.numberSearchBox);
-    findViewById(R.id.numberSearchOK).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            teamNumber = numberSearchBox.getText().toString();
-            goInfo();
-        }
-    });
+        teamNumberList = (ListView) findViewById(R.id.teamList);
 
 
-}
+//array is set
 
-public void goCurrentPrompt() {
+        final ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, teams);
+        teamNumberList.setAdapter(adapterList);
+
+        findViewById(R.id.numberOK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                teamNumber = numberSearchBox.getText().toString();
+
+
+                goInfo();
+            }
+        });
+
+
+    }
+
+    public void goCurrentPrompt() {
         setContentView(R.layout.seven_seven_five_prompt);
 
-    currentBox = (EditText) findViewById(R.id.curentlimitprompt);
+        currentBox = (EditText) findViewById(R.id.curentlimitprompt);
 
-    currentBox.setText(sevenSevenFiveCurrent);
-    findViewById(R.id.currentOK).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            sevenSevenFiveCurrent = currentBox.getText().toString();
-            goInfo();
-        }
-    });
+        currentBox.setText(sevenSevenFiveCurrent);
+        findViewById(R.id.currentOK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sevenSevenFiveCurrent = currentBox.getText().toString();
+                goInfo();
+            }
+        });
 
 
+    }
 
-}
-
-public void goDrivePrompt(){
+    public void goDrivePrompt() {
         setContentView(R.layout.drive_train_prompt);
-    driveOtherBox = (EditText) findViewById(R.id.driveTrainOtherPrompt);
-    driveOtherBox.setText(driveTrainOther);
-    findViewById(R.id.driveTrainOK).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            driveTrainOther = driveOtherBox.getText().toString();
-           goInfo();
-        }
-    });
+        driveOtherBox = (EditText) findViewById(R.id.driveTrainOtherPrompt);
+        driveOtherBox.setText(driveTrainOther);
+        findViewById(R.id.driveTrainOK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                driveTrainOther = driveOtherBox.getText().toString();
+                goInfo();
+            }
+        });
 
 
-}
+    }
 
 
-public void goWheelTypeOtherPrompt(){
+    public void goWheelTypeOtherPrompt() {
 
-    setContentView(R.layout.wheel_type_other_prompt);
-    wheelOtherBox = (EditText) findViewById(R.id.wheelTypeOtherPrompt);
-    wheelOtherBox.setText(wheelTypeOther);
-    findViewById(R.id.wheelTypeOtherOK).setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            wheelTypeOther = wheelOtherBox.getText().toString();
-            goInfo();
-        }
-    });
+        setContentView(R.layout.wheel_type_other_prompt);
+        wheelOtherBox = (EditText) findViewById(R.id.wheelTypeOtherPrompt);
+        wheelOtherBox.setText(wheelTypeOther);
+        findViewById(R.id.wheelTypeOtherOK).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                wheelTypeOther = wheelOtherBox.getText().toString();
+                goInfo();
+            }
+        });
 
-}
+    }
 
 
-
-    public void goWheelTypeMixedPrompt(){
+    public void goWheelTypeMixedPrompt() {
 
         setContentView(R.layout.wheel_type_mixed_prompt);
         wheelMixedBox = (EditText) findViewById(R.id.wheelTypeMixedPrompt);
@@ -161,16 +224,11 @@ public void goWheelTypeOtherPrompt(){
     }
 
 
-
-
-
-
     //go to info screen
-        public void goInfo() {
+    public void goInfo() {
 
 
-
-            setContentView(R.layout.activity_main_screen_2);
+        setContentView(R.layout.activity_main_screen_2);
 
         //go to picture screen
         findViewById(R.id.pictureButton).setOnClickListener(new View.OnClickListener() {
@@ -179,12 +237,12 @@ public void goWheelTypeOtherPrompt(){
                 goPictures();
             }
         });
-            findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    goStart();
-                }
-            });
+        findViewById(R.id.backButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goStart();
+            }
+        });
 
         intakeTypeBox = (EditText) findViewById(R.id.intakeTypeInput);
         weightBox = (EditText) findViewById(R.id.weightInput);
@@ -200,20 +258,19 @@ public void goWheelTypeOtherPrompt(){
         //set spinner entries
 
 
-
-        final String[] driveTrain = new String[]{"Tank" , "Swerve", "Slide", "Mechanum", "Other"};
+        final String[] driveTrain = new String[]{"Tank", "Swerve", "Slide", "Mechanum", "Other"};
         final Spinner driveTrainSpinner = (Spinner) findViewById(R.id.driveTrain);
 
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, driveTrain);
         driveTrainSpinner.setAdapter(adapter);
 
-            final String[] preloadStrings = new String[]{"Hatch" , "Cargo", "None"};
-            final Spinner preloadDropdown = (Spinner) findViewById(R.id.preloadSpinner);
+        final String[] preloadStrings = new String[]{"Hatch", "Cargo", "None"};
+        final Spinner preloadDropdown = (Spinner) findViewById(R.id.preloadSpinner);
 
-            final ArrayAdapter<String> preloadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, preloadStrings);
-            preloadDropdown.setAdapter(preloadAdapter);
+        final ArrayAdapter<String> preloadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, preloadStrings);
+        preloadDropdown.setAdapter(preloadAdapter);
 
-        String[] wheelType = new String[]{"Colsons" , "Mechanum", "Kit Of Parts", "Nitrile/Tread", "Omni","Other", "Mixed"};
+        String[] wheelType = new String[]{"Colsons", "Mechanum", "Kit Of Parts", "Nitrile/Tread", "Omni", "Other", "Mixed"};
         final Spinner wheelTypeSpinner = (Spinner) findViewById(R.id.wheelTypeSpinner);
 
         final ArrayAdapter<String> wheelTypeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, wheelType);
@@ -227,31 +284,31 @@ public void goWheelTypeOtherPrompt(){
         shiftingGearBoxSpinner.setAdapter(adapter2);
 
 
-        String[] sevenSevenFiveStrings = new String[]{"Yes" , "No"};
+        String[] sevenSevenFiveStrings = new String[]{"Yes", "No"};
         final Spinner sevenSevenFiveSpinner = (Spinner) findViewById(R.id.sevenSevenFive);
 
         final ArrayAdapter<String> adapterCurrent = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sevenSevenFiveStrings);
         sevenSevenFiveSpinner.setAdapter(adapterCurrent);
 
-            String[] hatchOffStrings = new String[]{ "Yes", "No"};
-            final Spinner hatchOffGroundSpinner = (Spinner) findViewById(R.id.hatchOffGround);
+        String[] hatchOffStrings = new String[]{"Yes", "No"};
+        final Spinner hatchOffGroundSpinner = (Spinner) findViewById(R.id.hatchOffGround);
 
-            final ArrayAdapter<String> adapterHatch = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hatchOffStrings);
-            hatchOffGroundSpinner.setAdapter(adapterHatch);
+        final ArrayAdapter<String> adapterHatch = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hatchOffStrings);
+        hatchOffGroundSpinner.setAdapter(adapterHatch);
 
-            System.out.println("ID's: DriveTrain: " + driveTrainId + " wheel Type: " + wheelTypeId + " Shifting gearbox: " + shiftingGearBoxId + " 775's: " + sevenSevenFiveId);
-            driveTrainSpinner.setSelection(driveTrainId);
-            wheelTypeSpinner.setSelection(wheelTypeId);
-            shiftingGearBoxSpinner.setSelection(shiftingGearBoxId);
-            sevenSevenFiveSpinner.setSelection(sevenSevenFiveId);
-            hatchOffGroundSpinner.setSelection(hatchOffGroundId);
-            preloadDropdown.setSelection(preloadSpinnerId);
-            System.out.println("Done Setting ID's");
-            intakeTypeBox.setText(intakeType);
-            weightBox.setText(weight);
-            narrowWideSquareBox.setText(narrowWideSquare);
-            notesBox.setText(notes);
-            nameBox.setText(name);
+        System.out.println("ID's: DriveTrain: " + driveTrainId + " wheel Type: " + wheelTypeId + " Shifting gearbox: " + shiftingGearBoxId + " 775's: " + sevenSevenFiveId);
+        driveTrainSpinner.setSelection(driveTrainId);
+        wheelTypeSpinner.setSelection(wheelTypeId);
+        shiftingGearBoxSpinner.setSelection(shiftingGearBoxId);
+        sevenSevenFiveSpinner.setSelection(sevenSevenFiveId);
+        hatchOffGroundSpinner.setSelection(hatchOffGroundId);
+        preloadDropdown.setSelection(preloadSpinnerId);
+        System.out.println("Done Setting ID's");
+        intakeTypeBox.setText(intakeType);
+        weightBox.setText(weight);
+        narrowWideSquareBox.setText(narrowWideSquare);
+        notesBox.setText(notes);
+        nameBox.setText(name);
         //Make prompts link to their pages
 
 /*
@@ -263,71 +320,71 @@ public void goWheelTypeOtherPrompt(){
     String name ="";
 
 */
-            ((Spinner)findViewById(R.id.shiftingGearBox)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ((Spinner) findViewById(R.id.shiftingGearBox)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    shiftingGearBoxString= shiftingGearBoxSpinner.getSelectedItem().toString();
-                    shiftingGearBoxId = i;
-                    System.out.println("Shifting Gearbox Selection: " + adapter2.getItem(i));
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                shiftingGearBoxString = shiftingGearBoxSpinner.getSelectedItem().toString();
+                shiftingGearBoxId = i;
+                System.out.println("Shifting Gearbox Selection: " + adapter2.getItem(i));
 
-                }
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                }
-            });
+            }
+        });
 
-            ((Spinner)findViewById(R.id.preloadSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ((Spinner) findViewById(R.id.preloadSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    preloadString = preloadDropdown.getSelectedItem().toString();
-                    preloadSpinnerId = i;
-
-
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                preloadString = preloadDropdown.getSelectedItem().toString();
+                preloadSpinnerId = i;
 
 
-            ((Spinner)findViewById(R.id.hatchOffGround)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            }
 
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    hatchOffGround = hatchOffGroundSpinner.getSelectedItem().toString();
-                  hatchOffGroundId = i;
-                }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
+            }
+        });
 
 
-        ((Spinner)findViewById(R.id.driveTrain)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ((Spinner) findViewById(R.id.hatchOffGround)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                hatchOffGround = hatchOffGroundSpinner.getSelectedItem().toString();
+                hatchOffGroundId = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+        ((Spinner) findViewById(R.id.driveTrain)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 driveTrainString = driveTrainSpinner.getSelectedItem().toString();
 
                 System.out.println("Drive Train selection: " + adapter.getItem(i));
-                if(adapter.getItem(i)== "Other" && driveTrainId != i) {
+                if (adapter.getItem(i) == "Other" && driveTrainId != i) {
                     // save before going to new page
-                name = nameBox.getText().toString() ;
-                intakeType = intakeTypeBox.getText().toString();
-                weight = weightBox.getText().toString();
-                narrowWideSquare = narrowWideSquareBox.getText().toString();
-                notes = notesBox.getText().toString();
+                    name = nameBox.getText().toString();
+                    intakeType = intakeTypeBox.getText().toString();
+                    weight = weightBox.getText().toString();
+                    narrowWideSquare = narrowWideSquareBox.getText().toString();
+                    notes = notesBox.getText().toString();
 
                     // Go to fill in page
 
-                   goDrivePrompt();
+                    goDrivePrompt();
 
 
                 }
@@ -341,43 +398,43 @@ public void goWheelTypeOtherPrompt(){
         });
 
 
-            ((Spinner)findViewById(R.id.sevenSevenFive)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    sevenSevenFive = sevenSevenFiveSpinner.getSelectedItem().toString();
-                    if(adapterCurrent.getItem(i)== "Yes" && sevenSevenFiveId != i) {
-                        // save before going to new page
-                        name = nameBox.getText().toString() ;
-                        intakeType = intakeTypeBox.getText().toString();
-                        weight = weightBox.getText().toString();
-                        narrowWideSquare = narrowWideSquareBox.getText().toString();
-                        notes = notesBox.getText().toString();
-                        sevenSevenFiveId = i;
-
-                        // Go to fill in page
-                        goCurrentPrompt();
-
-
-                    }
+        ((Spinner) findViewById(R.id.sevenSevenFive)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                sevenSevenFive = sevenSevenFiveSpinner.getSelectedItem().toString();
+                if (adapterCurrent.getItem(i) == "Yes" && sevenSevenFiveId != i) {
+                    // save before going to new page
+                    name = nameBox.getText().toString();
+                    intakeType = intakeTypeBox.getText().toString();
+                    weight = weightBox.getText().toString();
+                    narrowWideSquare = narrowWideSquareBox.getText().toString();
+                    notes = notesBox.getText().toString();
                     sevenSevenFiveId = i;
+
+                    // Go to fill in page
+                    goCurrentPrompt();
+
+
                 }
+                sevenSevenFiveId = i;
+            }
 
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
-                }
-            });
+            }
+        });
 
 
-            ((Spinner)findViewById(R.id.wheelTypeSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        ((Spinner) findViewById(R.id.wheelTypeSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
 
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 wheelTypeString = wheelTypeSpinner.getSelectedItem().toString();
 
                 System.out.println("Wheel Type Selection: " + wheelTypeAdapter.getItem(i));
-                if(wheelTypeAdapter.getItem(i)== "Other" && wheelTypeId != i) {
-                    name = nameBox.getText().toString() ;
+                if (wheelTypeAdapter.getItem(i) == "Other" && wheelTypeId != i) {
+                    name = nameBox.getText().toString();
                     intakeType = intakeTypeBox.getText().toString();
                     weight = weightBox.getText().toString();
                     narrowWideSquare = narrowWideSquareBox.getText().toString();
@@ -386,8 +443,8 @@ public void goWheelTypeOtherPrompt(){
 
 
                 }
-                if(wheelTypeAdapter.getItem(i)== "Mixed" && wheelTypeId != i){
-                    name = nameBox.getText().toString() ;
+                if (wheelTypeAdapter.getItem(i) == "Mixed" && wheelTypeId != i) {
+                    name = nameBox.getText().toString();
                     intakeType = intakeTypeBox.getText().toString();
                     weight = weightBox.getText().toString();
                     narrowWideSquare = narrowWideSquareBox.getText().toString();
@@ -399,7 +456,6 @@ public void goWheelTypeOtherPrompt(){
 
                 wheelTypeId = i;
             }
-
 
 
             @Override
@@ -453,7 +509,7 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
 
     //go to pictures screen
     public void goPictures() {
-        name = nameBox.getText().toString() ;
+        name = nameBox.getText().toString();
         intakeType = intakeTypeBox.getText().toString();
         weight = weightBox.getText().toString();
         narrowWideSquare = narrowWideSquareBox.getText().toString();
@@ -531,35 +587,35 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
 
         //save info in those text boxes
 
-        name = nameBox.getText().toString() ;
+        name = nameBox.getText().toString();
         intakeType = intakeTypeBox.getText().toString();
         weight = weightBox.getText().toString();
         narrowWideSquare = narrowWideSquareBox.getText().toString();
         notes = notesBox.getText().toString();
-
+        teams.remove(teamNumber);
 
         //output text to txt file
         try {
             PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/PitScoutingJSON.txt"), true));
             try {
                 JSONObject pitData = new JSONObject();
-                pitData.put( "number", teamNumber);
-                pitData.put( "name", name);
+                pitData.put("number", teamNumber);
+                pitData.put("name", name);
                 pitData.put("intake", intakeType);
                 pitData.put("hatchOffGround", hatchOffGround);
                 pitData.put("weight", weight);
                 pitData.put("narrowWideSquare", narrowWideSquare);
-                pitData.put("notes",notes);
+                pitData.put("notes", notes);
                 pitData.put("sevenFiveFive", currentStringSpinner);
-                pitData.put("sevenFiveFiveCurrent",sevenSevenFiveCurrent);
-                pitData.put("wheelType",wheelTypeString);
-                pitData.put("driveTrain",driveTrainString);
-                pitData.put("shiftingGearBox",shiftingGearBoxString);
-                pitData.put("sevenFiveFive",sevenSevenFive);
-                pitData.put("wheelTypeOther",wheelTypeOther);
-                pitData.put("preload",preloadString);
-                pitData.put("wheelTypeMixed",wheelTypeMixed);
-                pitData.put("driveTrainOther",driveTrainOther);
+                pitData.put("sevenFiveFiveCurrent", sevenSevenFiveCurrent);
+                pitData.put("wheelType", wheelTypeString);
+                pitData.put("driveTrain", driveTrainString);
+                pitData.put("shiftingGearBox", shiftingGearBoxString);
+                pitData.put("sevenFiveFive", sevenSevenFive);
+                pitData.put("wheelTypeOther", wheelTypeOther);
+                pitData.put("preload", preloadString);
+                pitData.put("wheelTypeMixed", wheelTypeMixed);
+                pitData.put("driveTrainOther", driveTrainOther);
                 String outputString = pitData.toString();
                 outputString = outputString + ",";
                 fw.println(outputString);
@@ -574,27 +630,27 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
             e.printStackTrace();
         }
 
-        teamNumber = "" ;
-         driveType ="";
-         wheelType ="";
-        shiftingGearBox ="";
-         sevenFiveFives ="";
-         intakeType ="";
-         hatchOffGround ="";
-         weight ="";
-         narrowWideSquare ="" ;
-         notes ="";
-         name ="";
-         sevenSevenFive = "";
-         wheelTypeMixed = "";
-         wheelTypeOther = "";
-         driveTrainOther = "";
-         currentStringSpinner = "";
-         wheelTypeString = "";
-         shiftingGearBoxString = "";
-         driveTrainString = "";
-         sevenSevenFiveCurrent = "";
-         goStart();
+        teamNumber = "";
+        driveType = "";
+        wheelType = "";
+        shiftingGearBox = "";
+        sevenFiveFives = "";
+        intakeType = "";
+        hatchOffGround = "";
+        weight = "";
+        narrowWideSquare = "";
+        notes = "";
+        name = "";
+        sevenSevenFive = "";
+        wheelTypeMixed = "";
+        wheelTypeOther = "";
+        driveTrainOther = "";
+        currentStringSpinner = "";
+        wheelTypeString = "";
+        shiftingGearBoxString = "";
+        driveTrainString = "";
+        sevenSevenFiveCurrent = "";
+        goStart();
 
     }
 }

@@ -3,54 +3,53 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
 
+    <Button
+        android:id="@+id/numberOK"
+        android:layout_width="102dp"
+        android:layout_height="51dp"
+        android:layout_below="@+id/numberSearchBox"
+        android:layout_marginStart="244dp"
+        android:layout_marginLeft="244dp"
+        android:layout_marginTop="49dp"
+        android:layout_marginBottom="546dp"
+        android:text="OK" />
+
+
+    <TextView
+        android:id="@+id/numberQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="143dp"
+        android:layout_marginTop="110dp"
+        android:text="What is their team number?"
+        android:textSize="24sp" />
+
     <EditText
         android:id="@+id/numberSearchBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/numberView"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="190dp"
-        android:layout_marginLeft="190dp"
-        android:layout_marginTop="200dp"
-        android:layout_x="149dp"
-        android:layout_y="453dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginLeft="188dp"
+        android:layout_marginTop="204dp"
+        android:hint=""
         android:ems="10"
         android:inputType="number"
-        android:text="" />
+        android:text=""
+        android:layout_below="@+id/numberQ"/>
 
-    <Button
-
-
-        android:id="@+id/numberSearchOK"
-        android:layout_width="102dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/numberSearchBox"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+    <ListView
+        android:id="@+id/teamList"
+        android:layout_width="100dp"
+        android:layout_height="250dp"
+        android:layout_alignEnd="@+id/numberOK"
+        android:layout_below="@+id/numberOK"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="250dp"
-        android:layout_marginLeft="250dp"
-        android:layout_marginTop="268dp"
-        android:layout_marginBottom="568dp"
-        android:text="OK" />
-
-    <TextView
-        android:id="@+id/numberView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="150dp"
-        android:layout_marginLeft="150dp"
-        android:layout_marginTop="114dp"
-        android:layout_marginBottom="702dp"
-        android:text="What is their team number?"
-        android:textSize="24sp" />
+        android:align_below="@+id/numberOK"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="203dp" />
 
 
 </RelativeLayout>
