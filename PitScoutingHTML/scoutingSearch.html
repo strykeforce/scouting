@@ -120,11 +120,29 @@ function mechanum()
   {
     if(local_data[j].wheelType == "Mechanum" || local_data[j].wheelTypeMixed.toUpperCase().includes("MECHANUM") || local_data[j].wheelTypeOther.toUpperCase().includes("MECHANUM"))
     {
-      mechomList += local_data[j].number + ": Mechanum<br>";
+      mechomList +=  local_data[j].number
+      if(local_data[j].wheelTypeMixed.toUpperCase().includes("MECHANUM"))
+      {
+        mechomList += ": Mixed with "
+      }
+      if(local_data[j].wheelTypeOther.toUpperCase().includes("MECHANUM"))
+      {
+        mechomList += ": Other has "
+      }
+      mechomList += ": Mechanum<br>";
     }
     if(local_data[j].wheelType == "Omni" || local_data[j].wheelTypeMixed.toUpperCase().includes("OMNI") || local_data[j].wheelTypeOther.toUpperCase().includes("OMNI"))
     {
-      mechomList += local_data[j].number + ": Omni<br>";
+      mechomList += local_data[j].number
+      if(local_data[j].wheelTypeMixed.toUpperCase().includes("OMNI"))
+      {
+        mechomList += ": Mixed with "
+      }
+      if(local_data[j].wheelTypeOther.toUpperCase().includes("OMNI"))
+      {
+        mechomList += ": Other has "
+      }
+      mechomList += ": Omni<br>";
     }
   }
   document.getElementById('mechom').innerHTML = mechomList;
