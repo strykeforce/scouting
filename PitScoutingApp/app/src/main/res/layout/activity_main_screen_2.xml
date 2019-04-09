@@ -149,20 +149,6 @@
         android:layout_alignEnd="@+id/saveInformation"/>
 
     <EditText
-        android:id="@+id/teamInput"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/teamText"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="73dp"
-        android:layout_marginLeft="73dp"
-        android:layout_x="420dp"
-        android:layout_y="155dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textColor="#1c1817" />
-
-    <EditText
         android:id="@+id/teamName"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -179,25 +165,11 @@
         android:inputType="text"
         android:textColor="#1c1817" />
 
-    <TextView
-        android:id="@+id/teamText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginBottom="77dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_x="51dp"
-        android:layout_y="150dp"
-        android:text="Team Number"
-        android:textSize="24sp" />
-
     <EditText
         android:layout_height="wrap_content"
         android:layout_width="200dp"
         android:id="@+id/weightInput"
+        android:inputType="number"
         android:layout_y="193dp"
         android:layout_x="420dp"
         android:layout_marginRight="0dp"
@@ -206,7 +178,6 @@
         android:layout_marginTop="0dp"
         android:layout_alignParentEnd="true"
         android:textColor="#1c1817"
-        android:inputType="textLongMessage"
         android:ems="10"
         android:layout_alignTop="@+id/weightText"/>
 
@@ -224,13 +195,12 @@
         android:ems="10"
         android:layout_alignTop="@+id/narrowWideSquareText"/>
 
-    <EditText
+    <Spinner
         android:layout_height="wrap_content"
         android:layout_width="200dp"
-        android:id="@+id/cubeReleaseInput"
+        android:id="@+id/hatchOffGround"
         android:layout_alignParentRight="true"
         android:textColor="#1c1817"
-        android:inputType="textLongMessage"
         android:ems="10"
         android:layout_alignTop="@+id/cubeReleaseText"/>
 
@@ -254,23 +224,23 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="23dp"
         android:text="Team Name"
         android:textSize="24sp" />
 
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:id="@+id/textView2"
-        android:text="Notes"
-        android:layout_marginLeft="23dp"
-        android:layout_marginStart="23dp"
-        android:layout_marginTop="35dp"
-        android:textSize="24sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/narrowWideSquareText"
         android:layout_alignParentLeft="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginLeft="39dp"
+        android:layout_marginTop="135dp"
+        android:text="Notes"
+        android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="?android:attr/colorControlNormal"
-        android:textAppearance="@style/TextAppearance.AppCompat"/>
+        android:textSize="24sp" />
 
     <EditText
         android:id="@+id/notes"
@@ -304,8 +274,8 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/wheelTypeText"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="3dp"
-        android:layout_marginRight="0dp" />
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="14dp" />
 
     <Spinner
         android:id="@+id/shiftingGearBox"
@@ -329,6 +299,52 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="0dp"
         android:layout_alignTop="@+id/sevenFiveFives"/>
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pictureButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="306dp"
+        android:layout_marginLeft="306dp"
+        android:layout_marginTop="6dp"
+        android:text="Back" />
+
+    <TextView
+        android:id="@+id/teamNumberCheck"
+        android:layout_width="166dp"
+        android:layout_height="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginRight="229dp"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/preloadQuestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="674dp"
+        android:layout_marginEnd="441dp"
+        android:layout_marginRight="441dp"
+        android:text="What do they preload?"
+        android:textSize="24sp" />
+
+    <Spinner
+        android:id="@+id/preloadSpinner"
+        android:layout_width="205dp"
+        android:layout_height="51dp"
+        android:layout_alignTop="@+id/wheelTypeText"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="520dp"
+        android:layout_marginRight="12dp" />
 
 </RelativeLayout>
 
