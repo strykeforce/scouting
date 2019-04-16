@@ -5,6 +5,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script type="text/javascript" src="PitScoutingJSON.json"></script>
+<script type="text/javascript" src="MasterScoutingJSON.json"></script>
 <script src="jquery-3.3.1.min.js"></script>
 <script src="jquery-ui-1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="jquery-ui-1.12.1/jquery-ui.css">
@@ -73,6 +74,7 @@ text-align: center;
   </td>
   <td align="left" valign="top">
     <div class="searchData"></div>
+    <div class="notes"></div>
   </td>
 </tr>
 </table>
@@ -80,6 +82,7 @@ text-align: center;
 
 <script>
 var local_data = data;
+var masterData = MasterDataFile;
 
 teams = new Array(local_data.length);
 var teamstg = "";
@@ -153,6 +156,7 @@ function savePictures()
 var input = document.getElementById("userInput").value;
 
     var searchData = '';
+    var notes= '';
 
     for (var i = 0; i < local_data.length; i++) {
       if(local_data[i].number == input || local_data[i].name.toUpperCase() == input.toUpperCase()) {
@@ -179,9 +183,17 @@ picture3 = "<img src=teamPictures/" + local_data[i].number + "_3.jpg height=400p
 document.querySelector('.results1').innerHTML = picture1;
 document.querySelector('.results2').innerHTML = picture2;
 document.querySelector('.results3').innerHTML = picture3;
+document.querySelector('.searchData').innerHTML = searchData;
       }
     }
-document.querySelector('.searchData').innerHTML = searchData;
+    for (var k = 0; k < masterData.length; k++)
+    {
+      if(masterData[k].Team == input)
+      {
+        notes += "<br>" + masterData[k].scouterNotes;
+      }
+    }
+document.querySelector('.notes').innerHTML = notes;
 }
   </script>
 </body>

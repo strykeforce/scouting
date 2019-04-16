@@ -1,0 +1,796 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>Qualification_Match_Scouting</title>
+    <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="json2html.js"></script>
+    <script type="text/javascript" src="jquery.json2html.js"></script>
+    <script type="text/javascript" src="mustache.js" ></script>
+</head>
+<body>
+
+  <br />
+  <input id="Button0" type="button" value="Unused" onclick="runButton0()"/>
+  <div id="Button0TextArea">  </div>
+  <br />
+  <input id="Button1" type="button" value="Unused" onclick="runButton1()"/>
+  <div id="Button1TextArea">  </div>
+  <br />
+  <input id="Button2" type="button" value="Unused" onclick="runButton2()"/>
+  <div id="Button2TextArea">  </div>
+  <br />
+  <input id="Button3" type="button" value="Unused" onclick="runButton3()"/>
+  <div id="Button3TextArea">  </div>
+  <br />
+  <input id="Button4" type="button" value="Unused" onclick="runButton4()"/>
+  <div id="Button4TextArea">  </div>
+  <br />
+  <input id="Button5" type="button" value="Unused" onclick="runButton5()"/>
+  <div id="Button5TextArea">  </div>
+  <br />
+  <input id="Button6" type="button" value="Unused" onclick="runButton6()"/>
+  <div id="Button6TextArea">  </div>
+  <br />
+  <input id="Button7" type="button" value="Unused" onclick="runButton7()"/>
+  <div id="Button7TextArea">  </div>
+  <br />
+  <input id="Button8" type="button" value="Unused" onclick="runButton8()"/>
+  <div id="Button8TextArea">  </div>
+  <br />
+  <input id="Button9" type="button" value="Unused" onclick="runButton9()"/>
+  <div id="Button9TextArea">  </div>
+  <br />
+  <input id="Button10" type="button" value="Unused" onclick="runButton10()"/>
+  <div id="Button10TextArea">  </div>
+  <br />
+  <input id="Button11" type="button" value="Unused" onclick="runButton11()"/>
+  <div id="Button11TextArea">  </div>
+
+<script>
+//this report only works when you open the webpage in Microsoft Edge
+//it does not seem to work in IE, Chrome nor firefox due to weird security features
+//that do not allow the webpage to open data from another file.
+
+//the body section toward the top of this file establishes the actual objects that
+//appear on the screen.  the buttons for each match and the sections of text
+// (known as divisions) that appear and disappear between the buttons.
+
+//you can edit the webpage content in just about any editor.  I used Atom for a lot
+//of the development.  For troubleshooting, sometimes i used dialog boxes that I Would
+//programmatically make appear and display text to help troubleshoot.  I also used
+//the built-in microsoft edge "developer tool" which you can open by clicking on the
+//settings button in Edge.
+
+//a handy troubleshooting mechanism is to create a dialog box with text or variables like this:
+//alert ("my alert is:" + ourMatches[1]);  //alerts create a dialog box...for troubleshooting or whatever
+
+//there are 4 .js source files in the header of this report document.  these were
+//used at various times to experiment with reading the JSON masterdataJSON file that
+//holds the match results data.
+
+//when we wanted to run a report.  I would get the masterdatajson file off of the
+//master tablet that collects the data from each of the 6 scout tablets.  To do this,
+//the tablet had to be power cycled off and then on for some reason in order to
+//get the file data to offload correctly onto the laptop.  if you did NOT power cycle the tablet
+//before transferring the file off of the tablet, the data in the JSON file would be empty or
+//old data that did not reflect the latest results that had been saved to the file by the tablet
+//application.  Once you power cycle the tablet, you can plug it into the laptop and
+//copy the JSON file off of the tablet and onto the laptop.  put the JSON file into the same
+//folder that the qualificationReport.html file is in and the refresh the .html webpage in MS edge.
+
+//At the beginning of the competition, you must also put a copy of the match schedule
+//in the same folder as the qualificationReport.html file.  the file must be a CSV file and it must
+//be named, "MyTeamMatches.csv".  This is the same file that is required to be copied onto
+//each scouting tablet in order for that tablets to know which team to watch in each match.
+
+//this provides handles to the html text division that can appear/disappear between each button
+var Button0textArea = document.getElementById("Button0TextArea");
+var Button1textArea = document.getElementById("Button1TextArea");
+var Button2textArea = document.getElementById("Button2TextArea");
+var Button3textArea = document.getElementById("Button3TextArea");
+var Button4textArea = document.getElementById("Button4TextArea");
+var Button5textArea = document.getElementById("Button5TextArea");
+var Button6textArea = document.getElementById("Button6TextArea");
+var Button7textArea = document.getElementById("Button7TextArea");
+var Button8textArea = document.getElementById("Button8TextArea");
+var Button9textArea = document.getElementById("Button9TextArea");
+var Button10textArea = document.getElementById("Button10TextArea");
+var Button11textArea = document.getElementById("Button11TextArea");
+
+//this creates a 2 dimensional array...which is impossible in javascript, but you are allowed to have an array of arrays
+//teamArray is a 2d list of all robots in all matches.  [match #1-150][team position# 1-6]
+var teamArray = new Array(150);
+for (var index1 = 0; index1 < 150; index1++) {
+  teamArray[index1] = new Array(6);
+}
+
+//ourmatches is an array that lists the matches we are in, and ourMatchPosition
+//will capture which position we are in for those matches (red1, blue2, etc)
+var ourMatches = new Array(12);
+var ourMatchPosition = new Array(12);
+
+//some variables i used for troubleshooting
+var mystring = "nope";
+var output = "nada";
+var testnum = 5;
+var index =0;
+var temp = 0;
+
+//matchscheduledata is used to store the text that we read from the match schedule file: "MyTeamMatches.csv"
+var MatchScheduleData;
+//matchtext is used to store the text we want to display when someone presses a match button
+var matchText;
+//partner 1 and 2 are used to store the team numbers of the alliance partners for
+//each of the matches we compete in (according to the match schedule file)
+var partner1 = new Array(12);
+var partner2 = new Array(12);
+
+var comp1 = new Array(12);
+var comp2 = new Array(12);
+var comp3 = new Array(12);
+//masterdata2 is used to store the data we read in from the masterdatajson file.
+var masterData2;
+//the next couple variables are used to store the row number of the JSON file that
+//should contain the data for that partners previous match results.
+var partner1MatchDataRows = new Array(12);
+var partner2MatchDataRows = new Array(12);
+
+var comp1MatchDataRows = new Array(12);
+var comp2MatchDataRows = new Array(12);
+var comp3MatchDataRows = new Array(12);
+//the next couple variables are used to store the matches that our partners
+//are competing in according to the match schedule.
+var partner1Matches = new Array(12);
+var partner2Matches = new Array(12);
+
+var comp1Matches = new Array(12);
+var comp2Matches = new Array(12);
+var comp3Matches = new Array(12);
+
+//this is my attempt to read the schedule data in
+$.get('MyTeamMatches.csv', function(masterData) {
+    MatchScheduleData = masterData;  //store file string in a string that i can parse/delete as I go
+
+    //temp = MatchScheduleData.search("2767");
+    //now we read the match schedule and populate a 2D array of all of the matches
+    //and the team numbers of the teams competing in the matches.
+    for (var i = 0; i < 150; i++) {
+      for (var j = 0; j < 6; j++) {
+        //find the index of the first comma
+        var n = MatchScheduleData.search(",");
+        //strip the string (team #) before the comma
+        teamArray[i] [j] = MatchScheduleData.substring(0,n);
+        //remove the text string we've parsed already
+        MatchScheduleData = MatchScheduleData.substring(n+1,1000000);
+        if (teamArray[i][j]=="2767") {
+          ourMatches[index]=i;  //record which matches we compete in
+          ourMatchPosition[index]=j;  //record whether we are red1, blue3, other
+          //display match buttons for each match we compete in
+          document.getElementById("Button"+(index)).value="Match:"+(i+1);
+          index++;
+        }
+      }
+      MatchScheduleData = MatchScheduleData.substring(2,1000000); //remove carriage return at end of each row
+    }
+    //find our alliance partners
+    for (var i=0;i<12;i++) {
+
+      if (ourMatchPosition[i]==0){
+          partner1[i] = teamArray[ourMatches[i]] [1];
+          partner2[i] = teamArray[ourMatches[i]] [2];
+
+          comp1[i] = teamArray[ourMatches[i]] [3];
+          comp2[i] = teamArray[ourMatches[i]] [4];
+          comp3[i] = teamArray[ourMatches[i]] [5];
+      }
+      if (ourMatchPosition[i]==1){
+          partner1[i] = teamArray[ourMatches[i]] [0];
+          partner2[i] = teamArray[ourMatches[i]] [2];
+
+          comp1[i] = teamArray[ourMatches[i]] [3];
+          comp2[i] = teamArray[ourMatches[i]] [4];
+          comp3[i] = teamArray[ourMatches[i]] [5];
+      }
+      if (ourMatchPosition[i]==2){
+          partner1[i] = teamArray[ourMatches[i]] [0];
+          partner2[i] = teamArray[ourMatches[i]] [1];
+
+          comp1[i] = teamArray[ourMatches[i]] [3];
+          comp2[i] = teamArray[ourMatches[i]] [4];
+          comp3[i] = teamArray[ourMatches[i]] [5];
+      }
+      if (ourMatchPosition[i]==3){
+          partner1[i] = teamArray[ourMatches[i]] [4];
+          partner2[i] = teamArray[ourMatches[i]] [5];
+
+          comp1[i] = teamArray[ourMatches[i]] [0];
+          comp2[i] = teamArray[ourMatches[i]] [1];
+          comp3[i] = teamArray[ourMatches[i]] [2];
+      }
+      if (ourMatchPosition[i]==4){
+          partner1[i] = teamArray[ourMatches[i]] [3];
+          partner2[i] = teamArray[ourMatches[i]] [5];
+
+          comp1[i] = teamArray[ourMatches[i]] [0];
+          comp2[i] = teamArray[ourMatches[i]] [1];
+          comp3[i] = teamArray[ourMatches[i]] [2];
+      }
+      if (ourMatchPosition[i]==5){
+          partner1[i] = teamArray[ourMatches[i]] [3];
+          partner2[i] = teamArray[ourMatches[i]] [4];
+
+          comp1[i] = teamArray[ourMatches[i]] [0];
+          comp2[i] = teamArray[ourMatches[i]] [1];
+          comp3[i] = teamArray[ourMatches[i]] [2];
+      }
+    }
+});
+
+
+//this reads the JSON file of match results and puts the data in a string called "inventory"
+$.getJSON( "MasterDataJSON.txt", function( inventory ) {
+    masterData2 = inventory  //store .json info for use when buttons are pressed
+    //this inserts the data from the .json file into the text
+
+});
+
+//these were some lines of code I was using when I was first learning to read JSON files...
+//    output = Mustache.render("my first tag value is: {{#.}} {{Scout ID}} {{/.}}. ", inventory2);
+//  output = output + Mustache.render("And this is my secondtag {{#.}} {{7.Match}} {{/.}}. ", inventory2);
+
+//this overwrites the text in the division called sectionOne
+//    sectionOne.innerHTML=output;
+
+//this subroutine finds the matches our alliance partners were in, and collects their data from the JSON file.
+//      inputs:  which button was pressed
+function FindMatchResults(selectedmatchbutton){
+//index 1 and 2 are used to count each time we find a match that our alliance partners
+//should have competed in.  index 1 for partner 1 data.  index 2 for partner 2 data.
+  var index1 = 0;
+  var index2 = 0;
+
+  var index3 = 0;
+  var index4 = 0;
+  var index5 = 0;
+
+  var rowNumber;
+  var ScoreContribution = 0;
+  var level;
+
+  matchText = "";
+  Button0textArea.innerHTML= matchText; //clear other button text
+  Button1textArea.innerHTML= matchText; //clear other button text
+  Button2textArea.innerHTML= matchText; //clear other button text
+  Button3textArea.innerHTML= matchText; //clear other button text
+  Button4textArea.innerHTML= matchText; //clear other button text
+  Button5textArea.innerHTML= matchText; //clear other button text
+  Button6textArea.innerHTML= matchText; //clear other button text
+  Button7textArea.innerHTML= matchText; //clear other button text
+  Button8textArea.innerHTML= matchText; //clear other button text
+  Button9textArea.innerHTML= matchText; //clear other button text
+  Button10textArea.innerHTML= matchText; //clear other button text
+  Button11textArea.innerHTML= matchText; //clear other button text
+  //find match result rows that the first alliance partner plays in
+  for (var i = 0; i < 150; i++) {
+    for (var j = 0; j < 6; j++) {
+        if (teamArray[i][j]==partner1[selectedmatchbutton]) {
+          partner1MatchDataRows[index1]=((i*6)+j);  //record which match result row that partner#1's results should be in
+          //the previous line of code assumes that there are exactly 6 rows of data for each match and that all matches
+          //are recorded in the masterdatajson file.
+          //To DO:  it would be better to read the JSON file itself to determine which matches our partners competed in
+          //so that we do not have to rely on the assumption of a perfect set of data in the JSON file.
+          partner1Matches [index1] = i;
+          index1++;
+        }
+        if (teamArray[i][j]==partner2[selectedmatchbutton]) {
+          partner2MatchDataRows[index2]=((i*6)+j);  //record which match result row that partner#2's results should be in
+          partner2Matches [index2] = i;
+          index2++;
+        }
+
+        if (teamArray[i][j]==comp1[selectedmatchbutton]) {
+          comp1MatchDataRows[index3]=((i*6)+j);  //record which match result row that partner#2's results should be in
+          comp1Matches [index3] = i;
+          index3++;
+        }
+        if (teamArray[i][j]==comp2[selectedmatchbutton]) {
+          comp2MatchDataRows[index4]=((i*6)+j);  //record which match result row that partner#2's results should be in
+          comp2Matches [index4] = i;
+          index4++;
+        }
+        if (teamArray[i][j]==comp3[selectedmatchbutton]) {
+          comp3MatchDataRows[index5]=((i*6)+j);  //record which match result row that partner#2's results should be in
+          comp3Matches [index5] = i;
+          index5++;
+        }
+      }
+    }
+    //start creating the html string to present when a button is pressed
+  matchText = matchText + "Our Alliance Partner #1 is: ";
+  matchText = matchText + partner1[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  //run through alliance partner #1's matches and gather their data into a string
+  for (i = 0; i<12;i++){
+    ScoreContribution = 0;
+    //determine which row of the JSON file to access
+    rowNumber = partner1MatchDataRows[i];
+    //get match #
+    matchText = matchText+ "<span style=margin-left:3em>Match " + (partner1Matches [i]+1);
+
+    //calculate the total number of balls
+    var balls = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Balls: " + balls + "</span>";
+    //calculate the total number of hatches
+    var hatches = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchCargoShipAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchTopAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchMidAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchCargoShipTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchTopTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchMidTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Hatches: " + hatches + "</span>";
+    //report a few other metrics
+    //figure out what level they reached
+    var levelThree = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2));
+    if  (levelThree == 1) {
+      level = 3;
+    }
+    else {
+      var levelTwo =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2));
+      if (levelTwo ==1){
+        level = 2;
+      }
+      else {
+        var levelOne =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2));
+        if (levelOne==1){
+          level=1;
+        }
+        else{
+          level=0;
+        }
+      }
+    }
+
+    matchText = matchText+ "<span style=margin-left:4em>Climb Level: " + level + " ";
+    matchText = matchText+ "<span style=margin-left:5em>Climb time: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".climbTimeTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Def? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".playedDefense}} {{/.}}", masterData2)) + "</span>";
+
+    ScoreContribution = ScoreContribution + (3*balls);
+    ScoreContribution = ScoreContribution + (2*hatches);
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (12*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2)));
+    matchText = matchText+ "<span style=margin-left:4em>Score: " + ScoreContribution + "</span><br />";
+  }
+
+//repeat the data collection for alliance partner #2
+
+  matchText = matchText + "<br />Our Alliance Partner #2 is: ";
+  matchText = matchText + partner2[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  for (i = 0; i<12;i++){
+    ScoreContribution = 0;
+    rowNumber = partner2MatchDataRows[i];
+    matchText = matchText+ "<span style=margin-left:4em>Match " + (partner2Matches [i]+1);
+
+    //calculate the total number of balls
+    var balls = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Balls: " + balls + "</span>";
+    //calculate the total number of hatches
+    var hatches = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchCargoShipAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchTopAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchMidAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchCargoShipTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchTopTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchMidTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Hatches: " + hatches + "</span>";
+    //report a few other metrics
+    //figure out what level they reached
+    var levelThree = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2));
+    if  (levelThree == 1) {
+      level = 3;
+    }
+    else {
+      var levelTwo =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2));
+      if (levelTwo ==1){
+        level = 2;
+      }
+      else {
+        var levelOne =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2));
+        if (levelOne==1){
+          level=1;
+        }
+        else{
+          level=0;
+        }
+      }
+    }
+
+    matchText = matchText+ "<span style=margin-left:4em>Climb Level: " + level + " ";
+    matchText = matchText+ "<span style=margin-left:5em>Climb time: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".climbTimeTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Def? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".playedDefense}} {{/.}}", masterData2)) + "</span>";
+
+    ScoreContribution = ScoreContribution + (3*balls);
+    ScoreContribution = ScoreContribution + (2*hatches);
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (12*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2)));
+    matchText = matchText+ "<span style=margin-left:4em>Score: " + ScoreContribution + "</span><br />";
+  }
+
+  matchText = matchText + "<br />Our Competitor #1 is: ";
+  matchText = matchText + comp1[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  for (i = 0; i<12;i++){
+    ScoreContribution = 0;
+    rowNumber = comp1MatchDataRows[i];
+    matchText = matchText+ "<span style=margin-left:4em>Match " + (comp1Matches [i]+1);
+
+    //calculate the total number of balls
+    var balls = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Balls: " + balls + "</span>";
+    //calculate the total number of hatches
+    var hatches = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchCargoShipAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchTopAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchMidAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchCargoShipTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchTopTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchMidTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Hatches: " + hatches + "</span>";
+    //report a few other metrics
+    //figure out what level they reached
+    var levelThree = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2));
+    if  (levelThree == 1) {
+      level = 3;
+    }
+    else {
+      var levelTwo =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2));
+      if (levelTwo ==1){
+        level = 2;
+      }
+      else {
+        var levelOne =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2));
+        if (levelOne==1){
+          level=1;
+        }
+        else{
+          level=0;
+        }
+      }
+    }
+
+    matchText = matchText+ "<span style=margin-left:4em>Climb Level: " + level + " ";
+    matchText = matchText+ "<span style=margin-left:5em>Climb time: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".climbTimeTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Def? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".playedDefense}} {{/.}}", masterData2)) + "</span>";
+
+    ScoreContribution = ScoreContribution + (3*balls);
+    ScoreContribution = ScoreContribution + (2*hatches);
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (12*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2)));
+    matchText = matchText+ "<span style=margin-left:4em>Score: " + ScoreContribution + "</span><br />";
+  }
+
+  matchText = matchText + "<br />Our Competitior #2 is: ";
+  matchText = matchText + comp2[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  for (i = 0; i<12;i++){
+    ScoreContribution = 0;
+    rowNumber = comp2MatchDataRows[i];
+    matchText = matchText+ "<span style=margin-left:4em>Match " + (comp2Matches [i]+1);
+
+    //calculate the total number of balls
+    var balls = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Balls: " + balls + "</span>";
+    //calculate the total number of hatches
+    var hatches = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchCargoShipAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchTopAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchMidAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchCargoShipTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchTopTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchMidTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Hatches: " + hatches + "</span>";
+    //report a few other metrics
+    //figure out what level they reached
+    var levelThree = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2));
+    if  (levelThree == 1) {
+      level = 3;
+    }
+    else {
+      var levelTwo =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2));
+      if (levelTwo ==1){
+        level = 2;
+      }
+      else {
+        var levelOne =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2));
+        if (levelOne==1){
+          level=1;
+        }
+        else{
+          level=0;
+        }
+      }
+    }
+
+    matchText = matchText+ "<span style=margin-left:4em>Climb Level: " + level + " ";
+    matchText = matchText+ "<span style=margin-left:5em>Climb time: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".climbTimeTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Def? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".playedDefense}} {{/.}}", masterData2)) + "</span>";
+
+    ScoreContribution = ScoreContribution + (3*balls);
+    ScoreContribution = ScoreContribution + (2*hatches);
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (12*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2)));
+    matchText = matchText+ "<span style=margin-left:4em>Score: " + ScoreContribution + "</span><br />";
+  }
+
+  matchText = matchText + "<br />Our Competitor #3 is: ";
+  matchText = matchText + comp3[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  for (i = 0; i<12;i++){
+    ScoreContribution = 0;
+    rowNumber = comp3MatchDataRows[i];
+    matchText = matchText+ "<span style=margin-left:4em>Match " + (comp3Matches [i]+1);
+
+    //calculate the total number of balls
+    var balls = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowAuto}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoCargoShipTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoTopTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoMidTele}} {{/.}}", masterData2));
+    balls = balls + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".cargoLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Balls: " + balls + "</span>";
+    //calculate the total number of hatches
+    var hatches = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchCargoShipAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchTopAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".HatchMidAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowAuto}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchCargoShipTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchTopTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchMidTele}} {{/.}}", masterData2));
+    hatches = hatches + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".hatchLowTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:4em>Hatches: " + hatches + "</span>";
+    //report a few other metrics
+    //figure out what level they reached
+    var levelThree = parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2));
+    if  (levelThree == 1) {
+      level = 3;
+    }
+    else {
+      var levelTwo =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2));
+      if (levelTwo ==1){
+        level = 2;
+      }
+      else {
+        var levelOne =  parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2));
+        if (levelOne==1){
+          level=1;
+        }
+        else{
+          level=0;
+        }
+      }
+    }
+
+    matchText = matchText+ "<span style=margin-left:4em>Climb Level: " + level + " ";
+    matchText = matchText+ "<span style=margin-left:5em>Climb time: " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".climbTimeTele}} {{/.}}", masterData2));
+    matchText = matchText+ "<span style=margin-left:6em>Def? " + parseInt(Mustache.render("{{#.}} {{"+rowNumber+".playedDefense}} {{/.}}", masterData2)) + "</span>";
+
+    ScoreContribution = ScoreContribution + (3*balls);
+    ScoreContribution = ScoreContribution + (2*hatches);
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoAuto}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (3*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelOneTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (6*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelTwoTele}} {{/.}}", masterData2)));
+    ScoreContribution = ScoreContribution + (12*parseInt(Mustache.render("{{#.}} {{"+rowNumber+".levelThreeTele}} {{/.}}", masterData2)));
+    matchText = matchText+ "<span style=margin-left:4em>Score: " + ScoreContribution + "</span><br />";
+  }
+}
+
+//this function runs when the button for the first match is pressed
+function runButton0()
+{
+  var button = 0;  //identify which button was pressed
+  FindMatchResults(button);
+  Button0textArea.innerHTML= matchText;  //write out new button text
+}
+
+function runButton1()
+{
+  var button =1;
+  FindMatchResults(button);
+  Button1textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton2()
+{
+  var button =2;
+  FindMatchResults(button);
+  Button2textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton3()
+{
+  var button =3;
+  FindMatchResults(button);
+  Button3textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton4()
+{
+  var button =4;
+  FindMatchResults(button);
+  Button4textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton5()
+{
+  var button =5;
+  FindMatchResults(button);
+  Button5textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton6()
+{
+  var button =6;
+  FindMatchResults(button);
+  Button6textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton7()
+{
+  var button =7;
+  FindMatchResults(button);
+  Button7textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton8()
+{
+  var button =8;
+  FindMatchResults(button);
+  Button8textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton9()
+{
+  var button =9;
+  FindMatchResults(button);
+  Button9textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton10()
+{
+  var button =10;
+  FindMatchResults(button);
+  Button10textArea.innerHTML= matchText;//write out new button text
+
+}
+
+function runButton11()
+{
+  var button =11;
+  FindMatchResults(button);
+  Button11textArea.innerHTML= matchText;//write out new button text
+
+}
+
+</script>
+
+
+
+<script>
+//the following stuff was used during the development of this report.  the report
+//was originally intended for an entirely different application:  reading info from
+//the roborio and presenting it in a very digestable way.  this never worked because
+//the security protocols on webpages does not allow the page to access data from another "server"
+/*
+var output = "blank";
+var driveWheel1 = 0;
+var sectionTwo = document.getElementById("secondSection");
+//now I want to read a more complicated file inventory.json, to see if I can read an array
+//this reads the JSON file and puts the data in a string called "inventory"
+$.getJSON( "inventory.json", function( inventory ) {
+    //this inserts the data from the inventory into the text
+    output = Mustache.render("the encoder values are: {{#.}} {{encoder.position}} {{/.}}. ", inventory);
+    //this next line gets the one encoder value we want, but repeats it over and over times the number of talons "174, 174, 174,..."
+    //but parseInt picks out the first one, so it works
+    driveWheel1 = parseInt(Mustache.render("{{#.}} {{2.encoder.position}} {{/.}}", inventory));
+    output = output + "encoder for talon 2 = " + driveWheel1;
+    //alert ("encoder: " + driveWheel1);
+    //this overwrites the text in the division called box
+    secondSection.innerHTML=output;
+});
+ */
+/*
+var sectionFour = document.getElementById("fourthSection");
+var msg;
+//this is a fourth section for playing with reading the inventory URL
+
+
+$.getJSON( {
+            type: 'GET',
+            dataType: 'jsonp',
+//            data: {},
+            crossDomain: 'true',
+            url: "http://10.27.67.2:5800/v1/inventory",
+            jsonp: false,
+            error: function(jqXHR, textStatus, errorThrown) {
+              output = Mustache.render("the encoder values are: {{#.}} {{encoder.position}} {{/.}}. ", jqXHR);
+
+                alert("jqXHR is "+jqXHR+" and error is "+errorThrown+" and textstatus is "+textStatus);
+            },
+            success: function(robotinventory) {
+                alert("i'm here");
+            }
+        });
+
+        sectionFour.innerHTML=output;
+  /*
+$.getJSON( 'http://10.27.67.2:5800/v1/inventory', function( inventory ) {
+//      output = Mustache.render("the encoder values are: {{#.}} {{encoder.position}} {{/.}}. ", inventory);
+alert("i'm here");
+    output = "it changed";
+    sectionFour.innerHTML=output;
+});
+*/
+
+</script>
+
+
+</body>
+
+
+<footer>
+<br />
+</footer>
+</html>
