@@ -1,10 +1,11 @@
 import json
-
+#so it can read json's
 with open("Documents\MasterDataJSON.json", encoding="utf8") as data_file:
     data = json.load(data_file)
-
+#data equals the JSON file
 CleanData = []
 for x in range(len(data)):
+    #for each entry do this
     Scouter = data[x]["Scout_ID"]
     Team = data[x]["Team"]
     Match = data[x]["Match"]
@@ -36,7 +37,9 @@ for x in range(len(data)):
     PlayedDefense = data[x]["playedDefense"]
     ScouterNotes = data[x]["scouterNotes"]
     ScouterInitials = data[x]["scouterInitials"]
+
     CleanData.append([Scouter, Team, Match, HatchCargoShipAuto, HatchTopAuto, HatchMidAuto, HatchLowAuto,
     CargoCargoShipAuto, CargoTopAuto, CargoMidAuto, CargoLowAuto, LevelOneAuto, LevelTwoAuto, Preload,
     HatchCargoShipTele, HatchTopTele, HatchMidTele, HatchLowTele, CargoCargoShipTele, CargoTopTele, CargoMidTele,
     CargoLowTele, LevelOneTele, LevelTwoTele, LevelThreeTele, ClimbTimeTele, Penalties, RobotFailed, PlayedDefense, ScouterNotes, ScouterInitials])
+#add this to CleanData
