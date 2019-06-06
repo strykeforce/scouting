@@ -1,4 +1,4 @@
-var pit_data = 
+var data = 
 [  
 {"number":"2767","drive":"swerve","wheels":"swerve","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"n\/a","intake":"wheels","cubeRelease":"wheels","weight":"120","narrowWideSquare":"narrow"},
 {"number":"2676","drive":"","wheels":"","gearBox":"","sevenFiveFives":"","limitCurrent":"","intake":"","cubeRelease":"","weight":"","narrowWideSquare":""},
@@ -21,4 +21,5 @@ var pit_data =
 {"number":"4004","drive":"swerve","wheels":"fulsons","gearBox":"no","sevenFiveFives":"no","limitCurrent":"","intake":"qctive wheel","cubeRelease":"open or spin","weight":"119.5","narrowWideSquare":"square"},
 {"number":"5927","drive":"tank","wheels":"standard","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"wheel","cubeRelease":"spin and open","weight":"118","narrowWideSquare":"narrow"},
 {"number":"2013","drive":"ball shifters","wheels":"traction and omni","gearBox":"yes","sevenFiveFives":"no","limitCurrent":"","intake":"static","cubeRelease":"neumatics","weight":"120","narrowWideSquare":"wide"},
+
 ]
