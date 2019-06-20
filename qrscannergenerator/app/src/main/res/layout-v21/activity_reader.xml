@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/activity_reader"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    tools:context="org.strykeforce.qrscannergenerator.ReaderActivity">
+
+    <TextView
+
+        android:id="@+id/textView3"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_centerHorizontal="true"
+
+        android:text="@string/master_scouting_app" />
+
+
+    <TextView
+
+        android:id="@+id/red3view"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentEnd="true"
+
+        android:layout_centerVertical="true"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="277dp"
+        android:layout_marginEnd="57dp"
+        android:text="@string/red_3"
+        android:translationX="475dp"
+        android:translationY="-15dp" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkRed1"
+
+        style="@android:style/Widget.CompoundButton.CheckBox"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/red1view"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_marginStart="24dp"
+
+        android:layout_marginTop="14dp"
+
+        android:buttonTint="@color/colorAccent"
+
+        android:checked="false"
+
+        android:clickable="false"
+
+        android:duplicateParentState="false"
+
+        android:scaleX="4.00"
+
+        android:scaleY="4.00" />
+
+
+    <TextView
+
+        android:id="@+id/red1view"
+
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/red3view"
+
+        android:layout_alignBottom="@+id/red3view"
+
+        android:layout_alignParentStart="true"
+        android:text="@string/red_1"
+        android:translationX="25dp"
+        android:translationY="-15dp" />
+
+
+    <TextView
+
+        android:id="@+id/red2view"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/red1view"
+
+        android:layout_alignBottom="@+id/red1view"
+
+        android:layout_centerHorizontal="true"
+
+        android:text="@string/red_2"
+        android:translationY="-15dp" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkRed2"
+
+        style="@android:style/Widget.CompoundButton.CheckBox"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/checkRed1"
+
+        android:layout_alignBottom="@+id/checkRed1"
+
+        android:layout_centerHorizontal="true"
+
+        android:buttonTint="@color/colorAccent"
+
+        android:checked="false"
+
+        android:clickable="false"
+
+        android:duplicateParentState="false"
+
+        android:scaleX="4.00"
+
+        android:scaleY="4.00" />
+
+
+    <TextView
+
+        android:id="@+id/blueView1"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/checkRed1"
+
+        android:layout_alignParentStart="true"
+
+        android:layout_marginTop="64dp"
+
+        android:text="@string/blue_1"
+        android:translationX="20dp"
+        android:translationY="-15dp" />
+
+
+    <TextView
+
+        android:id="@+id/blueView2"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/blueView1"
+
+        android:layout_alignBottom="@+id/blueView1"
+
+        android:layout_centerHorizontal="true"
+
+        android:text="@string/blue_2"
+        android:translationY="-15dp" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkBlue1"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/blueView1"
+
+        android:layout_alignStart="@+id/checkRed1"
+
+        android:layout_marginTop="14dp"
+
+        android:buttonTint="@color/colorPrimary"
+
+        android:checked="false"
+
+        android:clickable="false"
+
+        android:scaleX="4.00"
+
+        android:scaleY="4.00"
+
+        android:textColorLink="@color/colorPrimary" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkBlue2"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/checkBlue1"
+
+        android:layout_alignStart="@+id/checkRed2"
+
+        android:layout_alignBottom="@+id/checkBlue1"
+
+        android:buttonTint="@color/colorPrimary"
+
+        android:clickable="false"
+
+        android:scaleX="4.00"
+
+        android:scaleY="4.00"
+
+        android:textColorLink="@color/colorPrimary" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkRed3"
+
+        style="@android:style/Widget.CompoundButton.CheckBox"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/checkRed2"
+
+        android:layout_alignBottom="@+id/checkRed2"
+
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginEnd="24dp"
+
+        android:buttonTint="@color/colorAccent"
+
+        android:checked="false"
+
+        android:clickable="false"
+
+        android:duplicateParentState="false"
+
+        android:scaleX="4.00"
+
+        android:scaleY="4.00" />
+
+
+    <TextView
+
+        android:id="@+id/blueView3"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/blueView2"
+
+        android:layout_alignBottom="@+id/blueView2"
+
+        android:layout_alignParentEnd="true"
+
+        android:text="@string/blue_3"
+        android:translationX="-20dp"
+        android:translationY="-15dp" />
+
+
+    <CheckBox
+
+        android:id="@+id/checkBlue3"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignBaseline="@+id/checkBlue2"
+
+        android:layout_alignStart="@+id/checkRed3"
+
+        android:layout_alignBottom="@+id/checkBlue2"
+
+        android:buttonTint="@color/colorPrimary"
+
+        android:clickable="false"
+
+        android:scaleX="4.00"
+
+        android:scaleY="4.00"
+
+        android:textColorLink="@color/colorPrimary" />
+
+
+    <Button
+
+        android:id="@+id/scan_btn"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_below="@+id/textView3"
+
+        android:layout_alignStart="@+id/red2view"
+
+        android:layout_marginStart="-25dp"
+
+        android:layout_marginTop="56dp"
+
+        android:scaleX="2.00"
+
+        android:scaleY="1.75"
+        android:text="@string/scan2" />
+
+    <Button
+
+        android:id="@+id/resetButton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/red2view"
+
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-25dp"
+        android:layout_marginBottom="19dp"
+        android:text="@string/done" />
+
+    <Button
+        android:id="@+id/printbttn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/resetButton"
+        android:text="@string/print" />
+
+
+</RelativeLayout>

@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">qrscannergenerator</string>
     <string name="_2767">2767</string>
+    <string name="red_3">Red 3</string>
+    <string name="master_scouting_app">Master Scouting App</string>
+    <string name="blue_2">Blue 2</string>
+    <string name="red_1">Red 1</string>
+    <string name="done">Done</string>
+    <string name="scan1">SCAN</string>
+    <string name="blue_3">Blue 3</string>
+    <string name="print">Print</string>
+    <string name="blue_1">Blue 1</string>
+    <string name="red_2">Red 2</string>
+    <string name="scan2">SCAN</string>
 </resources>

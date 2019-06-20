@@ -10,8 +10,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +26,12 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 import org.json.JSONArray;
@@ -33,6 +41,7 @@ import java.io.PrintWriter;
 
 
 public class ReaderActivity extends AppCompatActivity {
+    ArrayList<String> divisionTeams = new ArrayList<String>();
     private Button scan_btn;
     private CheckBox[] checkboxes = new CheckBox[6]; //refers to off/on checkboxes images
     private String scanResult;
@@ -48,19 +57,32 @@ public class ReaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
         super.onCreate(savedInstanceState);
+        scanscreen();
+
+        try {
+            Scanner teamscan = new Scanner(new File("/storage/emulated/0/Divisions.csv")).useDelimiter(",");
+
+            while (teamscan.hasNextLine()) {
+                divisionTeams.add(teamscan.nextLine());
+            }
+            teamscan.close();
+        }catch (Exception e) {
+            System.out.println("oh nose!");
+        }
+
+    }
+
+
+    public void scanscreen() {
         setContentView(R.layout.activity_reader); //sets to layout of app
 
-        //initializes firebase to be able to send data to that URL
-//        Firebase.setAndroidContext(this);
-//        firebaseRef = new Firebase(FIREBASE_URL);
-
         //initializes all off/on check boxes
-        checkboxes[0] = (CheckBox) findViewById(R.id.checkRed1);
-        checkboxes[1] = (CheckBox) findViewById(R.id.checkRed2);
-        checkboxes[2] = (CheckBox) findViewById(R.id.checkRed3);
-        checkboxes[3] = (CheckBox) findViewById(R.id.checkBlue1);
-        checkboxes[4] = (CheckBox) findViewById(R.id.checkBlue2);
-        checkboxes[5] = (CheckBox) findViewById(R.id.checkBlue3);
+        checkboxes[0] = findViewById(R.id.checkRed1);
+        checkboxes[1] = findViewById(R.id.checkRed2);
+        checkboxes[2] = findViewById(R.id.checkRed3);
+        checkboxes[3] = findViewById(R.id.checkBlue1);
+        checkboxes[4] = findViewById(R.id.checkBlue2);
+        checkboxes[5] = findViewById(R.id.checkBlue3);
 
         //sets visibility of check boxes
         for (int j = 0; j < checkboxes.length; j++) {
@@ -100,14 +122,14 @@ public class ReaderActivity extends AppCompatActivity {
                 System.out.println(DialogInterface.BUTTON_NEGATIVE);
                 alert.show();
                 TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
-                msgTxt.setTextSize((float)35.0);
+                msgTxt.setTextSize((float) 35.0);
 
             }
 
         });
 
         //initializes scan button and sets scan button to open camera and scan when pressed
-        scan_btn = (Button) findViewById(R.id.scan_btn);
+        scan_btn = findViewById(R.id.scan_btn);
         final Activity activity = this;
         scan_btn.setOnClickListener(new View.OnClickListener() {
 
@@ -128,9 +150,18 @@ public class ReaderActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        Button print_btn = (Button) findViewById(R.id.scan_btn);
-    }
+        Button print_btn = (Button) findViewById(R.id.printbttn);
 
+        print_btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+                printScreen();
+            }
+
+        });
+    }
 
     //method that scans QR code from camera and stores in a string
     @Override
@@ -149,6 +180,37 @@ public class ReaderActivity extends AppCompatActivity {
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    public void printScreen() {
+        setContentView(R.layout.print_screen);
+
+        final ListView teamItems = findViewById(R.id.teamItems);
+
+        Button scan_screen_bttn = findViewById(R.id.scanscreenbttn);
+
+        final ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, divisionTeams);
+        teamItems.setAdapter(adapterList);
+
+        teamItems.setClickable(true);
+        teamItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+
+                String team = teamItems.getItemAtPosition(position).toString();
+            }
+        });
+
+        scan_screen_bttn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+                scanscreen();
+            }
+
+        });
     }
 
     public void getTeamNames() {

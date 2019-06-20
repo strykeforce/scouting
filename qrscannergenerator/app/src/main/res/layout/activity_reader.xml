@@ -28,7 +28,7 @@
 
         android:layout_height="wrap_content"
 
-        android:text="Master Scouting App"
+        android:text="@string/master_scouting_app"
 
         android:layout_centerHorizontal="true"
 
@@ -38,7 +38,7 @@
 
     <TextView
 
-        android:text="Red 3"
+        android:text="@string/red_3"
 
         android:layout_width="wrap_content"
 
@@ -180,7 +180,7 @@
 
     <TextView
 
-        android:text="Blue 2"
+        android:text="@string/blue_2"
 
         android:layout_width="wrap_content"
 
