@@ -27,6 +27,7 @@ import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -36,8 +37,12 @@ import java.util.Scanner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.PrintWriter;
+
+import org.json.*;
 
 
 public class ReaderActivity extends AppCompatActivity {
@@ -192,13 +197,30 @@ public class ReaderActivity extends AppCompatActivity {
         final ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, divisionTeams);
         teamItems.setAdapter(adapterList);
 
+        ((TextView)findViewById(R.id.number_and_name)).setText(divisionTeams.get(0));
+
         teamItems.setClickable(true);
         teamItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                String team = divisionTeams.get(position);
+                ((TextView)findViewById(R.id.number_and_name)).setText(team);
 
-                String team = teamItems.getItemAtPosition(position).toString();
+                String number = team.replaceAll("[^\\d]", "" );
+
+                int rocketHatchAvg;
+                int rocketCargoAvg;
+                int shipHatchAvg;
+                int shipCargoAvg;
+                int climbHigh;
+                int counter;
+
+
+                try {
+                    JSONObject infoscan = new JSONObject("MasterDataJSON.txt");
+                } catch( org.json.JSONException e) {}
+
             }
         });
 

@@ -23,4 +23,15 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="14dp" />
+
+    <TextView
+        android:id="@+id/number_and_name"
+        android:layout_width="178dp"
+        android:layout_height="61dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="55dp"
+        android:layout_marginEnd="95dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00" />
 </RelativeLayout>
