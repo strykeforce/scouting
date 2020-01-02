@@ -9,7 +9,7 @@ android {
 
         applicationId "org.strykeforce.qrscannergenerator"
 
-        minSdkVersion 20
+        minSdkVersion 22
 
         targetSdkVersion 28
 
@@ -59,31 +59,23 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
 
     })
-
     implementation 'com.android.support:appcompat-v7:28.0.0'
-//-rc01
+    implementation 'com.android.support:animated-vector-drawable:28.0.0'
+    implementation 'com.android.support:asynclayoutinflater:28.0.0'
+    //-rc01
     testImplementation 'junit:junit:4.12'
-
-//    implementation 'com.firebase:firebase-client-android:2.5.0'
-
-
-
+    //    implementation 'com.firebase:firebase-client-android:2.5.0'
     //DEPENDENCIES TO ZXING LIBRARY, necessary to import files
     implementation 'com.google.zxing:core:3.2.1'
     implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
-
     implementation 'com.android.support:support-annotations:25.1.0'
-
     final SUPPORT_LIB_VER = '28.0.0'
-
     configurations.all {
         resolutionStrategy {
             force "com.android.support:appcompat-v7:${SUPPORT_LIB_VER}"
             force "com.android.support:support-v4:${SUPPORT_LIB_VER}"
         }
     }
-
     implementation 'com.google.android.gms:play-services-appindexing:9.8.0'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
-
 }

@@ -38,6 +38,7 @@ import java.util.Scanner;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.w3c.dom.Text;
+import org.json.simple.parser.*;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -46,6 +47,9 @@ import org.json.*;
 
 
 public class ReaderActivity extends AppCompatActivity {
+
+    private final static String TAG = "cool kid B)";
+
     ArrayList<String> divisionTeams = new ArrayList<String>();
     private Button scan_btn;
     private CheckBox[] checkboxes = new CheckBox[6]; //refers to off/on checkboxes images
@@ -93,7 +97,7 @@ public class ReaderActivity extends AppCompatActivity {
         for (int j = 0; j < checkboxes.length; j++) {
             checkboxes[j].setChecked(false);
         }
-        getTeamNames();
+        //getTeamNames();
 
 
         //first, opens a dialog box to check if they are sure with clearing the match, then clears current stored data and resets checkboxes
@@ -155,9 +159,9 @@ public class ReaderActivity extends AppCompatActivity {
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
 
-        Button print_btn = (Button) findViewById(R.id.printbttn);
+        //Button print_btn = (Button) findViewById(R.id.printbttn);
 
-        print_btn.setOnClickListener(new View.OnClickListener() {
+        /*print_btn.setOnClickListener(new View.OnClickListener() {
 
             @Override
 
@@ -165,7 +169,7 @@ public class ReaderActivity extends AppCompatActivity {
                 printScreen();
             }
 
-        });
+        });*/
     }
 
     //method that scans QR code from camera and stores in a string
@@ -187,42 +191,85 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
-    public void printScreen() {
+    /*public void printScreen() {
         setContentView(R.layout.print_screen);
 
-        final ListView teamItems = findViewById(R.id.teamItems);
+        ListView teamItems = findViewById(R.id.teamItems);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, divisionTeams);
+        teamItems.setAdapter(arrayAdapter);
 
         Button scan_screen_bttn = findViewById(R.id.scanscreenbttn);
 
-        final ArrayAdapter<String> adapterList = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, divisionTeams);
-        teamItems.setAdapter(adapterList);
+        final TextView RocketHatchAvgTxt = findViewById(R.id.rockethatchavg);
 
-        ((TextView)findViewById(R.id.number_and_name)).setText(divisionTeams.get(0));
+        try {
 
+
+            Scanner dumbCommas = new Scanner(new File("/storage/emulated/0/MasterDataJSON.txt"));
+            String newLine;
+            PrintWriter out = new PrintWriter("/storage/emulated/0/properSyntaxMaster.txt");
+            while(dumbCommas.hasNextLine()) {
+                newLine = dumbCommas.nextLine();
+                Log.d(TAG, "line is " + newLine);
+                newLine.substring(0, newLine.length()-2);
+                Log.d(TAG, "substringed is " + newLine);
+                out.println(newLine);
+            }
+            out.close();
+        } catch(FileNotFoundException e) {}
         teamItems.setClickable(true);
         teamItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            @Override
+           @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 String team = divisionTeams.get(position);
-                ((TextView)findViewById(R.id.number_and_name)).setText(team);
+
+               ((TextView) findViewById(R.id.number_and_name)).setText(team);
 
                 String number = team.replaceAll("[^\\d]", "" );
 
-                int rocketHatchAvg;
-                int rocketCargoAvg;
-                int shipHatchAvg;
-                int shipCargoAvg;
-                int climbHigh;
-                int counter;
+                int rocketHatchAvg = 0;
+                int rocketCargoAvg = 0;
+                int shipHatchAvg = 0;
+                int shipCargoAvg = 0;
+                int climbHigh = 0;
+                int counter = 0;
+
+                    try {
+                        BufferedReader masterData = new BufferedReader(new FileReader("/storage/emulated/0/properSyntaxMaster.txt"));
+                        JSONParser reader = new JSONParser();
+                        String currentLine = masterData.readLine();
+                        Log.d(TAG, "got into try phrase");
+                        while(currentLine != null)
+                        {
+                            Log.d(TAG, "here in while loop! boop!");
+                            Object temp;
+                            try {
+                                temp = reader.parse(currentLine);
+                                JSONObject line = (JSONObject) temp;
 
 
-                try {
-                    JSONObject infoscan = new JSONObject("MasterDataJSON.txt");
-                } catch( org.json.JSONException e) {}
+                                if(line.get("Team") == team)
+                                {
+                                    Log.d(TAG, team);
+                                    rocketHatchAvg += Integer.parseInt((String) line.get("HatchCargoShipAuto"));
+                                    counter += 1;
+                                    Log.d(TAG, "rocket hatch avg is " + team + " and counter is at " + counter);
+                                }
+                            }
+                            catch (ParseException e) { Log.d(TAG, "The error is: " + e); Log.d(TAG, currentLine); }
+                            catch(JSONException e) {}
+                            currentLine = masterData.readLine();
+                        }
 
+
+                    } catch(FileNotFoundException e) {}
+                    catch(java.io.IOException e) {}
+
+               RocketHatchAvgTxt.setText("" + rocketHatchAvg);
             }
         });
+
 
         scan_screen_bttn.setOnClickListener(new View.OnClickListener() {
 
@@ -252,11 +299,11 @@ public class ReaderActivity extends AppCompatActivity {
 
             }
             s.close();
- /*           s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
+              s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
 
- //           String[][] teamNameArray = new String[numOfTeams][3];
+              String[][] teamNameArray = new String[numOfTeams][3];
             for (int i = 0; i < numOfTeams; i++) {
- //               teamNameArray[i] = new String[3];
+                  teamNameArray[i] = new String[3];
                 String[] args = s.nextLine().split(",");
                 for (int ii = 0; ii < 2; ii++) {
                     teamNameArray[i][ii] = args[ii];
@@ -269,13 +316,13 @@ public class ReaderActivity extends AppCompatActivity {
             }
             System.out.println("</getTeamNames>\n");
             s.close();
- */       } catch (Exception e) {
+          } catch (Exception e) {
             System.out.println("oh nose!");
- //           return null;
+              return null;
         }
 
- //       return returned;
-    }
+          return returned;
+    }*/
 
     //stores scout data from QR string to chatmessage array and sets match number to red 1's match num
     public void storeScout(){
