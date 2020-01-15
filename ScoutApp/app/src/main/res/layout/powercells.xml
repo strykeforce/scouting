@@ -143,25 +143,22 @@
 
     <ListView
         android:id="@+id/screenTabs"
-        android:clickable="true"
         android:layout_width="169dp"
         android:layout_height="553dp"
         android:layout_x="0dp"
         android:layout_y="11dp"
         android:textSize="5dp"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        android:focusable="false"
-        android:focusableInTouchMode="false" />
+        tools:layout_editor_absoluteY="8dp" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="732dp"
+        android:layout_width="150dp"
+        android:layout_height="189dp"
+        android:layout_x="713dp"
         android:layout_y="0dp"
-        android:text="Auton"
-        android:textColor="@android:color/holo_green_dark"
+        android:text="Power Cells"
+        android:textColor="@android:color/holo_orange_dark"
         android:textSize="50sp"
         tools:layout_editor_absoluteX="830dp"
         tools:layout_editor_absoluteY="49dp" />
