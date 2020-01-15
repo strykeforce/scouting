@@ -1,0 +1,4 @@
+
+["matches":
+  {"Scout_ID":1,"Team":7598,"Name":"SCA Constellations","Match":0,"robotFailed":0, "innerPortAuto":0,"outerPortAuto":3,"lowerPortAuto":0, "initiationLeave":true,"pickUpAuton":1, "innerPort":1, "outerPort":27, "lowerPort":13, "rotationalWOF":false, "positionalWOF":false, "climb":true, "climbTime":13, "adjustCOG":true,"notes":"heyo"},
+]
