@@ -5,34 +5,26 @@ package org.strykeforce.scoutapp;
 
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.speech.tts.TextToSpeech;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 
 import android.view.View;
 
+import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.SeekBar;
 
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import android.widget.ImageView;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.*;
 
@@ -43,10 +35,7 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
-import org.w3c.dom.Text;
-
 import static org.strykeforce.scoutapp.R.id.nextbutton;
-import static org.strykeforce.scoutapp.R.id.screenTabs;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +52,31 @@ public class MainActivity extends AppCompatActivity {
     private int MatchLimit = 1000;
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
-    List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Power Cells", "Wheel Of Fortune", "Endgame"));
+    List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame"));
+
+    //initialize variables
+    int cellsPickedUp = 0;
+    int innerAutonScored = 0;
+    int outerAutonScored = 0;
+    int bottomAutonScored = 0;
+
+    boolean leftLine = false;
+
+    int innerScored = 0;
+    int outerScored = 0;
+    int bottomScored = 0;
+
+    boolean stage2Complete = false;
+    boolean stage3Complete = false;
+
+    boolean climbed = false;
+    boolean adjustCOG = false;
+    boolean robotFailed= false;
+
+    double startTime = 0;
+    double endTime = 0;
+    double climbTime;
+    int timeStatus;
 
     //onCreate defines what happens when the app is started up
     @Override
@@ -126,9 +139,11 @@ public class MainActivity extends AppCompatActivity {
         switch(position)
         {
             case 0: goAuton();
+                break;
             case 1: goPower();
-            case 2: goWOF();
-            case 3: goEndgame();
+                break;
+            case 2: goEndgame();
+                break;
         }
     }
 
@@ -140,6 +155,24 @@ public class MainActivity extends AppCompatActivity {
         final TextView teamdata = findViewById(R.id.teamdata);
         final TextView matchdata = findViewById(R.id.matchdata);
 
+        //initialize onscreen text and buttons
+        final CheckBox leftLineCheck = findViewById(R.id.leaveLine);
+
+        final TextView pickedUp = findViewById(R.id.pickCellAuton);
+        final TextView innerAuton = findViewById(R.id.innerAuton);
+        final TextView outerAuton = findViewById(R.id.outerAuton);
+        final TextView bottomAuton = findViewById(R.id.bottomAuton);
+
+        final Button pickedUpMinus = findViewById(R.id.cellAutonMinus);
+        final Button innerAutonMinus = findViewById(R.id.innerMinusAuton);
+        final Button outerAutonMinus = findViewById(R.id.outeMinusAuton);
+        final Button bottomAutonMinus = findViewById(R.id.bottomMinusAuton);
+
+        final Button pickedUpPlus = findViewById(R.id.cellAutonPlus);
+        final Button innerAutonPlus = findViewById(R.id.innerPlusAuton);
+        final Button outerAutonPlus = findViewById(R.id.outerPlusAuton);
+        final Button bottomAutonPlus = findViewById(R.id.bottomPlusAuton);
+
         //create list on side for easy navigation between pages
         final ListView screenTabs = findViewById(R.id.screenTabs);
         ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
@@ -147,14 +180,20 @@ public class MainActivity extends AppCompatActivity {
 
         screenTabs.setAdapter(textFormat);
 
-        //when a screen is displayed, the objects default back to false, zero, so we have to...
-        //initialize the screen objects to whatever they were set to before...
-        //so that they will be correct if we arrived at this screen using a "back" button
+        //when a screen is displayed, the objects default back to false, zero, so we have to
+        //initialize the screen objects to whatever they were set to before
+        //so that they will be correct if we arrived at this screen after switching to a differing one
+        leftLineCheck.setChecked(leftLine);
 
+        pickedUp.setText(""+cellsPickedUp);
+        innerAuton.setText(""+innerAutonScored);
+        outerAuton.setText(""+outerAutonScored);
+        bottomAuton.setText(""+bottomAutonScored);
+
+        //this sets the display of the match number, team number, and scouter id
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
 
-        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
         if (SCOUT_ID < 3) {
             ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
@@ -163,24 +202,147 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
         }
 
+        //pick up power cell buttons
+        pickedUpPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cellsPickedUp++;
+                pickedUp.setText(""+cellsPickedUp);
+            }
+        });
+
+        pickedUpMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cellsPickedUp != 0){
+                    cellsPickedUp--;
+                }
+                pickedUp.setText(""+cellsPickedUp);
+            }
+        });
+
+        //pick up power cell buttons
+        pickedUpPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cellsPickedUp++;
+                pickedUp.setText(""+cellsPickedUp);
+            }
+        });
+
+        pickedUpMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cellsPickedUp != 0){
+                    cellsPickedUp--;
+                }
+                pickedUp.setText(""+cellsPickedUp);
+            }
+        });
+
+        //inner power cell buttons
+        innerAutonPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                innerAutonScored++;
+                innerAuton.setText(""+innerAutonScored);
+            }
+        });
+
+        innerAutonMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(innerAutonScored != 0){
+                    innerAutonScored--;
+                }
+                innerAuton.setText(""+innerAutonScored);
+            }
+        });
+
+        //outer power cell buttons
+        outerAutonPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                outerAutonScored++;
+                outerAuton.setText(""+outerAutonScored);
+            }
+        });
+
+        outerAutonMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(outerAutonScored != 0){
+                    outerAutonScored--;
+                }
+                outerAuton.setText(""+outerAutonScored);
+            }
+        });
+
+        //bottom power cell buttons
+        bottomAutonPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomAutonScored++;
+                bottomAuton.setText(""+bottomAutonScored);
+            }
+        });
+
+        bottomAutonMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bottomAutonScored != 0){
+                    bottomAutonScored--;
+                }
+                bottomAuton.setText(""+bottomAutonScored);
+            }
+        });
+
         //tell what happens when an item on list is clicked
         screenTabs.setClickable(true);
         screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //save info that needs to be saved
+                if(leftLineCheck.isChecked()) {
+                    leftLine = true;
+                } else {leftLine = false;}
                 changeScreen(position);
             }
         });
 
+        //change screen to qr screen when done button is pressed
+        findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save info that needs to be saved
+                if(leftLineCheck.isChecked()) {
+                    leftLine = true;
+                } else {leftLine = false;}
+
+                goQR();
+            }
+        });
     }
 
     public void goPower() {
         //display power cell screen screen
         setContentView(R.layout.powercells);
 
-        //provide us with a variable that can be used to read/write to the screen objects
-        final TextView teamdata = findViewById(R.id.teamdata);
-        final TextView matchdata = findViewById(R.id.matchdata);
+        //initialize onscreen text and buttons
+        final CheckBox stage2 = findViewById(R.id.rotation);
+        final CheckBox stage3 = findViewById(R.id.position);
+
+        final TextView inner = findViewById(R.id.inner);
+        final TextView outer = findViewById(R.id.outer);
+        final TextView bottom = findViewById(R.id.bottom);
+
+        final Button innerPlus = findViewById(R.id.innerPlus);
+        final Button outerPlus = findViewById(R.id.outerPlus);
+        final Button bottomPlus = findViewById(R.id.bottomPlus);
+
+        final Button innerMinus = findViewById(R.id.innerMinus);
+        final Button outerMinus = findViewById(R.id.outerMinus);
+        final Button bottomMinus = findViewById(R.id.bottomMinus);
 
         //create list on side for easy navigation between pages
         final ListView screenTabs = findViewById(R.id.screenTabs);
@@ -189,14 +351,23 @@ public class MainActivity extends AppCompatActivity {
 
         screenTabs.setAdapter(textFormat);
 
-        //when a screen is displayed, the objects default back to false, zero, so we have to...
-        //initialize the screen objects to whatever they were set to before...
+        //when a screen is displayed, the objects default back to false, zero, so we have to
+        //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
+        stage2.setChecked(stage2Complete);
+        stage3.setChecked(stage3Complete);
+
+        inner.setText(""+innerScored);
+        outer.setText(""+outerScored);
+        bottom.setText(""+bottomScored);
+
+        //this sets the display of the match, team, and scouter id
+        final TextView teamdata = findViewById(R.id.teamdata);
+        final TextView matchdata = findViewById(R.id.matchdata);
 
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
 
-        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
         if (SCOUT_ID < 3) {
             ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
@@ -205,65 +376,143 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
         }
 
-        //tell what happens when an item on list is clicked
-        screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //inner power cell buttons
+        innerPlus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                changeScreen(position);
+            public void onClick(View v) {
+                innerScored++;
+                inner.setText(""+innerScored);
             }
         });
 
-    }
+        innerMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(innerScored != 0){
+                    innerScored--;
+                }
+                inner.setText(""+innerScored);
+            }
+        });
 
-    public void goWOF() {
-        //display wheel of fortune screen
-        setContentView(R.layout.auton);
+        //outer power cell buttons
+        outerPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                outerScored++;
+                outer.setText(""+outerScored);
+            }
+        });
 
-        //provide us with a variable that can be used to read/write to the screen objects
-        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
-        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+        outerMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(outerScored != 0){
+                    outerScored--;
+                }
+                outer.setText(""+outerScored);
+            }
+        });
 
-        //create list on side for easy navigation between pages
-        final ListView screenTabs = (ListView) findViewById(R.id.screenTabs);
-        ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
-                R.layout.listviewformat, android.R.id.text1, tabNames);
+        //bottom power cell buttons
+        bottomPlus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bottomScored++;
+                bottom.setText(""+bottomScored);
+            }
+        });
 
-        screenTabs.setAdapter(textFormat);
+        bottomMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(bottomScored != 0){
+                    bottomScored--;
+                }
+                bottom.setText(""+bottomScored);
+            }
+        });
 
         //tell what happens when an item on list is clicked
         screenTabs.setClickable(true);
         screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //save info that needs to be saved
+                if(stage2.isChecked()) {
+                    stage2Complete = true;
+                } else {stage2Complete = false;}
+
+                if(stage3.isChecked()) {
+                    stage3Complete = true;
+                } else {stage3Complete = false;}
                 changeScreen(position);
             }
         });
 
+        //change screen to qr screen when done button is pressed
+        findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save info that needs to be saved
+                if(stage2.isChecked()) {
+                    stage2Complete = true;
+                } else {stage2Complete = false;}
 
-        //when a screen is displayed, the objects default back to false, zero, so we have to...
-        //initialize the screen objects to whatever they were set to before...
-        //so that they will be correct if we arrived at this screen using a "back" button
+                if(stage3.isChecked()) {
+                    stage3Complete = true;
+                } else {stage3Complete = false;}
 
-        teamdata.setText(Integer.toString(TEAM_NUMBER));
-        matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
-
-        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
-        if (SCOUT_ID < 3) {
-            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
-            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
-        } else {
-            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
-            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
-        }
+                goQR();
+            }
+        });
     }
 
     public void goEndgame() {
-        //display auton screen
-        setContentView(R.layout.auton);
+        //display endgame screen
+        setContentView(R.layout.endgame);
 
-        //provide us with a variable that can be used to read/write to the screen objects
+        //initialize onscreen text and buttons
+        final CheckBox climbedBox = findViewById(R.id.climb);
+        final CheckBox adjustCOGBox = findViewById(R.id.adjustCOG);
+        final CheckBox robotFailedBox = findViewById(R.id.robotFailed);
+
+        final Button timeButton = findViewById(R.id.climbTime);
+        final TextView timeDisplay = findViewById(R.id.timeDisplay);
+
+        //when a screen is displayed, the objects default back to false, zero, so we have to
+        //initialize the screen objects to whatever they were set to before
+        //so that they will be correct if we arrived at this screen using a "back" button
+        climbedBox.setChecked(climbed);
+        adjustCOGBox.setChecked(adjustCOG);
+        robotFailedBox.setChecked(robotFailed);
+
+        timeDisplay.setText(""+climbTime);
+
+        if(climbTime != 0) {
+            timeButton.setText("RESTART?");
+            timeStatus = 2;
+        } else {
+            timeButton.setText("START");
+            timeStatus = 0;
+        }
+
+
+
+
+        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
         final TextView teamdata = (TextView) findViewById(R.id.teamdata);
         final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+
+        teamdata.setText(Integer.toString(TEAM_NUMBER));
+        matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
+        if (SCOUT_ID < 3) {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
+        } else {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
+        }
 
         //create list on side for easy navigation between pages
         final ListView screenTabs = (ListView) findViewById(R.id.screenTabs);
@@ -272,31 +521,83 @@ public class MainActivity extends AppCompatActivity {
 
         screenTabs.setAdapter(textFormat);
 
+        //tell what happens when climb time button is pressed
+        timeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(timeStatus == 0) {
+                    //get start time
+                    startTime = System.currentTimeMillis();
+                    timeButton.setText("STOP");
+                    timeStatus = 1;
+                }
+                else if (timeStatus == 1) {
+                    endTime = System.currentTimeMillis();
+                    timeButton.setText("RESTART?");
+                    climbTime = Math.round((endTime/1000-startTime/1000));
+                    timeDisplay.setText(""+climbTime);
+                    timeStatus = 2;
+                }
+                else if (timeStatus == 2) {
+                    timeButton.setText("START");
+                    timeStatus = 3;
+                }
+                else if (timeStatus == 3) {
+                    timeDisplay.setText("");
+                    startTime = System.currentTimeMillis();
+                    timeButton.setText("STOP");
+                    timeStatus = 1;
+                }
+            }
+        });
+
         //tell what happens when an item on list is clicked
         screenTabs.setClickable(true);
         screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //save info that needs to be saved
+                if(climbedBox.isChecked()) {
+                    climbed = true;
+                } else {climbed = false;}
+
+                if(adjustCOGBox.isChecked()) {
+                    adjustCOG = true;
+                } else {adjustCOG = false;}
+
+                if(robotFailedBox.isChecked()) {
+                    robotFailed = true;
+                } else {robotFailed = false;}
+
                 changeScreen(position);
             }
         });
 
+        //change screen to qr screen when done button is pressed
+        findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save info that needs to be saved
+                if(climbedBox.isChecked()) {
+                    climbed = true;
+                } else {climbed = false;}
 
-        //when a screen is displayed, the objects default back to false, zero, so we have to...
-        //initialize the screen objects to whatever they were set to before...
-        //so that they will be correct if we arrived at this screen using a "back" button
+                if(adjustCOGBox.isChecked()) {
+                    adjustCOG = true;
+                } else {adjustCOG = false;}
 
-        teamdata.setText(Integer.toString(TEAM_NUMBER));
-        matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
+                if(robotFailedBox.isChecked()) {
+                    robotFailed = true;
+                } else {robotFailed = false;}
 
-        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
-        if (SCOUT_ID < 3) {
-            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
-            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
-        } else {
-            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
-            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
-        }
+                if(endTime == 0) {
+                    startTime = 0;
+                }
+
+                //go to qr screen
+                goQR();
+            }
+        });
     }
 
     public void goQR() {
@@ -317,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("RESET MATCH?");
-        builderReset.setMessage("Are you sure? Did Mission Control say to go to the next match?");
+        builderReset.setMessage("Are you sure? Did the Master Scouter say to go to the next match?");
         findViewById(nextbutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,8 +668,7 @@ public class MainActivity extends AppCompatActivity {
 
     //starts a new match
     public void NewMatch() {
-        scouterNotes = "";
-        scouterInitials = "";
+        //clear all 
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
