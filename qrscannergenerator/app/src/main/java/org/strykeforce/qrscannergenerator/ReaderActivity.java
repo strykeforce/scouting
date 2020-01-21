@@ -56,7 +56,7 @@ public class ReaderActivity extends AppCompatActivity {
     private String scanResult;
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
 //    private Firebase firebaseRef;
-    private static final int NUM_INT=28, NUM_STG=4, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
+    private static final int NUM_INT=17, NUM_STG=1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
@@ -353,36 +353,26 @@ public class ReaderActivity extends AppCompatActivity {
                         o.put("Scout_ID", scoutingData[j].scoutIDint);
                         o.put("Team", scoutingData[j].teamNumberInt);
                         o.put("Name", teamNames[scoutingData[j].teamNumberInt]);
-                        o.put("Match",scoutingData[j].matchNumberint);
-                        o.put("HatchCargoShipAuto",scoutingData[j].hatchCargoShipAuto);
-                        o.put("HatchTopAuto",scoutingData[j].hatchTopAuto);
-                        o.put("HatchMidAuto",scoutingData[j].hatchMidAuto);
-                        o.put("hatchLowAuto",scoutingData[j].hatchLowAuto);
-                        o.put("cargoCargoShipAuto",scoutingData[j].cargoCargoShipAuto);
-                        o.put("cargoTopAuto",scoutingData[j].cargoTopAuto);
-                        o.put("cargoMidAuto",scoutingData[j].cargoMidAuto);
-                        o.put("cargoLowAuto",scoutingData[j].cargoLowAuto);
-                        o.put("levelOneAuto",scoutingData[j].levelOneAuto);
-                        o.put("levelTwoAuto",scoutingData[j].levelTwoAuto);
-                        o.put("preload",scoutingData[j].preload);
-                        o.put("hatchCargoShipTele",scoutingData[j].hatchCargoShipTele);
-                        o.put("hatchTopTele",scoutingData[j].hatchTopTele);
-                        o.put("hatchMidTele",scoutingData[j].hatchMidTele);
-                        o.put("hatchLowTele",scoutingData[j].hatchLowTele);
-                        o.put("cargoCargoShipTele",scoutingData[j].cargoCargoShipTele);
-                        o.put("cargoTopTele",scoutingData[j].cargoTopTele);
-                        o.put("cargoMidTele",scoutingData[j].cargoMidTele);
-                        o.put("cargoLowTele",scoutingData[j].cargoLowTele);
-                        o.put("climbTimeTele",scoutingData[j].climbTimeTele);
-                        o.put("levelOneTele",scoutingData[j].levelOneTele);
-                        o.put("levelTwoTele",scoutingData[j].levelTwoTele);
-                        o.put("levelThreeTele",scoutingData[j].levelThreeTele);
-                        o.put("penalties",scoutingData[j].penalties);
+                        o.put("Match", scoutingData[j].matchNumberint);
+
+                        o.put("initiationLeave", scoutingData[j].leftLine);
+                        o.put("pickUpAuton", scoutingData[j].cellsPickedUp);
+                        o.put("innerPortAuto", scoutingData[j].innerAutonScored);
+                        o.put("outerPortAuto", scoutingData[j].outerAutonScored);
+                        o.put("lowerPortAuto", scoutingData[j].bottomAutonScored);
+
+                        o.put("innerPort", scoutingData[j].innerScored);
+                        o.put("outerPort", scoutingData[j].outerScored);
+                        o.put("lowerPort", scoutingData[j].bottomScored);
+                        o.put("rotationalWOF", scoutingData[j].stage2Complete);
+                        o.put("positionalWOF", scoutingData[j].stage3Complete);
+
+                        o.put("climb", scoutingData[j].climbed);
+                        o.put("climbTime", scoutingData[j].climbTime);
+                        o.put("adjustCOG", scoutingData[j].adjustCOG);
+
                         o.put("robotFailed",scoutingData[j].robotFailed);
-                        o.put("playedDefense",scoutingData[j].playedDefense);
-                        o.put("rank", scoutingData[j].rank);
                         o.put("scouterNotes",scoutingData[j].scouterNotes);
-                        o.put("scouterInitials",scoutingData[j].scouterInitials);
                         String outputString = o.toString();
                 outputString = outputString + ","; //added comma to be compatible with qualification match report
                 Log.d("lilian", "outputString == " + outputString);

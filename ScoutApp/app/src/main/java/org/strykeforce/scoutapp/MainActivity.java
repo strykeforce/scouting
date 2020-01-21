@@ -45,14 +45,13 @@ public class MainActivity extends AppCompatActivity {
     int ScoutId;
     int StartMatch;
 
-    String scouterNotes = "", scouterInitials = "";
-
     private String QRStr;
 
     private int MatchLimit = 1000;
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
-    List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame"));
+    String scouterNotes = ""; //scouter notes
+    List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame", "Postgame")); //sidebar list
 
     //initialize variables
     int cellsPickedUp = 0;
@@ -143,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
             case 1: goPower();
                 break;
             case 2: goEndgame();
+                break;
+            case 3: goPostgame();
                 break;
         }
     }
@@ -475,7 +476,6 @@ public class MainActivity extends AppCompatActivity {
         //initialize onscreen text and buttons
         final CheckBox climbedBox = findViewById(R.id.climb);
         final CheckBox adjustCOGBox = findViewById(R.id.adjustCOG);
-        final CheckBox robotFailedBox = findViewById(R.id.robotFailed);
 
         final Button timeButton = findViewById(R.id.climbTime);
         final TextView timeDisplay = findViewById(R.id.timeDisplay);
@@ -485,7 +485,6 @@ public class MainActivity extends AppCompatActivity {
         //so that they will be correct if we arrived at this screen using a "back" button
         climbedBox.setChecked(climbed);
         adjustCOGBox.setChecked(adjustCOG);
-        robotFailedBox.setChecked(robotFailed);
 
         timeDisplay.setText(""+climbTime);
 
@@ -564,11 +563,6 @@ public class MainActivity extends AppCompatActivity {
                 if(adjustCOGBox.isChecked()) {
                     adjustCOG = true;
                 } else {adjustCOG = false;}
-
-                if(robotFailedBox.isChecked()) {
-                    robotFailed = true;
-                } else {robotFailed = false;}
-
                 changeScreen(position);
             }
         });
@@ -586,15 +580,73 @@ public class MainActivity extends AppCompatActivity {
                     adjustCOG = true;
                 } else {adjustCOG = false;}
 
+                //go to qr screen
+                goQR();
+            }
+        });
+    }
+
+    public void goPostgame() {
+        //change to postgame screen
+        setContentView(R.layout.postgame);
+        //initialize onscreen text and buttons
+        final CheckBox robotFailedBox = findViewById(R.id.robotFailed);
+        final TextView notesBox = findViewById(R.id.notes);
+
+        //when a screen is displayed, the objects default back to false, zero, so we have to
+        //initialize the screen objects to whatever they were set to before
+        //so that they will be correct if we arrived at this screen using a "back" button
+        robotFailedBox.setChecked(robotFailed);
+        notesBox.setText(scouterNotes);
+
+
+        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
+        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
+        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+
+        teamdata.setText(Integer.toString(TEAM_NUMBER));
+        matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
+        if (SCOUT_ID < 3) {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
+        } else {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
+        }
+
+        //create list on side for easy navigation between pages
+        final ListView screenTabs = (ListView) findViewById(R.id.screenTabs);
+        ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
+                R.layout.listviewformat, android.R.id.text1, tabNames);
+
+        //tells what happens when an item on list is clicked
+        screenTabs.setAdapter(textFormat);
+        screenTabs.setClickable(true);
+        screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //save info that needs to be saved
                 if(robotFailedBox.isChecked()) {
                     robotFailed = true;
                 } else {robotFailed = false;}
 
-                if(endTime == 0) {
-                    startTime = 0;
-                }
+                scouterNotes = notesBox.getText().toString();
 
-                //go to qr screen
+                changeScreen(position);
+            }
+        });
+
+        //change screen to qr screen when done button is pressed
+        findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save info that needs to be saved
+                if(robotFailedBox.isChecked()) {
+                    robotFailed = true;
+                } else {robotFailed = false;}
+
+                scouterNotes = notesBox.getText().toString();
+
                 goQR();
             }
         });
@@ -668,7 +720,29 @@ public class MainActivity extends AppCompatActivity {
 
     //starts a new match
     public void NewMatch() {
-        //clear all 
+        //clear all
+        cellsPickedUp = 0;
+        innerAutonScored = 0;
+        outerAutonScored = 0;
+        bottomAutonScored = 0;
+
+        leftLine = false;
+
+        innerScored = 0;
+        outerScored = 0;
+        bottomScored = 0;
+
+        stage2Complete = false;
+        stage3Complete = false;
+
+        climbed = false;
+        adjustCOG = false;
+        robotFailed= false;
+
+        startTime = 0;
+        endTime = 0;
+        climbTime = 0;
+        timeStatus = 0;
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -714,11 +788,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String GenerateQRString() {
+        //generates the string to be passed to the papa panda through qr code.
+        //titles must be kept as short as possible so as to keep the qr code as small as possible
+        //or it will be harder to scan at competition.
         QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
                 + "TEAM: " + TEAM_NUMBER + "\t" //Team
-                + "MATCH: " + MATCH_NUMBER + "\t"
-                + "NOTE: " + scouterNotes + "\t" //Notes
-                + "INIT: " + scouterInitials + "\t"; //Initials
+                + "MATCH: " + MATCH_NUMBER + "\t"//Match Number
+                + "LIL: " + booltoInt(leftLine) + "\t" //Left Initiation Line
+                + "APU: " + cellsPickedUp + "\t" //Picked Up Cells in Auton
+                + "API: " + innerAutonScored + "\t"
+                + "APO: " + outerAutonScored + "\t"
+                + "APB: " + bottomAutonScored + "\t"
+                + "PI: " + innerScored + "\t"
+                + "PO: " + outerScored + "\t"
+                + "PB: " + bottomScored + "\t"
+                + "WOF2: " + booltoInt(stage2Complete) + "\t"
+                + "WOF3: " + booltoInt(stage3Complete) + "\t"
+                + "CLI: " + booltoInt(climbed) + "\t"
+                + "TIME: " + climbTime + "\t"
+                + "COG: " + booltoInt(adjustCOG) + "\t"
+                + "FAIL: " + booltoInt(robotFailed) + "\t"
+                + "NOTE: " + scouterNotes + "\t";
         return QRStr;
     }
 

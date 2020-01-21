@@ -2,33 +2,31 @@ package org.strykeforce.qrscannergenerator;
 
 public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
-    private static final String[] labels = {"ID","TEAM","MATCH","HCSA","HTA","HMA","HLA","CCSA","CTA",
-            "CMA","CLA","L1A","L2A",
-            "HCST","HTT","HMT", "HLT", "CCST", "CTT", "CMT", "CLT", "CT", "L1T",
-            "L2T", "L3T", "PEN", "FAIL", "DEF", "PRE", "RANK", "NOTE", "INIT"};
+    private static final String[] labels = {"ID","TEAM","MATCH","LIL","APU","API","APO","APB","PI",
+            "PO","PB","WOF2","WOF3",
+            "CLI","TIME","COG", "FAIL", "NOTE"};
     private int numInt = 28, numStg = 4, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 
-    int hatchCargoShipAuto, hatchTopAuto, hatchMidAuto, hatchLowAuto;
-    int cargoCargoShipAuto, cargoTopAuto, cargoMidAuto, cargoLowAuto;
-    String preload;
+    int leftLine;
+    int cellsPickedUp;
+    int innerAutonScored;
+    int outerAutonScored;
+    int bottomAutonScored;
 
-    int hatchCargoShipTele, hatchTopTele, hatchMidTele, hatchLowTele;
-    int cargoCargoShipTele, cargoTopTele, cargoMidTele, cargoLowTele;
-    int climbTimeTele;
+    int innerScored;
+    int outerScored;
+    int bottomScored;
+    int stage2Complete;
+    int stage3Complete;
 
-    int levelOneAuto , levelTwoAuto ;
+    int climbed;
+    int climbTime;
+    int adjustCOG;
 
-    int levelOneTele , levelTwoTele , levelThreeTele;
-
-    int penalties = 0;
-
-    int robotFailed, playedDefense;
-
-    String rank;
-
-    String scouterNotes = "", scouterInitials = "";
+    int robotFailed;
+    String scouterNotes;
 
     public ChatMessage(int[] data, String[] names)
     {
@@ -36,43 +34,25 @@ public class ChatMessage {
         this.teamNumberInt = data[1];
         this.matchNumberint = data[2];
 
-        this.hatchCargoShipAuto = data[3];
-        this.hatchTopAuto = data[4];
-        this.hatchMidAuto = data[5];
-        this.hatchLowAuto = data[6];
+        this.leftLine = data[3];
+        this.cellsPickedUp = data[4];
+        this.innerAutonScored = data[5];
+        this.outerAutonScored = data[6];
+        this.bottomAutonScored = data[7];
 
-        this.cargoCargoShipAuto = data[7];
-        this.cargoTopAuto = data[8];
-        this.cargoMidAuto = data[9];
-        this.cargoLowAuto = data[10];
+        this.innerScored = data[8];
+        this.outerScored = data[9];
+        this.bottomScored = data[10];
+        this.stage2Complete = data[11];
+        this.stage3Complete = data[12];
 
-        this.levelOneAuto = data[11];
-        this.levelTwoAuto = data[12];
+        this.climbed = data[13];
+        this.climbTime = data[14];
+        this.adjustCOG = data[15];
 
-        this.hatchCargoShipTele = data[13];
-        this.hatchTopTele = data[14];
-        this.hatchMidTele = data[15];
-        this.hatchLowTele = data[16];
+        this.robotFailed = data[16];
 
-        this.cargoCargoShipTele = data[17];
-        this.cargoTopTele = data[18];
-        this.cargoMidTele = data[19];
-        this.cargoLowTele = data[20];
-
-        this.climbTimeTele = data[21];
-
-        this.levelOneTele = data[22];
-        this.levelTwoTele = data[23];
-        this.levelThreeTele = data[24];
-
-        this.penalties = data[25];
-        this.robotFailed = data[26];
-        this.playedDefense = data[27];
-
-        this.preload = names[0];
-        this.rank = names[1];
-        this.scouterNotes = names[2];
-        this.scouterInitials = names[3];
+        this.scouterNotes = names[0];
 
         this.nums = data;
         this.strings = names;

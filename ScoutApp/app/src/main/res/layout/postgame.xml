@@ -23,6 +23,19 @@
     tools:context="org.strykeforce.scoutapp.MainActivity">
 
 
+    <TextView
+        android:id="@+id/bottomTitle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="204dp"
+        android:layout_y="184dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Notes"
+        android:textColor="@android:color/holo_purple"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
+
     <Button
         android:id="@+id/donebutton"
         android:layout_width="114dp"
@@ -35,29 +48,15 @@
         tools:layout_editor_absoluteY="102dp" />
 
     <CheckBox
-        android:id="@+id/adjustCOG"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="268dp"
-        android:layout_y="184dp"
-        android:scaleX="2.00"
-        android:scaleY="2.00"
-        android:text="Adjusted Center of Gravity"
-        android:textColor="?attr/colorAccent"
-        android:textColorLink="@android:color/holo_green_light"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="90dp" />
-
-    <CheckBox
-        android:id="@+id/climb"
+        android:id="@+id/robotFailed"
         android:layout_width="160dp"
         android:layout_height="wrap_content"
-        android:layout_x="248dp"
+        android:layout_x="250dp"
         android:layout_y="106dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
-        android:text="Climbed"
-        android:textColor="?attr/colorAccent"
+        android:text="Robot Failed"
+        android:textColor="@android:color/holo_purple"
         android:textColorLink="@android:color/holo_green_light"
         tools:layout_editor_absoluteX="252dp"
         tools:layout_editor_absoluteY="90dp" />
@@ -73,36 +72,13 @@
         tools:layout_editor_absoluteY="8dp" />
 
     <TextView
-        android:id="@+id/title4"
-        android:layout_width="224dp"
-        android:layout_height="wrap_content"
-        android:layout_x="220dp"
-        android:layout_y="258dp"
-        android:text="Climb Time"
-        android:textColor="?attr/colorAccent"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="830dp"
-        tools:layout_editor_absoluteY="49dp" />
-
-    <TextView
-        android:id="@+id/timeDisplay"
-        android:layout_width="82dp"
-        android:layout_height="wrap_content"
-        android:layout_x="507dp"
-        android:layout_y="266dp"
-        android:textColor="?attr/colorAccent"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="830dp"
-        tools:layout_editor_absoluteY="49dp" />
-
-    <TextView
         android:id="@+id/title5"
-        android:layout_width="220dp"
+        android:layout_width="267dp"
         android:layout_height="wrap_content"
-        android:layout_x="169dp"
+        android:layout_x="173dp"
         android:layout_y="0dp"
-        android:text="Endgame"
-        android:textColor="?attr/colorAccent"
+        android:text="Postgame"
+        android:textColor="@android:color/holo_purple"
         android:textSize="50sp"
         tools:layout_editor_absoluteX="830dp"
         tools:layout_editor_absoluteY="49dp" />
@@ -224,16 +200,17 @@
 
         android:textStyle="normal|bold" />
 
-    <Button
-        android:id="@+id/climbTime"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
-        android:layout_x="655dp"
-        android:layout_y="235dp"
-        android:text="start"
-        android:textSize="32sp"
-        tools:layout_editor_absoluteX="245dp"
-        tools:layout_editor_absoluteY="273dp" />
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="567dp"
+        android:layout_height="wrap_content"
+        android:layout_x="272dp"
+        android:layout_y="172dp"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        android:text="Enter here..."
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="196dp" />
 
 
 </AbsoluteLayout>
