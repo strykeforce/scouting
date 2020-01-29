@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
     double startTime = 0;
     double endTime = 0;
-    double climbTime;
+    int climbTime;
     int timeStatus;
 
     //onCreate defines what happens when the app is started up
@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //this defines variables we can use to access the screen objects
-        final TextView scoutid = (TextView) findViewById(R.id.editText);
-        final TextView startmatch = (TextView) findViewById(R.id.editText7);
+        final TextView scoutid = findViewById(R.id.editText);
+        final TextView startmatch = findViewById(R.id.editText7);
 
         //this tells the app what to do when the user pushes the "ok" button on the start screen
         //key point:  the software reads the lines of code below, but does not pause here to wait
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "ok button pushed");
 
                     MATCH_NUMBER = Integer.parseInt(startmatch.getText().toString()) - 1;
-                    ;
+
                     SCOUT_ID = Integer.parseInt(scoutid.getText().toString()) - 1;
 
                     TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -500,8 +500,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
-        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
-        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+        final TextView teamdata = findViewById(R.id.teamdata);
+        final TextView matchdata = findViewById(R.id.matchdata);
 
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
@@ -514,7 +514,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //create list on side for easy navigation between pages
-        final ListView screenTabs = (ListView) findViewById(R.id.screenTabs);
+        final ListView screenTabs = findViewById(R.id.screenTabs);
         ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
                 R.layout.listviewformat, android.R.id.text1, tabNames);
 
@@ -528,12 +528,13 @@ public class MainActivity extends AppCompatActivity {
                     //get start time
                     startTime = System.currentTimeMillis();
                     timeButton.setText("STOP");
+                    timeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     timeStatus = 1;
                 }
                 else if (timeStatus == 1) {
                     endTime = System.currentTimeMillis();
-                    timeButton.setText("RESTART?");
-                    climbTime = Math.round((endTime/1000-startTime/1000));
+                    timeButton.setText("RESTART?");timeButton.setBackgroundColor(Color.LTGRAY);
+                    climbTime = (int) Math.round((endTime/1000-startTime/1000));
                     timeDisplay.setText(""+climbTime);
                     timeStatus = 2;
                 }
@@ -545,6 +546,7 @@ public class MainActivity extends AppCompatActivity {
                     timeDisplay.setText("");
                     startTime = System.currentTimeMillis();
                     timeButton.setText("STOP");
+                    timeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     timeStatus = 1;
                 }
             }
@@ -601,8 +603,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
-        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
-        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+        final TextView teamdata = findViewById(R.id.teamdata);
+        final TextView matchdata = findViewById(R.id.matchdata);
 
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
@@ -615,7 +617,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //create list on side for easy navigation between pages
-        final ListView screenTabs = (ListView) findViewById(R.id.screenTabs);
+        final ListView screenTabs = findViewById(R.id.screenTabs);
         ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
                 R.layout.listviewformat, android.R.id.text1, tabNames);
 
@@ -657,7 +659,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.qrscreen);
 
         //Display the QR code
-        final ImageView qrImageView = (ImageView) findViewById(R.id.imageView2);
+        final ImageView qrImageView = findViewById(R.id.imageView2);
         qrImageView.setImageBitmap(generateQRImage(GenerateQRString()));
 
         //Tells what to do when backbutton is pressed
@@ -693,7 +695,7 @@ public class MainActivity extends AppCompatActivity {
                 final AlertDialog alert = builderReset.create();
                 System.out.println(DialogInterface.BUTTON_NEGATIVE);
                 alert.show();
-                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
+                TextView msgTxt = alert.findViewById(android.R.id.message);
                 msgTxt.setTextSize((float)35.0);
                 //storeLocal();
             }
@@ -743,6 +745,8 @@ public class MainActivity extends AppCompatActivity {
         endTime = 0;
         climbTime = 0;
         timeStatus = 0;
+
+        scouterNotes = "";
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
