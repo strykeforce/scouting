@@ -57,6 +57,7 @@ public class ReaderActivity extends AppCompatActivity {
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
 //    private Firebase firebaseRef;
     private static final int NUM_INT=17, NUM_STG=1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
+    private int MatchLimit;
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
@@ -66,17 +67,37 @@ public class ReaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
         super.onCreate(savedInstanceState);
-        scanscreen();
+        dScale();
+    }
 
+
+    public int[][] getTeamNums() {
+        MatchLimit = 0;
         try {
-            Scanner teamscan = new Scanner(new File("/storage/emulated/0/Divisions.csv")).useDelimiter(",");
+            Scanner s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
 
-            while (teamscan.hasNextLine()) {
-                divisionTeams.add(teamscan.nextLine());
+            while (s.hasNextLine()) {
+                s.nextLine();
+                MatchLimit++;
+
             }
-            teamscan.close();
-        }catch (Exception e) {
+            s.close();
+            s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
+
+            int[][] returned = new int[MatchLimit][6];
+            for (int i = 0; i < MatchLimit; i++) {
+                returned[i] = new int[6];
+                String[] args = s.nextLine().split(",");
+                for (int ii = 0; ii < 6; ii++) {
+                    returned[i][ii] = Integer.valueOf(args[ii]);
+                }
+            }
+            System.out.println("</getTeamNums>\n");
+            s.close();
+            return returned;
+        } catch (Exception e) {
             System.out.println("oh nose!");
+            return null;
         }
 
     }
@@ -130,7 +151,7 @@ public class ReaderActivity extends AppCompatActivity {
                 final AlertDialog alert = builderReset.create();
                 System.out.println(DialogInterface.BUTTON_NEGATIVE);
                 alert.show();
-                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
+                TextView msgTxt = alert.findViewById(android.R.id.message);
                 msgTxt.setTextSize((float) 35.0);
 
             }
@@ -155,21 +176,6 @@ public class ReaderActivity extends AppCompatActivity {
             }
 
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        //client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
-
-        //Button print_btn = (Button) findViewById(R.id.printbttn);
-
-        /*print_btn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View view) {
-                printScreen();
-            }
-
-        });*/
     }
 
     //method that scans QR code from camera and stores in a string
@@ -191,138 +197,9 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
-    /*public void printScreen() {
-        setContentView(R.layout.print_screen);
-
-        ListView teamItems = findViewById(R.id.teamItems);
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, divisionTeams);
-        teamItems.setAdapter(arrayAdapter);
-
-        Button scan_screen_bttn = findViewById(R.id.scanscreenbttn);
-
-        final TextView RocketHatchAvgTxt = findViewById(R.id.rockethatchavg);
-
-        try {
-
-
-            Scanner dumbCommas = new Scanner(new File("/storage/emulated/0/MasterDataJSON.txt"));
-            String newLine;
-            PrintWriter out = new PrintWriter("/storage/emulated/0/properSyntaxMaster.txt");
-            while(dumbCommas.hasNextLine()) {
-                newLine = dumbCommas.nextLine();
-                Log.d(TAG, "line is " + newLine);
-                newLine.substring(0, newLine.length()-2);
-                Log.d(TAG, "substringed is " + newLine);
-                out.println(newLine);
-            }
-            out.close();
-        } catch(FileNotFoundException e) {}
-        teamItems.setClickable(true);
-        teamItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-           @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                String team = divisionTeams.get(position);
-
-               ((TextView) findViewById(R.id.number_and_name)).setText(team);
-
-                String number = team.replaceAll("[^\\d]", "" );
-
-                int rocketHatchAvg = 0;
-                int rocketCargoAvg = 0;
-                int shipHatchAvg = 0;
-                int shipCargoAvg = 0;
-                int climbHigh = 0;
-                int counter = 0;
-
-                    try {
-                        BufferedReader masterData = new BufferedReader(new FileReader("/storage/emulated/0/properSyntaxMaster.txt"));
-                        JSONParser reader = new JSONParser();
-                        String currentLine = masterData.readLine();
-                        Log.d(TAG, "got into try phrase");
-                        while(currentLine != null)
-                        {
-                            Log.d(TAG, "here in while loop! boop!");
-                            Object temp;
-                            try {
-                                temp = reader.parse(currentLine);
-                                JSONObject line = (JSONObject) temp;
-
-
-                                if(line.get("Team") == team)
-                                {
-                                    Log.d(TAG, team);
-                                    rocketHatchAvg += Integer.parseInt((String) line.get("HatchCargoShipAuto"));
-                                    counter += 1;
-                                    Log.d(TAG, "rocket hatch avg is " + team + " and counter is at " + counter);
-                                }
-                            }
-                            catch (ParseException e) { Log.d(TAG, "The error is: " + e); Log.d(TAG, currentLine); }
-                            catch(JSONException e) {}
-                            currentLine = masterData.readLine();
-                        }
-
-
-                    } catch(FileNotFoundException e) {}
-                    catch(java.io.IOException e) {}
-
-               RocketHatchAvgTxt.setText("" + rocketHatchAvg);
-            }
-        });
-
-
-        scan_screen_bttn.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View view) {
-                scanscreen();
-            }
-
-        });
+    public void dScale() {
+        setContentView(R.layout.dscale_screen);
     }
-
-    public void getTeamNames() {
-        numOfTeams = 0;
-         String temp;
-        String[] readLine;
-        String returned = "no name";
-
-        try {
-            Scanner s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
-
-            while (s.hasNextLine()) {
-                temp = s.nextLine();
-                readLine = temp.split(",");
-                teamNames[Integer.parseInt(readLine[0])]=readLine[1];
-                numOfTeams++;
-
-            }
-            s.close();
-              s = new Scanner(new File("/storage/emulated/0/TeamNames.csv"));
-
-              String[][] teamNameArray = new String[numOfTeams][3];
-            for (int i = 0; i < numOfTeams; i++) {
-                  teamNameArray[i] = new String[3];
-                String[] args = s.nextLine().split(",");
-                for (int ii = 0; ii < 2; ii++) {
-                    teamNameArray[i][ii] = args[ii];
-                }
-            }
-            for (int i = 0; i < numOfTeams; i++) {
-                if (Integer.valueOf(teamNameArray[i][0]) == teamNumber) {
-                    return teamNameArray[i][1] = returned;
-                }
-            }
-            System.out.println("</getTeamNames>\n");
-            s.close();
-          } catch (Exception e) {
-            System.out.println("oh nose!");
-              return null;
-        }
-
-          return returned;
-    }*/
 
     //stores scout data from QR string to chatmessage array and sets match number to red 1's match num
     public void storeScout(){

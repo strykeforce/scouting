@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/matchDone"
+        android:layout_width="108dp"
+        android:layout_height="92dp"
+        android:layout_x="442dp"
+        android:layout_y="704dp"
+        android:text="SCAN"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/saveInfo"
+        android:layout_width="108dp"
+        android:layout_height="92dp"
+        android:layout_x="38dp"
+        android:layout_y="704dp"
+        android:text="SAVE INFO"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/startMatchNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="265dp"
+        android:layout_y="46dp"
+        android:ems="10"
+        android:inputType="numberPassword"
+        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteY="73dp" />
+</AbsoluteLayout>
