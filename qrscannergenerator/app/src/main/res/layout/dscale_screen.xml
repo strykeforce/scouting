@@ -4,6 +4,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Spinner
+        android:id="@+id/defensiveSpinner"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_x="251dp"
+        android:layout_y="256dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="230dp" />
+
     <Button
         android:id="@+id/matchDone"
         android:layout_width="108dp"
@@ -23,13 +34,68 @@
         android:textSize="24sp" />
 
     <EditText
-        android:id="@+id/startMatchNum"
-        android:layout_width="wrap_content"
+        android:id="@+id/changeMatchNum"
+        android:layout_width="63dp"
         android:layout_height="wrap_content"
-        android:layout_x="265dp"
-        android:layout_y="46dp"
+        android:layout_x="268dp"
+        android:layout_y="105dp"
         android:ems="10"
-        android:inputType="numberPassword"
+        android:numeric="integer"
         tools:layout_editor_absoluteX="242dp"
         tools:layout_editor_absoluteY="73dp" />
+
+    <TextView
+        android:id="@+id/curMatch"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_x="413dp"
+        android:layout_y="38dp"
+        android:text="0"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="298dp"
+        tools:layout_editor_absoluteY="47dp" />
+
+    <TextView
+        android:id="@+id/currenttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="151dp"
+        android:layout_y="46dp"
+        android:text="Currently Recording Match:"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="129dp"
+        android:layout_y="116dp"
+        android:text="Change Match:"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="387dp"
+        tools:layout_editor_absoluteY="59dp" />
+
+    <Button
+        android:id="@+id/changeButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_x="362dp"
+        android:layout_y="104dp"
+        android:text="CHANGE"
+        tools:layout_editor_absoluteX="352dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_x="255dp"
+        android:layout_y="223dp"
+        android:text="Defensive Bot"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="274dp"
+        tools:layout_editor_absoluteY="219dp" />
+
 </AbsoluteLayout>

@@ -15,6 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +59,8 @@ public class ReaderActivity extends AppCompatActivity {
 //    private Firebase firebaseRef;
     private static final int NUM_INT=17, NUM_STG=1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     private int MatchLimit;
+    private int curMatch = 0;
+    private Integer[] matchTeams = new Integer[6];
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
@@ -70,8 +73,7 @@ public class ReaderActivity extends AppCompatActivity {
         dScale();
     }
 
-
-    public int[][] getTeamNums() {
+    public Integer[] getTeamNums() {
         MatchLimit = 0;
         try {
             Scanner s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
@@ -84,12 +86,11 @@ public class ReaderActivity extends AppCompatActivity {
             s.close();
             s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
 
-            int[][] returned = new int[MatchLimit][6];
+            Integer[] returned = new Integer[6];
             for (int i = 0; i < MatchLimit; i++) {
-                returned[i] = new int[6];
                 String[] args = s.nextLine().split(",");
                 for (int ii = 0; ii < 6; ii++) {
-                    returned[i][ii] = Integer.valueOf(args[ii]);
+                    returned[ii] = Integer.parseInt(args[ii]);
                 }
             }
             System.out.println("</getTeamNums>\n");
@@ -102,6 +103,34 @@ public class ReaderActivity extends AppCompatActivity {
 
     }
 
+
+    public void dScale() {
+        //switch screen
+        setContentView(R.layout.dscale_screen);
+
+        //initialize onscreen text/buttons
+        TextView matchDisplay = findViewById(R.id.curMatch);
+
+        TextView changeMatchNum = findViewById(R.id.changeMatchNum);
+
+        Button changeMatch = findViewById(R.id.changeButton);
+        Button savingInfo = findViewById(R.id.saveInfo);
+        Button toScan = findViewById(R.id.matchDone);
+
+        Spinner defenseDropdown = findViewById(R.id.defensiveSpinner);
+
+        //increment match num
+        //*come back to this later as you only want to increment when going forwards in screens, not backwards*
+        curMatch++;
+
+        //grab team numbers from current match number
+        matchTeams = getTeamNums();
+
+        //populate spinner
+        final ArrayAdapter<Integer> defenseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, matchTeams);
+        defenseDropdown.setAdapter(defenseAdapter);
+
+    }
 
     public void scanscreen() {
         setContentView(R.layout.activity_reader); //sets to layout of app
@@ -197,10 +226,6 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
-    public void dScale() {
-        setContentView(R.layout.dscale_screen);
-    }
-
     //stores scout data from QR string to chatmessage array and sets match number to red 1's match num
     public void storeScout(){
         //gets QR results from private string
@@ -211,10 +236,6 @@ public class ReaderActivity extends AppCompatActivity {
             Log.d("Lilian" , "Arrived in store scout! uwu");
             ChatMessage sendingObj = findElements(message);
             scoutingData[curScoutID-1] = sendingObj;
-             if(curScoutID==1)
-            {
-
-            }
             scanResult = "";
         }
     }
@@ -260,12 +281,7 @@ public class ReaderActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-
-
-
-
             fw.close();
-
         }
         catch(Exception e) {
             System.out.println("oh noes!");
