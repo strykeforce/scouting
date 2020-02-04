@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,8 +59,7 @@ public class ReaderActivity extends AppCompatActivity {
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
 //    private Firebase firebaseRef;
     private static final int NUM_INT=17, NUM_STG=1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
-    private int MatchLimit;
-    private int curMatch = 0;
+    public int curMatch = 0;
     private Integer[] matchTeams = new Integer[6];
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
@@ -72,37 +72,6 @@ public class ReaderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         dScale();
     }
-
-    public Integer[] getTeamNums() {
-        MatchLimit = 0;
-        try {
-            Scanner s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
-
-            while (s.hasNextLine()) {
-                s.nextLine();
-                MatchLimit++;
-
-            }
-            s.close();
-            s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
-
-            Integer[] returned = new Integer[6];
-            for (int i = 0; i < MatchLimit; i++) {
-                String[] args = s.nextLine().split(",");
-                for (int ii = 0; ii < 6; ii++) {
-                    returned[ii] = Integer.parseInt(args[ii]);
-                }
-            }
-            System.out.println("</getTeamNums>\n");
-            s.close();
-            return returned;
-        } catch (Exception e) {
-            System.out.println("oh nose!");
-            return null;
-        }
-
-    }
-
 
     public void dScale() {
         //switch screen
@@ -123,12 +92,8 @@ public class ReaderActivity extends AppCompatActivity {
         //*come back to this later as you only want to increment when going forwards in screens, not backwards*
         curMatch++;
 
-        //grab team numbers from current match number
-        matchTeams = getTeamNums();
-
         //populate spinner
-        final ArrayAdapter<Integer> defenseAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, matchTeams);
-        defenseDropdown.setAdapter(defenseAdapter);
+        defenseDropdown.setAdapter(new SpinnerColors(this));
 
     }
 
