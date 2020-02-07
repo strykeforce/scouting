@@ -16,7 +16,6 @@ public class SpinnerColors extends BaseAdapter
     int[] retrieve;
     Context context;
     ArrayList<Integer> colors;
-    public int MatchLimit;
     Integer[] teamText;
 
     public void ChangeSpinner(Context context2)
@@ -29,11 +28,11 @@ public class SpinnerColors extends BaseAdapter
                 if(i >= 1 || i <= 3) {
                     colors.add(i);
                 }
-        }
+            }
         }
     }
 
-    public Integer[] getTeamNums() {
+    /*public Integer[] getTeamNums() {
         MatchLimit = 0;
         try {
             Scanner s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
@@ -61,7 +60,7 @@ public class SpinnerColors extends BaseAdapter
             return null;
         }
 
-    }
+    }*/
 
     @Override
     public int getCount()
@@ -86,7 +85,7 @@ public class SpinnerColors extends BaseAdapter
         TextView txv= view.findViewById(android.R.id.text1);
         txv.setBackgroundColor(colors.get(pos));
         txv.setTextSize(20f);
-        teamText = getTeamNums();
+        //teamText = getTeamNums();
         txv.setText("" + teamText[pos]);
         return view;
     }

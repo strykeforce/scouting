@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresPermission;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -60,17 +61,50 @@ public class ReaderActivity extends AppCompatActivity {
 //    private Firebase firebaseRef;
     private static final int NUM_INT=17, NUM_STG=1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
     public int curMatch = 0;
+    public int MatchLimit;
     private Integer[] matchTeams = new Integer[6];
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
-    String [] teamNames = new String[9000] ;
+    String [] teamNames = new String[9000];
+    String [] rankTitles = new String[] {"1 ┬──┬ ︵(╯。□。）╯", "2 ┐(‘～`；)┌", "3 (◡‿◡✿)", "4 ┏(＾0＾)┛┗(＾0＾) ┓", "5 (づ｡◕‿‿◕｡)づ"};
+    String tempText;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
         super.onCreate(savedInstanceState);
         dScale();
+    }
+
+    public Integer[] getTeamNums() {
+        MatchLimit = 0;
+        try {
+            Scanner s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
+
+            while (s.hasNextLine()) {
+                s.nextLine();
+                MatchLimit++;
+
+            }
+            s.close();
+            s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
+
+            Integer[] returned = new Integer[6];
+            for (int i = 0; i < MatchLimit; i++) {
+                String[] args = s.nextLine().split(",");
+                for (int ii = 0; ii < 6; ii++) {
+                    returned[ii] = Integer.parseInt(args[ii]);
+                }
+            }
+            System.out.println("</getTeamNums>\n");
+            s.close();
+            return returned;
+        } catch (Exception e) {
+            System.out.println("oh nose!");
+            return null;
+        }
+
     }
 
     public void dScale() {
@@ -83,21 +117,62 @@ public class ReaderActivity extends AppCompatActivity {
         TextView changeMatchNum = findViewById(R.id.changeMatchNum);
 
         Button changeMatch = findViewById(R.id.changeButton);
+        Button penalities = findViewById(R.id.penButton);
         Button savingInfo = findViewById(R.id.saveInfo);
         Button toScan = findViewById(R.id.matchDone);
 
         Spinner defenseDropdown = findViewById(R.id.defensiveSpinner);
+        Spinner rankDropdown = findViewById(R.id.rankSpinner);
+
+        final TextView notesBox = findViewById(R.id.notesBox);
 
         //increment match num
         //*come back to this later as you only want to increment when going forwards in screens, not backwards*
         curMatch++;
+        matchDisplay.setText("" + curMatch);
 
-        //populate spinner
-        defenseDropdown.setAdapter(new SpinnerColors(this));
+        //populate spinners
+        matchTeams = getTeamNums();
+        final ArrayAdapter<Integer> tadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, matchTeams);
+        defenseDropdown.setAdapter(tadapter);
 
+        final ArrayAdapter<String> radapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, rankTitles);
+        rankDropdown.setAdapter(radapter);
+
+        //insert text into notes when certain buttons are pressed
+        penalities.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+                tempText = "" + notesBox.getText();
+                tempText += "Caused excessive penalties. ";
+                notesBox.setText(tempText);
+            }
+        });
+
+        //move to scan screen
+        toScan.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+                scanScreen();
+            }
+        });
+
+        //save info
+        savingInfo.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+
+            }
+        });
     }
 
-    public void scanscreen() {
+    public void scanScreen() {
         setContentView(R.layout.activity_reader); //sets to layout of app
 
         //initializes all off/on check boxes

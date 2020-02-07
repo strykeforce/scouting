@@ -4,12 +4,34 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="478dp"
+        android:layout_y="200dp"
+        android:text="Rank"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="274dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <Spinner
+        android:id="@+id/rankSpinner"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_x="283dp"
+        android:layout_y="232dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="230dp" />
+
     <Spinner
         android:id="@+id/defensiveSpinner"
         android:layout_width="106dp"
         android:layout_height="wrap_content"
-        android:layout_x="251dp"
-        android:layout_y="256dp"
+        android:layout_x="87dp"
+        android:layout_y="230dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
         tools:layout_editor_absoluteX="8dp"
@@ -91,11 +113,33 @@
         android:id="@+id/textView6"
         android:layout_width="128dp"
         android:layout_height="wrap_content"
-        android:layout_x="255dp"
-        android:layout_y="223dp"
+        android:layout_x="91dp"
+        android:layout_y="197dp"
         android:text="Defensive Bot"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="274dp"
         tools:layout_editor_absoluteY="219dp" />
+
+    <EditText
+        android:id="@+id/notesBox"
+        android:layout_width="512dp"
+        android:layout_height="71dp"
+        android:layout_x="28dp"
+        android:layout_y="590dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        tools:layout_editor_absoluteX="187dp"
+        tools:layout_editor_absoluteY="559dp" />
+
+    <Button
+        android:id="@+id/penButton"
+        android:layout_width="wrap_content"
+        android:layout_height="71dp"
+        android:layout_x="25dp"
+        android:layout_y="310dp"
+        android:text="PENALTY"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="282dp" />
 
 </AbsoluteLayout>
