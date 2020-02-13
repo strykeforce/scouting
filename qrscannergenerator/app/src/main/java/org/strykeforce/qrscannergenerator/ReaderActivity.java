@@ -58,17 +58,18 @@ public class ReaderActivity extends AppCompatActivity {
     private CheckBox[] checkboxes = new CheckBox[6]; //refers to off/on checkboxes images
     private String scanResult;
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
-//    private Firebase firebaseRef;
-    private static final int NUM_INT=17, NUM_STG=1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
-    public int curMatch = 0;
+    //    private Firebase firebaseRef;
+    private static final int NUM_INT = 17, NUM_STG = 1, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
+    public int curMatch = 1;
     public int MatchLimit;
     private Integer[] matchTeams = new Integer[6];
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
-    String [] teamNames = new String[9000];
-    String [] rankTitles = new String[] {"1 ┬──┬ ︵(╯。□。）╯", "2 ┐(‘～`；)┌", "3 (◡‿◡✿)", "4 ┏(＾0＾)┛┗(＾0＾) ┓", "5 (づ｡◕‿‿◕｡)づ"};
-    String tempText;
+    String[] teamNames = new String[9000];
+    String[] rankTitles = new String[]{"1 ┬──┬ ︵(╯。□。）╯", "2 ┐(‘～`；)┌", "3 (◡‿◡✿)", "4 ┏(＾0＾)┛┗(＾0＾) ┓", "5 (づ｡◕‿‿◕｡)づ"};
+    String tempText, notesText;
+    int tempTeam, teamPos = 0, tempRank, rankPos = 0;
 
 
     @Override
@@ -112,24 +113,27 @@ public class ReaderActivity extends AppCompatActivity {
         setContentView(R.layout.dscale_screen);
 
         //initialize onscreen text/buttons
-        TextView matchDisplay = findViewById(R.id.curMatch);
+        final TextView matchDisplay = findViewById(R.id.curMatch);
 
-        TextView changeMatchNum = findViewById(R.id.changeMatchNum);
+        final TextView changeMatchNum = findViewById(R.id.changeMatchNum);
 
-        Button changeMatch = findViewById(R.id.changeButton);
-        Button penalities = findViewById(R.id.penButton);
-        Button savingInfo = findViewById(R.id.saveInfo);
-        Button toScan = findViewById(R.id.matchDone);
+        final Button changeMatch = findViewById(R.id.changeButton);
+        final Button penalities = findViewById(R.id.penButton);
+        final Button savingInfo = findViewById(R.id.saveInfo);
+        final Button toScan = findViewById(R.id.matchDone);
 
-        Spinner defenseDropdown = findViewById(R.id.defensiveSpinner);
-        Spinner rankDropdown = findViewById(R.id.rankSpinner);
+        final Spinner defenseDropdown = findViewById(R.id.defensiveSpinner);
+        final Spinner rankDropdown = findViewById(R.id.rankSpinner);
 
         final TextView notesBox = findViewById(R.id.notesBox);
 
-        //increment match num
-        //*come back to this later as you only want to increment when going forwards in screens, not backwards*
-        curMatch++;
+        //import data if coming from same match
         matchDisplay.setText("" + curMatch);
+
+        defenseDropdown.setSelection(teamPos);
+        rankDropdown.setSelection(rankPos);
+
+        notesBox.setText(notesText);
 
         //populate spinners
         matchTeams = getTeamNums();
@@ -151,26 +155,60 @@ public class ReaderActivity extends AppCompatActivity {
             }
         });
 
+        //save info
+        savingInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tempTeam = matchTeams[defenseDropdown.getSelectedItemPosition()];
+                tempRank = rankDropdown.getSelectedItemPosition() + 1;
+                final AlertDialog.Builder builderReset = new AlertDialog.Builder(ReaderActivity.this);
+                builderReset.setTitle("SAVE INFO?");
+                builderReset.setMessage("If you continue, this data will be saved forever!! " +
+                        "If you wish to change it after this, you will have to edit the JSON file.");
+                builderReset.setPositiveButton("YES", new DialogInterface.OnClickListener() { //sets what the yes option will do
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        notesText = "" + notesBox.getText();
+                        storeD(tempTeam, tempRank , notesText);
+                        teamPos = 0;
+                        rankPos = 0;
+                        notesText = null;
+                        dScale();
+                        dialog.dismiss(); //closes dialog box
+                    }
+
+                });
+                builderReset.setNegativeButton("NO", new DialogInterface.OnClickListener() { //sets what the no option will do
+
+                    @Override
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss(); //closes dialog box
+                    }
+
+                });
+                final AlertDialog alert = builderReset.create();
+                System.out.println(DialogInterface.BUTTON_NEGATIVE);
+                alert.show();
+                TextView msgTxt = alert.findViewById(android.R.id.message);
+                msgTxt.setTextSize((float) 35.0);
+            }
+        });
+
         //move to scan screen
         toScan.setOnClickListener(new View.OnClickListener() {
 
             @Override
 
             public void onClick(View view) {
+                teamPos = defenseDropdown.getSelectedItemPosition();
+                rankPos = rankDropdown.getSelectedItemPosition();
+                notesText = "" + notesBox.getText();
                 scanScreen();
             }
         });
-
-        //save info
-        savingInfo.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-
-            public void onClick(View view) {
-
-            }
-        });
     }
+
 
     public void scanScreen() {
         setContentView(R.layout.activity_reader); //sets to layout of app
@@ -203,7 +241,12 @@ public class ReaderActivity extends AppCompatActivity {
 
                     public void onClick(DialogInterface dialog, int which) {
                         storeLocal();
-                        resetMatch(); //calls method to restart match
+                        resetMatch();
+                        curMatch++;
+                        teamPos = 0;
+                        rankPos = 0;
+                        notesText = null;
+                        dScale();
                         dialog.dismiss(); //closes dialog box
                     }
 
@@ -250,13 +293,13 @@ public class ReaderActivity extends AppCompatActivity {
     //method that scans QR code from camera and stores in a string
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("Lilian" , "Arrived in onActivityResult! uwu");
+        Log.d("Lilian", "Arrived in onActivityResult! uwu");
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
                 Toast.makeText(this, "You cancelled the scanning", Toast.LENGTH_LONG).show();
             } else {
-                Log.d("Lilian" , "Arrived in onActivityResult (again)! uwu");
+                Log.d("Lilian", "Arrived in onActivityResult (again)! uwu");
                 scanResult = result.getContents(); //gets data from QR code and stores in private string
                 //Toast.makeText(this, scanResult, Toast.LENGTH_LONG).show(); //displays data from QR code on screen
                 storeScout();
@@ -266,16 +309,39 @@ public class ReaderActivity extends AppCompatActivity {
         }
     }
 
+    public void storeD(int tpos, int rpos, String stringText) {
+        try {
+            PrintWriter fw = new PrintWriter(new FileWriter(new File("/storage/emulated/0/DefenseJSON.txt"), true));
+                try {
+                    JSONObject o = new JSONObject();
+                    o.put("Match", curMatch);
+                    o.put("Team", tpos + ":");
+                    o.put("Rank",rpos + ":");
+                    o.put("Notes",stringText);
+                    String outputString = o.toString();
+                    outputString = outputString + ",";
+                    fw.println(outputString);
+                    fw.flush();
+                    dScale();
+                } catch (Exception e) {
+                    System.out.println("oh noes!");
+                    e.printStackTrace();
+                }
+        } catch (Exception e) {
+            System.out.println("oh noes!");
+            e.printStackTrace();
+        }
+    }
+
     //stores scout data from QR string to chatmessage array and sets match number to red 1's match num
-    public void storeScout(){
+    public void storeScout() {
         //gets QR results from private string
         String message = scanResult;
 
-        if(!message.equals(""))
-        {
-            Log.d("Lilian" , "Arrived in store scout! uwu");
+        if (!message.equals("")) {
+            Log.d("Lilian", "Arrived in store scout! uwu");
             ChatMessage sendingObj = findElements(message);
-            scoutingData[curScoutID-1] = sendingObj;
+            scoutingData[curScoutID - 1] = sendingObj;
             scanResult = "";
         }
     }
