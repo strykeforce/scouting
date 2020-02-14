@@ -66,7 +66,7 @@ public class ReaderActivity extends AppCompatActivity {
     private ChatMessage[] scoutingData = new ChatMessage[6];
     private int curScoutID, numOfTeams;
     private GoogleApiClient client;
-    String[] teamNames = new String[9000];
+    String[] teamNames = new String[10000];
     String[] rankTitles = new String[]{"1 ┬──┬ ︵(╯。□。）╯", "2 ┐(‘～`；)┌", "3 (◡‿◡✿)", "4 ┏(＾0＾)┛┗(＾0＾) ┓", "5 (づ｡◕‿‿◕｡)づ"};
     String tempText, notesText;
     int tempTeam, teamPos = 0, tempRank, rankPos = 0;
@@ -76,6 +76,19 @@ public class ReaderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) { //method that creates everything when app is opened
         super.onCreate(savedInstanceState);
         dScale();
+    }
+
+    public void getTeamNames() {
+        try {
+            Scanner scan = new Scanner(new File("/storage/emulated/0/TeamNames.csv")).useDelimiter(",");
+            int count = 0;
+            while(scan.hasNextLine()) {
+                scan.next();
+                teamNames[count] = scan.next();
+                Log.d("Lilian",""+teamNames[count]);
+                count++;
+            }
+        } catch(Exception e) {}
     }
 
     public Integer[] getTeamNums() {
@@ -288,6 +301,14 @@ public class ReaderActivity extends AppCompatActivity {
             }
 
         });
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dScale();
+            }
+        });
     }
 
     //method that scans QR code from camera and stores in a string
@@ -348,6 +369,7 @@ public class ReaderActivity extends AppCompatActivity {
 
     public void storeLocal()
     {
+        getTeamNames();
         try
         {
         PrintWriter fw =  new PrintWriter(new FileWriter(new File("/storage/emulated/0/MasterDataJSON.txt"), true));

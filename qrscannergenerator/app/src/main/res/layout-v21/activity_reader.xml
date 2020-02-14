@@ -22,6 +22,23 @@
 
     tools:context="org.strykeforce.qrscannergenerator.ReaderActivity">
 
+    <Button
+
+        android:id="@+id/backButton"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/red2view"
+
+        android:layout_alignLeft="@+id/red2view"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="241dp"
+        android:layout_marginLeft="241dp"
+        android:layout_marginBottom="20dp"
+        android:text="BACK" />
+
     <TextView
 
         android:layout_width="wrap_content"
