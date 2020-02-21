@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     boolean stage3Complete = false;
 
     boolean climbed = false;
-    boolean adjustCOG = false;
+    boolean centeredCOG = false;
     boolean robotFailed= false;
 
     double startTime = 0;
@@ -475,7 +475,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize onscreen text and buttons
         final CheckBox climbedBox = findViewById(R.id.climb);
-        final CheckBox adjustCOGBox = findViewById(R.id.adjustCOG);
+        final CheckBox centeredCOGBox = findViewById(R.id.adjustCOG);
 
         final Button timeButton = findViewById(R.id.climbTime);
         final TextView timeDisplay = findViewById(R.id.timeDisplay);
@@ -484,7 +484,7 @@ public class MainActivity extends AppCompatActivity {
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
         climbedBox.setChecked(climbed);
-        adjustCOGBox.setChecked(adjustCOG);
+        centeredCOGBox.setChecked(centeredCOG);
 
         timeDisplay.setText(""+climbTime);
 
@@ -562,9 +562,9 @@ public class MainActivity extends AppCompatActivity {
                     climbed = true;
                 } else {climbed = false;}
 
-                if(adjustCOGBox.isChecked()) {
-                    adjustCOG = true;
-                } else {adjustCOG = false;}
+                if(centeredCOGBox.isChecked()) {
+                    centeredCOG = true;
+                } else {centeredCOG = false;}
                 changeScreen(position);
             }
         });
@@ -578,9 +578,9 @@ public class MainActivity extends AppCompatActivity {
                     climbed = true;
                 } else {climbed = false;}
 
-                if(adjustCOGBox.isChecked()) {
-                    adjustCOG = true;
-                } else {adjustCOG = false;}
+                if(centeredCOGBox.isChecked()) {
+                    centeredCOG = true;
+                } else {centeredCOG = false;}
 
                 //go to qr screen
                 goQR();
@@ -738,7 +738,7 @@ public class MainActivity extends AppCompatActivity {
         stage3Complete = false;
 
         climbed = false;
-        adjustCOG = false;
+        centeredCOG = false;
         robotFailed= false;
 
         startTime = 0;
@@ -810,7 +810,7 @@ public class MainActivity extends AppCompatActivity {
                 + "WOF3: " + booltoInt(stage3Complete) + "\t"
                 + "CLI: " + booltoInt(climbed) + "\t"
                 + "TIME: " + climbTime + "\t"
-                + "COG: " + booltoInt(adjustCOG) + "\t"
+                + "COG: " + booltoInt(centeredCOG) + "\t"
                 + "FAIL: " + booltoInt(robotFailed) + "\t"
                 + "NOTE: " + scouterNotes + "\t";
         return QRStr;

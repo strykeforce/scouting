@@ -395,7 +395,7 @@ public class ReaderActivity extends AppCompatActivity {
 
                         o.put("climb", scoutingData[j].climbed);
                         o.put("climbTime", scoutingData[j].climbTime);
-                        o.put("adjustCOG", scoutingData[j].adjustCOG);
+                        o.put("centered", scoutingData[j].adjustCOG);
 
                         o.put("robotFailed",scoutingData[j].robotFailed);
                         o.put("scouterNotes",scoutingData[j].scouterNotes);
