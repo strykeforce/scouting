@@ -4,8 +4,8 @@ public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
     private static final String[] labels = {"ID","TEAM","MATCH","LIL","APU","API","APO","APB","PI",
             "PO","PB","WOF2","WOF3",
-            "CLI","TIME","COG", "FAIL", "NOTE"};
-    private int numInt = 28, numStg = 4, numSending = numInt+numStg;
+            "CLI","TIME","COG", "FAIL", "NOTE", "INT"};
+    private int numInt = 28, numStg = 5, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 
@@ -27,6 +27,7 @@ public class ChatMessage {
 
     int robotFailed;
     String scouterNotes;
+    String scouterName;
 
     public ChatMessage(int[] data, String[] names)
     {
@@ -53,6 +54,7 @@ public class ChatMessage {
         this.robotFailed = data[16];
 
         this.scouterNotes = names[0];
+        this.scouterName = names[1];
 
         this.nums = data;
         this.strings = names;

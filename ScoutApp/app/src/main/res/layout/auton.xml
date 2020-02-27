@@ -24,14 +24,14 @@
 
 
     <TextView
-        android:id="@+id/bottomTitle2"
+        android:id="@+id/innerTitle2"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
-        android:layout_x="541dp"
-        android:layout_y="298dp"
-        android:scaleX="2.00"
-        android:scaleY="2.00"
-        android:text="Bottom"
+        android:layout_x="554dp"
+        android:layout_y="221dp"
+        android:scaleX="2.0"
+        android:scaleY="2.0"
+        android:text="Inner"
         android:textColor="@android:color/holo_green_dark"
         tools:layout_editor_absoluteX="589dp"
         tools:layout_editor_absoluteY="105dp" />
@@ -40,8 +40,8 @@
         android:id="@+id/outerTitle2"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
-        android:layout_x="561dp"
-        android:layout_y="188dp"
+        android:layout_x="547dp"
+        android:layout_y="85dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
         android:text="Outer"
@@ -50,17 +50,158 @@
         tools:layout_editor_absoluteY="105dp" />
 
     <TextView
-        android:id="@+id/innerTitle2"
+        android:id="@+id/bottomTitle2"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
-        android:layout_x="567dp"
-        android:layout_y="88dp"
-        android:scaleX="2.0"
-        android:scaleY="2.0"
-        android:text="Inner"
+        android:layout_x="544dp"
+        android:layout_y="355dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Lower"
         android:textColor="@android:color/holo_green_dark"
         tools:layout_editor_absoluteX="589dp"
         tools:layout_editor_absoluteY="105dp" />
+
+    <ImageView
+        android:id="@+id/bottomImage2"
+        android:layout_width="264dp"
+        android:layout_height="104dp"
+        android:layout_x="504dp"
+        android:layout_y="314dp"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        app:srcCompat="@drawable/bottominput"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="317dp" />
+
+    <ImageView
+        android:id="@+id/outerImage2"
+        android:layout_width="264dp"
+        android:layout_height="104dp"
+        android:layout_x="503dp"
+        android:layout_y="45dp"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        app:srcCompat="@drawable/outerinput"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="317dp" />
+
+    <ImageView
+        android:id="@+id/innerImage2"
+        android:layout_width="264dp"
+        android:layout_height="104dp"
+        android:layout_x="503dp"
+        android:layout_y="177dp"
+        android:scaleX="0.75"
+        android:scaleY="0.75"
+        app:srcCompat="@drawable/innerinput"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="317dp" />
+
+    <TextView
+        android:id="@+id/innerAuton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="623dp"
+        android:layout_y="202dp"
+        android:text="0"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="40dp"
+        tools:layout_editor_absoluteX="805dp"
+        tools:layout_editor_absoluteY="115dp" />
+
+    <Button
+        android:id="@+id/innerMinusAuton"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_x="696dp"
+        android:layout_y="177dp"
+        android:padding="0dp"
+        android:text="-"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <Button
+        android:id="@+id/outerPlusAuton"
+        android:layout_width="126dp"
+        android:layout_height="117dp"
+        android:layout_x="752dp"
+        android:layout_y="38dp"
+        android:text="+"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <Button
+        android:id="@+id/innerPlusAuton"
+        android:layout_width="126dp"
+        android:layout_height="117dp"
+        android:layout_x="752dp"
+        android:layout_y="175dp"
+        android:text="+"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <Button
+        android:id="@+id/bottomPlusAuton"
+        android:layout_width="126dp"
+        android:layout_height="117dp"
+        android:layout_x="752dp"
+        android:layout_y="305dp"
+        android:text="+"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <TextView
+        android:id="@+id/outerAuton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="624dp"
+        android:layout_y="69dp"
+        android:text="0"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="40dp"
+        tools:layout_editor_absoluteX="805dp"
+        tools:layout_editor_absoluteY="115dp" />
+
+    <Button
+        android:id="@+id/outerMinusAuton"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_x="696dp"
+        android:layout_y="45dp"
+        android:padding="0dp"
+        android:text="-"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <TextView
+        android:id="@+id/bottomAuton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="624dp"
+        android:layout_y="338dp"
+        android:text="0"
+        android:textColor="@android:color/holo_green_dark"
+        android:textSize="40dp"
+        tools:layout_editor_absoluteX="805dp"
+        tools:layout_editor_absoluteY="115dp" />
+
+    <Button
+        android:id="@+id/bottomMinusAuton"
+        android:layout_width="48dp"
+        android:layout_height="40dp"
+        android:layout_x="698dp"
+        android:layout_y="316dp"
+        android:padding="0dp"
+        android:text="-"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
 
     <TextView
         android:id="@+id/title3"
@@ -192,29 +333,6 @@
 
         android:textStyle="normal|bold" />
 
-    <Button
-        android:id="@+id/innerPlusAuton"
-        android:layout_width="101dp"
-        android:layout_height="76dp"
-        android:layout_x="765dp"
-        android:layout_y="44dp"
-        android:text="+"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
-
-    <ImageView
-        android:id="@+id/bottomImage2"
-        android:layout_width="264dp"
-        android:layout_height="104dp"
-        android:layout_x="517dp"
-        android:layout_y="252dp"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:srcCompat="@drawable/bottominput"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="317dp" />
-
     <ListView
         android:id="@+id/screenTabs"
         android:layout_width="160dp"
@@ -224,124 +342,6 @@
         android:textSize="5dp"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
-
-    <ImageView
-        android:id="@+id/innerImage2"
-        android:layout_width="264dp"
-        android:layout_height="104dp"
-        android:layout_x="516dp"
-        android:layout_y="44dp"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:srcCompat="@drawable/innerinput"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="317dp" />
-
-    <ImageView
-        android:id="@+id/outerImage2"
-        android:layout_width="264dp"
-        android:layout_height="104dp"
-        android:layout_x="517dp"
-        android:layout_y="148dp"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:srcCompat="@drawable/outerinput"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="317dp" />
-
-    <TextView
-        android:id="@+id/innerAuton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="637dp"
-        android:layout_y="68dp"
-        android:text="0"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="40dp"
-        tools:layout_editor_absoluteX="805dp"
-        tools:layout_editor_absoluteY="115dp" />
-
-    <Button
-        android:id="@+id/innerMinusAuton"
-        android:layout_width="48dp"
-        android:layout_height="40dp"
-        android:layout_x="709dp"
-        android:layout_y="44dp"
-        android:padding="0dp"
-        android:text="-"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
-
-    <Button
-        android:id="@+id/outerPlusAuton"
-        android:layout_width="101dp"
-        android:layout_height="76dp"
-        android:layout_x="764dp"
-        android:layout_y="148dp"
-        android:text="+"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
-
-    <TextView
-        android:id="@+id/outerAuton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="638dp"
-        android:layout_y="172dp"
-        android:text="0"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="40dp"
-        tools:layout_editor_absoluteX="805dp"
-        tools:layout_editor_absoluteY="115dp" />
-
-    <Button
-        android:id="@+id/outeMinusAuton"
-        android:layout_width="48dp"
-        android:layout_height="40dp"
-        android:layout_x="710dp"
-        android:layout_y="148dp"
-        android:padding="0dp"
-        android:text="-"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
-
-    <Button
-        android:id="@+id/bottomPlusAuton"
-        android:layout_width="101dp"
-        android:layout_height="76dp"
-        android:layout_x="765dp"
-        android:layout_y="254dp"
-        android:text="+"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
-
-    <TextView
-        android:id="@+id/bottomAuton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="637dp"
-        android:layout_y="276dp"
-        android:text="0"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="40dp"
-        tools:layout_editor_absoluteX="805dp"
-        tools:layout_editor_absoluteY="115dp" />
-
-    <Button
-        android:id="@+id/bottomMinusAuton"
-        android:layout_width="48dp"
-        android:layout_height="40dp"
-        android:layout_x="711dp"
-        android:layout_y="254dp"
-        android:padding="0dp"
-        android:text="-"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
 
     <Button
         android:id="@+id/donebutton"

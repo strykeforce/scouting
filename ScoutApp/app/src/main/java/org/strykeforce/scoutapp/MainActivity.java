@@ -36,6 +36,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import static org.strykeforce.scoutapp.R.id.nextbutton;
+import static org.strykeforce.scoutapp.R.id.scouterNameBox;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private int MatchLimit = 1000;
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
-    String scouterNotes = ""; //scouter notes
+    String scouterNotes = "", scouterName = ""; //scouter notes
     List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame", "Postgame")); //sidebar list
 
     //initialize variables
@@ -166,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button pickedUpMinus = findViewById(R.id.cellAutonMinus);
         final Button innerAutonMinus = findViewById(R.id.innerMinusAuton);
-        final Button outerAutonMinus = findViewById(R.id.outeMinusAuton);
+        final Button outerAutonMinus = findViewById(R.id.outerMinusAuton);
         final Button bottomAutonMinus = findViewById(R.id.bottomMinusAuton);
 
         final Button pickedUpPlus = findViewById(R.id.cellAutonPlus);
@@ -594,12 +595,14 @@ public class MainActivity extends AppCompatActivity {
         //initialize onscreen text and buttons
         final CheckBox robotFailedBox = findViewById(R.id.robotFailed);
         final TextView notesBox = findViewById(R.id.notes);
+        final TextView nameBox = findViewById(R.id.scouterNameBox);
 
         //when a screen is displayed, the objects default back to false, zero, so we have to
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
         robotFailedBox.setChecked(robotFailed);
         notesBox.setText(scouterNotes);
+        nameBox.setText(scouterName);
 
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
@@ -633,6 +636,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {robotFailed = false;}
 
                 scouterNotes = notesBox.getText().toString();
+                scouterName = nameBox.getText().toString();
 
                 changeScreen(position);
             }
@@ -648,6 +652,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {robotFailed = false;}
 
                 scouterNotes = notesBox.getText().toString();
+                scouterName = nameBox.getText().toString();
 
                 goQR();
             }
@@ -747,6 +752,7 @@ public class MainActivity extends AppCompatActivity {
         timeStatus = 0;
 
         scouterNotes = "";
+        scouterName = "";
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -812,7 +818,8 @@ public class MainActivity extends AppCompatActivity {
                 + "TIME: " + climbTime + "\t"
                 + "COG: " + booltoInt(centeredCOG) + "\t"
                 + "FAIL: " + booltoInt(robotFailed) + "\t"
-                + "NOTE: " + scouterNotes + "\t";
+                + "NOTE: " + scouterNotes + "\t"
+                + "INT: " + scouterName + "\t";
         return QRStr;
     }
 
