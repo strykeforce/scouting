@@ -36,8 +36,11 @@ public class mainScreen extends AppCompatActivity {
     Spinner sevenSevenFiveDropdown;
     EditText intakeTypeBox;
     EditText weightBox;
+    EditText heightBox;
+    EditText canTheyBox;
     EditText narrowWideSquareBox;
     EditText notesBox;
+    EditText whereShootBox;
     EditText nameBox;
     EditText currentBox;
     EditText wheelMixedBox;
@@ -50,15 +53,17 @@ public class mainScreen extends AppCompatActivity {
     String teamNumber = "";
     String driveType = "";
     String wheelType = "";
+    String whereShoot = "";
     String shiftingGearBox = "";
     String sevenFiveFives = "";
     String intakeType = "";
-    String hatchOffGround = "";
+    String height = "";
+    String canThey ="";
     String weight = "";
     String narrowWideSquare = "";
     String notes = "";
     String name = "";
-    String preloadString = "";
+  //  String preloadString = "";
     String sevenSevenFive = "";
     String wheelTypeMixed = "";
     String wheelTypeOther = "";
@@ -67,14 +72,16 @@ public class mainScreen extends AppCompatActivity {
     static int wheelTypeId = 0;
     static int shiftingGearBoxId = 0;
     static int sevenSevenFiveId = 0;
-    static int hatchOffGroundId = 0;
-    static int preloadSpinnerId = 0;
+    static int heightId = 0;
+    static int canTheyId = 0;
+    static int whereShootId = 0;
+  //  static int preloadSpinnerId = 0;
     String currentStringSpinner = "";
     String wheelTypeString = "";
     String shiftingGearBoxString = "";
     String driveTrainString = "";
     String sevenSevenFiveCurrent = "";
-    String preloadStrings = "";
+//    String preloadStrings = "";
     private static final String TAG = "MainScreen";
     List<String> teams = new ArrayList<>();
 
@@ -130,6 +137,7 @@ public class mainScreen extends AppCompatActivity {
 
 
         goStart();
+
     }
 
     public void goStart() {
@@ -137,6 +145,10 @@ public class mainScreen extends AppCompatActivity {
         setContentView(R.layout.start_screen);
         numberSearchBox = (EditText) findViewById(R.id.numberSearchBox);
         teamNumberList = (ListView) findViewById(R.id.teamList);
+
+
+
+
 
 
 //array is set
@@ -151,6 +163,7 @@ public class mainScreen extends AppCompatActivity {
 
 
                 goInfo();
+
             }
         });
 
@@ -226,7 +239,6 @@ public class mainScreen extends AppCompatActivity {
     //go to info screen
     public void goInfo() {
 
-
         setContentView(R.layout.activity_main_screen_2);
 
         //go to picture screen
@@ -245,8 +257,12 @@ public class mainScreen extends AppCompatActivity {
 
         intakeTypeBox = (EditText) findViewById(R.id.intakeTypeInput);
         weightBox = (EditText) findViewById(R.id.weightInput);
+        heightBox = (EditText) findViewById(R.id.heightInput);
+        canTheyBox = (EditText) findViewById(R.id.canTheyInput);
+        whereShootBox = (EditText) findViewById(R.id.whereShootInput);
+
         narrowWideSquareBox = (EditText) findViewById(R.id.narrowWideSquareInput);
-        notesBox = (EditText) findViewById(R.id.notes);
+        notesBox = (EditText) findViewById(R.id.notesInput);
         nameBox = (EditText) findViewById(R.id.teamName);
         teamNumberCheck = (TextView) findViewById(R.id.teamNumberCheck);
 
@@ -263,11 +279,11 @@ public class mainScreen extends AppCompatActivity {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, driveTrain);
         driveTrainSpinner.setAdapter(adapter);
 
-        final String[] preloadStrings = new String[]{"Hatch", "Cargo", "None"};
-        final Spinner preloadDropdown = (Spinner) findViewById(R.id.preloadSpinner);
+        //final String[] preloadStrings = new String[]{"Hatch", "Cargo", "None"};
+      //  final Spinner preloadDropdown = (Spinner) findViewById(R.id.preloadSpinner);
 
-        final ArrayAdapter<String> preloadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, preloadStrings);
-        preloadDropdown.setAdapter(preloadAdapter);
+        //final ArrayAdapter<String> preloadAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, preloadStrings);
+        //preloadDropdown.setAdapter(preloadAdapter);
 
         String[] wheelType = new String[]{"Colsons", "Mechanum", "Kit Of Parts", "Nitrile/Tread", "Omni", "Other", "Mixed"};
         final Spinner wheelTypeSpinner = (Spinner) findViewById(R.id.wheelTypeSpinner);
@@ -289,22 +305,20 @@ public class mainScreen extends AppCompatActivity {
         final ArrayAdapter<String> adapterCurrent = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, sevenSevenFiveStrings);
         sevenSevenFiveSpinner.setAdapter(adapterCurrent);
 
-        String[] hatchOffStrings = new String[]{"Yes", "No"};
-        final Spinner hatchOffGroundSpinner = (Spinner) findViewById(R.id.hatchOffGround);
 
-        final ArrayAdapter<String> adapterHatch = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, hatchOffStrings);
-        hatchOffGroundSpinner.setAdapter(adapterHatch);
 
         System.out.println("ID's: DriveTrain: " + driveTrainId + " wheel Type: " + wheelTypeId + " Shifting gearbox: " + shiftingGearBoxId + " 775's: " + sevenSevenFiveId);
         driveTrainSpinner.setSelection(driveTrainId);
         wheelTypeSpinner.setSelection(wheelTypeId);
         shiftingGearBoxSpinner.setSelection(shiftingGearBoxId);
         sevenSevenFiveSpinner.setSelection(sevenSevenFiveId);
-        hatchOffGroundSpinner.setSelection(hatchOffGroundId);
-        preloadDropdown.setSelection(preloadSpinnerId);
+      //  preloadDropdown.setSelection(preloadSpinnerId);
         System.out.println("Done Setting ID's");
         intakeTypeBox.setText(intakeType);
         weightBox.setText(weight);
+        heightBox.setText(height);
+        canTheyBox.setText(canThey);
+        whereShootBox.setText(whereShoot+"");
         narrowWideSquareBox.setText(narrowWideSquare);
         notesBox.setText(notes);
         nameBox.setText(name);
@@ -314,11 +328,14 @@ public class mainScreen extends AppCompatActivity {
     String intakeType ="";
     String hatchOffGround ="";
     String weight ="";
+    String height ="";
+
     String narrowWideSquare ="" ;
-    String notes ="";
+  //  String notes ="";
     String name ="";
 
 */
+
         ((Spinner) findViewById(R.id.shiftingGearBox)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
             @Override
@@ -335,36 +352,27 @@ public class mainScreen extends AppCompatActivity {
             }
         });
 
-        ((Spinner) findViewById(R.id.preloadSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+     //   ((Spinner) findViewById(R.id.preloadSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                preloadString = preloadDropdown.getSelectedItem().toString();
-                preloadSpinnerId = i;
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
-            }
-        });
+           // @Override
+          //  public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+              //  preloadString = preloadDropdown.getSelectedItem().toString();
+            //    preloadSpinnerId = i;
 
 
-        ((Spinner) findViewById(R.id.hatchOffGround)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+           // }
 
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                hatchOffGround = hatchOffGroundSpinner.getSelectedItem().toString();
-                hatchOffGroundId = i;
-            }
+          //  @Override
+          //  public void onNothingSelected(AdapterView<?> adapterView) {
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
+         //   }
+       // });
 
-            }
-        });
+
+
+
+
+
 
 
         ((Spinner) findViewById(R.id.driveTrain)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -378,6 +386,9 @@ public class mainScreen extends AppCompatActivity {
                     name = nameBox.getText().toString();
                     intakeType = intakeTypeBox.getText().toString();
                     weight = weightBox.getText().toString();
+                    height = heightBox.getText().toString();
+                    canThey = canTheyBox.getText().toString();
+                    whereShoot = whereShootBox.getText().toString();
                     narrowWideSquare = narrowWideSquareBox.getText().toString();
                     notes = notesBox.getText().toString();
 
@@ -406,6 +417,9 @@ public class mainScreen extends AppCompatActivity {
                     name = nameBox.getText().toString();
                     intakeType = intakeTypeBox.getText().toString();
                     weight = weightBox.getText().toString();
+                    height = heightBox.getText().toString();
+                    canThey = canTheyBox.getText().toString();
+                    whereShoot = whereShootBox.getText().toString();
                     narrowWideSquare = narrowWideSquareBox.getText().toString();
                     notes = notesBox.getText().toString();
                     sevenSevenFiveId = i;
@@ -436,6 +450,9 @@ public class mainScreen extends AppCompatActivity {
                     name = nameBox.getText().toString();
                     intakeType = intakeTypeBox.getText().toString();
                     weight = weightBox.getText().toString();
+                    height = heightBox.getText().toString();
+                    canThey = canTheyBox.getText().toString();
+                    whereShoot = whereShootBox.getText().toString();
                     narrowWideSquare = narrowWideSquareBox.getText().toString();
                     notes = notesBox.getText().toString();
                     goWheelTypeOtherPrompt();
@@ -446,6 +463,9 @@ public class mainScreen extends AppCompatActivity {
                     name = nameBox.getText().toString();
                     intakeType = intakeTypeBox.getText().toString();
                     weight = weightBox.getText().toString();
+                    height = heightBox.getText().toString();
+                    canThey = canTheyBox.getText().toString();
+                    whereShoot = whereShootBox.getText().toString();
                     narrowWideSquare = narrowWideSquareBox.getText().toString();
                     notes = notesBox.getText().toString();
                     goWheelTypeMixedPrompt();
@@ -506,11 +526,15 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
         });
     }
 
+
     //go to pictures screen
     public void goPictures() {
         name = nameBox.getText().toString();
         intakeType = intakeTypeBox.getText().toString();
         weight = weightBox.getText().toString();
+        height = heightBox.getText().toString();
+        canThey = canTheyBox.getText().toString();
+        whereShoot = whereShootBox.getText().toString();
         narrowWideSquare = narrowWideSquareBox.getText().toString();
         notes = notesBox.getText().toString();
         setContentView(R.layout.picture_screen);
@@ -585,10 +609,13 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
     public void saveInfo() {
 
         //save info in those text boxes
-
+        whereShoot = whereShootBox.getText().toString();
         name = nameBox.getText().toString();
         intakeType = intakeTypeBox.getText().toString();
         weight = weightBox.getText().toString();
+        height = heightBox.getText().toString();
+        canThey = canTheyBox.getText().toString();
+        whereShoot = whereShootBox.getText().toString(); whereShoot = whereShootBox.getText().toString();
         narrowWideSquare = narrowWideSquareBox.getText().toString();
         notes = notesBox.getText().toString();
         teams.remove(teamNumber);
@@ -601,8 +628,10 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
                 pitData.put("number", teamNumber);
                 pitData.put("name", name);
                 pitData.put("intake", intakeType);
-                pitData.put("hatchOffGround", hatchOffGround);
+                pitData.put("height", height);
+                pitData.put("canThey", canThey);
                 pitData.put("weight", weight);
+                pitData.put("whereShoot", whereShoot);
                 pitData.put("narrowWideSquare", narrowWideSquare);
                 pitData.put("notes", notes);
                 pitData.put("sevenFiveFive", currentStringSpinner);
@@ -612,7 +641,7 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
                 pitData.put("shiftingGearBox", shiftingGearBoxString);
                 pitData.put("sevenFiveFive", sevenSevenFive);
                 pitData.put("wheelTypeOther", wheelTypeOther);
-                pitData.put("preload", preloadString);
+            //    pitData.put("preload", preloadString);
                 pitData.put("wheelTypeMixed", wheelTypeMixed);
                 pitData.put("driveTrainOther", driveTrainOther);
                 String outputString = pitData.toString();
@@ -635,7 +664,9 @@ jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
         shiftingGearBox = "";
         sevenFiveFives = "";
         intakeType = "";
-        hatchOffGround = "";
+        height = "";
+        canThey = "";
+        whereShoot = "";
         weight = "";
         narrowWideSquare = "";
         notes = "";

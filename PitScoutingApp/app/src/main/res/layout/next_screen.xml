@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<RelativeLayout tools:context="com.example.lilia.pitscoutingapp.mainScreen"
+
+    android:paddingTop="16dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/activity_main_screen"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <EditText
+        android:id="@+id/whereShootInput"
+        android:layout_width="396dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/whereShootText"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="222dp"
+        android:layout_marginBottom="-45dp"
+        android:layout_x="420dp"
+        android:layout_y="155dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="#1c1817" />
+
+    <TextView
+        android:id="@+id/whereShootText"
+        android:layout_width="395dp"
+        android:layout_height="76dp"
+        android:layout_below="@+id/teamText"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="23dp"
+        android:text="where do they prefer to shoot from?"
+        android:textSize="24sp"
+        tools:ignore="UnknownId" />
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>
+
