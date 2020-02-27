@@ -36,6 +36,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
 import static org.strykeforce.scoutapp.R.id.nextbutton;
+import static org.strykeforce.scoutapp.R.id.scouterNameBox;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,14 +46,13 @@ public class MainActivity extends AppCompatActivity {
     int ScoutId;
     int StartMatch;
 
-    String scouterNotes = "", scouterInitials = "";
-
     private String QRStr;
 
     private int MatchLimit = 1000;
 
     private static int MATCH_NUMBER = 0, TEAM_NUMBER = 0, SCOUT_ID = 0; //current match and team num
-    List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame"));
+    String scouterNotes = "", scouterName = ""; //scouter notes
+    List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame", "Postgame")); //sidebar list
 
     //initialize variables
     int cellsPickedUp = 0;
@@ -70,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
     boolean stage3Complete = false;
 
     boolean climbed = false;
-    boolean adjustCOG = false;
+    boolean centeredCOG = false;
     boolean robotFailed= false;
 
     double startTime = 0;
     double endTime = 0;
-    double climbTime;
+    int climbTime;
     int timeStatus;
 
     //onCreate defines what happens when the app is started up
@@ -93,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //this defines variables we can use to access the screen objects
-        final TextView scoutid = (TextView) findViewById(R.id.editText);
-        final TextView startmatch = (TextView) findViewById(R.id.editText7);
+        final TextView scoutid = findViewById(R.id.editText);
+        final TextView startmatch = findViewById(R.id.editText7);
 
         //this tells the app what to do when the user pushes the "ok" button on the start screen
         //key point:  the software reads the lines of code below, but does not pause here to wait
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "ok button pushed");
 
                     MATCH_NUMBER = Integer.parseInt(startmatch.getText().toString()) - 1;
-                    ;
+
                     SCOUT_ID = Integer.parseInt(scoutid.getText().toString()) - 1;
 
                     TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2: goEndgame();
                 break;
+            case 3: goPostgame();
+                break;
         }
     }
 
@@ -165,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         final Button pickedUpMinus = findViewById(R.id.cellAutonMinus);
         final Button innerAutonMinus = findViewById(R.id.innerMinusAuton);
-        final Button outerAutonMinus = findViewById(R.id.outeMinusAuton);
+        final Button outerAutonMinus = findViewById(R.id.outerMinusAuton);
         final Button bottomAutonMinus = findViewById(R.id.bottomMinusAuton);
 
         final Button pickedUpPlus = findViewById(R.id.cellAutonPlus);
@@ -474,8 +476,7 @@ public class MainActivity extends AppCompatActivity {
 
         //initialize onscreen text and buttons
         final CheckBox climbedBox = findViewById(R.id.climb);
-        final CheckBox adjustCOGBox = findViewById(R.id.adjustCOG);
-        final CheckBox robotFailedBox = findViewById(R.id.robotFailed);
+        final CheckBox centeredCOGBox = findViewById(R.id.adjustCOG);
 
         final Button timeButton = findViewById(R.id.climbTime);
         final TextView timeDisplay = findViewById(R.id.timeDisplay);
@@ -484,8 +485,7 @@ public class MainActivity extends AppCompatActivity {
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
         climbedBox.setChecked(climbed);
-        adjustCOGBox.setChecked(adjustCOG);
-        robotFailedBox.setChecked(robotFailed);
+        centeredCOGBox.setChecked(centeredCOG);
 
         timeDisplay.setText(""+climbTime);
 
@@ -501,8 +501,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
-        final TextView teamdata = (TextView) findViewById(R.id.teamdata);
-        final TextView matchdata = (TextView) findViewById(R.id.matchdata);
+        final TextView teamdata = findViewById(R.id.teamdata);
+        final TextView matchdata = findViewById(R.id.matchdata);
 
         teamdata.setText(Integer.toString(TEAM_NUMBER));
         matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
@@ -515,7 +515,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //create list on side for easy navigation between pages
-        final ListView screenTabs = (ListView) findViewById(R.id.screenTabs);
+        final ListView screenTabs = findViewById(R.id.screenTabs);
         ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
                 R.layout.listviewformat, android.R.id.text1, tabNames);
 
@@ -529,12 +529,13 @@ public class MainActivity extends AppCompatActivity {
                     //get start time
                     startTime = System.currentTimeMillis();
                     timeButton.setText("STOP");
+                    timeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     timeStatus = 1;
                 }
                 else if (timeStatus == 1) {
                     endTime = System.currentTimeMillis();
-                    timeButton.setText("RESTART?");
-                    climbTime = Math.round((endTime/1000-startTime/1000));
+                    timeButton.setText("RESTART?");timeButton.setBackgroundColor(Color.LTGRAY);
+                    climbTime = (int) Math.round((endTime/1000-startTime/1000));
                     timeDisplay.setText(""+climbTime);
                     timeStatus = 2;
                 }
@@ -546,6 +547,7 @@ public class MainActivity extends AppCompatActivity {
                     timeDisplay.setText("");
                     startTime = System.currentTimeMillis();
                     timeButton.setText("STOP");
+                    timeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
                     timeStatus = 1;
                 }
             }
@@ -561,14 +563,9 @@ public class MainActivity extends AppCompatActivity {
                     climbed = true;
                 } else {climbed = false;}
 
-                if(adjustCOGBox.isChecked()) {
-                    adjustCOG = true;
-                } else {adjustCOG = false;}
-
-                if(robotFailedBox.isChecked()) {
-                    robotFailed = true;
-                } else {robotFailed = false;}
-
+                if(centeredCOGBox.isChecked()) {
+                    centeredCOG = true;
+                } else {centeredCOG = false;}
                 changeScreen(position);
             }
         });
@@ -582,19 +579,81 @@ public class MainActivity extends AppCompatActivity {
                     climbed = true;
                 } else {climbed = false;}
 
-                if(adjustCOGBox.isChecked()) {
-                    adjustCOG = true;
-                } else {adjustCOG = false;}
+                if(centeredCOGBox.isChecked()) {
+                    centeredCOG = true;
+                } else {centeredCOG = false;}
 
+                //go to qr screen
+                goQR();
+            }
+        });
+    }
+
+    public void goPostgame() {
+        //change to postgame screen
+        setContentView(R.layout.postgame);
+        //initialize onscreen text and buttons
+        final CheckBox robotFailedBox = findViewById(R.id.robotFailed);
+        final TextView notesBox = findViewById(R.id.notes);
+        final TextView nameBox = findViewById(R.id.scouterNameBox);
+
+        //when a screen is displayed, the objects default back to false, zero, so we have to
+        //initialize the screen objects to whatever they were set to before
+        //so that they will be correct if we arrived at this screen using a "back" button
+        robotFailedBox.setChecked(robotFailed);
+        notesBox.setText(scouterNotes);
+        nameBox.setText(scouterName);
+
+
+        //this sets the display of the scout team (red 1, blue 2) in the top middle of the screen
+        final TextView teamdata = findViewById(R.id.teamdata);
+        final TextView matchdata = findViewById(R.id.matchdata);
+
+        teamdata.setText(Integer.toString(TEAM_NUMBER));
+        matchdata.setText(Integer.toString(MATCH_NUMBER + 1));
+        if (SCOUT_ID < 3) {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#ff0000"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Red " + (SCOUT_ID + 1));
+        } else {
+            ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
+            ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
+        }
+
+        //create list on side for easy navigation between pages
+        final ListView screenTabs = findViewById(R.id.screenTabs);
+        ArrayAdapter<String> textFormat = new ArrayAdapter<String>(this,
+                R.layout.listviewformat, android.R.id.text1, tabNames);
+
+        //tells what happens when an item on list is clicked
+        screenTabs.setAdapter(textFormat);
+        screenTabs.setClickable(true);
+        screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+                //save info that needs to be saved
                 if(robotFailedBox.isChecked()) {
                     robotFailed = true;
                 } else {robotFailed = false;}
 
-                if(endTime == 0) {
-                    startTime = 0;
-                }
+                scouterNotes = notesBox.getText().toString();
+                scouterName = nameBox.getText().toString();
 
-                //go to qr screen
+                changeScreen(position);
+            }
+        });
+
+        //change screen to qr screen when done button is pressed
+        findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //save info that needs to be saved
+                if(robotFailedBox.isChecked()) {
+                    robotFailed = true;
+                } else {robotFailed = false;}
+
+                scouterNotes = notesBox.getText().toString();
+                scouterName = nameBox.getText().toString();
+
                 goQR();
             }
         });
@@ -605,7 +664,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.qrscreen);
 
         //Display the QR code
-        final ImageView qrImageView = (ImageView) findViewById(R.id.imageView2);
+        final ImageView qrImageView = findViewById(R.id.imageView2);
         qrImageView.setImageBitmap(generateQRImage(GenerateQRString()));
 
         //Tells what to do when backbutton is pressed
@@ -641,7 +700,7 @@ public class MainActivity extends AppCompatActivity {
                 final AlertDialog alert = builderReset.create();
                 System.out.println(DialogInterface.BUTTON_NEGATIVE);
                 alert.show();
-                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
+                TextView msgTxt = alert.findViewById(android.R.id.message);
                 msgTxt.setTextSize((float)35.0);
                 //storeLocal();
             }
@@ -668,7 +727,32 @@ public class MainActivity extends AppCompatActivity {
 
     //starts a new match
     public void NewMatch() {
-        //clear all 
+        //clear all
+        cellsPickedUp = 0;
+        innerAutonScored = 0;
+        outerAutonScored = 0;
+        bottomAutonScored = 0;
+
+        leftLine = false;
+
+        innerScored = 0;
+        outerScored = 0;
+        bottomScored = 0;
+
+        stage2Complete = false;
+        stage3Complete = false;
+
+        climbed = false;
+        centeredCOG = false;
+        robotFailed= false;
+
+        startTime = 0;
+        endTime = 0;
+        climbTime = 0;
+        timeStatus = 0;
+
+        scouterNotes = "";
+        scouterName = "";
 
         MATCH_NUMBER++;
         TEAM_NUMBER = getTeamNums()[MATCH_NUMBER][SCOUT_ID];
@@ -714,11 +798,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String GenerateQRString() {
+        //generates the string to be passed to the papa panda through qr code.
+        //titles must be kept as short as possible so as to keep the qr code as small as possible
+        //or it will be harder to scan at competition.
         QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
                 + "TEAM: " + TEAM_NUMBER + "\t" //Team
-                + "MATCH: " + MATCH_NUMBER + "\t"
-                + "NOTE: " + scouterNotes + "\t" //Notes
-                + "INIT: " + scouterInitials + "\t"; //Initials
+                + "MATCH: " + MATCH_NUMBER + "\t"//Match Number
+                + "LIL: " + booltoInt(leftLine) + "\t" //Left Initiation Line
+                + "APU: " + cellsPickedUp + "\t" //Picked Up Cells in Auton
+                + "API: " + innerAutonScored + "\t"
+                + "APO: " + outerAutonScored + "\t"
+                + "APB: " + bottomAutonScored + "\t"
+                + "PI: " + innerScored + "\t"
+                + "PO: " + outerScored + "\t"
+                + "PB: " + bottomScored + "\t"
+                + "WOF2: " + booltoInt(stage2Complete) + "\t"
+                + "WOF3: " + booltoInt(stage3Complete) + "\t"
+                + "CLI: " + booltoInt(climbed) + "\t"
+                + "TIME: " + climbTime + "\t"
+                + "COG: " + booltoInt(centeredCOG) + "\t"
+                + "FAIL: " + booltoInt(robotFailed) + "\t"
+                + "NOTE: " + scouterNotes + "\t"
+                + "INT: " + scouterName + "\t";
         return QRStr;
     }
 

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer-array name="listColors">
+        <item name="red1">@color/teamRed</item>
+        <item name="red2">@color/teamRed</item>
+        <item name="red3">@color/teamRed</item>
+        <item name="blue1">@color/teamBlue</item>
+        <item name="blue2">@color/teamBlue</item>
+        <item name="blue3">@color/teamBlue</item>
+    </integer-array>
+</resources>
