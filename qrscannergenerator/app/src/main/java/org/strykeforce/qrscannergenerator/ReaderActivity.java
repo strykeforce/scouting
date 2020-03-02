@@ -70,6 +70,7 @@ public class ReaderActivity extends AppCompatActivity {
     String[] rankTitles = new String[]{"1 ┬──┬ ︵(╯。□。）╯", "2 ┐(‘～`；)┌", "3 (◡‿◡✿)", "4 ┏(＾0＾)┛┗(＾0＾) ┓", "5 (づ｡◕‿‿◕｡)づ"};
     String tempText = "", notesText = "";
     int tempTeam, teamPos = 0, tempRank, rankPos = 0;
+    Integer[] returned = new Integer[6];
 
 
     @Override
@@ -105,21 +106,23 @@ public class ReaderActivity extends AppCompatActivity {
             s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
 
             checkMatch = 1;
-            Integer[] returned = new Integer[6];
             for (int i = 0; i < MatchLimit; i++) {
                 String[] args = s.nextLine().split(",");
                 if(checkMatch == curMatch) {
                     for (int ii = 0; ii < 6; ii++) {
                         returned[ii] = Integer.parseInt(args[ii]);
                     }
-                    checkMatch++;
                 }
+                checkMatch++;
             }
+            Log.d("Lilian", "checkMatch is " + checkMatch);
+            Log.d("Lilian","curMatch is " + curMatch);
             System.out.println("</getTeamNums>\n");
             s.close();
+            Log.d("Lilian","match numbers are " + returned);
             return returned;
         } catch (Exception e) {
-            System.out.println("oh nose!");
+            Log.d("Lilian", "error is " + e);
             return null;
         }
 

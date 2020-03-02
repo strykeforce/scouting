@@ -13,6 +13,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pictureButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="286dp"
+        android:layout_marginLeft="286dp"
+        android:layout_marginTop="-3dp"
+        android:text="Next" />
+
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="146dp"
@@ -309,8 +321,8 @@
         android:layout_alignTop="@+id/pictureButton"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginStart="321dp"
-        android:layout_marginLeft="321dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginLeft="136dp"
         android:layout_marginTop="-3dp"
         android:text="Back" />
 

@@ -161,17 +161,17 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox leftLineCheck = findViewById(R.id.leaveLine);
 
         final TextView pickedUp = findViewById(R.id.pickCellAuton);
-        final TextView innerAuton = findViewById(R.id.innerAuton);
+        //final TextView innerAuton = findViewById(R.id.innerAuton);
         final TextView outerAuton = findViewById(R.id.outerAuton);
         final TextView bottomAuton = findViewById(R.id.bottomAuton);
 
         final Button pickedUpMinus = findViewById(R.id.cellAutonMinus);
-        final Button innerAutonMinus = findViewById(R.id.innerMinusAuton);
+        //final Button innerAutonMinus = findViewById(R.id.innerMinusAuton);
         final Button outerAutonMinus = findViewById(R.id.outerMinusAuton);
         final Button bottomAutonMinus = findViewById(R.id.bottomMinusAuton);
 
         final Button pickedUpPlus = findViewById(R.id.cellAutonPlus);
-        final Button innerAutonPlus = findViewById(R.id.innerPlusAuton);
+        //final Button innerAutonPlus = findViewById(R.id.innerPlusAuton);
         final Button outerAutonPlus = findViewById(R.id.outerPlusAuton);
         final Button bottomAutonPlus = findViewById(R.id.bottomPlusAuton);
 
@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         leftLineCheck.setChecked(leftLine);
 
         pickedUp.setText(""+cellsPickedUp);
-        innerAuton.setText(""+innerAutonScored);
+        //innerAuton.setText(""+innerAutonScored);
         outerAuton.setText(""+outerAutonScored);
         bottomAuton.setText(""+bottomAutonScored);
 
@@ -243,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //inner power cell buttons
-        innerAutonPlus.setOnClickListener(new View.OnClickListener() {
+        /*innerAutonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 innerAutonScored++;
@@ -259,7 +259,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 innerAuton.setText(""+innerAutonScored);
             }
-        });
+        });*/
 
         //outer power cell buttons
         outerAutonPlus.setOnClickListener(new View.OnClickListener() {
@@ -334,15 +334,15 @@ public class MainActivity extends AppCompatActivity {
         final CheckBox stage2 = findViewById(R.id.rotation);
         final CheckBox stage3 = findViewById(R.id.position);
 
-        final TextView inner = findViewById(R.id.inner);
+        //final TextView inner = findViewById(R.id.inner);
         final TextView outer = findViewById(R.id.outer);
         final TextView bottom = findViewById(R.id.bottom);
 
-        final Button innerPlus = findViewById(R.id.innerPlus);
+        //final Button innerPlus = findViewById(R.id.innerPlus);
         final Button outerPlus = findViewById(R.id.outerPlus);
         final Button bottomPlus = findViewById(R.id.bottomPlus);
 
-        final Button innerMinus = findViewById(R.id.innerMinus);
+        //final Button innerMinus = findViewById(R.id.innerMinus);
         final Button outerMinus = findViewById(R.id.outerMinus);
         final Button bottomMinus = findViewById(R.id.bottomMinus);
 
@@ -359,7 +359,7 @@ public class MainActivity extends AppCompatActivity {
         stage2.setChecked(stage2Complete);
         stage3.setChecked(stage3Complete);
 
-        inner.setText(""+innerScored);
+        //inner.setText(""+innerScored);
         outer.setText(""+outerScored);
         bottom.setText(""+bottomScored);
 
@@ -379,7 +379,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //inner power cell buttons
-        innerPlus.setOnClickListener(new View.OnClickListener() {
+        /*innerPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 innerScored++;
@@ -395,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 inner.setText(""+innerScored);
             }
-        });
+        });*/
 
         //outer power cell buttons
         outerPlus.setOnClickListener(new View.OnClickListener() {
