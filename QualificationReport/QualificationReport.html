@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Talon Item Commands</title>
+    <title>Qualification Report</title>
     <script type="text/javascript" src="jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="json2html.js"></script>
     <script type="text/javascript" src="jquery.json2html.js"></script>
@@ -48,7 +48,6 @@
   <div id="Button11TextArea">  </div>
 
 <script>
-//this provides a handle to the division called firstsection
 var Button0textArea = document.getElementById("Button0TextArea");
 var Button1textArea = document.getElementById("Button1TextArea");
 var Button2textArea = document.getElementById("Button2TextArea");
@@ -81,6 +80,7 @@ var index =0;
 var temp = 0;
 var matchData;
 var matchText;
+var pitData;
 var partner1 = new Array(12);
 var partner2 = new Array(12);
 var masterData2;
@@ -88,11 +88,26 @@ var partner1MatchDataRows = new Array(12);
 var partner2MatchDataRows = new Array(12);
 var partner1Matches = new Array(12);
 var partner2Matches = new Array(12);
+var curLine = 0;
 
+var button;
+
+$.getJSON( "MasterDataJSON.txt", function( inventory ) {
+    masterData2 = inventory; //store .json info for use when buttons are pressed
+    //this inserts the data from the .json file into the text
+//    output = Mustache.render("my first tag value is: {{#.}} {{Scout ID}} {{/.}}. ", inventory2);
+//  output = output + Mustache.render("And this is my secondtag {{#.}} {{7.Match}} {{/.}}. ", inventory2);
+
+    //this overwrites the text in the division called sectionOne
+//    sectionOne.innerHTML=output;
+
+  //alert ("my alert is:" + ourMatches[1]);  //alerts create a dialog box...for troubleshooting or whatever
+});
+
+//this is my attempt to read the schedule data in
 //this is my attempt to read the schedule data in
 $.get('MyTeamMatches.csv', function(masterData) {
     matchData = masterData;  //store file string in a string that i can parse/delete as I go
-
 
     //temp = matchData.search("2767");
     for (var i = 0; i < 150; i++) {
@@ -101,6 +116,7 @@ $.get('MyTeamMatches.csv', function(masterData) {
         teamArray[i] [j] = matchData.substring(0,n);
         matchData = matchData.substring(n+1,1000000);
         if (teamArray[i][j]=="2767") {
+          console.log("in if statement");
           ourMatches[index]=i;  //record which matches we compete in
           ourMatchPosition[index]=j;  //record whether we are red1, blue3, other
           //display match buttons for each match we compete in
@@ -140,27 +156,14 @@ $.get('MyTeamMatches.csv', function(masterData) {
     }
 });
 
-
-
-
-
 //i was playing with the ability to read another file....so i used a simple inventory2.json file
 //this reads the JSON file and puts the data in a string called "inventory"
-$.getJSON( "MasterDataJSON.txt", function( inventory ) {
-    masterData2 = inventory //store .json info for use when buttons are pressed
-    //this inserts the data from the .json file into the text
-//    output = Mustache.render("my first tag value is: {{#.}} {{Scout ID}} {{/.}}. ", inventory2);
-//  output = output + Mustache.render("And this is my secondtag {{#.}} {{7.Match}} {{/.}}. ", inventory2);
-
-    //this overwrites the text in the division called sectionOne
-//    sectionOne.innerHTML=output;
-
-  //alert ("my alert is:" + ourMatches[1]);  //alerts create a dialog box...for troubleshooting or whatever
-});
 
 $.getJSON( "PitScoutingJSON.txt", function( pitInventory ) {
-  pitData = pitInventory
-}
+  pitData = pitInventory;
+  //console.log(pitData);
+});
+
 
 //this subroutine finds the matches our alliance partners were in, and collects their data from the JSON file.
 //      inputs:  which button was pressed
@@ -168,6 +171,10 @@ function FindMatchResults(selectedmatchbutton){
   var index1 = 0;
   var index2 = 0;
   var rowNumber;
+
+  var onMatch = selectedmatchbutton;
+
+  //console.log(selectedmatchbutton);
 
   matchText = "";
   Button0textArea.innerHTML= matchText; //clear other button text
@@ -186,9 +193,11 @@ function FindMatchResults(selectedmatchbutton){
   for (var i = 0; i < 150; i++) {
     for (var j = 0; j < 6; j++) {
         if (teamArray[i][j]==partner1[selectedmatchbutton]) {
+          console.log("Team is in match " + i + "at position " + j);
           partner1MatchDataRows[index1]=((i*6)+j);  //record which match result row partner#1's results should be in
           partner1Matches [index1] = i;
           index1++;
+          console.log("Alliance 1 is in " + index1+ " matches.");
         }
         if (teamArray[i][j]==partner2[selectedmatchbutton]) {
           partner2MatchDataRows[index2]=((i*6)+j);  //record which match result row partner#2's results should be in
@@ -197,40 +206,42 @@ function FindMatchResults(selectedmatchbutton){
         }
       }
     }
+
+    //console.log(selectedmatchbutton);
     //start creating the html string to present when a button is pressed
-  matchText = matchText + "Our Alliance Partner #1 is: ";
-  matchText = matchText + partner1[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
+  matchText = matchText + "Our Alliance Partner #1 is: " + partner1[selectedmatchbutton];
   //get pit data team number line
   for(i = 0; i<70; i++) {
-    if(partner1[selectedmatchbutton] == parseInt(Mustache.render("{{#.}} {{"+i+".number}} {{/.}}", pitData))) {
+    if(parseInt(partner1[selectedmatchbutton]) == parseInt(Mustache.render("{{#.}} {{"+i+".number}} {{/.}}", pitData))) {
       var pitLine = i;
+      //console.log(pitLine);
     }
   }
+  //console.log(pitLine);
+  matchText = matchText + "<br>Weight: " + Mustache.render("{{#.}} {{"+pitLine+".weight}} {{/.}}", pitData);
   //run through alliance partner #1's matches and gather their data into a string
-  var autoCells1;
-  var teleCells1;
-  var cellCount1;
-  for (i = 0; i<12;i++){
-    //determine which row of the JSON file to access
-    rowNumber = partner1MatchDataRows[i];
-    //get match #
-    matchText = matchText+ "<span style=margin-left:3em>Match " + (partner1Matches [i]+1);
-    //get weight
-    matchText = matchText+ "<span style=margin-left:4em>Weight " + parseInt(Mustache.render("{{#.}} {{"+pitLine+".Weight}} {{/.}}", pitData));
+  var autoCells1 = 0;
+  var teleCells1 = 0;
+  var cellCount1 = 0;
+  for (var k = 0; k<index1+1;k++) {
+    rowNumber = partner1MatchDataRows[k]
     //calculate the total number of cells scored per match
-    autoCells1 += parseInt(Mustache.render("{{#.}} {{"+rowNumber+".outerPortAuto}} {{/.}}", masterData2));
-    teleCells1 += parseInt(Mustache.render("{{#.}} {{"+rowNumber+".outerPort}} {{/.}}", masterData2));
+    autoCells1 += parseInt(Mustache.render("{{#.}} {{"+k+".outerPortAuto}} {{/.}}", masterData2));
+    console.log(rowNumber);
+    //console.log(autoCells1);
+    teleCells1 += parseInt(Mustache.render("{{#.}} {{"+k+".outerPort}} {{/.}}", masterData2));
+    //console.log(teleCells1);
     cellCount1++;
+    console.log(Mustache.render("{{#.}} {{"+k+".outerPort}} {{/.}}", masterData2));
   }
-  autoCells = autoCells/cellCount;
-  teleCells = teleCells/cellCount;
-  matchText = matchText+ "<span style=margin-keft:4em>Average Auton Cells " + autoCells1;
-  matchText = matchText+ "<span style=margin-keft:4em>Average Teleop Cells " + teleCells1;
+  autoCells = autoCells1/cellCount1;
+  teleCells = teleCells1/cellCount1;
+  matchText = matchText+ "<br>Average Auton Cells: " + autoCells1;
+  matchText = matchText+ "<br>Average Teleop Cells: " + teleCells1;
 
-  //start creating the html string to present when a button is pressed
-matchText = matchText + "Our Alliance Partner #2 is: ";
-matchText = matchText + partner1[selectedmatchbutton] +"<br /><span style=margin-left:2em>and they've competed in these matches: </span><br />";
-//get pit data team number line
+  matchText = matchText + "<br><br>Our Alliance Partner #2 is: " + partner2[selectedmatchbutton];
+  /*
+  //get pit data team number line
 for(i = 0; i<70; i++) {
   if(partner2[selectedmatchbutton] == parseInt(Mustache.render("{{#.}} {{"+i+".number}} {{/.}}", pitData))) {
     var pitLine = i;
@@ -246,29 +257,29 @@ for (i = 0; i<12;i++){
   //get match #
   matchText = matchText+ "<span style=margin-left:3em>Match " + (partner2Matches [i]+1);
   //get weight
-  matchText = matchText+ "<span style=margin-left:4em>Weight " + parseInt(Mustache.render("{{#.}} {{"+pitLine+".Weight}} {{/.}}", pitData));
+  //matchText = matchText+ "<span style=margin-left:4em>Weight " + parseInt(Mustache.render("{{#.}} {{"+pitLine+".Weight}} {{/.}}", pitData));
   //calculate the total number of cells scored per match
-  autoCells2 += parseInt(Mustache.render("{{#.}} {{"+rowNumber+".outerPortAuto}} {{/.}}", masterData2));
+  /*autoCells2 += parseInt(Mustache.render("{{#.}} {{"+rowNumber+".outerPortAuto}} {{/.}}", masterData2));
   teleCells2 += parseInt(Mustache.render("{{#.}} {{"+rowNumber+".outerPort}} {{/.}}", masterData2));
   cellCount2++;
 }
 autoCells2 = autoCells2/cellCount2;
 teleCells2 = teleCells2/cellCount2;
 matchText = matchText+ "<span style=margin-keft:4em>Average Auton Cells " + autoCells2;
-matchText = matchText+ "<span style=margin-keft:4em>Average Teleop Cells " + teleCells2;
+matchText = matchText+ "<span style=margin-keft:4em>Average Teleop Cells " + teleCells2;*/
 }
 
 //this function runs when the button for the first match is pressed
 function runButton0()
 {
-  var button = 0;  //identify which button was pressed
+  button = 0;  //identify which button was pressed
   FindMatchResults(button);
   Button0textArea.innerHTML= matchText;  //write out new button text
 }
 
 function runButton1()
 {
-  var button =1;
+  button =1;
   FindMatchResults(button);
   Button1textArea.innerHTML= matchText;//write out new button text
 
@@ -276,7 +287,7 @@ function runButton1()
 
 function runButton2()
 {
-  var button =2;
+  button =2;
   FindMatchResults(button);
   Button2textArea.innerHTML= matchText;//write out new button text
 
@@ -284,7 +295,7 @@ function runButton2()
 
 function runButton3()
 {
-  var button =3;
+  button =3;
   FindMatchResults(button);
   Button3textArea.innerHTML= matchText;//write out new button text
 
@@ -292,7 +303,7 @@ function runButton3()
 
 function runButton4()
 {
-  var button =4;
+  button =4;
   FindMatchResults(button);
   Button4textArea.innerHTML= matchText;//write out new button text
 
@@ -300,7 +311,7 @@ function runButton4()
 
 function runButton5()
 {
-  var button =5;
+  button =5;
   FindMatchResults(button);
   Button5textArea.innerHTML= matchText;//write out new button text
 
@@ -308,7 +319,7 @@ function runButton5()
 
 function runButton6()
 {
-  var button =6;
+  button =6;
   FindMatchResults(button);
   Button6textArea.innerHTML= matchText;//write out new button text
 
@@ -316,7 +327,7 @@ function runButton6()
 
 function runButton7()
 {
-  var button =7;
+  button =7;
   FindMatchResults(button);
   Button7textArea.innerHTML= matchText;//write out new button text
 
@@ -324,7 +335,7 @@ function runButton7()
 
 function runButton8()
 {
-  var button =8;
+  button =8;
   FindMatchResults(button);
   Button8textArea.innerHTML= matchText;//write out new button text
 
@@ -332,7 +343,7 @@ function runButton8()
 
 function runButton9()
 {
-  var button =9;
+  button =9;
   FindMatchResults(button);
   Button9textArea.innerHTML= matchText;//write out new button text
 
@@ -340,7 +351,7 @@ function runButton9()
 
 function runButton10()
 {
-  var button =10;
+  button =10;
   FindMatchResults(button);
   Button10textArea.innerHTML= matchText;//write out new button text
 
@@ -348,7 +359,7 @@ function runButton10()
 
 function runButton11()
 {
-  var button =11;
+  button =11;
   FindMatchResults(button);
   Button11textArea.innerHTML= matchText;//write out new button text
 
@@ -420,7 +431,6 @@ alert("i'm here");
 </body>
 
 
-<footer>
-<br />
-</footer>
+
+
 </html>
