@@ -22,6 +22,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.Scanner;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -84,55 +85,24 @@ public class mainScreen extends AppCompatActivity {
 //    String preloadStrings = "";
     private static final String TAG = "MainScreen";
     List<String> teams = new ArrayList<>();
+    String tempTeam = new String();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        teams.add("    27    ");
-        teams.add("    67    ");
-        teams.add("    141    ");
-        teams.add("    217    ");
-        teams.add("    226    ");
-        teams.add("    548    ");
-        teams.add("    573    ");
-        teams.add("    910    ");
-        teams.add("    1189    ");
-        teams.add("    1481    ");
-        teams.add("    1718    ");
-        teams.add("    2048    ");
-        teams.add("    2054    ");
-        teams.add("    2474    ");
-        teams.add("    2767    ");
-        teams.add("    2832    ");
-        teams.add("    2960    ");
-        teams.add("    3357    ");
-        teams.add("    3602    ");
-        teams.add("    3770    ");
-        teams.add("    4004    ");
-        teams.add("    4130    ");
-        teams.add("    4381    ");
-        teams.add("    4568    ");
-        teams.add("    5048    ");
-        teams.add("    5282    ");
-        teams.add("    5567    ");
-        teams.add("    5676    ");
-        teams.add("    5901    ");
-        teams.add("    5927    ");
-        teams.add("    6020    ");
-        teams.add("    6090    ");
-        teams.add("    6344    ");
-        teams.add("    6548    ");
-        teams.add("    6573    ");
-        teams.add("    6963    ");
-        teams.add("    7211    ");
-        teams.add("    7660    ");
-        teams.add("    7769    ");
-        teams.add("    7809    ");
+        //pull division teams (make sure there is a csv file with every team in division
+        //called "Divisions.csv"
+        try {
+            Scanner s = new Scanner(new File("/storage/emulated/0/Divisions.csv"));
+            while(s.hasNextLine()) {
+                tempTeam = s.nextLine();
+                Log.d("Lilian","tempTeam is " + tempTeam);
+                teams.add(tempTeam);
+            }
+        } catch(Exception e) {}
 
 
         //go to info screen
-
-        // teams.add("");
 
 
 
@@ -483,23 +453,88 @@ public class mainScreen extends AppCompatActivity {
             }
         });
 
+        //next button
+        findViewById(R.id.nextButton).setOnClickListener(new View.OnClickListener() {
+            @Override
 
+            public void onClick(View v) {
+                //make sure to save info in here
+                name = nameBox.getText().toString();
+                intakeType = intakeTypeBox.getText().toString();
+                weight = weightBox.getText().toString();
+                height = heightBox.getText().toString();
+                canThey = canTheyBox.getText().toString();
+                whereShoot = whereShootBox.getText().toString();
+                narrowWideSquare = narrowWideSquareBox.getText().toString();
+                notes = notesBox.getText().toString();
+                goInfo2();
+            }
+        });
 
-
-/*
-uogyfjklhgehuigaerhuiltg4aweTUILGHUBGARIHGWEDILGUFHNAILEDGFHUBweialghfneaiklughILWEUKAHGFLAKEUGHFBILEGHBALKEDBGUBFILawegfbualeigbfaeigfhulgiaujegfiledgfbuidkgbueagfbeulgbuiweaghbeliagb
-
- */
-
-/*
-jncfjcfdhytvfjkgjfgtyfhgfujtyhdyhfujhghFruitPunch?
- */
 
         //final warning pop up before entering information
         final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
         builderReset.setTitle("ENTER INFORMATION");
         builderReset.setMessage("Do NOT continue unless you are sure the information you entered is correct.");
         findViewById(R.id.saveInformation).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                builderReset.setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        saveInfo();
+                        dialog.dismiss();
+                    }
+
+                });
+                builderReset.setNegativeButton("GO BACK!", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                final AlertDialog alert = builderReset.create();
+                System.out.println(DialogInterface.BUTTON_NEGATIVE);
+                alert.show();
+                TextView msgTxt = (TextView) alert.findViewById(android.R.id.message);
+                msgTxt.setTextSize((float) 35.0);
+            }
+        });
+    }
+
+    //Lilian: I made a second screen for you to use because Shelby (our main pit scouter)
+    //and Zach (build team student leader) wanted more information and I know you have been
+    //struggling to make a second screen, so I made one for you so it can be done by St. Joe.
+    //Thank you!! :D
+    public void goInfo2() {
+        //change view to info 2 screen
+        setContentView(R.layout.next_screen);
+
+        //initialize onscreen text
+        whereShootBox = findViewById(R.id.whereShootInput);
+
+        //import old info if info has not been saved
+        whereShootBox.setText(whereShoot);
+
+        //back button
+        findViewById(R.id.backButton2).setOnClickListener(new View.OnClickListener() {
+            @Override
+
+            public void onClick(View v) {
+                //make sure to save info in here- i've added functionality to what
+                //you already had on screen for an example.
+                whereShoot = whereShootBox.getText().toString();
+                goInfo();
+            }
+        });
+
+        //save info
+        //final warning pop up before entering information
+        final AlertDialog.Builder builderReset = new AlertDialog.Builder(this);
+        builderReset.setTitle("ENTER INFORMATION");
+        builderReset.setMessage("Do NOT continue unless you are sure the information you entered is correct.");
+        findViewById(R.id.saveInformation2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 builderReset.setPositiveButton("CONTINUE", new DialogInterface.OnClickListener() {

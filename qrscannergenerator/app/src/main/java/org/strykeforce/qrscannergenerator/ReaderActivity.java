@@ -60,7 +60,7 @@ public class ReaderActivity extends AppCompatActivity {
     private static final String FIREBASE_URL = "https://testproj1-dc6de.firebaseio.com/"; //set to URL of firebase to send to
     //    private Firebase firebaseRef;
     private static final int NUM_INT = 17, NUM_STG = 2, NUM_ELEMENTS_SENDING = NUM_INT + NUM_STG;
-    public int curMatch = 1;
+    public int curMatch = 1, checkMatch, tempMatch;
     public int MatchLimit;
     private Integer[] matchTeams = new Integer[6];
     private ChatMessage[] scoutingData = new ChatMessage[6];
@@ -68,8 +68,9 @@ public class ReaderActivity extends AppCompatActivity {
     private GoogleApiClient client;
     String[] teamNames = new String[10000];
     String[] rankTitles = new String[]{"1 ┬──┬ ︵(╯。□。）╯", "2 ┐(‘～`；)┌", "3 (◡‿◡✿)", "4 ┏(＾0＾)┛┗(＾0＾) ┓", "5 (づ｡◕‿‿◕｡)づ"};
-    String tempText, notesText;
+    String tempText = "", notesText = "";
     int tempTeam, teamPos = 0, tempRank, rankPos = 0;
+    Integer[] returned = new Integer[6];
 
 
     @Override
@@ -104,18 +105,24 @@ public class ReaderActivity extends AppCompatActivity {
             s.close();
             s = new Scanner(new File("/storage/emulated/0/MyTeamMatches.csv"));
 
-            Integer[] returned = new Integer[6];
+            checkMatch = 1;
             for (int i = 0; i < MatchLimit; i++) {
                 String[] args = s.nextLine().split(",");
-                for (int ii = 0; ii < 6; ii++) {
-                    returned[ii] = Integer.parseInt(args[ii]);
+                if(checkMatch == curMatch) {
+                    for (int ii = 0; ii < 6; ii++) {
+                        returned[ii] = Integer.parseInt(args[ii]);
+                    }
                 }
+                checkMatch++;
             }
+            Log.d("Lilian", "checkMatch is " + checkMatch);
+            Log.d("Lilian","curMatch is " + curMatch);
             System.out.println("</getTeamNums>\n");
             s.close();
+            Log.d("Lilian","match numbers are " + returned);
             return returned;
         } catch (Exception e) {
-            System.out.println("oh nose!");
+            Log.d("Lilian", "error is " + e);
             return null;
         }
 
@@ -126,11 +133,11 @@ public class ReaderActivity extends AppCompatActivity {
         setContentView(R.layout.dscale_screen);
 
         //initialize onscreen text/buttons
-        final TextView matchDisplay = findViewById(R.id.curMatch);
+        final TextView matchDisplay = findViewById(R.id.matchDisplay);
 
-        final TextView changeMatchNum = findViewById(R.id.changeMatchNum);
+        final TextView changeMatchNumBox = findViewById(R.id.changeMatchNum);
 
-        final Button changeMatch = findViewById(R.id.changeButton);
+        final Button changeMatchButton = findViewById(R.id.changeButton);
         final Button penalities = findViewById(R.id.penButton);
         final Button savingInfo = findViewById(R.id.saveInfo);
         final Button toScan = findViewById(R.id.matchDone);
@@ -141,20 +148,23 @@ public class ReaderActivity extends AppCompatActivity {
         final TextView notesBox = findViewById(R.id.notesBox);
 
         //import data if coming from same match
+        Log.d("Lilian", "displaying text");
         matchDisplay.setText("" + curMatch);
-
-        defenseDropdown.setSelection(teamPos);
-        rankDropdown.setSelection(rankPos);
 
         notesBox.setText(notesText);
 
         //populate spinners
         matchTeams = getTeamNums();
+        Log.d("Lilian", "set spinners");
         final ArrayAdapter<Integer> tadapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, matchTeams);
         defenseDropdown.setAdapter(tadapter);
 
         final ArrayAdapter<String> radapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, rankTitles);
         rankDropdown.setAdapter(radapter);
+        Log.d("Lilian", "finish set spinners");
+
+        defenseDropdown.setSelection(teamPos);
+        rankDropdown.setSelection(rankPos);
 
         //insert text into notes when certain buttons are pressed
         penalities.setOnClickListener(new View.OnClickListener() {
@@ -166,6 +176,30 @@ public class ReaderActivity extends AppCompatActivity {
                 tempText += "Caused excessive penalties. ";
                 notesBox.setText(tempText);
             }
+        });
+
+        changeMatchButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View view) {
+                Log.d("Lilian", "after button is pressed");
+                tempText = changeMatchNumBox.getText() + "";
+                if (tempText != null) {
+                    Log.d("Lilian", "tempText is " + tempText);
+                    Log.d("Lilian", "tempText is " + tempText);
+                    tempMatch = Integer.parseInt("" + tempText);
+                    if (tempMatch >= 1) {
+                        curMatch = Integer.parseInt("" + changeMatchNumBox.getText());
+                        Log.d("Lilian", "curMatch is " + curMatch);
+                        teamPos = 0;
+                        rankPos = 0;
+                        notesText = "";
+                        dScale();
+                    }
+                }
+            }
+
         });
 
         //save info
@@ -185,7 +219,7 @@ public class ReaderActivity extends AppCompatActivity {
                         storeD(tempTeam, tempRank , notesText);
                         teamPos = 0;
                         rankPos = 0;
-                        notesText = null;
+                        notesText = "";
                         dScale();
                         dialog.dismiss(); //closes dialog box
                     }

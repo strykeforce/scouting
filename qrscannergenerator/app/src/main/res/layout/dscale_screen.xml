@@ -67,7 +67,7 @@
         tools:layout_editor_absoluteY="73dp" />
 
     <TextView
-        android:id="@+id/curMatch"
+        android:id="@+id/matchDisplay"
         android:layout_width="46dp"
         android:layout_height="wrap_content"
         android:layout_x="413dp"

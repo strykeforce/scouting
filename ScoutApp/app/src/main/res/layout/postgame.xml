@@ -24,6 +24,19 @@
 
 
     <TextView
+        android:id="@+id/bottomTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="529dp"
+        android:layout_y="140dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="**Do not use apostrophes!!**"
+        android:textColor="@android:color/holo_purple"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <TextView
         android:id="@+id/bottomTitle3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
