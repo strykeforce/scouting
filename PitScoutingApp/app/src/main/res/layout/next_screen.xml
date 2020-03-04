@@ -14,6 +14,101 @@
     tools:context="com.example.lilia.pitscoutingapp.mainScreen">
 
 
+    <TextView
+        android:id="@+id/canTheyText"
+        android:layout_width="395dp"
+        android:layout_height="76dp"
+        android:layout_below="@+id/whereShootText"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="626dp"
+        android:layout_x="0dp"
+        android:layout_y="172dp"
+        android:text="Can they do Wheel of Fortune?"
+        android:textSize="24sp"
+        tools:ignore="UnknownId" />
+
+    <TextView
+        android:id="@+id/canTheyText3"
+        android:layout_width="395dp"
+        android:layout_height="76dp"
+        android:layout_below="@+id/whereShootText"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="626dp"
+        android:layout_x="0dp"
+        android:layout_y="97dp"
+        android:text="What levels can they reach?"
+        android:textSize="24sp"
+        tools:ignore="UnknownId" />
+
+    <Spinner
+        android:id="@+id/wofSpinner"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_x="324dp"
+        android:layout_y="173dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <Spinner
+        android:id="@+id/reachLevelSpinner"
+        android:layout_width="232dp"
+        android:layout_height="wrap_content"
+        android:layout_x="330dp"
+        android:layout_y="98dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <EditText
+        android:id="@+id/notesInput"
+        android:layout_width="459dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/notesText"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="38dp"
+        android:layout_x="106dp"
+        android:layout_y="511dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="#1c1817" />
+
+    <TextView
+        android:id="@+id/canTheyText2"
+        android:layout_width="395dp"
+        android:layout_height="76dp"
+        android:layout_below="@+id/whereShootText"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="626dp"
+        android:layout_x="0dp"
+        android:layout_y="21dp"
+        android:text="Where can they load from?"
+        android:textSize="24sp"
+        tools:ignore="UnknownId" />
+
+    <TextView
+        android:id="@+id/notesText2"
+        android:layout_width="122dp"
+        android:layout_height="76dp"
+        android:layout_below="@+id/canTheyInput"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="784dp"
+        android:layout_x="0dp"
+        android:layout_y="510dp"
+        android:text="notes"
+        android:textSize="24sp"
+        tools:ignore="UnknownId" />
+
     <Button
         android:id="@+id/saveInformation2"
         android:layout_width="177dp"
@@ -22,8 +117,8 @@
         android:layout_marginLeft="141dp"
         android:layout_marginRight="14dp"
         android:layout_marginBottom="-3dp"
-        android:layout_x="360dp"
-        android:layout_y="791dp"
+        android:layout_x="355dp"
+        android:layout_y="721dp"
         android:text="Save Information" />
 
     <Button
@@ -34,39 +129,18 @@
         android:layout_marginStart="136dp"
         android:layout_marginLeft="136dp"
         android:layout_marginTop="-3dp"
-        android:layout_x="19dp"
-        android:layout_y="802dp"
+        android:layout_x="14dp"
+        android:layout_y="732dp"
         android:text="Back" />
 
-    <EditText
-        android:id="@+id/whereShootInput"
-        android:layout_width="202dp"
+    <Spinner
+        android:id="@+id/pickupSpinner"
+        android:layout_width="232dp"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/whereShootText"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="222dp"
-        android:layout_marginBottom="-45dp"
-        android:layout_x="353dp"
-        android:layout_y="40dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColor="#1c1817" />
-
-    <TextView
-        android:id="@+id/whereShootText"
-        android:layout_width="395dp"
-        android:layout_height="76dp"
-        android:layout_below="@+id/teamText"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="23dp"
-        android:layout_x="0dp"
-        android:layout_y="0dp"
-        android:text="where do they prefer to shoot from?"
-        android:textSize="24sp"
-        tools:ignore="UnknownId" />
+        android:layout_x="334dp"
+        android:layout_y="22dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="258dp" />
 
 
 </AbsoluteLayout>

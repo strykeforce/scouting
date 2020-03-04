@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<RelativeLayout tools:context="com.example.lilia.pitscoutingapp.mainScreen"
+<AbsoluteLayout tools:context="com.example.lilia.pitscoutingapp.mainScreen"
 
     android:paddingTop="16dp"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -13,6 +13,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <TextView
+        android:id="@+id/intakeTypeText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sevenFiveFives"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="238dp"
+        android:layout_marginRight="238dp"
+        android:layout_x="4dp"
+        android:layout_y="471dp"
+        android:text="Climber Type"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/climberTypeInput"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/intakeTypeText"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="11dp"
+        android:layout_x="356dp"
+        android:layout_y="468dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        android:textColor="#1c1817" />
+
     <Button
         android:id="@+id/nextButton"
         android:layout_width="wrap_content"
@@ -23,21 +55,23 @@
         android:layout_marginStart="286dp"
         android:layout_marginLeft="286dp"
         android:layout_marginTop="-3dp"
+        android:layout_x="281dp"
+        android:layout_y="703dp"
         android:text="Next" />
 
     <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="146dp"
         android:id="@+id/driveTrainText"
-        android:text="Drive Train"
-        android:layout_y="209dp"
-        android:layout_x="41dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="35dp"
-        android:textSize="24sp"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="35dp"
+        android:layout_x="10dp"
+        android:layout_y="161dp"
+        android:text="Drive Train"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/wheelTypeText"
@@ -47,24 +81,10 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="35dp"
-        android:layout_x="41dp"
-        android:layout_y="270dp"
+        android:layout_x="13dp"
+        android:layout_y="219dp"
         android:text="Wheel Type"
         android:textSize="24sp" />
-
-    <TextView
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/shiftingGearBoxText"
-        android:text="Shifting Gear Box"
-        android:layout_y="342dp"
-        android:layout_x="41dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="35dp"
-        android:textSize="24sp"
-        android:layout_below="@+id/wheelTypeText"
-        android:layout_alignParentLeft="true" />
 
     <TextView
         android:id="@+id/sevenFiveFives"
@@ -75,8 +95,8 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="24dp"
-        android:layout_x="26dp"
-        android:layout_y="418dp"
+        android:layout_x="0dp"
+        android:layout_y="394dp"
         android:text="775s on Drive Train"
         android:textSize="24sp" />
 
@@ -88,8 +108,8 @@
         android:layout_marginEnd="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="-7dp"
-        android:layout_x="19dp"
-        android:layout_y="807dp"
+        android:layout_x="17dp"
+        android:layout_y="705dp"
         android:text="Pictures" />
 
     <Button
@@ -102,8 +122,8 @@
         android:layout_marginLeft="141dp"
         android:layout_marginRight="14dp"
         android:layout_marginBottom="-3dp"
-        android:layout_x="240dp"
-        android:layout_y="803dp"
+        android:layout_x="401dp"
+        android:layout_y="706dp"
         android:text="Save Information" />
 
     <TextView
@@ -114,8 +134,8 @@
         android:layout_alignParentLeft="true"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="36dp"
-        android:layout_x="25dp"
-        android:layout_y="675dp"
+        android:layout_x="341dp"
+        android:layout_y="300dp"
         android:text="Weight"
         android:textSize="24sp" />
 
@@ -128,134 +148,14 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="35dp"
         android:layout_marginRight="371dp"
-        android:layout_x="25dp"
-        android:layout_y="591dp"
+        android:layout_x="12dp"
+        android:layout_y="300dp"
         android:text="Height"
         android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/narrowWideSquareText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/weightText"
-        android:layout_alignParentLeft="true"
-
-        android:layout_marginStart="20dp"
-        android:layout_marginLeft="36dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginRight="371dp"
-        android:layout_x="23dp"
-        android:layout_y="745dp"
-        android:text="Drive narrow, wide, or square?"
-        android:textSize="24sp" />
-
-    <EditText
-        android:id="@+id/narrowWideSquareInput"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/narrowWideSquareText"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="54dp"
-        android:layout_marginRight="54dp"
-        android:ems="10"
-        android:inputType="textLongMessage"
-        android:textColor="#1c1817" />
-
-    <EditText
-        android:id="@+id/whereShootInput"
-        android:layout_width="396dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/whereShootText"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="15dp"
-        android:layout_x="420dp"
-        android:layout_y="155dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColor="#1c1817" />
-
-    <TextView
-        android:id="@+id/canTheyText"
-        android:layout_width="395dp"
-        android:layout_height="76dp"
-        android:layout_below="@+id/whereShootText"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="626dp"
-        android:text="can they pick up from the floor?"
-        android:textSize="24sp"
-        tools:ignore="UnknownId" />
-
-    <TextView
-        android:id="@+id/whereShootText"
-        android:layout_width="395dp"
-        android:layout_height="76dp"
-        android:layout_below="@+id/narrowWideSquareInput"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="716dp"
-        android:text="where do they prefer to shoot from?"
-        android:textSize="24sp"
-        tools:ignore="UnknownId" />
-
-    <EditText
-        android:id="@+id/canTheyInput"
-        android:layout_width="396dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/canTheyText"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="3dp"
-        android:layout_x="420dp"
-        android:layout_y="155dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColor="#1c1817" />
-
-    <TextView
-        android:id="@+id/notesText"
-        android:layout_width="395dp"
-        android:layout_height="76dp"
-        android:layout_below="@+id/canTheyInput"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="784dp"
-        android:text="notes"
-        android:textSize="24sp"
-        tools:ignore="UnknownId" />
-
-    <EditText
-        android:id="@+id/notesInput"
-        android:layout_width="396dp"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/notesText"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="76dp"
-        android:layout_marginLeft="76dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="38dp"
-        android:layout_x="420dp"
-        android:layout_y="155dp"
-        android:ems="10"
-        android:inputType="text"
-        android:textColor="#1c1817" />
-
     <EditText
         android:id="@+id/weightInput"
-        android:layout_width="200dp"
+        android:layout_width="132dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/weightText"
         android:layout_alignParentEnd="true"
@@ -266,15 +166,15 @@
         android:layout_marginEnd="78dp"
         android:layout_marginRight="78dp"
         android:layout_marginBottom="-140dp"
-        android:layout_x="420dp"
-        android:layout_y="193dp"
+        android:layout_x="425dp"
+        android:layout_y="296dp"
         android:ems="10"
         android:inputType="number"
         android:textColor="#1c1817" />
 
     <EditText
         android:id="@+id/heightInput"
-        android:layout_width="200dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/height"
         android:layout_alignParentEnd="true"
@@ -282,8 +182,10 @@
         android:layout_marginTop="-1dp"
         android:layout_marginEnd="88dp"
         android:layout_marginRight="88dp"
+        android:layout_x="92dp"
+        android:layout_y="299dp"
         android:ems="10"
-        android:inputType="textLongMessage"
+        android:inputType="number"
         android:textColor="#1c1817"
         tools:ignore="NotSibling" />
 
@@ -298,6 +200,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="11dp"
+        android:layout_x="358dp"
+        android:layout_y="544dp"
         android:ems="10"
         android:inputType="textLongMessage"
         android:textColor="#1c1817" />
@@ -312,7 +216,9 @@
         android:layout_marginLeft="142dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginRight="16dp" />
+        android:layout_marginRight="16dp"
+        android:layout_x="355dp"
+        android:layout_y="400dp" />
 
     <Button
         android:id="@+id/backButton"
@@ -324,6 +230,8 @@
         android:layout_marginStart="136dp"
         android:layout_marginLeft="136dp"
         android:layout_marginTop="-3dp"
+        android:layout_x="146dp"
+        android:layout_y="703dp"
         android:text="Back" />
 
     <TextView
@@ -336,8 +244,8 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="238dp"
         android:layout_marginRight="238dp"
-        android:layout_x="33dp"
-        android:layout_y="533dp"
+        android:layout_x="6dp"
+        android:layout_y="547dp"
         android:text="Intake Type"
         android:textSize="24sp" />
 
@@ -352,8 +260,8 @@
         android:layout_marginTop="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginBottom="-140dp"
-        android:layout_x="420dp"
-        android:layout_y="155dp"
+        android:layout_x="364dp"
+        android:layout_y="83dp"
         android:ems="10"
         android:inputType="text"
         android:textColor="#1c1817" />
@@ -367,12 +275,11 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="23dp"
+        android:layout_x="23dp"
+        android:layout_y="86dp"
         android:text="Team Name"
         android:textSize="24sp"
         tools:ignore="UnknownId" />
-
-
-
 
 
     <Spinner
@@ -384,7 +291,9 @@
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
-        android:layout_marginRight="0dp" />
+        android:layout_marginRight="0dp"
+        android:layout_x="350dp"
+        android:layout_y="172dp" />
 
     <Spinner
         android:id="@+id/wheelTypeSpinner"
@@ -393,23 +302,14 @@
         android:layout_alignTop="@+id/wheelTypeText"
         android:layout_alignParentRight="true"
         android:layout_marginTop="1dp"
-        android:layout_marginRight="14dp" />
-
-    <Spinner
-        android:id="@+id/shiftingGearBox"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/shiftingGearBoxText"
-        android:layout_alignParentRight="true"
-        android:layout_marginStart="-157dp"
-        android:layout_marginLeft="-157dp"
-        android:layout_marginTop ="-6dp"
-        android:layout_marginRight="0dp" />
+        android:layout_marginRight="14dp"
+        android:layout_x="348dp"
+        android:layout_y="224dp" />
 
 
     <TextView
         android:id="@+id/teamNumberCheck"
-        android:layout_width="166dp"
+        android:layout_width="168dp"
         android:layout_height="43dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
@@ -417,10 +317,12 @@
         android:layout_marginTop="0dp"
         android:layout_marginEnd="229dp"
         android:layout_marginRight="229dp"
+        android:layout_x="197dp"
+        android:layout_y="1dp"
         android:textSize="24sp" />
 
 
 
 
-</RelativeLayout>
+</AbsoluteLayout>
 
