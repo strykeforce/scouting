@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
 
     int ScoutId;
     int StartMatch;
-
     private String QRStr;
 
     private int MatchLimit = 1000;
@@ -263,6 +262,13 @@ public class MainActivity extends AppCompatActivity {
                 goQR();
             }
         });
+    }
+    public void pushMaster() {
+//41c8cb4a-e5c1-11eb-ba80-0242ac130004 UUID
+
+
+
+
     }
 
     public void goQR() {
