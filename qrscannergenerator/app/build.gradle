@@ -3,18 +3,15 @@ apply plugin: 'com.android.application'
 
 
 android {
-
-    compileSdkVersion 25
-
-    buildToolsVersion "25.0.2"
-
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     defaultConfig {
 
         applicationId "org.strykeforce.qrscannergenerator"
 
-        minSdkVersion 15
+        minSdkVersion 22
 
-        targetSdkVersion 25
+        targetSdkVersion 28
 
         versionCode 1
 
@@ -23,10 +20,9 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
-
     buildTypes {
 
-        debug{
+        debug {
 
             debuggable true
 
@@ -41,9 +37,6 @@ android {
         }
 
     }
-
-
-
     packagingOptions {
 
         exclude 'META-INF/LICENSE'
@@ -53,37 +46,36 @@ android {
         exclude 'META-INF/NOTICE'
 
     }
-
+    productFlavors {
+    }
 }
 
 
 
 dependencies {
-
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
 
         exclude group: 'com.android.support', module: 'support-annotations'
 
     })
-
-    compile 'com.android.support:appcompat-v7:25.1.0'
-
-    testCompile 'junit:junit:4.12'
-
-    compile 'com.firebase:firebase-client-android:2.5.0'
-
-
-
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:animated-vector-drawable:28.0.0'
+    implementation 'com.android.support:asynclayoutinflater:28.0.0'
+    //-rc01
+    testImplementation 'junit:junit:4.12'
+    //    implementation 'com.firebase:firebase-client-android:2.5.0'
     //DEPENDENCIES TO ZXING LIBRARY, necessary to import files
-
-    compile 'com.google.zxing:core:3.2.1'
-
-    compile 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
-
-    compile 'com.android.support:support-annotations:25.1.0'
-
-    compile 'com.google.android.gms:play-services-appindexing:9.8.0'
-
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.android.support:support-annotations:25.1.0'
+    final SUPPORT_LIB_VER = '28.0.0'
+    configurations.all {
+        resolutionStrategy {
+            force "com.android.support:appcompat-v7:${SUPPORT_LIB_VER}"
+            force "com.android.support:support-v4:${SUPPORT_LIB_VER}"
+        }
+    }
+    implementation 'com.google.android.gms:play-services-appindexing:9.8.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
 }

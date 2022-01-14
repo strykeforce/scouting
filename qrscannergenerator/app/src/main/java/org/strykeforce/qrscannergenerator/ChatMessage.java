@@ -2,20 +2,32 @@ package org.strykeforce.qrscannergenerator;
 
 public class ChatMessage {
     public int scoutIDint, teamNumberInt, matchNumberint;
-    private static final String[] labels = {"ID","Team","Match","ABL","Aswitch","Ascale","A2cube","Atime","Pcube","Ccube","Pzcube","Scube","Slcube","Xcube","Aclimb","Sclimb","Lift1", "Lift2", "Lift", "Op", "Rf", "Pen", "Drv", "Notes"};
-    private int numInt = 22, numStg = 1, numSending = numInt+numStg;
+    private static final String[] labels = {"ID","TEAM","MATCH","LIL","APU","API","APO","APB","PI",
+            "PO","PB","WOF2","WOF3",
+            "CLI","TIME","COG", "FAIL", "NOTE", "INT"};
+    private int numInt = 28, numStg = 5, numSending = numInt+numStg;
     private int[] nums;
     private String[] strings;
 
-    public int ScaleTimeInt;
-    public int baseLineInt, deliverSwitchInt, secondCubeInt, autoScaleInt;
-    public int climbInt, climbAttemptInt, lift1Int, lift2Int, liftedInt, platformInt;
-    public int failedInt;
-    public int Driveability;
+    int leftLine;
+    int cellsPickedUp;
+    int innerAutonScored;
+    int outerAutonScored;
+    int bottomAutonScored;
 
-    public int PortalCubes = 0, CenterCubes = 0, ZoneCubes = 0, SwitchCubes = 0, ScaleCubes = 0, ExchangeCubes = 0;
-    public String Notes;
-    int Penalties;
+    int innerScored;
+    int outerScored;
+    int bottomScored;
+    int stage2Complete;
+    int stage3Complete;
+
+    int climbed;
+    int climbTime;
+    int adjustCOG;
+
+    int robotFailed;
+    String scouterNotes;
+    String scouterName;
 
     public ChatMessage(int[] data, String[] names)
     {
@@ -23,33 +35,28 @@ public class ChatMessage {
         this.teamNumberInt = data[1];
         this.matchNumberint = data[2];
 
-        this.baseLineInt = data[3];
-        this.deliverSwitchInt = data[4];
-        this.autoScaleInt = data[5];
+        this.leftLine = data[3];
+        this.cellsPickedUp = data[4];
+        this.innerAutonScored = data[5];
+        this.outerAutonScored = data[6];
+        this.bottomAutonScored = data[7];
 
-        this.secondCubeInt = data[6];
-        this.ScaleTimeInt = data[7];
+        this.innerScored = data[8];
+        this.outerScored = data[9];
+        this.bottomScored = data[10];
+        this.stage2Complete = data[11];
+        this.stage3Complete = data[12];
 
-        this.PortalCubes = data[8];
+        this.climbed = data[13];
+        this.climbTime = data[14];
+        this.adjustCOG = data[15];
 
-        this.CenterCubes = data[9];
-        this.ZoneCubes = data[10];
-        this.SwitchCubes = data[11];
-        this.ScaleCubes = data[12];
-        this.ExchangeCubes = data[13];
+        this.robotFailed = data[16];
 
-        this.climbAttemptInt = data[14];
-        this.climbInt = data[15];
-        this.lift1Int = data[16];
-        this.lift2Int = data[17];
-        this.liftedInt = data[18];
-        this.platformInt = data[19];
-        this.failedInt = data[20];
+        this.scouterNotes = names[0];
+        this.scouterName = names[1];
 
-        this.Penalties = data[21];
-        this.Driveability = data[22];
-
-        this.Notes = names[0];
         this.nums = data;
+        this.strings = names;
     }
 }

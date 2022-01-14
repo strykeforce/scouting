@@ -32,6 +32,8 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
 
+                <action android:name="android.intent.action.VIEW" />
+
             </intent-filter>
 
         </activity> <!--ATTENTION: This was auto-generated to add Google Play services to your project for

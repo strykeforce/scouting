@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<AbsoluteLayout tools:context="com.example.lilia.pitscoutingapp.mainScreen"
+
+    android:paddingTop="16dp"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:id="@+id/activity_main_screen"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/intakeTypeText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sevenFiveFives"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="238dp"
+        android:layout_marginRight="238dp"
+        android:layout_x="4dp"
+        android:layout_y="471dp"
+        android:text="Climber Type"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/climberTypeInput"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/intakeTypeText"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="11dp"
+        android:layout_x="356dp"
+        android:layout_y="468dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        android:textColor="#1c1817" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pictureButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="286dp"
+        android:layout_marginLeft="286dp"
+        android:layout_marginTop="-3dp"
+        android:layout_x="281dp"
+        android:layout_y="703dp"
+        android:text="Next" />
+
+    <TextView
+        android:id="@+id/driveTrainText"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="35dp"
+        android:layout_x="10dp"
+        android:layout_y="161dp"
+        android:text="Drive Train"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/wheelTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/driveTrainText"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="35dp"
+        android:layout_x="13dp"
+        android:layout_y="219dp"
+        android:text="Wheel Type"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/sevenFiveFives"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/shiftingGearBoxText"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_x="0dp"
+        android:layout_y="394dp"
+        android:text="775s on Drive Train"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/pictureButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="-7dp"
+        android:layout_x="17dp"
+        android:layout_y="705dp"
+        android:text="Pictures" />
+
+    <Button
+        android:id="@+id/saveInformation"
+        android:layout_width="177dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="141dp"
+        android:layout_marginLeft="141dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="-3dp"
+        android:layout_x="401dp"
+        android:layout_y="706dp"
+        android:text="Save Information" />
+
+    <TextView
+        android:id="@+id/weightText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/height"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="36dp"
+        android:layout_x="341dp"
+        android:layout_y="300dp"
+        android:text="Weight"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/intakeTypeText"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginRight="371dp"
+        android:layout_x="12dp"
+        android:layout_y="300dp"
+        android:text="Height"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/weightInput"
+        android:layout_width="132dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/weightText"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="78dp"
+        android:layout_marginRight="78dp"
+        android:layout_marginBottom="-140dp"
+        android:layout_x="425dp"
+        android:layout_y="296dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="#1c1817" />
+
+    <EditText
+        android:id="@+id/heightInput"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginRight="88dp"
+        android:layout_x="92dp"
+        android:layout_y="299dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textColor="#1c1817"
+        tools:ignore="NotSibling" />
+
+    <EditText
+        android:id="@+id/intakeTypeInput"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/intakeTypeText"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="11dp"
+        android:layout_x="358dp"
+        android:layout_y="544dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        android:textColor="#1c1817" />
+
+    <Spinner
+        android:id="@+id/sevenSevenFive"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/sevenFiveFives"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="142dp"
+        android:layout_marginLeft="142dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="16dp"
+        android:layout_x="355dp"
+        android:layout_y="400dp" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/pictureButton"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="136dp"
+        android:layout_marginLeft="136dp"
+        android:layout_marginTop="-3dp"
+        android:layout_x="146dp"
+        android:layout_y="703dp"
+        android:text="Back" />
+
+    <TextView
+        android:id="@+id/intakeTypeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/sevenFiveFives"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="238dp"
+        android:layout_marginRight="238dp"
+        android:layout_x="6dp"
+        android:layout_y="547dp"
+        android:text="Intake Type"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/teamName"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/textView"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="76dp"
+        android:layout_marginLeft="76dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="-140dp"
+        android:layout_x="364dp"
+        android:layout_y="83dp"
+        android:ems="10"
+        android:inputType="text"
+        android:textColor="#1c1817" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/teamText"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="23dp"
+        android:layout_x="23dp"
+        android:layout_y="86dp"
+        android:text="Team Name"
+        android:textSize="24sp"
+        tools:ignore="UnknownId" />
+
+
+    <Spinner
+        android:id="@+id/driveTrain"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/driveTrainText"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_x="350dp"
+        android:layout_y="172dp" />
+
+    <Spinner
+        android:id="@+id/wheelTypeSpinner"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/wheelTypeText"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="1dp"
+        android:layout_marginRight="14dp"
+        android:layout_x="348dp"
+        android:layout_y="224dp" />
+
+
+    <TextView
+        android:id="@+id/teamNumberCheck"
+        android:layout_width="168dp"
+        android:layout_height="43dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginRight="229dp"
+        android:layout_x="197dp"
+        android:layout_y="1dp"
+        android:textSize="24sp" />
+
+
+
+
+</AbsoluteLayout>
+

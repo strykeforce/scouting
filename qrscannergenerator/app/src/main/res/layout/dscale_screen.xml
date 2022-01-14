@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="382dp"
+        android:layout_y="200dp"
+        android:text="Rank"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="274dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <Spinner
+        android:id="@+id/rankSpinner"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_x="283dp"
+        android:layout_y="232dp"
+        android:scaleX="1"
+        android:scaleY="1"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="230dp" />
+
+    <Spinner
+        android:id="@+id/defensiveSpinner"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_x="87dp"
+        android:layout_y="230dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="230dp" />
+
+    <Button
+        android:id="@+id/matchDone"
+        android:layout_width="108dp"
+        android:layout_height="92dp"
+        android:layout_x="442dp"
+        android:layout_y="704dp"
+        android:text="SCAN"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/saveInfo"
+        android:layout_width="108dp"
+        android:layout_height="92dp"
+        android:layout_x="38dp"
+        android:layout_y="704dp"
+        android:text="SAVE INFO"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/changeMatchNum"
+        android:layout_width="63dp"
+        android:layout_height="wrap_content"
+        android:layout_x="268dp"
+        android:layout_y="105dp"
+        android:ems="10"
+        android:numeric="integer"
+        tools:layout_editor_absoluteX="242dp"
+        tools:layout_editor_absoluteY="73dp" />
+
+    <TextView
+        android:id="@+id/matchDisplay"
+        android:layout_width="46dp"
+        android:layout_height="wrap_content"
+        android:layout_x="413dp"
+        android:layout_y="38dp"
+        android:text="0"
+        android:textSize="30sp"
+        tools:layout_editor_absoluteX="298dp"
+        tools:layout_editor_absoluteY="47dp" />
+
+    <TextView
+        android:id="@+id/currenttext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="151dp"
+        android:layout_y="46dp"
+        android:text="Currently Recording Match:"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="40dp"
+        tools:layout_editor_absoluteY="55dp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="129dp"
+        android:layout_y="116dp"
+        android:text="Change Match:"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="387dp"
+        tools:layout_editor_absoluteY="59dp" />
+
+    <Button
+        android:id="@+id/changeButton"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_x="362dp"
+        android:layout_y="104dp"
+        android:text="CHANGE"
+        tools:layout_editor_absoluteX="352dp"
+        tools:layout_editor_absoluteY="106dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="128dp"
+        android:layout_height="wrap_content"
+        android:layout_x="91dp"
+        android:layout_y="197dp"
+        android:text="Defensive Bot"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="274dp"
+        tools:layout_editor_absoluteY="219dp" />
+
+    <EditText
+        android:id="@+id/notesBox"
+        android:layout_width="512dp"
+        android:layout_height="71dp"
+        android:layout_x="28dp"
+        android:layout_y="590dp"
+        android:ems="10"
+        android:inputType="textLongMessage"
+        tools:layout_editor_absoluteX="187dp"
+        tools:layout_editor_absoluteY="559dp" />
+
+    <Button
+        android:id="@+id/penButton"
+        android:layout_width="wrap_content"
+        android:layout_height="71dp"
+        android:layout_x="25dp"
+        android:layout_y="310dp"
+        android:text="PENALTY"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="282dp" />
+
+</AbsoluteLayout>

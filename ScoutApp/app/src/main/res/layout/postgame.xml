@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:id="@+id/activity_scout_main"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+
+    android:paddingRight="@dimen/activity_horizontal_margin"
+
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    tools:context="org.strykeforce.scoutapp.MainActivity">
+
+
+    <TextView
+        android:id="@+id/bottomTitle5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="529dp"
+        android:layout_y="140dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="**Do not use apostrophes!!**"
+        android:textColor="@android:color/holo_purple"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <TextView
+        android:id="@+id/bottomTitle3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="204dp"
+        android:layout_y="184dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Notes"
+        android:textColor="@android:color/holo_purple"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <Button
+        android:id="@+id/donebutton"
+        android:layout_width="114dp"
+        android:layout_height="wrap_content"
+        android:layout_x="180dp"
+        android:layout_y="362dp"
+        android:text="done"
+        android:textSize="25dp"
+        tools:layout_editor_absoluteX="732dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <CheckBox
+        android:id="@+id/robotFailed"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_x="250dp"
+        android:layout_y="106dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Robot Failed"
+        android:textColor="@android:color/holo_purple"
+        android:textColorLink="@android:color/holo_green_light"
+        tools:layout_editor_absoluteX="252dp"
+        tools:layout_editor_absoluteY="90dp" />
+
+    <ListView
+        android:id="@+id/screenTabs"
+        android:layout_width="160dp"
+        android:layout_height="553dp"
+        android:layout_x="0dp"
+        android:layout_y="11dp"
+        android:textSize="5dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <TextView
+        android:id="@+id/title5"
+        android:layout_width="267dp"
+        android:layout_height="wrap_content"
+        android:layout_x="173dp"
+        android:layout_y="0dp"
+        android:text="Postgame"
+        android:textColor="@android:color/holo_purple"
+        android:textSize="50sp"
+        tools:layout_editor_absoluteX="830dp"
+        tools:layout_editor_absoluteY="49dp" />
+
+    <TextView
+
+        android:id="@+id/match"
+
+        android:layout_width="50dp"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="39dp"
+
+        android:layout_x="523dp"
+
+        android:layout_y="0dp"
+
+        android:scaleX="1.75"
+
+        android:scaleY="1.75"
+
+        android:text="Match"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/matchdata"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="79dp"
+
+        android:layout_x="595dp"
+
+        android:layout_y="0dp"
+
+        android:scaleX="1.70"
+
+        android:scaleY="1.70"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/scoutDisplay"
+
+        android:layout_width="133dp"
+
+        android:layout_height="35dp"
+
+        android:layout_x="617dp"
+
+        android:layout_y="0dp"
+
+        android:text="Blue 1"
+
+        android:textAlignment="center"
+
+        android:textColor="@android:color/holo_blue_dark"
+
+        android:textSize="30dp"
+
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/team"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content"
+
+        android:layout_marginEnd="33dp"
+
+        android:layout_x="759dp"
+
+        android:layout_y="0dp"
+
+        android:scaleX="1.75"
+
+        android:scaleY="1.75"
+
+        android:text="Team"
+
+        android:textColor="@android:color/black"
+        android:textStyle="normal|bold" />
+
+    <TextView
+
+        android:id="@+id/teamdata"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="20dp"
+
+        android:layout_marginEnd="79dp"
+
+        android:layout_x="827dp"
+
+        android:layout_y="0dp"
+
+        android:scaleX="1.70"
+
+        android:scaleY="1.70"
+
+        android:text="0"
+
+        android:textColor="@android:color/black"
+
+        android:textStyle="normal|bold" />
+
+    <EditText
+        android:id="@+id/scouterNameBox"
+        android:layout_width="567dp"
+        android:layout_height="wrap_content"
+        android:layout_x="270dp"
+        android:layout_y="262dp"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        android:text="Enter here..."
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+    <TextView
+        android:id="@+id/bottomTitle4"
+        android:layout_width="68dp"
+        android:layout_height="wrap_content"
+        android:layout_x="190dp"
+        android:layout_y="266dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
+        android:text="Scouter Name"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_purple"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="567dp"
+        android:layout_height="wrap_content"
+        android:layout_x="272dp"
+        android:layout_y="172dp"
+        android:ems="10"
+        android:inputType="textShortMessage"
+        android:text="Enter here..."
+        tools:layout_editor_absoluteX="334dp"
+        tools:layout_editor_absoluteY="196dp" />
+
+
+</AbsoluteLayout>
