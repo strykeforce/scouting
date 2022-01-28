@@ -34,33 +34,26 @@
         tools:layout_editor_absoluteX="732dp"
         tools:layout_editor_absoluteY="102dp" />
 
-    <CheckBox
-        android:id="@+id/adjustCOG"
+    <TextView
+        android:id="@+id/climbLevelText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="236dp"
-        android:layout_y="175dp"
+        android:layout_x="580dp"
+        android:layout_y="100dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
-        android:text="Centered on Bar"
-        android:textColor="?attr/colorAccent"
-        android:textColorLink="@android:color/holo_green_light"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="90dp" />
+        android:text="Which rung?"
+        android:textColor="@android:color/holo_orange_dark"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
 
-    <CheckBox
-        android:id="@+id/climb"
-        android:layout_width="160dp"
+    <Spinner
+        android:id="@+id/climbLevelSpinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="248dp"
-        android:layout_y="106dp"
-        android:scaleX="2.00"
-        android:scaleY="2.00"
-        android:text="Climbed"
-        android:textColor="?attr/colorAccent"
-        android:textColorLink="@android:color/holo_green_light"
-        tools:layout_editor_absoluteX="252dp"
-        tools:layout_editor_absoluteY="90dp" />
+        android:layout_x="580dp"
+        android:layout_y="150dp"
+        />
 
     <ListView
         android:id="@+id/screenTabs"
@@ -73,28 +66,39 @@
         tools:layout_editor_absoluteY="8dp" />
 
     <TextView
-        android:id="@+id/title4"
-        android:layout_width="224dp"
+        android:id="@+id/climbTimbText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="220dp"
-        android:layout_y="258dp"
+        android:layout_x="580dp"
+        android:layout_y="230dp"
+        android:scaleX="2.00"
+        android:scaleY="2.00"
         android:text="Climb Time"
-        android:textColor="?attr/colorAccent"
-        android:textSize="40sp"
-        tools:layout_editor_absoluteX="830dp"
-        tools:layout_editor_absoluteY="49dp" />
+        android:textColor="@android:color/holo_orange_dark"
+        tools:layout_editor_absoluteX="589dp"
+        tools:layout_editor_absoluteY="105dp" />
+
+    <Button
+        android:id="@+id/climbTime"
+        android:layout_width="125dp"
+        android:layout_height="75dp"
+        android:layout_x="580dp"
+        android:layout_y="270dp"
+        android:text="start"
+        android:textSize="24sp"
+        tools:layout_editor_absoluteX="245dp"
+        tools:layout_editor_absoluteY="273dp" />
 
     <TextView
         android:id="@+id/timeDisplay"
         android:layout_width="82dp"
         android:layout_height="wrap_content"
-        android:layout_x="507dp"
-        android:layout_y="266dp"
+        android:layout_x="750dp"
+        android:layout_y="280dp"
         android:textColor="?attr/colorAccent"
         android:textSize="30sp"
         tools:layout_editor_absoluteX="830dp"
         tools:layout_editor_absoluteY="49dp" />
-
     <TextView
         android:id="@+id/title5"
         android:layout_width="220dp"
@@ -224,16 +228,7 @@
 
         android:textStyle="normal|bold" />
 
-    <Button
-        android:id="@+id/climbTime"
-        android:layout_width="160dp"
-        android:layout_height="120dp"
-        android:layout_x="655dp"
-        android:layout_y="235dp"
-        android:text="start"
-        android:textSize="32sp"
-        tools:layout_editor_absoluteX="245dp"
-        tools:layout_editor_absoluteY="273dp" />
+
 
 
 </AbsoluteLayout>

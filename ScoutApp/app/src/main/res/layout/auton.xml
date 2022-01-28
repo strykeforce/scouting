@@ -37,19 +37,6 @@
         tools:layout_editor_absoluteY="105dp" /> -->
 
     <TextView
-        android:id="@+id/highernote"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_x="652dp"
-        android:layout_y="166dp"
-        android:scaleX="2.00"
-        android:scaleY="2.00"
-        android:text="Inner and Outer = Same Input"
-        android:textColor="@android:color/holo_green_dark"
-        tools:layout_editor_absoluteX="589dp"
-        tools:layout_editor_absoluteY="105dp" />
-
-    <TextView
         android:id="@+id/outerTitle2"
         android:layout_width="108dp"
         android:layout_height="wrap_content"
@@ -57,7 +44,7 @@
         android:layout_y="85dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
-        android:text="Higher"
+        android:text="Upper"
         android:textColor="@android:color/holo_green_dark"
         tools:layout_editor_absoluteX="589dp"
         tools:layout_editor_absoluteY="105dp" />
@@ -67,7 +54,7 @@
         android:layout_width="108dp"
         android:layout_height="wrap_content"
         android:layout_x="544dp"
-        android:layout_y="355dp"
+        android:layout_y="250dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
         android:text="Lower"
@@ -75,101 +62,31 @@
         tools:layout_editor_absoluteX="589dp"
         tools:layout_editor_absoluteY="105dp" />
 
-    <ImageView
-        android:id="@+id/bottomImage2"
-        android:layout_width="264dp"
-        android:layout_height="104dp"
-        android:layout_x="504dp"
-        android:layout_y="314dp"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:srcCompat="@drawable/bottominput"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="317dp" />
-
-    <ImageView
-        android:id="@+id/outerImage2"
-        android:layout_width="264dp"
-        android:layout_height="104dp"
-        android:layout_x="503dp"
-        android:layout_y="45dp"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:srcCompat="@drawable/outerinput"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="317dp" />
-
-<!--    <ImageView
-        android:id="@+id/innerImage2"
-        android:layout_width="264dp"
-        android:layout_height="104dp"
-        android:layout_x="503dp"
-        android:layout_y="177dp"
-        android:scaleX="0.75"
-        android:scaleY="0.75"
-        app:srcCompat="@drawable/innerinput"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="317dp" /> -->
-
-<!--    <TextView
-        android:id="@+id/innerAuton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="623dp"
-        android:layout_y="202dp"
-        android:text="0"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="40dp"
-        tools:layout_editor_absoluteX="805dp"
-        tools:layout_editor_absoluteY="115dp" /> -->
-
-<!--    <Button
-        android:id="@+id/innerMinusAuton"
-        android:layout_width="48dp"
-        android:layout_height="40dp"
-        android:layout_x="696dp"
-        android:layout_y="177dp"
-        android:padding="0dp"
-        android:text="-"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" /> -->
-
     <Button
-        android:id="@+id/outerPlusAuton"
+        android:id="@+id/upperPlusAuton"
         android:layout_width="126dp"
         android:layout_height="117dp"
         android:layout_x="752dp"
-        android:layout_y="38dp"
+        android:layout_y="48dp"
         android:text="+"
         android:textSize="25dp"
         tools:layout_editor_absoluteX="732dp"
         tools:layout_editor_absoluteY="102dp" />
 
-<!--    <Button
-        android:id="@+id/innerPlusAuton"
-        android:layout_width="126dp"
-        android:layout_height="117dp"
-        android:layout_x="752dp"
-        android:layout_y="175dp"
-        android:text="+"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" /> -->
 
     <Button
-        android:id="@+id/bottomPlusAuton"
+        android:id="@+id/lowerPlusAuton"
         android:layout_width="126dp"
         android:layout_height="117dp"
         android:layout_x="752dp"
-        android:layout_y="305dp"
+        android:layout_y="225dp"
         android:text="+"
         android:textSize="25dp"
         tools:layout_editor_absoluteX="732dp"
         tools:layout_editor_absoluteY="102dp" />
 
     <TextView
-        android:id="@+id/outerAuton"
+        android:id="@+id/upperAuton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="624dp"
@@ -181,11 +98,11 @@
         tools:layout_editor_absoluteY="115dp" />
 
     <Button
-        android:id="@+id/outerMinusAuton"
+        android:id="@+id/upperMinusAuton"
         android:layout_width="48dp"
         android:layout_height="40dp"
         android:layout_x="696dp"
-        android:layout_y="45dp"
+        android:layout_y="58dp"
         android:padding="0dp"
         android:text="-"
         android:textSize="25dp"
@@ -193,11 +110,11 @@
         tools:layout_editor_absoluteY="102dp" />
 
     <TextView
-        android:id="@+id/bottomAuton"
+        android:id="@+id/lowerAuton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="624dp"
-        android:layout_y="338dp"
+        android:layout_y="250dp"
         android:text="0"
         android:textColor="@android:color/holo_green_dark"
         android:textSize="40dp"
@@ -205,11 +122,11 @@
         tools:layout_editor_absoluteY="115dp" />
 
     <Button
-        android:id="@+id/bottomMinusAuton"
+        android:id="@+id/lowerMinusAuton"
         android:layout_width="48dp"
         android:layout_height="40dp"
         android:layout_x="698dp"
-        android:layout_y="316dp"
+        android:layout_y="235dp"
         android:padding="0dp"
         android:text="-"
         android:textSize="25dp"
@@ -367,67 +284,27 @@
         tools:layout_editor_absoluteX="732dp"
         tools:layout_editor_absoluteY="102dp" />
 
-    <Button
-        android:id="@+id/cellAutonMinus"
-        android:layout_width="48dp"
-        android:layout_height="40dp"
-        android:layout_x="204dp"
-        android:layout_y="252dp"
-        android:padding="0dp"
-        android:text="-"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
+
 
     <CheckBox
-        android:id="@+id/leaveLine"
+        android:id="@+id/leaveTarmac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_x="247dp"
         android:layout_y="107dp"
         android:scaleX="2.00"
         android:scaleY="2.00"
-        android:text="Left Initiation Line"
+        android:text="Left Tarmac"
         android:textColor="@android:color/holo_green_dark"
         android:textColorLink="@android:color/holo_green_light"
         tools:layout_editor_absoluteX="252dp"
         tools:layout_editor_absoluteY="90dp" />
 
-    <TextView
-        android:id="@+id/pickupTitle3"
-        android:layout_width="270dp"
-        android:layout_height="wrap_content"
-        android:layout_x="316dp"
-        android:layout_y="202dp"
-        android:scaleX="2.00"
-        android:scaleY="2.00"
-        android:text="Power Cells Picked Up"
-        android:textColor="@android:color/holo_green_dark"
-        tools:layout_editor_absoluteX="589dp"
-        tools:layout_editor_absoluteY="105dp" />
 
-    <Button
-        android:id="@+id/cellAutonPlus"
-        android:layout_width="101dp"
-        android:layout_height="76dp"
-        android:layout_x="324dp"
-        android:layout_y="244dp"
-        android:text="+"
-        android:textSize="25dp"
-        tools:layout_editor_absoluteX="732dp"
-        tools:layout_editor_absoluteY="102dp" />
 
-    <TextView
-        android:id="@+id/pickCellAuton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_x="279dp"
-        android:layout_y="246dp"
-        android:text="0"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="40dp"
-        tools:layout_editor_absoluteX="805dp"
-        tools:layout_editor_absoluteY="115dp" />
+
+
+
 
 
 </AbsoluteLayout>

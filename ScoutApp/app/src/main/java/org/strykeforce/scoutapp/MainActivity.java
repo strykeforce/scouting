@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import java.util.ArrayList;
 
 import android.view.View;
 
@@ -20,11 +21,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import android.widget.ImageView;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 import java.io.*;
 
@@ -35,8 +36,8 @@ import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
 
+import static org.strykeforce.scoutapp.R.id.climbTimbText;
 import static org.strykeforce.scoutapp.R.id.nextbutton;
-import static org.strykeforce.scoutapp.R.id.scouterNameBox;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,28 +56,21 @@ public class MainActivity extends AppCompatActivity {
     List<String> tabNames = new ArrayList<>(Arrays.asList("Auton", "Teleop", "Endgame", "Postgame")); //sidebar list
 
     //initialize variables
-    int cellsPickedUp = 0;
-    int innerAutonScored = 0;
-    int outerAutonScored = 0;
-    int bottomAutonScored = 0;
+    int upperAutonScored = 0;
+    int lowerAutonScored = 0;
+    int humanPlayerScored = 0;
+    boolean leftTarmac = false;
+    boolean robotFailed = false;
 
-    boolean leftLine = false;
-
-    int innerScored = 0;
-    int outerScored = 0;
-    int bottomScored = 0;
-
-    boolean stage2Complete = false;
-    boolean stage3Complete = false;
-
-    boolean climbed = false;
-    boolean centeredCOG = false;
-    boolean robotFailed= false;
+    int upperScored = 0;
+    int lowerScored = 0;
+    int climbLevelIndex = 0;
+    int climbTime = 0;
+    int timeStatus = 0;
+    String climbLevel = "";
 
     double startTime = 0;
     double endTime = 0;
-    int climbTime;
-    int timeStatus;
 
     //onCreate defines what happens when the app is started up
     @Override
@@ -140,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         {
             case 0: goAuton();
                 break;
-            case 1: goPower();
+            case 1: goTele();
                 break;
             case 2: goEndgame();
                 break;
@@ -158,22 +152,19 @@ public class MainActivity extends AppCompatActivity {
         final TextView matchdata = findViewById(R.id.matchdata);
 
         //initialize onscreen text and buttons
-        final CheckBox leftLineCheck = findViewById(R.id.leaveLine);
-
-        final TextView pickedUp = findViewById(R.id.pickCellAuton);
+        final CheckBox leftTarmacCheck = findViewById(R.id.leaveTarmac);
+        
         //final TextView innerAuton = findViewById(R.id.innerAuton);
-        final TextView outerAuton = findViewById(R.id.outerAuton);
-        final TextView bottomAuton = findViewById(R.id.bottomAuton);
-
-        final Button pickedUpMinus = findViewById(R.id.cellAutonMinus);
+        final TextView upperAuton = findViewById(R.id.upperAuton);
+        final TextView lowerAuton = findViewById(R.id.lowerAuton);
+        
         //final Button innerAutonMinus = findViewById(R.id.innerMinusAuton);
-        final Button outerAutonMinus = findViewById(R.id.outerMinusAuton);
-        final Button bottomAutonMinus = findViewById(R.id.bottomMinusAuton);
-
-        final Button pickedUpPlus = findViewById(R.id.cellAutonPlus);
+        final Button upperAutonMinus = findViewById(R.id.upperMinusAuton);
+        final Button lowerAutonMinus = findViewById(R.id.lowerMinusAuton);
+        
         //final Button innerAutonPlus = findViewById(R.id.innerPlusAuton);
-        final Button outerAutonPlus = findViewById(R.id.outerPlusAuton);
-        final Button bottomAutonPlus = findViewById(R.id.bottomPlusAuton);
+        final Button upperAutonPlus = findViewById(R.id.upperPlusAuton);
+        final Button lowerAutonPlus = findViewById(R.id.lowerPlusAuton);
 
         //create list on side for easy navigation between pages
         final ListView screenTabs = findViewById(R.id.screenTabs);
@@ -185,12 +176,12 @@ public class MainActivity extends AppCompatActivity {
         //when a screen is displayed, the objects default back to false, zero, so we have to
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen after switching to a differing one
-        leftLineCheck.setChecked(leftLine);
+        leftTarmacCheck.setChecked(leftTarmac);
 
-        pickedUp.setText(""+cellsPickedUp);
+        //pickedUp.setText(""+cellsPickedUp);
         //innerAuton.setText(""+innerAutonScored);
-        outerAuton.setText(""+outerAutonScored);
-        bottomAuton.setText(""+bottomAutonScored);
+        upperAuton.setText(""+upperAutonScored);
+        lowerAuton.setText(""+lowerAutonScored);
 
         //this sets the display of the match number, team number, and scouter id
         teamdata.setText(Integer.toString(TEAM_NUMBER));
@@ -203,99 +194,44 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.scoutDisplay)).setTextColor(Color.parseColor("#1d34e2"));
             ((TextView) findViewById(R.id.scoutDisplay)).setText("Blue " + (SCOUT_ID - 2));
         }
+        
+        
 
-        //pick up power cell buttons
-        pickedUpPlus.setOnClickListener(new View.OnClickListener() {
+        //upper cargo buttons
+        upperAutonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cellsPickedUp++;
-                pickedUp.setText(""+cellsPickedUp);
+                upperAutonScored++;
+                upperAuton.setText(""+upperAutonScored);
             }
         });
 
-        pickedUpMinus.setOnClickListener(new View.OnClickListener() {
+        upperAutonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cellsPickedUp != 0){
-                    cellsPickedUp--;
+                if(upperAutonScored != 0){
+                    upperAutonScored--;
                 }
-                pickedUp.setText(""+cellsPickedUp);
+                upperAuton.setText(""+upperAutonScored);
             }
         });
 
-        //pick up power cell buttons
-        pickedUpPlus.setOnClickListener(new View.OnClickListener() {
+        //lower cargo buttons
+        lowerAutonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cellsPickedUp++;
-                pickedUp.setText(""+cellsPickedUp);
+                lowerAutonScored++;
+                lowerAuton.setText(""+lowerAutonScored);
             }
         });
 
-        pickedUpMinus.setOnClickListener(new View.OnClickListener() {
+        lowerAutonMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cellsPickedUp != 0){
-                    cellsPickedUp--;
+                if(lowerAutonScored != 0){
+                    lowerAutonScored--;
                 }
-                pickedUp.setText(""+cellsPickedUp);
-            }
-        });
-
-        //inner power cell buttons
-        /*innerAutonPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                innerAutonScored++;
-                innerAuton.setText(""+innerAutonScored);
-            }
-        });
-
-        innerAutonMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(innerAutonScored != 0){
-                    innerAutonScored--;
-                }
-                innerAuton.setText(""+innerAutonScored);
-            }
-        });*/
-
-        //outer power cell buttons
-        outerAutonPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                outerAutonScored++;
-                outerAuton.setText(""+outerAutonScored);
-            }
-        });
-
-        outerAutonMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(outerAutonScored != 0){
-                    outerAutonScored--;
-                }
-                outerAuton.setText(""+outerAutonScored);
-            }
-        });
-
-        //bottom power cell buttons
-        bottomAutonPlus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                bottomAutonScored++;
-                bottomAuton.setText(""+bottomAutonScored);
-            }
-        });
-
-        bottomAutonMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(bottomAutonScored != 0){
-                    bottomAutonScored--;
-                }
-                bottomAuton.setText(""+bottomAutonScored);
+                lowerAuton.setText(""+lowerAutonScored);
             }
         });
 
@@ -305,9 +241,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 //save info that needs to be saved
-                if(leftLineCheck.isChecked()) {
-                    leftLine = true;
-                } else {leftLine = false;}
+                if(leftTarmacCheck.isChecked()) {
+                    leftTarmac= true;
+                } else {leftTarmac= false;}
                 changeScreen(position);
             }
         });
@@ -317,34 +253,34 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //save info that needs to be saved
-                if(leftLineCheck.isChecked()) {
-                    leftLine = true;
-                } else {leftLine = false;}
+                if(leftTarmacCheck.isChecked()) {
+                    leftTarmac= true;
+                } else {leftTarmac= false;}
 
                 goQR();
             }
         });
     }
 
-    public void goPower() {
+    public void goTele() {
         //display power cell screen screen
-        setContentView(R.layout.powercells);
+        setContentView(R.layout.teleop);
 
         //initialize onscreen text and buttons
-        final CheckBox stage2 = findViewById(R.id.rotation);
-        final CheckBox stage3 = findViewById(R.id.position);
+        //final CheckBox stage2 = findViewById(R.id.rotation);
+        //final CheckBox stage3 = findViewById(R.id.position);
 
         //final TextView inner = findViewById(R.id.inner);
-        final TextView outer = findViewById(R.id.outer);
-        final TextView bottom = findViewById(R.id.bottom);
+        final TextView upper = findViewById(R.id.upper);
+        final TextView lower = findViewById(R.id.lower);
 
         //final Button innerPlus = findViewById(R.id.innerPlus);
-        final Button outerPlus = findViewById(R.id.outerPlus);
-        final Button bottomPlus = findViewById(R.id.bottomPlus);
+        final Button upperPlus = findViewById(R.id.upperPlus);
+        final Button lowerPlus = findViewById(R.id.lowerPlus);
 
         //final Button innerMinus = findViewById(R.id.innerMinus);
-        final Button outerMinus = findViewById(R.id.outerMinus);
-        final Button bottomMinus = findViewById(R.id.bottomMinus);
+        final Button upperMinus = findViewById(R.id.upperMinus);
+        final Button lowerMinus = findViewById(R.id.lowerMinus);
 
         //create list on side for easy navigation between pages
         final ListView screenTabs = findViewById(R.id.screenTabs);
@@ -356,12 +292,10 @@ public class MainActivity extends AppCompatActivity {
         //when a screen is displayed, the objects default back to false, zero, so we have to
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
-        stage2.setChecked(stage2Complete);
-        stage3.setChecked(stage3Complete);
 
         //inner.setText(""+innerScored);
-        outer.setText(""+outerScored);
-        bottom.setText(""+bottomScored);
+        upper.setText(""+upperScored);
+        lower.setText(""+lowerScored);
 
         //this sets the display of the match, team, and scouter id
         final TextView teamdata = findViewById(R.id.teamdata);
@@ -397,41 +331,41 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        //outer power cell buttons
-        outerPlus.setOnClickListener(new View.OnClickListener() {
+        //upper power cell buttons
+        upperPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                outerScored++;
-                outer.setText(""+outerScored);
+                upperScored++;
+                upper.setText(""+upperScored);
             }
         });
 
-        outerMinus.setOnClickListener(new View.OnClickListener() {
+        upperMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(outerScored != 0){
-                    outerScored--;
+                if(upperScored != 0){
+                    upperScored--;
                 }
-                outer.setText(""+outerScored);
+                upper.setText(""+upperScored);
             }
         });
 
-        //bottom power cell buttons
-        bottomPlus.setOnClickListener(new View.OnClickListener() {
+        //lower power cell buttons
+        lowerPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bottomScored++;
-                bottom.setText(""+bottomScored);
+                lowerScored++;
+                lower.setText(""+lowerScored);
             }
         });
 
-        bottomMinus.setOnClickListener(new View.OnClickListener() {
+        lowerMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(bottomScored != 0){
-                    bottomScored--;
+                if(lowerScored != 0){
+                    lowerScored--;
                 }
-                bottom.setText(""+bottomScored);
+                lower.setText(""+lowerScored);
             }
         });
 
@@ -441,13 +375,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
                 //save info that needs to be saved
-                if(stage2.isChecked()) {
-                    stage2Complete = true;
-                } else {stage2Complete = false;}
-
-                if(stage3.isChecked()) {
-                    stage3Complete = true;
-                } else {stage3Complete = false;}
                 changeScreen(position);
             }
         });
@@ -457,45 +384,86 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //save info that needs to be saved
-                if(stage2.isChecked()) {
-                    stage2Complete = true;
-                } else {stage2Complete = false;}
-
-                if(stage3.isChecked()) {
-                    stage3Complete = true;
-                } else {stage3Complete = false;}
-
                 goQR();
             }
         });
     }
 
     public void goEndgame() {
-        //display endgame screen
         setContentView(R.layout.endgame);
 
-        //initialize onscreen text and buttons
-        final CheckBox climbedBox = findViewById(R.id.climb);
-        final CheckBox centeredCOGBox = findViewById(R.id.adjustCOG);
 
-        final Button timeButton = findViewById(R.id.climbTime);
+        //initialize onscreen text and buttons
+
+        final Spinner climb = findViewById(R.id.climbLevelSpinner);
+        final Button climbTimeButton = findViewById(R.id.climbTime);
         final TextView timeDisplay = findViewById(R.id.timeDisplay);
 
         //when a screen is displayed, the objects default back to false, zero, so we have to
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
-        climbedBox.setChecked(climbed);
-        centeredCOGBox.setChecked(centeredCOG);
+
+
+        final String[] rungs = new String[]{"No Climb", "Low", "Mid", "High", "Traversal"};
+
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, rungs);
+        climb.setAdapter(adapter);
 
         timeDisplay.setText(""+climbTime);
 
         if(climbTime != 0) {
-            timeButton.setText("RESTART?");
+            climbTimeButton.setText("RESTART?");
             timeStatus = 2;
         } else {
-            timeButton.setText("START");
+            climbTimeButton.setText("START");
             timeStatus = 0;
         }
+        climbTimeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(timeStatus == 0) {
+                    //get start time
+                    startTime = System.currentTimeMillis();
+                    climbTimeButton.setText("STOP");
+                    climbTimeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    timeStatus = 1;
+                }
+                else if (timeStatus == 1) {
+                    endTime = System.currentTimeMillis();
+                    climbTimeButton.setText("RESTART?");climbTimeButton.setBackgroundColor(Color.LTGRAY);
+                    climbTime = (int) Math.round((endTime/1000-startTime/1000));
+                    timeDisplay.setText(""+climbTime);
+                    timeStatus = 2;
+                }
+                else if (timeStatus == 2) {
+                    climbTimeButton.setText("START");
+                    timeStatus = 3;
+                    timeDisplay.setText("0");
+
+                }
+                else if (timeStatus == 3) {
+                    timeDisplay.setText("");
+                    startTime = System.currentTimeMillis();
+                    climbTimeButton.setText("STOP");
+                    climbTimeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                    timeStatus = 1;
+                }
+            }
+        });
+        climb.setSelection(climbLevelIndex);
+        ((Spinner) findViewById(R.id.climbLevelSpinner)).setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                climbLevel = climb.getSelectedItem().toString();
+                climbLevelIndex = Arrays.asList(rungs).indexOf(climbLevel);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
 
 
@@ -522,50 +490,13 @@ public class MainActivity extends AppCompatActivity {
         screenTabs.setAdapter(textFormat);
 
         //tell what happens when climb time button is pressed
-        timeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(timeStatus == 0) {
-                    //get start time
-                    startTime = System.currentTimeMillis();
-                    timeButton.setText("STOP");
-                    timeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    timeStatus = 1;
-                }
-                else if (timeStatus == 1) {
-                    endTime = System.currentTimeMillis();
-                    timeButton.setText("RESTART?");timeButton.setBackgroundColor(Color.LTGRAY);
-                    climbTime = (int) Math.round((endTime/1000-startTime/1000));
-                    timeDisplay.setText(""+climbTime);
-                    timeStatus = 2;
-                }
-                else if (timeStatus == 2) {
-                    timeButton.setText("START");
-                    timeStatus = 3;
-                }
-                else if (timeStatus == 3) {
-                    timeDisplay.setText("");
-                    startTime = System.currentTimeMillis();
-                    timeButton.setText("STOP");
-                    timeButton.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                    timeStatus = 1;
-                }
-            }
-        });
+
 
         //tell what happens when an item on list is clicked
         screenTabs.setClickable(true);
         screenTabs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-                //save info that needs to be saved
-                if(climbedBox.isChecked()) {
-                    climbed = true;
-                } else {climbed = false;}
-
-                if(centeredCOGBox.isChecked()) {
-                    centeredCOG = true;
-                } else {centeredCOG = false;}
                 changeScreen(position);
             }
         });
@@ -574,15 +505,6 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //save info that needs to be saved
-                if(climbedBox.isChecked()) {
-                    climbed = true;
-                } else {climbed = false;}
-
-                if(centeredCOGBox.isChecked()) {
-                    centeredCOG = true;
-                } else {centeredCOG = false;}
-
                 //go to qr screen
                 goQR();
             }
@@ -597,10 +519,11 @@ public class MainActivity extends AppCompatActivity {
         final TextView notesBox = findViewById(R.id.notes);
         final TextView nameBox = findViewById(R.id.scouterNameBox);
 
+
         //when a screen is displayed, the objects default back to false, zero, so we have to
         //initialize the screen objects to whatever they were set to before
         //so that they will be correct if we arrived at this screen using a "back" button
-        robotFailedBox.setChecked(robotFailed);
+        //robotFailedBox.setChecked(robotFailed);
         notesBox.setText(scouterNotes);
         nameBox.setText(scouterName);
 
@@ -641,6 +564,8 @@ public class MainActivity extends AppCompatActivity {
                 changeScreen(position);
             }
         });
+
+
 
         //change screen to qr screen when done button is pressed
         findViewById(R.id.donebutton).setOnClickListener(new View.OnClickListener() {
@@ -728,28 +653,23 @@ public class MainActivity extends AppCompatActivity {
     //starts a new match
     public void NewMatch() {
         //clear all
-        cellsPickedUp = 0;
-        innerAutonScored = 0;
-        outerAutonScored = 0;
-        bottomAutonScored = 0;
+        upperAutonScored = 0;
+        lowerAutonScored = 0;
 
-        leftLine = false;
+        leftTarmac= false;
 
-        innerScored = 0;
-        outerScored = 0;
-        bottomScored = 0;
+        upperScored = 0;
+        lowerScored = 0;
+        lowerScored = 0;
 
-        stage2Complete = false;
-        stage3Complete = false;
-
-        climbed = false;
-        centeredCOG = false;
+        //climbed = false;
+        //centeredCOG = false;
         robotFailed= false;
 
         startTime = 0;
         endTime = 0;
         climbTime = 0;
-        timeStatus = 0;
+        //timeStatus = 0;
 
         scouterNotes = "";
         scouterName = "";
@@ -804,19 +724,13 @@ public class MainActivity extends AppCompatActivity {
         QRStr = "ID: " + (SCOUT_ID + 1) + "\t" //Scout ID
                 + "TEAM: " + TEAM_NUMBER + "\t" //Team
                 + "MATCH: " + MATCH_NUMBER + "\t"//Match Number
-                + "LIL: " + booltoInt(leftLine) + "\t" //Left Initiation Line
-                + "APU: " + cellsPickedUp + "\t" //Picked Up Cells in Auton
-                + "API: " + innerAutonScored + "\t"
-                + "APO: " + outerAutonScored + "\t"
-                + "APB: " + bottomAutonScored + "\t"
-                + "PI: " + innerScored + "\t"
-                + "PO: " + outerScored + "\t"
-                + "PB: " + bottomScored + "\t"
-                + "WOF2: " + booltoInt(stage2Complete) + "\t"
-                + "WOF3: " + booltoInt(stage3Complete) + "\t"
-                + "CLI: " + booltoInt(climbed) + "\t"
+                + "LIL: " + booltoInt(leftTarmac) + "\t" //Left Initiation Line
+                + "APO: " + upperAutonScored + "\t"
+                + "APB: " + lowerAutonScored + "\t"
+                + "PO: " + upperScored + "\t"
+                + "PB: " + lowerScored + "\t"
+                + "CLI: " + climbLevel + "\t"
                 + "TIME: " + climbTime + "\t"
-                + "COG: " + booltoInt(centeredCOG) + "\t"
                 + "FAIL: " + booltoInt(robotFailed) + "\t"
                 + "NOTE: " + scouterNotes + "\t"
                 + "INT: " + scouterName + "\t";
